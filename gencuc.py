@@ -10,24 +10,25 @@ import datetime
 import time
 import sys
 import os
+import kpilot
 
 dbpath ="/nfs/OGN/SWdata/"
 cucpath="/var/www/cuc/"
 
 
-print "Generate live .CUC files V1.0 from  " +dbpath+ "SWIface.db"
+print "Generate live .CUC files V1.0 from  " +dbpath+ "SWIface.db the GLIDERS table"
 start_time = time.time()
 local_time = datetime.datetime.now()
-print "Time is now:", local_time
+print "Time is now:", local_time				# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")			# get the local time
 CUC_DATA = cucpath + "LIVE" + fl_date_time+'.cuc'		# name of the CUC to be generated
-print "CUC data file is: ", CUC_DATA
+print "CUC data file is: ", CUC_DATA				# just a trace
 datafile = open (CUC_DATA, 'w')					# open the output file
 cuchdr   = open (cucpath + "LIVEhdr.txt", 'r')			# opend the header file
 cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
 buf=cuchdr.read()						# start reading the header file
 datafile.write(buf)						# copy into the output file
-# db = sqlite3.connect('file:path/to/database?mode=ro', uri=True)
+# db = sqlite3.connect('file:path/to/database?mode=ro', uri=True)	# we need to check the readonly feature
 conn=sqlite3.connect(dbpath+'SWiface.db')			# open th DB in read only mode
 cursD=conn.cursor()						# cursor for the ogndata table
 cursG=conn.cursor()						# cursor for the glider table
@@ -35,10 +36,10 @@ pn=0								# number of pilots found
 cursD.execute('select distinct idflarm from OGNDATA')		# get all the glifers flying now 
 for row in cursD.fetchall():					# search all the rows
     idflarm=row[0]						# flarmid is the first field
-    idf=idflarm[3:9]						# we the first 3 chars      
+    idf=idflarm[3:9]						# we skip the first 3 chars      
     cursG.execute("select registration, cn, type from GLIDERS where idglider = ?", [idf])		# search now into the gliding database
-    gli=cursG.fetchone()
-    if gli and gli != None:
+    gli=cursG.fetchone()					# get the data from the DB
+    if gli and gli != None:					# did we find it ??? Index is unique, only one row
                 regi=gli[0]					# get the registration 
                 cn=gli[1]					# get the competition numbers
 		if cn == "":
@@ -48,14 +49,18 @@ for row in cursD.fetchall():					# search all the rows
                 regi='NO-NAME'
                 cn='NN'
                 type='NOTYPE'
-    print "D==>: ", regi, cn, type
+    if idflarm in kpilot.kpilot:				# check if know the pilot because is our database kpilot.py
+	pname=kpilot.kpilot[idflarm]				# in that case place the name of the pilot
+    else:
+	pname="Pilot NN-"+str(pn)				# otherwise just say: NoName#
+    print "D==>: ", idflarm, pname, regi, cn, type
 #   								write the Pilot detail
-#   "Tpilot","",*0,"FLRDDE1FC","Ventus","EC-TTT","TT","",0,"",0,"",1,"",""
+#   "Tpilot","",*0,"FLRDDE1FC","Ventus","EC-TTT","TT","",0,"",0,"",1,"",""		# the template to use
     pn +=1 
-    buf='"Pilot' +str(pn)+ '","",*0,"' +idflarm+ '","' +type+ '","' +regi+ '","' +cn+ '","",0,"",0,"",1,"",""\n' 
+    buf='"' +pname+ '","",*0,"' +idflarm+ '","' +type+ '","' +regi+ '","' +cn+ '","",0,"",0,"",1,"",""\n' 	# write tha into the psuedo CUC file
     datafile.write(buf)						# write the pilot information into the pseudo CUC file
     
-# write the day header
+# write the day entry
 
 # [Starts]							# this is the template
 #
@@ -69,7 +74,7 @@ datafile.write(buf)
 buf="D" + local_time.strftime("%d%m%Y") + "-010400000\n"
 datafile.write(buf)
 
-# close files and exit
+# wite the trailer in order to complete the format of the .CUC file
 
 buf=cuctail.read()						# read the trailer file
 datafile.write(buf)						# write it into the output file

@@ -1,6 +1,6 @@
 <?php
-$username    = $_GET['username'];
-$cpassword   = $_GET['cpassword'];
+//$username    = $_GET['username'];
+//$cpassword   = $_GET['cpassword'];
 $contestname = $_GET['contestname'];
 $querytype   = $_GET['querytype'];
 $trackerid   = $_GET['trackerid'];
@@ -11,7 +11,15 @@ $syear = substr($starttime, 2, 6);
 $stime = substr($starttime, 8);
 $eyear = substr($endtime, 2, 6);
 $etime = substr($endtime, 8);
-$DBpath='/nfs/OGN/SWdata/';
+if ($syear == date('ymd'))
+	{
+	$DBpath='/nfs/OGN/SWdata/';
+	}
+else 
+	{
+	$DBpath='/nfs/OGN/SWdata/archive/';
+	}
+	
 $DB=$DBpath.'SWiface.db';
 // echo $DB; 
 // phpinfo();

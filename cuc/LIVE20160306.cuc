@@ -33,13 +33,14 @@ ValFailed=True
 \\psf\Home\Desktop\Flights\
 
 [Pilots]
-"Cerdanya Pilot","",*0,"FLRDDC1AC","DG-400               ","EC-HTH"," ","",0,"",0,"",1,"",""
+"Pilot NN-0","",*0,"FLRDDBC42","DG-1000 T","G-RYPE","E6","",0,"",0,"",1,"",""
+"Pedro Toquero","",*0,"FLRDDD591","ASK-21","EC-JEQ","XX","",0,"",0,"",1,"",""
 "Sergi Pujol","",*0,"FLRDDE1FC","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
-"PilotNN2","",*0,"FLRDDE66D","MS-894 Minerva","F-GNHE","HE","",0,"",0,"",1,"",""
+"Juanma Garete ","",*0,"FLRDDE421","Duo Discus","EC-LJO","T1","",0,"",0,"",1,"",""
 [Starts]
  
-[Day_05/03/2016]
-D05032016-010400000
+[Day_06/03/2016]
+D06032016-010400000
 V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=True
 C3012990000003012990000-2
 C4238680N00186830ELa Cerdanya - LECD
