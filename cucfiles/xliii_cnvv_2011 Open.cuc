@@ -1,0 +1,1364 @@
+[Options]
+Title=XLIII Campeonato Nacional de Vuelo a Vela
+Site=Lillo, Toledo, Spain
+PeriodFrom=40725
+PeriodTo=40733
+Class=Clase abierta
+ClassIndex=6
+AvtoSaveFlight=False
+AvtoSaveTime=-60
+AvtoPublishTime=-300
+TakeoffAlt=0m
+TaskPicWidth=600
+TaskPicHeight=400
+TaskPicCompression=90
+TaskPicBorder=12
+NeedLegs=False
+StrictName=False
+UseBinFiles=False
+CommentPrefix=1
+
+[Warnings]
+HighEnl=300
+AsViolate=True
+MinFinAlt=0m
+MaxFinAlt=10000m
+MaxAlt=0m
+MaxAltCorr=50.0m
+AltTimeout=0
+StartGsp=0km/h
+FixRate=10
+
+[SearchPath]
+D:\VaV\CNVV_2011\Dia1_03072011\Open\
+D:\VaV\CNVV_2011\Dia2_04072011\Open\
+D:\VaV\CNVV_2011\Dia3_05072011\Open\
+D:\VaV\CNVV_2011\Dia4_06072011\Open\
+D:\VaV\CNVV_2011\Dia5_07072011\Open\
+D:\VaV\CNVV_2011\Dia6_08072011\Open\
+D:\VaV\CNVV_2011\Dia7_09072011\Open\
+
+[Pilots]
+"Vincent","Bilote",*,"GBSF,","Janus B","F CEPU","107","Open",108,"AC Jacetania",164,"",3,"",""
+"Alvaro","de Orleans Borbon",*,"V6ZJ,","ASH 31","D KTAJ","AJ","Open",92,"RAC Toledo",1000,"",0,"",""
+"Joan Anton","Font",*,"GRM9,","DG 800 A","D KWAG","AG","Open",114,"CVV La Cerdanya",203,"",1,"",""
+"Eduardo","Gandia Ferrer",*,"LJKP,","DG 808 B","D KICB","7_","Open",114,"CVV Igualada Odena",889,"",0,"",""
+"Angel","Garcia",*,"LC3U,","Janus C","D 2520","K5","Open",108,"RAC Toledo",161,"",1,"",""
+"Luis Emilio","Garcia Castillo",*,"LGQC,","LS 6/18m","D 8561","B2","Open",118,"AC Ocaña",520,"",1,"",""
+"Jose Miguel","Garcia Gomez",*,"F1BX,","LS 6","D 2584","HW","Open",112,"AC Ocaña",0,"",1,"",""
+"Santiago","Matas Utrilla",*,"LCIX,","Discus 2ct","D KSCC","CC","Open",108,"RAC Toledo",192,"",1,"",""
+"Ignacio","Monzon Fueyo",*,"LKVC,","Ventus 2cT","D KKIK","IK","Open",114,"CVV Igualada Odena",173,"",1,"",""
+"Alexandre","Nielles",*,"C3ZA,","Ventus 2 cxm","D KURY","AN","Open",120,"CVV Igualada Odena",460,"",1,"",""
+"Stephen","Olender",*,"F898,","Ventus 2cT","G CJWX","63","Open",114,"AC Loreto",889,"",3,"",""
+"Sergi","Pujol",*,"GSJK,","Duo Discus","EC KYA","BY","Open",110,"CVV La Cerdanya",732,"",1,"",""
+"Ricardo","Rodriguez Menchero",*,"L1P7,","ASH 25","D 4638","AR","Open",124,"AC Ocaña",474,"",1,"",""
+"Joan","Roig Aragones",*,"LDXL,","DG 505 MB","EC JAN","AN","Open",108,"AC Albatros Benabarre",512,"",1,"",""
+"Iñigo","Ulibarri",*,"A1E5,","Duo Discus","D KADR","DR","Open",110,"AC Ocaña",929,"",0,"",""
+"Neville","Weir",*,"LGO8,","ASG 29 E","D KNEV","MW","Open",114,"AC Ocaña",889,"",3,"",""
+
+[Script0]
+Program Tarea_velocidad_Hdcp_FAE_102;
+
+// Version 1.05, Date 24.08.2004
+
+//Pilots[i] record element description
+// sstart    starttime written in results sets in seconds
+// sfinish   finishtime written in results sets in seconds (negative values - no finish)
+// sdis      distance shown in results in meters (negative values will be shown in parenthesis)
+// sspeed    speed shown in results in m/s (negative values will be shown in parenthesis)
+// points    points shown in results
+// pointString: string; a string representation of points for custom output
+// Hcap      handicap factor as declared in pilot setup
+// penalty   penalty points defined in Day performance dialog
+// start     start time of task (-1 if no start)
+// finish    finish time of task (-1 if no finish)
+// dis       flown distance
+// speed     speed of finished taks (-1 if no finish, takes into account task time)
+// tstart    start time of task with time (-1 if no start)
+// tfinish   finish time of task with time
+// tdis      flown distance in task time
+// tspeed    flown distance divided by task time
+// takeoff   takeoff time (-1 if no takeoff)
+// landing   landing time (-1 if no landing)
+// phototime outlanding time (-1 if no outlanding)
+// isHc      set to TRUE if not competing is used
+// FinishAlt altitude of task finish
+// DisToGoal distance between Task landing point and flight landing point
+// Tag       string value as defined in Day performace dialog
+// Leg,LegT  array of TLeg records; info about each leg, LegT for timeout calculation
+// Warning: String;  used to set up a user warning
+// td1,td2,td3: Double; temprary variables
+
+//TLeg = record; holding leg information
+// start,finish,d,crs Double; time in seconds, distance in meters, crs in radians
+// td1,td2,td3 Double; variables may be used as temporary variables
+
+//other variables
+//info1..info2    informational strings shown on results
+//DayTag    string value as defined in Day properties dialog
+//
+//Task = record; holding basic information about task
+// TotalDis: Double; task distance in meters
+// TaskTime: Integer; task time in second
+// Point: Array of TTaskPoint; description of task
+//TTaskPoint = record; holding basic information about taskpoint and leg
+// lon,lat: Double; 
+// d,crs: Double; distance, course to next point
+
+// Notas:
+//   Distancia mínima capada para vuelo valido (Dm), no se usa ya que, 
+//   el programa calcula Dm como el 50% de la minima distancia de tarea.
+
+const Tmin = 10800;     // ¿Se usa?  
+var
+
+  Dt, n1, n2, N, D0, V0, T0, H0, Td, Dm, n3, n4,
+  Pm, Pdm, Pvm, Pn, F, Day, Tpru, Rn, Rd, Rv : Double;
+  
+  D, H, Dh, M, T, Dc, Pd, V, Pv, S, Pu, Porvel : double;
+  
+  PmaxDistance, PmaxVel : double;
+  
+  i : integer;
+
+Function MinValue( a,b,c : double ) : double;
+var m : double;
+begin
+  m := a;
+  If b < m Then m := b;
+  If c < m Then m := c;
+
+  MinValue := m;
+end;
+
+begin
+  // Cálculo de los parámetros básicos
+  N := 0;  // Num pilotos despegados
+  N1 := 0;  // Num pilotos que han hecho mas de la distancia mínima (Dm)
+  N3 := 0;  // Num pilotos que han cerrado
+  H0 := 0;  // Handicap mas alto
+  Td := 0;  // Tiempo mínimo de tarea (para AAT)
+  n4 := 0;  // Si es 1 es que el día es válido
+
+  Dm :=  Task.TotalDis / 2;  // Distancia Mínima (50% de la tarea mas corta)
+
+//  ShowMessage(FormatFloat('0.00',Task.TotalDis));
+
+// Cálculo de Handicap mas alto
+  for i:=0 to GetArrayLength(Pilots)-1 do
+  begin
+    If not Pilots[i].isHC Then
+    begin
+      If Pilots[i].Hcap > H0 Then H0 := Pilots[i].Hcap;
+    end;
+  end;
+  If H0=0 Then Exit;
+
+// Número de pilotos despegados (N), con distancia mínima (N1), tiempo de prueba (Td)
+// y pilotos que han cerrado (N3)
+  for i:=0 to GetArrayLength(Pilots)-1 do
+  begin
+    If not Pilots[i].isHC Then
+    begin
+      If Pilots[i].dis*H0/Pilots[i].Hcap >= Dm Then n1 := n1+1;
+      If Pilots[i].takeoff > 0 Then N := N+1;
+      If Pilots[i].finish > 0 Then N3 := N3+1;
+      If Pilots[i].tstart > 0 Then Td := Pilots[i].tfinish-Pilots[i].tstart;
+    end;
+  end;
+  If N=0 Then Exit;             //Cero pilotos despegados
+  If (N3+N1)>0 Then n4 := 1; // Según FAE es necesario al menos 1 
+                                            // piloto que haya hecho mas del 50% y mi 
+                                          // aportación es que si alguno ha cerrado pues también.
+// No se considera penalización por fuera de campo.
+
+// Mejor distancia (D0), mejor velocidad (V0) y su correspondiente tiempo de prueba (T0)
+  D0 := 0;
+  T0 := 0;
+  V0 := 0;
+  for i:=0 to GetArrayLength(Pilots)-1 do
+  begin
+    If not Pilots[i].isHC Then
+    begin
+      // Mejor distancia
+      If Pilots[i].dis*H0/Pilots[i].Hcap > D0 Then D0 := Pilots[i].dis*H0/Pilots[i].Hcap;
+      
+      // Find the highest finisher's speed of the day and corresponding Task Time
+      If Pilots[i].speed*H0/Pilots[i].Hcap = V0 Then // in case of a tie, lowest Task Time applies
+      begin
+        If (Pilots[i].finish-Pilots[i].start) < T0 Then
+        begin
+          V0 := Pilots[i].speed*H0/Pilots[i].Hcap;
+          T0 := Pilots[i].finish-Pilots[i].start;
+        end;
+      end
+      Else
+      begin
+        If Pilots[i].speed*H0/Pilots[i].Hcap > V0 Then 
+        begin
+          V0 := Pilots[i].speed*H0/Pilots[i].Hcap;
+          T0 := Pilots[i].finish-Pilots[i].start;
+          If T0 < Td Then  // If marking time is shorter than Designated time, Designated time must be used for computations
+            T0 := Td;
+        end;
+      end;
+    end;
+  end;
+  If D0=0 Then Exit;
+
+// Cálculo de los pilotos por encima de 2/3 la mejor velocidad (n2) y factor de velocidad (Rn)
+  n2 := 0;
+  for i:=0 to GetArrayLength(Pilots)-1 do
+  begin
+    If not Pilots[i].isHC Then
+    begin
+      If Pilots[i].speed*H0/Pilots[i].Hcap > (2.0/3.0*V0) Then
+      begin
+        n2 := n2+1;
+      end;
+    end;
+  end;
+  Rn:= n2/N;
+  
+// Puntos máximos del día
+  PmaxDistance := (5*D0/1000)-250;
+  If V0 > 0 Then PmaxVel := 400*((D0/1000)/(V0*3.6))-200;
+  If T0 <= 0 Then PmaxVel:= 1000;
+  If PmaxVel < 0 Then PmaxVel:= 0;
+  Pm := MinValue( PmaxDistance, PmaxVel, 1000.0 );
+
+// Puntuación  
+  for i:=0 to GetArrayLength(Pilots)-1 do
+  begin
+    If Pilots[i].finish > 0 Then
+    begin
+      Rd := 1.0;
+      Rv := (Pilots[i].speed*H0/Pilots[i].Hcap)/V0;
+    end
+    Else
+    begin
+      Rd := (Pilots[i].dis*H0/Pilots[i].Hcap)/D0;
+      Rv := 0.0;
+    end;
+    If T0 <= 0 Then
+    begin    
+      Pd:= Rd*Pm;
+      Pv:= 0.0;
+      Pu:= Pd;
+    end
+    Else    
+    begin    
+      Pd:= Rd*(1-Rn*0.666666)*Pm;
+      Pv:= 2.0*(Rv-0.6666666)*Rn*Pm;
+      If Pv < 0.0 Then Pv:= 0.0;
+      Pu:= Pv + Pd;
+    end;
+
+    Pilots[i].Points := n4*(Round(Pu)-Pilots[i].Penalty);
+  end;
+  
+  // Información publicada en las clasificaciones
+  for i:=0 to GetArrayLength(Pilots)-1 do
+  begin
+      Pilots[i].sstart:=Pilots[i].start;
+      Pilots[i].sfinish:=Pilots[i].finish;
+      Pilots[i].sdis:=Pilots[i].dis;
+      Pilots[i].sspeed:=Pilots[i].speed;
+  end;
+  Porvel := 0.0;
+  If T0 > 0 Then PorVel := 66.66666*Rn;
+  Info1 := 'Puntos máximos: '+IntToStr(Round(Pm))+' ('+IntToStr(Round(PorVel))+'% de velocidad)';
+  Info2 := 'Mejor tiempo: '+FormatFloat('0.00',T0/3600)+ ', mejor distancia: '+IntToStr(Round(D0/1000))+ ', mejor velocidad: '+FormatFloat('0.00',V0*3.6);
+  Info3 := 'Despegados:  '+IntToStr(Round(N))+ ', con dist mínima: '+IntToStr(Round(N1))+ ', con velocidad aceptable: '+IntToStr(Round(N2));
+  Info4 := 'Distancia mínima para día válido: '+IntToStr(Round(Dm/1000))+ ', velocidad aceptable: '+FormatFloat('0.00',3.6*2.0/3.0*V0);
+
+end.
+
+[Starts]
+
+[Day_03/07/2011]
+D030720110000100000
+V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10
+I1Puntos máximos: 1000 (11% de velocidad)
+I2Mejor tiempo: 3,27, mejor distancia: 413, mejor velocidad: 126,48
+I3Despegados:  12, con dist mínima: 8, con velocidad aceptable: 2
+I4Distancia mínima para día válido: 153, velocidad aceptable: 84,32
+C301299000000301299000003
+C3943020N00319230WAerodromo de Lillo
+C3933333N00315083WAerodromo la Mancha
+C3915740N00428529WAlcoba
+C3929440N00248583WSanta María de los Llanos
+C3941167N00313183WAerogeneradores
+C3943017N00319233WAerodromo Lillo
+C3943017N00319233WAerodromo Lillo
+OZ=-1,Style=2,R1=6000m,A1=90
+OZ=0,Style=1,R1=3000m,A1=45,R2=500m,A2=180
+OZ=1,Style=1,R1=3000m,A1=45,R2=500m,A2=180
+OZ=2,Style=1,R1=3000m,A1=45,R2=500m,A2=180
+OZ=3,Style=3,R1=3000m,A1=180
+TSK,WpDis=True,MinDis=True,NearDis=0.5km,NearAlt=200.0m,MinFinAlt=0.0km
+E000,3,,K,164,0,46350,57359,50588,-1,0,66594.4921875,50588,-1,0,66594.4921875,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173GBSF1.IGC",46445,57359,"",55041,,,,,BE819353C1C9D502AF5A61D8C2E918D1,
+WA12:52:53: Ingresando Zona peligrosa Paracas Lillo en 698m.
+WA12:52:53: Ingresando Zona peligrosa Paracas Lillo en 698m.
+WA12:52:57: Partiendo Zona peligrosa Paracas Lillo a las 699m.
+WA
+WA12:52:57: Partiendo Zona peligrosa Paracas Lillo a las 699m.
+WA
+WA12:53:31: Ingresando Zona peligrosa Paracas Lillo en 746m.
+WA12:53:31: Ingresando Zona peligrosa Paracas Lillo en 746m.
+WA12:55:25: Partiendo Zona peligrosa Paracas Lillo a las 863m.
+WA
+WA12:55:25: Partiendo Zona peligrosa Paracas Lillo a las 863m.
+WA
+WA12:55:53: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 902m.
+WA12:55:53: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 902m.
+WA12:57:31: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1001m.
+WA12:58:23: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1038m.
+WA
+WA12:58:23: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1038m.
+WA
+WA13:00:19: Ingresando Zona peligrosa Paracas Lillo en 1154m.
+WA13:00:19: Ingresando Zona peligrosa Paracas Lillo en 1154m.
+WA13:01:47: Partiendo Zona peligrosa Paracas Lillo a las 1166m.
+WA
+WA13:01:47: Partiendo Zona peligrosa Paracas Lillo a las 1166m.
+WA
+WA13:03:19: Ingresando Zona peligrosa Paracas Lillo en 1212m.
+WA13:03:19: Ingresando Zona peligrosa Paracas Lillo en 1212m.
+WA13:03:33: Partiendo Zona peligrosa Paracas Lillo a las 1212m.
+WA
+WA13:03:33: Partiendo Zona peligrosa Paracas Lillo a las 1212m.
+WA
+WA13:03:45: Ingresando Zona peligrosa Paracas Lillo en 1220m.
+WA13:03:45: Ingresando Zona peligrosa Paracas Lillo en 1220m.
+WA13:04:11: Partiendo Zona peligrosa Paracas Lillo a las 1196m.
+WA
+WA13:04:11: Partiendo Zona peligrosa Paracas Lillo a las 1196m.
+WA
+WA13:07:23: Ingresando Zona peligrosa Paracas Lillo en 1448m.
+WA13:07:23: Ingresando Zona peligrosa Paracas Lillo en 1448m.
+WA13:07:35: Partiendo Zona peligrosa Paracas Lillo a las 1458m.
+WA
+WA13:07:35: Partiendo Zona peligrosa Paracas Lillo a las 1458m.
+WA
+WA13:07:41: Ingresando Zona peligrosa Paracas Lillo en 1479m.
+WA13:07:41: Ingresando Zona peligrosa Paracas Lillo en 1479m.
+WA13:08:35: Partiendo Zona peligrosa Paracas Lillo a las 1604m.
+WA
+WA13:08:35: Partiendo Zona peligrosa Paracas Lillo a las 1604m.
+WA
+WA14:05:05: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2094m.
+WA
+WA15:45:17: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2125m.
+WA15:50:51: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1859m.
+WA15:50:51: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1859m.
+WA15:52:01: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1466m.
+WA
+WA15:52:01: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1466m.
+WA
+WA15:53:51: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1008m.
+WA
+WE-16384.0
+E001,3,,HK,1000,0,46208,62007,50150,61918,26.0670680999756,306757.25,50150,61918,26.0670680999756,306757.25,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173V6ZJ1.igc",46304,62007,"",-1,,,,,83761AF219A6827198E3C18B5119E2B6,
+WA12:50:24: Ingresando Zona peligrosa Paracas Lillo en 701m.
+WA12:50:24: Ingresando Zona peligrosa Paracas Lillo en 701m.
+WA12:50:26: Partiendo Zona peligrosa Paracas Lillo a las 700m.
+WA
+WA12:50:26: Partiendo Zona peligrosa Paracas Lillo a las 700m.
+WA
+WA12:52:44: Ingresando Zona de control
+WAClase D ECM: 124.025 en 990m.
+WA12:52:50: Ingresando Zona peligrosa Paracas Lillo en 1001m.
+WA12:52:50: Ingresando Zona peligrosa Paracas Lillo en 1001m.
+WA12:53:11: Partiendo Zona peligrosa Paracas Lillo a las 1063m.
+WA
+WA12:53:11: Partiendo Zona peligrosa Paracas Lillo a las 1063m.
+WA
+WA12:55:45: Ingresando Zona Restringida Paracas Lillo en 1226m.
+WA12:55:47: Ingresando Zona peligrosa Paracas Lillo en 1227m.
+WA12:55:47: Ingresando Zona peligrosa Paracas Lillo en 1227m.
+WA12:56:13: Partiendo Zona peligrosa Paracas Lillo a las 1280m.
+WA
+WA12:56:13: Partiendo Zona peligrosa Paracas Lillo a las 1280m.
+WA
+WA12:56:23: Ingresando Zona peligrosa Paracas Lillo en 1269m.
+WA12:56:23: Ingresando Zona peligrosa Paracas Lillo en 1269m.
+WA12:59:02: Partiendo Zona Restringida Paracas Lillo a las 1627m.
+WA
+WA12:59:15: Ingresando Zona Restringida Paracas Lillo en 1662m.
+WA12:59:33: Partiendo Zona Restringida Paracas Lillo a las 1705m.
+WA
+WA12:59:58: Ingresando Zona Restringida Paracas Lillo en 1750m.
+WA13:00:04: Partiendo Zona Restringida Paracas Lillo a las 1774m.
+WA
+WA13:01:38: Ingresando Zona Restringida Paracas Lillo en 1814m.
+WA13:02:12: Partiendo Zona peligrosa Paracas Lillo a las 1809m.
+WA
+WA13:02:12: Partiendo Zona peligrosa Paracas Lillo a las 1809m.
+WA
+WA13:02:16: Partiendo Zona Restringida Paracas Lillo a las 1810m.
+WA
+WA14:00:52: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1802m.
+WA
+WA17:01:01: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1620m.
+WA17:10:55: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 988m.
+WA
+WA17:13:15: Ingresando Zona peligrosa Paracas Lillo en 711m.
+WA17:13:15: Ingresando Zona peligrosa Paracas Lillo en 711m.
+WA17:13:17: Partiendo Zona peligrosa Paracas Lillo a las 712m.
+WA
+WA17:13:17: Partiendo Zona peligrosa Paracas Lillo a las 712m.
+WA
+WE-16384.0
+E002,3,,K,203,0,46466,59115,51427,-1,0,86872.2890625,51427,-1,0,86872.2890625,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173GRM92.IGC",46618,59115,"",56100,,,,,6EBF9BB3E6BD80B941DA022A3BF1DA20,
+WA12:59:54: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1701m.
+WA
+WA13:01:35: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1648m.
+WA13:09:21: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1530m.
+WA
+WA13:09:29: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1535m.
+WA13:10:01: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1560m.
+WA
+WA13:10:07: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1560m.
+WA13:12:41: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1534m.
+WA
+WA13:15:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1837m.
+WA13:15:55: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1851m.
+WA
+WA13:16:03: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1868m.
+WA13:19:37: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1875m.
+WA
+WA13:48:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1500m.
+WA14:13:09: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2544m.
+WA
+WA15:58:31: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2680m.
+WA16:05:59: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2359m.
+WA16:05:59: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2359m.
+WA16:09:05: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2119m.
+WA
+WA16:09:05: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2119m.
+WA
+WA16:22:05: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 987m.
+WA
+WE-16384.0
+E003,3,,HFK,889,0,44057,66222,51263,65976,20.849401473999,306757.25,51263,65976,20.849401473999,306757.25,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LJKP1.igc",46531,66222,"",-1,,,,,6226A95178D9FD1EB12936E6FAF9C1E8,
+WA12:14:33: Ingresando Zona peligrosa Paracas Lillo en 695m.
+WA12:14:33: Ingresando Zona peligrosa Paracas Lillo en 695m.
+WA12:14:45: Partiendo Zona peligrosa Paracas Lillo a las 727m.
+WA
+WA12:14:45: Partiendo Zona peligrosa Paracas Lillo a las 727m.
+WA
+WA12:16:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1025m.
+WA12:34:09: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1440m.
+WA
+WA12:34:33: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1436m.
+WA12:34:57: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1438m.
+WA
+WA12:35:09: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1439m.
+WA12:35:33: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1460m.
+WA
+WA12:35:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1461m.
+WA12:36:33: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1484m.
+WA
+WA12:40:10: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1291m.
+WA12:49:43: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 990m.
+WA
+WA13:15:38: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1809m.
+WA13:15:50: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1824m.
+WA
+WA13:16:02: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1840m.
+WA13:19:26: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1859m.
+WA
+WA13:21:26: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1685m.
+WA13:22:38: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1566m.
+WA
+WA13:35:50: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2013m.
+WA13:36:02: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2006m.
+WA
+WA13:36:26: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2038m.
+WA13:36:38: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2039m.
+WA
+WA13:36:50: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2059m.
+WA13:39:31: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2006m.
+WA
+WA13:43:07: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2117m.
+WA13:43:19: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2115m.
+WA
+WA14:06:14: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1869m.
+WA14:12:14: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1958m.
+WA
+WA15:46:22: Ingresando Zona Restringida LER146 Park Cabaneros en 1909m.
+WA15:46:22: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1909m.
+WA15:46:22: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1909m.
+WA15:47:34: Partiendo Zona Restringida LER146 Park Cabaneros a las 1830m.
+WA
+WA15:47:34: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1830m.
+WA
+WA15:47:34: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1830m.
+WA
+WA15:55:54: Ingresando Zona Restringida LER146 Park Cabaneros en 1330m.
+WA15:55:54: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1330m.
+WA15:55:54: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1330m.
+WA16:11:30: Partiendo Zona Restringida LER146 Park Cabaneros a las 1869m.
+WA
+WA16:11:30: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1869m.
+WA
+WA16:11:30: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1869m.
+WA
+WA17:53:46: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1450m.
+WA18:19:25: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 993m.
+WA
+WA18:20:06: Ingresando Zona de control
+WAClase D ECM: 124.025 en 996m.
+WA18:21:06: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 986m.
+WA
+WE-16384.0
+E004,3,,FK,161,0,46244,60042,51033,-1,0,65096.375,51033,-1,0,65096.375,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LC3U1.IGC",46672,60042,"",57311,,,,,756BC670EFD1423B933DE764F69DF3DD,
+WA12:51:12: Ingresando Zona peligrosa Paracas Lillo en 701m.
+WA12:51:12: Ingresando Zona peligrosa Paracas Lillo en 701m.
+WA12:51:22: Partiendo Zona peligrosa Paracas Lillo a las 706m.
+WA
+WA12:51:22: Partiendo Zona peligrosa Paracas Lillo a las 706m.
+WA
+WA12:52:02: Ingresando Zona peligrosa Paracas Lillo en 770m.
+WA12:52:02: Ingresando Zona peligrosa Paracas Lillo en 770m.
+WA12:53:52: Partiendo Zona peligrosa Paracas Lillo a las 927m.
+WA
+WA12:53:52: Partiendo Zona peligrosa Paracas Lillo a las 927m.
+WA
+WA12:54:22: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 934m.
+WA12:54:22: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 934m.
+WA12:56:32: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1017m.
+WA12:57:02: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1066m.
+WA
+WA12:57:02: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1066m.
+WA
+WA12:59:02: Ingresando Zona peligrosa Paracas Lillo en 1104m.
+WA12:59:02: Ingresando Zona peligrosa Paracas Lillo en 1104m.
+WA13:00:02: Partiendo Zona peligrosa Paracas Lillo a las 1168m.
+WA
+WA13:00:02: Partiendo Zona peligrosa Paracas Lillo a las 1168m.
+WA
+WA13:03:02: Ingresando Zona peligrosa Paracas Lillo en 1318m.
+WA13:03:02: Ingresando Zona peligrosa Paracas Lillo en 1318m.
+WA13:03:12: Partiendo Zona peligrosa Paracas Lillo a las 1324m.
+WA
+WA13:03:12: Partiendo Zona peligrosa Paracas Lillo a las 1324m.
+WA
+WA13:03:42: Ingresando Zona peligrosa Paracas Lillo en 1331m.
+WA13:03:42: Ingresando Zona peligrosa Paracas Lillo en 1331m.
+WA13:05:52: Partiendo Zona peligrosa Paracas Lillo a las 1328m.
+WA
+WA13:05:52: Partiendo Zona peligrosa Paracas Lillo a las 1328m.
+WA
+WA13:06:12: Ingresando Zona peligrosa Paracas Lillo en 1342m.
+WA13:06:12: Ingresando Zona peligrosa Paracas Lillo en 1342m.
+WA13:06:42: Partiendo Zona peligrosa Paracas Lillo a las 1377m.
+WA
+WA13:06:42: Partiendo Zona peligrosa Paracas Lillo a las 1377m.
+WA
+WA13:06:52: Ingresando Zona peligrosa Paracas Lillo en 1398m.
+WA13:06:52: Ingresando Zona peligrosa Paracas Lillo en 1398m.
+WA13:08:02: Partiendo Zona peligrosa Paracas Lillo a las 1545m.
+WA
+WA13:08:02: Partiendo Zona peligrosa Paracas Lillo a las 1545m.
+WA
+WA13:08:12: Ingresando Zona peligrosa Paracas Lillo en 1581m.
+WA13:08:12: Ingresando Zona peligrosa Paracas Lillo en 1581m.
+WA13:15:53: Ingresando Zona Restringida Paracas Lillo en 2153m.
+WA13:16:43: Partiendo Zona Restringida Paracas Lillo a las 2075m.
+WA
+WA13:16:43: Partiendo Zona peligrosa Paracas Lillo a las 2075m.
+WA
+WA13:16:43: Partiendo Zona peligrosa Paracas Lillo a las 2075m.
+WA
+WA13:38:14: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1510m.
+WA
+WA13:38:34: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1500m.
+WA13:58:40: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1838m.
+WA
+WA14:04:35: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2229m.
+WA14:04:45: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2235m.
+WA
+WA14:05:05: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2254m.
+WA14:06:25: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2310m.
+WA
+WA14:06:35: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2312m.
+WA14:08:55: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2158m.
+WA
+WA16:29:02: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1625m.
+WA16:38:22: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 984m.
+WA
+WE-16384.0
+E005,3,,K,520,0,46761,65218,50381,-1,0,229991.09375,50381,-1,0,229991.09375,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LGQC1.IGC",46873,65218,"",64115,,,,,BCB755BAD4A7D4D4E488F72CD4D46925,
+WA13:00:43: Ingresando Zona peligrosa Paracas Lillo en 853m.
+WA13:00:43: Ingresando Zona peligrosa Paracas Lillo en 853m.
+WA13:01:43: Partiendo Zona peligrosa Paracas Lillo a las 1008m.
+WA
+WA13:01:43: Partiendo Zona peligrosa Paracas Lillo a las 1008m.
+WA
+WA13:01:43: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1008m.
+WA13:02:23: Ingresando Zona peligrosa Paracas Lillo en 1106m.
+WA13:02:23: Ingresando Zona peligrosa Paracas Lillo en 1106m.
+WA13:03:03: Partiendo Zona peligrosa Paracas Lillo a las 1175m.
+WA
+WA13:03:03: Partiendo Zona peligrosa Paracas Lillo a las 1175m.
+WA
+WA13:03:33: Ingresando Zona peligrosa Paracas Lillo en 1185m.
+WA13:03:33: Ingresando Zona peligrosa Paracas Lillo en 1185m.
+WA13:04:23: Partiendo Zona peligrosa Paracas Lillo a las 1189m.
+WA
+WA13:04:23: Partiendo Zona peligrosa Paracas Lillo a las 1189m.
+WA
+WA13:07:13: Ingresando Zona peligrosa Paracas Lillo en 1401m.
+WA13:07:13: Ingresando Zona peligrosa Paracas Lillo en 1401m.
+WA13:07:23: Partiendo Zona peligrosa Paracas Lillo a las 1412m.
+WA
+WA13:07:23: Partiendo Zona peligrosa Paracas Lillo a las 1412m.
+WA
+WA13:07:33: Ingresando Zona peligrosa Paracas Lillo en 1446m.
+WA13:07:33: Ingresando Zona peligrosa Paracas Lillo en 1446m.
+WA13:17:13: Partiendo Zona peligrosa Paracas Lillo a las 2361m.
+WA
+WA13:17:13: Partiendo Zona peligrosa Paracas Lillo a las 2361m.
+WA
+WA13:17:23: Ingresando Zona peligrosa Paracas Lillo en 2358m.
+WA13:17:23: Ingresando Zona peligrosa Paracas Lillo en 2358m.
+WA13:17:43: Partiendo Zona peligrosa Paracas Lillo a las 2358m.
+WA
+WA13:17:43: Partiendo Zona peligrosa Paracas Lillo a las 2358m.
+WA
+WA13:18:03: Ingresando Zona peligrosa Paracas Lillo en 2319m.
+WA13:18:03: Ingresando Zona peligrosa Paracas Lillo en 2319m.
+WA13:20:03: Ingresando Zona Restringida Paracas Lillo en 2127m.
+WA13:20:33: Partiendo Zona Restringida Paracas Lillo a las 2080m.
+WA
+WA13:20:33: Partiendo Zona peligrosa Paracas Lillo a las 2080m.
+WA
+WA13:20:33: Partiendo Zona peligrosa Paracas Lillo a las 2080m.
+WA
+WA14:03:53: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2049m.
+WA
+WA17:09:25: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1622m.
+WA17:26:55: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2275m.
+WA17:26:55: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2275m.
+WA17:27:05: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2277m.
+WA
+WA17:27:05: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2277m.
+WA
+WA17:27:15: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2297m.
+WA17:27:15: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2297m.
+WA17:27:35: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2333m.
+WA
+WA17:27:35: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2333m.
+WA
+WA17:27:45: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2361m.
+WA17:27:45: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 2361m.
+WA17:28:05: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2395m.
+WA
+WA17:28:05: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 2395m.
+WA
+WA18:05:18: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 988m.
+WA
+WE-16384.0
+E006,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+WE-16384.0
+E007,3,,FK,192,0,46299,62974,51660,-1,0,77884.765625,51660,-1,0,77884.765625,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LCIX1.IGC",46619,62974,"",57272,,,,,BB471324102889223F64E7732BDEAED3,
+WA12:51:59: Ingresando Zona peligrosa Paracas Lillo en 697m.
+WA12:51:59: Ingresando Zona peligrosa Paracas Lillo en 697m.
+WA12:52:11: Partiendo Zona peligrosa Paracas Lillo a las 718m.
+WA
+WA12:52:11: Partiendo Zona peligrosa Paracas Lillo a las 718m.
+WA
+WA12:52:35: Ingresando Zona peligrosa Paracas Lillo en 802m.
+WA12:52:35: Ingresando Zona peligrosa Paracas Lillo en 802m.
+WA12:54:23: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1017m.
+WA12:54:47: Partiendo Zona peligrosa Paracas Lillo a las 1057m.
+WA
+WA12:54:47: Partiendo Zona peligrosa Paracas Lillo a las 1057m.
+WA
+WA12:55:23: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1100m.
+WA12:55:23: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1100m.
+WA12:58:35: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1462m.
+WA
+WA12:58:35: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1462m.
+WA
+WA12:58:48: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1483m.
+WA12:58:48: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1483m.
+WA12:59:00: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1499m.
+WA
+WA12:59:00: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1499m.
+WA
+WA12:59:12: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1513m.
+WA12:59:12: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1513m.
+WA12:59:36: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1554m.
+WA
+WA12:59:36: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1554m.
+WA
+WA13:02:36: Ingresando Zona peligrosa Paracas Lillo en 1787m.
+WA13:02:36: Ingresando Zona peligrosa Paracas Lillo en 1787m.
+WA13:02:48: Partiendo Zona peligrosa Paracas Lillo a las 1811m.
+WA
+WA13:02:48: Partiendo Zona peligrosa Paracas Lillo a las 1811m.
+WA
+WA13:03:00: Ingresando Zona peligrosa Paracas Lillo en 1826m.
+WA13:03:00: Ingresando Zona peligrosa Paracas Lillo en 1826m.
+WA13:17:13: Partiendo Zona peligrosa Paracas Lillo a las 2340m.
+WA
+WA13:17:13: Partiendo Zona peligrosa Paracas Lillo a las 2340m.
+WA
+WA13:17:25: Ingresando Zona peligrosa Paracas Lillo en 2333m.
+WA13:17:25: Ingresando Zona peligrosa Paracas Lillo en 2333m.
+WA13:19:13: Ingresando Zona Restringida Paracas Lillo en 2162m.
+WA13:20:25: Partiendo Zona Restringida Paracas Lillo a las 2151m.
+WA
+WA13:20:25: Partiendo Zona peligrosa Paracas Lillo a las 2151m.
+WA
+WA13:20:25: Partiendo Zona peligrosa Paracas Lillo a las 2151m.
+WA
+WA14:19:30: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2132m.
+WA
+WA16:19:49: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2030m.
+WA17:05:56: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1761m.
+WA17:05:56: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1761m.
+WA17:11:32: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1515m.
+WA
+WA17:11:32: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1515m.
+WA
+WA17:26:58: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1004m.
+WA
+WE-16384.0
+E008,3,,FK,173,0,47220,61132,50950,-1,0,74149.625,50950,-1,0,74149.625,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LKVC1.igc",47560,61132,"",57316,,,,,39B970A5F3AE9BDD3B55CE33A5DE86A3,
+WA13:07:40: Ingresando Zona peligrosa Paracas Lillo en 729m.
+WA13:07:40: Ingresando Zona peligrosa Paracas Lillo en 729m.
+WA13:09:52: Partiendo Zona peligrosa Paracas Lillo a las 932m.
+WA
+WA13:09:52: Partiendo Zona peligrosa Paracas Lillo a las 932m.
+WA
+WA13:10:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 955m.
+WA13:10:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 955m.
+WA13:11:04: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1053m.
+WA13:13:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1221m.
+WA
+WA13:13:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1221m.
+WA
+WA13:13:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1216m.
+WA13:13:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1216m.
+WA13:13:52: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1259m.
+WA
+WA13:13:52: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1259m.
+WA
+WA13:14:04: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1297m.
+WA13:14:04: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1297m.
+WA13:14:16: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1325m.
+WA
+WA13:14:16: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1325m.
+WA
+WA13:14:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1353m.
+WA13:14:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1353m.
+WA13:14:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1387m.
+WA
+WA13:14:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1387m.
+WA
+WA13:21:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1887m.
+WA13:21:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1887m.
+WA13:30:16: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1854m.
+WA
+WA13:30:16: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1854m.
+WA
+WA13:30:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1891m.
+WA13:30:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1891m.
+WA13:31:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1889m.
+WA
+WA13:31:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1889m.
+WA
+WA14:28:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1580m.
+WA14:28:28: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1580m.
+WA14:35:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1726m.
+WA
+WA14:35:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1726m.
+WA
+WA14:35:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1767m.
+WA14:35:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1767m.
+WA14:35:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1758m.
+WA
+WA14:35:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1758m.
+WA
+WA14:35:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1803m.
+WA14:35:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1803m.
+WA14:36:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1798m.
+WA
+WA14:36:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1798m.
+WA
+WA14:41:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1991m.
+WA14:41:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1991m.
+WA14:46:52: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1850m.
+WA
+WA14:46:52: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1850m.
+WA
+WA15:13:16: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2288m.
+WA
+WA16:26:16: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1791m.
+WA16:40:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1543m.
+WA16:40:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1543m.
+WA16:41:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1565m.
+WA
+WA16:41:04: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1565m.
+WA
+WA16:41:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1584m.
+WA16:41:16: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1584m.
+WA16:41:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1608m.
+WA
+WA16:41:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1608m.
+WA
+WA16:41:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1639m.
+WA16:41:52: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1639m.
+WA16:44:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1573m.
+WA
+WA16:44:40: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1573m.
+WA
+WA16:52:40: Ingresando Zona Restringida Paracas Lillo en 1239m.
+WA16:53:28: Ingresando Zona peligrosa Paracas Lillo en 1251m.
+WA16:53:28: Ingresando Zona peligrosa Paracas Lillo en 1251m.
+WA16:53:40: Partiendo Zona peligrosa Paracas Lillo a las 1213m.
+WA
+WA16:53:40: Partiendo Zona peligrosa Paracas Lillo a las 1213m.
+WA
+WA16:54:04: Partiendo Zona Restringida Paracas Lillo a las 1234m.
+WA
+WA16:56:16: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 988m.
+WA
+WE-16384.0
+E009,3,,K,460,0,44093,62939,51613,-1,0,207285.59375,51613,-1,0,207285.59375,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173C3ZA1.IGC",44303,62939,"",62861,,,,,96CC169FE9E9F014C97C81384BF918E1,
+WA12:15:11: Ingresando Zona peligrosa Paracas Lillo en 695m.
+WA12:15:11: Ingresando Zona peligrosa Paracas Lillo en 695m.
+WA12:15:14: Partiendo Zona peligrosa Paracas Lillo a las 695m.
+WA
+WA12:15:14: Partiendo Zona peligrosa Paracas Lillo a las 695m.
+WA
+WA12:18:05: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1010m.
+WA12:28:17: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1427m.
+WA12:28:17: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1427m.
+WA12:28:29: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1435m.
+WA
+WA12:28:29: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1435m.
+WA
+WA12:28:44: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1453m.
+WA12:28:44: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1453m.
+WA12:28:56: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1466m.
+WA
+WA12:28:56: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1466m.
+WA
+WA13:35:41: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1806m.
+WA
+WA13:38:05: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1796m.
+WA13:38:17: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1789m.
+WA
+WA13:43:26: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1462m.
+WA14:34:17: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1915m.
+WA
+WA15:59:05: Ingresando Zona Restringida LER146 Park Cabaneros en 1737m.
+WA15:59:05: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1737m.
+WA15:59:05: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1737m.
+WA16:19:38: Partiendo Zona Restringida LER146 Park Cabaneros a las 1610m.
+WA
+WA16:19:38: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1610m.
+WA
+WA16:19:38: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1610m.
+WA
+WA16:23:35: Ingresando Zona Restringida LER146 Park Cabaneros en 1268m.
+WA16:23:35: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1268m.
+WA16:23:35: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1268m.
+WA16:38:29: Partiendo Zona Restringida LER146 Park Cabaneros a las 1383m.
+WA
+WA16:38:29: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1383m.
+WA
+WA16:38:29: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1383m.
+WA
+WA17:18:35: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2245m.
+WA17:24:14: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1487m.
+WA17:24:14: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1487m.
+WA17:24:56: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1279m.
+WA
+WA17:24:56: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1279m.
+WA
+WA17:27:14: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1003m.
+WA
+WE-16384.0
+E010,7,,K,889,0,46607,66069,51391,65889,21.1585903167725,306757.25,51391,65889,21.1585903167725,306757.25,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173F8981.IGC",46811,66069,"",-1,,,,,B3C0C10BDCC36AC5081B14C2D00F8496,
+WTPuntos Aerodromo la Mancha, Alcoba incorrectamente virados.
+WA12:57:38: Ingresando Zona peligrosa Paracas Lillo en 754m.
+WA12:57:38: Ingresando Zona peligrosa Paracas Lillo en 754m.
+WA12:59:17: Partiendo Zona peligrosa Paracas Lillo a las 1004m.
+WA
+WA12:59:17: Partiendo Zona peligrosa Paracas Lillo a las 1004m.
+WA
+WA12:59:17: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1004m.
+WA14:22:04: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2160m.
+WA
+WA14:23:25: Ingresando Zona de control
+WAClase D ECM: 124.025 en 2237m.
+WA14:23:34: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2247m.
+WA
+WA15:45:46: Ingresando Zona Restringida LER146 Park Cabaneros en 1679m.
+WA15:45:46: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1679m.
+WA15:45:46: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1679m.
+WA15:49:49: Partiendo Zona Restringida LER146 Park Cabaneros a las 1766m.
+WA
+WA15:49:49: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1766m.
+WA
+WA15:49:49: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1766m.
+WA
+WA18:03:37: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1704m.
+WA18:19:03: Ingresando Zona peligrosa Paracas Lillo en 1027m.
+WA18:19:03: Ingresando Zona peligrosa Paracas Lillo en 1027m.
+WA18:19:21: Partiendo Zona peligrosa Paracas Lillo a las 992m.
+WA
+WA18:19:21: Partiendo Zona peligrosa Paracas Lillo a las 992m.
+WA
+WA18:19:30: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 984m.
+WA
+WE-16384.0
+E011,3,,K,732,0,46144,66466,51046,-1,0,302199.84375,51046,-1,0,302199.84375,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173GSJK1.IGC",46381,66466,"",66404,,,,,B3B6D783998F5A0C25CC6AA3E868B1AE,
+WCToma en Aerogeneradores
+WA12:49:29: Ingresando Zona peligrosa Paracas Lillo en 712m.
+WA12:49:29: Ingresando Zona peligrosa Paracas Lillo en 712m.
+WA12:49:31: Partiendo Zona peligrosa Paracas Lillo a las 711m.
+WA
+WA12:49:31: Partiendo Zona peligrosa Paracas Lillo a las 711m.
+WA
+WA12:50:05: Ingresando Zona peligrosa Paracas Lillo en 771m.
+WA12:50:05: Ingresando Zona peligrosa Paracas Lillo en 771m.
+WA12:51:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1005m.
+WA12:52:07: Partiendo Zona peligrosa Paracas Lillo a las 1060m.
+WA
+WA12:52:07: Partiendo Zona peligrosa Paracas Lillo a las 1060m.
+WA
+WA12:57:43: Ingresando Zona peligrosa Paracas Lillo en 1557m.
+WA12:57:43: Ingresando Zona peligrosa Paracas Lillo en 1557m.
+WA12:58:05: Partiendo Zona peligrosa Paracas Lillo a las 1601m.
+WA
+WA12:58:05: Partiendo Zona peligrosa Paracas Lillo a las 1601m.
+WA
+WA12:58:21: Ingresando Zona peligrosa Paracas Lillo en 1559m.
+WA12:58:21: Ingresando Zona peligrosa Paracas Lillo en 1559m.
+WA12:58:43: Partiendo Zona peligrosa Paracas Lillo a las 1600m.
+WA
+WA12:58:43: Partiendo Zona peligrosa Paracas Lillo a las 1600m.
+WA
+WA12:59:51: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1543m.
+WA12:59:51: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1543m.
+WA13:00:01: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1548m.
+WA
+WA13:00:01: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1548m.
+WA
+WA13:02:55: Ingresando Zona peligrosa Paracas Lillo en 1687m.
+WA13:02:55: Ingresando Zona peligrosa Paracas Lillo en 1687m.
+WA13:03:27: Partiendo Zona peligrosa Paracas Lillo a las 1699m.
+WA
+WA13:03:27: Partiendo Zona peligrosa Paracas Lillo a las 1699m.
+WA
+WA13:03:39: Ingresando Zona peligrosa Paracas Lillo en 1708m.
+WA13:03:39: Ingresando Zona peligrosa Paracas Lillo en 1708m.
+WA13:06:19: Partiendo Zona peligrosa Paracas Lillo a las 1738m.
+WA
+WA13:06:19: Partiendo Zona peligrosa Paracas Lillo a las 1738m.
+WA
+WA13:40:55: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1607m.
+WA
+WA13:48:47: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1804m.
+WA13:49:01: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1824m.
+WA
+WA13:49:11: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1822m.
+WA14:00:23: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2079m.
+WA
+WA15:51:39: Ingresando Zona Restringida LER146 Park Cabaneros en 1683m.
+WA15:51:39: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1683m.
+WA15:51:39: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1683m.
+WA15:54:17: Partiendo Zona Restringida LER146 Park Cabaneros a las 1646m.
+WA
+WA15:54:17: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1646m.
+WA
+WA15:54:17: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1646m.
+WA
+WA17:57:02: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1286m.
+WA18:21:46: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1018m.
+WA
+WA18:21:52: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1012m.
+WA18:21:54: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1008m.
+WA
+WE-16384.0
+E012,3,,FK,474,0,46927,62180,52236,-1,0,220387.875,52236,-1,0,220387.875,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173L1P71.IGC",47313,62180,"",61940,,,,,0DD5BF2F3C85200307668A88B9B91C9F,
+WCToma en La Mancha
+WA13:03:45: Ingresando Zona peligrosa Paracas Lillo en 840m.
+WA13:03:45: Ingresando Zona peligrosa Paracas Lillo en 840m.
+WA13:05:21: Partiendo Zona peligrosa Paracas Lillo a las 965m.
+WA
+WA13:05:21: Partiendo Zona peligrosa Paracas Lillo a las 965m.
+WA
+WA13:05:57: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 997m.
+WA13:05:57: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 997m.
+WA13:06:21: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1022m.
+WA13:07:57: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1103m.
+WA
+WA13:07:57: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1103m.
+WA
+WA14:34:33: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1821m.
+WA
+WA15:43:09: Ingresando Zona Restringida LER146 Park Cabaneros en 1707m.
+WA15:43:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1707m.
+WA15:43:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1707m.
+WA15:45:57: Partiendo Zona Restringida LER146 Park Cabaneros a las 2151m.
+WA
+WA15:45:57: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 2151m.
+WA
+WA15:45:57: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 2151m.
+WA
+WA15:48:09: Ingresando Zona Restringida LER146 Park Cabaneros en 2130m.
+WA15:48:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2130m.
+WA15:48:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2130m.
+WA15:52:57: Partiendo Zona Restringida LER146 Park Cabaneros a las 1828m.
+WA
+WA15:52:57: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1828m.
+WA
+WA15:52:57: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1828m.
+WA
+WA15:57:20: Ingresando Zona Restringida LER146 Park Cabaneros en 1499m.
+WA15:57:20: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1499m.
+WA15:57:20: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1499m.
+WA16:05:20: Partiendo Zona Restringida LER146 Park Cabaneros a las 2141m.
+WA
+WA16:05:20: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 2141m.
+WA
+WA16:05:20: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 2141m.
+WA
+WA16:06:08: Ingresando Zona Restringida LER146 Park Cabaneros en 2131m.
+WA16:06:08: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2131m.
+WA16:06:08: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2131m.
+WA16:10:56: Partiendo Zona Restringida LER146 Park Cabaneros a las 1840m.
+WA
+WA16:10:56: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1840m.
+WA
+WA16:10:56: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1840m.
+WA
+WE-16384.0
+E013,3,,FK,512,0,47282,60517,51207,-1,0,207351,51207,-1,0,207351,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LDXL1.IGC",47598,60517,"",60439,,,,,0AC6EC95DCDFEBCBC1D3155CD8C00DA0,
+WA13:11:21: Ingresando Zona peligrosa Paracas Lillo en 1005m.
+WA13:11:21: Ingresando Zona peligrosa Paracas Lillo en 1005m.
+WA13:11:21: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1005m.
+WA13:11:47: Partiendo Zona peligrosa Paracas Lillo a las 1057m.
+WA
+WA13:11:47: Partiendo Zona peligrosa Paracas Lillo a las 1057m.
+WA
+WA13:45:43: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1568m.
+WA
+WA13:48:32: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1648m.
+WA14:00:27: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1890m.
+WA
+WA14:05:19: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1951m.
+WA14:05:32: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1960m.
+WA
+WA14:05:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1989m.
+WA14:12:35: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2194m.
+WA
+WA15:22:09: Ingresando Zona Restringida LER146 Park Cabaneros en 1649m.
+WA15:22:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1649m.
+WA15:22:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1649m.
+WA15:22:22: Partiendo Zona Restringida LER146 Park Cabaneros a las 1654m.
+WA
+WA15:22:22: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1654m.
+WA
+WA15:22:22: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1654m.
+WA
+WA15:22:35: Ingresando Zona Restringida LER146 Park Cabaneros en 1658m.
+WA15:22:35: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1658m.
+WA15:22:35: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1658m.
+WA15:24:06: Partiendo Zona Restringida LER146 Park Cabaneros a las 1741m.
+WA
+WA15:24:06: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1741m.
+WA
+WA15:24:06: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1741m.
+WA
+WA15:24:19: Ingresando Zona Restringida LER146 Park Cabaneros en 1761m.
+WA15:24:19: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1761m.
+WA15:24:19: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1761m.
+WA15:24:32: Partiendo Zona Restringida LER146 Park Cabaneros a las 1775m.
+WA
+WA15:24:32: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1775m.
+WA
+WA15:24:32: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1775m.
+WA
+WA15:30:09: Ingresando Zona Restringida LER146 Park Cabaneros en 2054m.
+WA15:30:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2054m.
+WA15:30:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2054m.
+WA15:38:36: Partiendo Zona Restringida LER146 Park Cabaneros a las 1390m.
+WA
+WA15:38:36: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1390m.
+WA
+WA15:38:36: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1390m.
+WA
+WA15:50:28: Ingresando Zona Restringida LER146 Park Cabaneros en 1233m.
+WA15:50:28: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1233m.
+WA15:50:28: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1233m.
+WA15:56:45: Partiendo Zona Restringida LER146 Park Cabaneros a las 1564m.
+WA
+WA15:56:45: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1564m.
+WA
+WA15:56:45: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1564m.
+WA
+WA15:56:58: Ingresando Zona Restringida LER146 Park Cabaneros en 1598m.
+WA15:56:58: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1598m.
+WA15:56:58: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1598m.
+WA15:57:11: Partiendo Zona Restringida LER146 Park Cabaneros a las 1614m.
+WA
+WA15:57:11: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1614m.
+WA
+WA15:57:11: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1614m.
+WA
+WA15:57:24: Ingresando Zona Restringida LER146 Park Cabaneros en 1624m.
+WA15:57:24: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1624m.
+WA15:57:24: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1624m.
+WA15:57:50: Partiendo Zona Restringida LER146 Park Cabaneros a las 1632m.
+WA
+WA15:57:50: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1632m.
+WA
+WA15:57:50: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1632m.
+WA
+WA16:37:32: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1881m.
+WA16:42:59: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1403m.
+WA16:42:59: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1403m.
+WA16:43:51: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1148m.
+WA
+WA16:43:51: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1148m.
+WA
+WA16:44:56: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 998m.
+WA
+WE-16384.0
+E014,3,,HK,929,0,47064,63909,51323,63823,24.5405807495117,306757.25,51323,63823,24.5405807495117,306757.25,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173A1E52.igc",49242,63909,"",-1,,,,,A32CFED8B3238014117614831D0934EC,
+WA13:05:27: Ingresando Zona peligrosa Paracas Lillo en 726m.
+WA13:05:27: Ingresando Zona peligrosa Paracas Lillo en 726m.
+WA13:07:15: Partiendo Zona peligrosa Paracas Lillo a las 959m.
+WA
+WA13:07:15: Partiendo Zona peligrosa Paracas Lillo a las 959m.
+WA
+WA13:07:34: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 984m.
+WA13:07:34: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 984m.
+WA13:08:09: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1016m.
+WA13:09:12: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1100m.
+WA
+WA13:09:12: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1100m.
+WA
+WA14:18:30: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 1943m.
+WA
+WA15:53:45: Ingresando Zona Restringida LER146 Park Cabaneros en 1634m.
+WA15:53:45: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1634m.
+WA15:53:45: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1634m.
+WA15:57:30: Partiendo Zona Restringida LER146 Park Cabaneros a las 1480m.
+WA
+WA15:57:30: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1480m.
+WA
+WA15:57:30: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1480m.
+WA
+WA15:59:09: Ingresando Zona Restringida LER146 Park Cabaneros en 1467m.
+WA15:59:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1467m.
+WA15:59:09: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 1467m.
+WA15:59:18: Partiendo Zona Restringida LER146 Park Cabaneros a las 1475m.
+WA
+WA15:59:18: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1475m.
+WA
+WA15:59:18: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 1475m.
+WA
+WA17:25:40: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1501m.
+WA17:43:02: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 991m.
+WA
+WA17:45:00: Ingresando Zona peligrosa Paracas Lillo en 695m.
+WA17:45:00: Ingresando Zona peligrosa Paracas Lillo en 695m.
+WA17:45:09: Partiendo Zona peligrosa Paracas Lillo a las 695m.
+WA
+WA17:45:09: Partiendo Zona peligrosa Paracas Lillo a las 695m.
+WA
+WE-16384.0
+E015,3,,K,889,0,47156,66148,50520,65895,19.9516906738281,306757.25,50520,65895,19.9516906738281,306757.25,-1,-1,0,0,"D:\VaV\CNVV_2011\Dia1_03072011\Open\173LGO81.LXN",47523,66148,"",-1,,,,,F231488B38BF72F370F6C8169F516917,
+WA13:06:48: Ingresando Zona peligrosa Paracas Lillo en 750m.
+WA13:06:48: Ingresando Zona peligrosa Paracas Lillo en 750m.
+WA13:08:54: Partiendo Zona peligrosa Paracas Lillo a las 907m.
+WA
+WA13:08:54: Partiendo Zona peligrosa Paracas Lillo a las 907m.
+WA
+WA13:09:30: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 957m.
+WA13:09:30: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 957m.
+WA13:10:24: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1024m.
+WA13:13:15: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1320m.
+WA
+WA13:13:15: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1320m.
+WA
+WA13:13:24: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1348m.
+WA13:13:24: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1348m.
+WA13:13:42: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1378m.
+WA
+WA13:13:42: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1378m.
+WA
+WA13:14:00: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1398m.
+WA13:14:00: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1398m.
+WA13:14:09: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1422m.
+WA
+WA13:14:09: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1422m.
+WA
+WA13:18:48: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1793m.
+WA13:18:48: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1793m.
+WA13:21:12: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1702m.
+WA
+WA13:21:12: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1702m.
+WA
+WA13:21:21: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1702m.
+WA13:21:21: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1702m.
+WA13:30:39: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1889m.
+WA
+WA13:30:39: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1889m.
+WA
+WA13:30:48: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1893m.
+WA13:30:48: Ingresando Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 en 1893m.
+WA13:31:24: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1856m.
+WA
+WA13:31:24: Partiendo Zona peligrosa LED52 Ocaña: Cont. LEOC: 122.600 a las 1856m.
+WA
+WA14:05:12: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 2098m.
+WA
+WA15:56:39: Ingresando Zona Restringida LER146 Park Cabaneros en 2105m.
+WA15:56:39: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2105m.
+WA15:56:39: Ingresando Zona Restringida LER146 PN Cabañeros: Cont. en 2105m.
+WA15:57:24: Partiendo Zona Restringida LER146 Park Cabaneros a las 2083m.
+WA
+WA15:57:24: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 2083m.
+WA
+WA15:57:24: Partiendo Zona Restringida LER146 PN Cabañeros: Cont. a las 2083m.
+WA
+WA18:02:45: Ingresando Zona de control
+WAClase D ECM: 124.025 en 1697m.
+WA18:20:31: Partiendo Zona de control
+WAClase D ECM: 124.025 a las 970m.
+WA
+WA18:22:19: Ingresando Zona peligrosa Paracas Lillo en 717m.
+WA18:22:19: Ingresando Zona peligrosa Paracas Lillo en 717m.
+WA18:22:28: Partiendo Zona peligrosa Paracas Lillo a las 716m.
+WA
+WA18:22:28: Partiendo Zona peligrosa Paracas Lillo a las 716m.
+WA
+WE-16384.0
+
