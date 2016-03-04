@@ -17,12 +17,12 @@ $DB=$DBpath.'SWiface.db';
 // phpinfo();
 if ($querytype == "getintfixes")
 	{
-	$output= "{datadelay}5{/datadelay}\n";
+	$output= "{datadelay}0{/datadelay}\n";
 	$query1="SELECT idflarm, date, time, latitude, longitude, altitude FROM OGNDATA WHERE idflarm = '".$trackerid."'";
 	$query2=" and date = '".$syear."' and time >= '".$stime."' and time <= '".$etime."'";
 	$query=$query1.$query2;
 	 // echo $query;
-	$db = new SQLite3($DB);
+	$db = new SQLite3($DB, SQLITE3_OPEN_READONLY);
 	// echo var_dump($db); 
 	$results = $db->query($query);
 	// echo var_dump($results); 
