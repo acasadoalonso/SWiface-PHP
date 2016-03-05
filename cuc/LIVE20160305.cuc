@@ -33,16 +33,10 @@ ValFailed=True
 \\psf\Home\Desktop\Flights\
 
 [Pilots]
-"Pilot1","",*0,"FLRDDA9B7","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
-"Pilot2","",*0,"FLRDDD591","ASK-21","EC-JEQ","XX","",0,"",0,"",1,"",""
-"Pilot3","",*0,"FLRDDDBA8","Pegase","F-CGFD","FD","",0,"",0,"",1,"",""
-"Pilot4","",*0,"FLRDDE1FC","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
-"Pilot5","",*0,"FLRDDE669","alliance 34","F-CIHM","HM","",0,"",0,"",1,"",""
-"Pilot6","",*0,"FLRDDFE47","ASK-13","F-CEGA","GA","",0,"",0,"",1,"",""
 [Starts]
  
-[Day_04/03/2016]
-D04032016-010400000
+[Day_05/03/2016]
+D05032016-010400000
 V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=True
 C3012990000003012990000-2
 C4238680N00186830ELa Cerdanya - LECD

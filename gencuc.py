@@ -27,7 +27,8 @@ cuchdr   = open (cucpath + "LIVEhdr.txt", 'r')			# opend the header file
 cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
 buf=cuchdr.read()						# start reading the header file
 datafile.write(buf)						# copy into the output file
-conn=sqlite3.connect(dbpath+'SWiface.db')			# open th DB
+# db = sqlite3.connect('file:path/to/database?mode=ro', uri=True)
+conn=sqlite3.connect(dbpath+'SWiface.db')			# open th DB in read only mode
 cursD=conn.cursor()						# cursor for the ogndata table
 cursG=conn.cursor()						# cursor for the glider table
 pn=0								# number of pilots found
@@ -41,7 +42,7 @@ for row in cursD.fetchall():					# search all the rows
                 regi=gli[0]					# get the registration 
                 cn=gli[1]					# get the competition numbers
 		if cn == "":
-			cn="NN"					# if none ?
+			cn="XX"					# if none ?
                 type=gli[2]					# get glider type
     else:
                 regi='NO-NAME'
