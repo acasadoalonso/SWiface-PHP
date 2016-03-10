@@ -1,3 +1,45 @@
+[Options]
+Title=Angel Casado OGN-SGP test
+PeriodFrom=0
+PeriodTo=401521
+AvtoSaveFlight=True
+AvtoSaveTime=60
+AvtoPublishTime=-300
+TakeoffAlt=0m
+TaskPicWidth=600
+TaskPicHeight=400
+TaskPicCompression=90
+TaskPicBorder=12
+UtcOffset=1
+NeedLegs=False
+StrictName=False
+UseBinFiles=True
+CommentPrefix=1
+
+[Warnings]
+HighEnl=300
+AsViolate=True
+MinFinAlt=0m
+MaxFinAlt=10000m
+MaxStartAlt=0m
+MaxAlt=0m
+MaxAltCorr=50.0m
+AltTimeout=0
+StartGsp=0km/h
+FixRate=10
+ValFailed=True
+
+[SearchPath]
+\\psf\Home\Desktop\Flights\
+
+[Pilots]
+"Sergi Pujol","",*0,"FLRDDE1FC","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Tow plane Pilot","",*0,"FLRDDE649","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-2","",*0,"FLRDE0555","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+[Starts]
+ 
+[Day_09/03/2016]
+D09032016-010400000
 V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=True
 C301299000000301299000003
 C4238680N00186830ELa Cerdanya - LECD

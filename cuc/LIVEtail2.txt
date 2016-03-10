@@ -1,9 +1,3 @@
-V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=True
-C301299000000301299000003
-C4238680N00186830ELa Cerdanya - LECD
-C4256750N00072560WSanta Cilia - LECI
-C4238680N00186830ELa Cerdanya - LECD
-C4238680N00186830ELa Cerdanya - LECD
 TSK,WpDis=True,MinDis=True,NearDis=0.5km,NearAlt=200.0m,MinFinAlt=0.0km
 XTest day
 E000,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,

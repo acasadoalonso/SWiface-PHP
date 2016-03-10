@@ -1,0 +1,9 @@
+version=10
+user=
+modified=2016-03-09 18:23:56
+cup
+name,code,country,lat,lon,elev,style,rwdir,rwlen,freq,desc,userdata,pics
+-----Related Tasks-----
+,"Cerdanya","Cerdanya","E05/Santa Cilia","Lleida","Cerdanya","Cerdanya"
+OBSZONE=2,Style=1,R1=3000m,A1=45,R2=1000m,A2=180
+OBSZONE=3,Style=3,R1=3000m,A1=180

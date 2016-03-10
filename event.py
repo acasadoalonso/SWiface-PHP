@@ -8,8 +8,10 @@ import sys
 import QSGP
 import kpilot
 import sqlite3
+import datetime
 
-dbpath="/nfs/OGN/SWdata/"
+dbpath= "/nfs/OGN/SWdata/"
+cucpath="/var/www/cuc/" 
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
@@ -28,11 +30,6 @@ if (eventid == "LIVE"):							# if it a dummy envent LIVE
 # Build the tracks 
 	tracks=[]
 
-	idflarm="FLRDDBC42"
-	cn="K5"
-	type="Janus CE"
-	regi="D-2520"
-	pname="Angel Casado"
 #
 	conn=sqlite3.connect(dbpath+'SWiface.db')                       # open th DB in read only mode
 	cursD=conn.cursor()                                             # cursor for the ogndata table
@@ -71,5 +68,13 @@ if (eventid == "LIVE"):							# if it a dummy envent LIVE
 	event={"name": eventid, "description" : "LIVE Pyrenees", "taskType": "SailplaneGrandPrix", "startOpenTs": 0, "turnpoints": tp,  "tracks": tracks}
 	j=json.dumps(event, indent=4)
 else:
-	j=json.dumps(QSGP.QSGP, indent=4)
+	datetimes=datetime.datetime.now()
+	fname=cucpath+eventid+datetimes.strftime("%Y%m%d")+".json"
+	try:
+		fd=open(fname, 'r')
+		j=fd.read()
+		fd.close()
+	except:
+		j=json.dumps(QSGP.QSGP, indent=4)
+		#print "Not found...", fname
 print j
