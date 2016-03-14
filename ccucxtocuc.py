@@ -14,8 +14,8 @@ import kpilot
 import QSGP
 import json
 
-dbpath ="/var/www/cucfiles/"
-cucpath="/var/www/cuc/"
+dbpath ="/var/www/html/cucfiles/"
+cucpath="/var/www/html/cuc/"
 
 
 print "Generate .CUC files V1.0 from  " +cucpath+ "contest.db the unzip of the .CUCX file"

@@ -11,14 +11,16 @@ import sqlite3
 import datetime
 
 dbpath= "/nfs/OGN/SWdata/"
-cucpath="/var/www/cuc/" 
+cucpath="/var/www/html/cuc/" 
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
 #
-eventid=sys.argv[1]
+arg1=sys.argv[1]
+eventid=arg1
+id=arg1[0:4]
 
-if (eventid == "LIVE"):							# if it a dummy envent LIVE
+if (id == "LIVE"):							# if it a dummy envent LIVE
 
 #	Build the turning points
 

@@ -14,6 +14,7 @@ $etime = substr($endtime, 8);
 if ($syear == date('ymd'))
 	{
 	$DBpath='/nfs/OGN/SWdata/';
+	//echo "Today";
 	}
 else 
 	{

@@ -20,11 +20,7 @@ TIMEZONE="CET"				#  <=== change this to the appropiate time zone.
 
 trackid=sys.argv[1]
 since  =sys.argv[2]
-#dt=datetime.datetime(1970,1,1)
-#cet=timezone(TIMEZONE)
-#lt=cet.localize(dt)
-#offset=lt.utcoffset()
-#nsec=offset.total_seconds()
+live=True
 
 if (since == "0"):
 	date=0;
@@ -41,6 +37,7 @@ else:
         	dbpath='/nfs/OGN/SWdata/';
 	else:
        		dbpath='/nfs/OGN/SWdata/archive/';
+		live=False
 
 #print since, dbpath, date, time
 conn=sqlite3.connect(dbpath+'SWiface.db')                       # open th DB in read only mode
@@ -71,7 +68,7 @@ for row in cursD.fetchall():
 	tracks.append({"t": int(ts), "e":long, "n":lati, "a":alti})
 	tn +=1
 
-tp={"trackId": trackid, "live": True, "track": tracks}
+tp={"trackId": trackid, "live": live, "track": tracks}
 j=json.dumps(tp, indent=4)
 print j
 conn.commit()

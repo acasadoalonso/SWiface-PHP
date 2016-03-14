@@ -13,22 +13,24 @@ import os
 import kpilot
 
 dbpath ="/nfs/OGN/SWdata/"
-cucpath="/var/www/cuc/"
+pwd=os.environ['PWD']
+cucpath=pwd+"/cuc/"
+run=os.environ['APACHE_RUN_USER']
 
 
-print "Generate live .CUC files V1.0 from  " +dbpath+ "SWIface.db the GLIDERS table"
+print "Generate live .CUC files V1.1 from  " +dbpath+ "SWIface.db the GLIDERS table"
 start_time = time.time()
 local_time = datetime.datetime.now()
 print "Time is now:", local_time				# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")			# get the local time
 CUC_DATA = cucpath + "LIVE" + fl_date_time+'.cuc'		# name of the CUC to be generated
-print "CUC data file is: ", CUC_DATA				# just a trace
+print "CUC data file is: ", CUC_DATA, " User:", run		# just a trace
 datafile = open (CUC_DATA, 'w')					# open the output file
 cuchdr   = open (cucpath + "LIVEhdr.txt", 'r')			# opend the header file
 cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
 buf=cuchdr.read()						# start reading the header file
 datafile.write(buf)						# copy into the output file
-# db = sqlite3.connect('file:path/to/database?mode=ro', uri=True)	# we need to check the readonly feature
+# 
 conn=sqlite3.connect(dbpath+'SWiface.db')			# open th DB in read only mode
 cursD=conn.cursor()						# cursor for the ogndata table
 cursG=conn.cursor()						# cursor for the glider table
