@@ -72,13 +72,19 @@ tracks=[]							# create the instance for the tracks
 pn=0								# number of pilots found
 cursD.execute('select name, aircraft_model, contestant_number, aircraft_registration, flight_recorders, id_contestant from CONTESTANT')		# get all the glifers flying now 
 for row in cursD.fetchall():					# search all the rows
+    print row
     pname=row[0]						# flarmid is the first field
     type=row[1]							# get glider type
     cn=row[2]							# get the competition numbers
     regi=row[3]							# get the registration 
-    idflarm=row[4]						# get the flarmID 
-    idflarm=idflarm.rstrip('\n')
-    idflarm=idflarm.rstrip('\r')
+    if regi == None:
+	regi="EC-XXX"
+    idflarm=row[4]						# get the flarmID
+    if (idflarm != None):					# check for FLARMID	
+   	 idflarm=idflarm.rstrip('\n')
+   	 idflarm=idflarm.rstrip('\r')
+    else:
+	 idflarm="*"
     idcont=row[5]						# get the global ID of the contestant 
     if pname == "":
 	if idflarm in kpilot.kpilot:				# check if know the pilot because is our database kpilot.py
@@ -100,7 +106,7 @@ for row in cursD.fetchall():					# search all the rows
     country=pil[0]
     ccc = pycountry.countries.get(alpha2=pil[0])
     country=ccc.alpha3
-    tr={"trackId": "QSGP"+fl:dte_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country, "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color]}
+    tr={"trackId": "QSGP"+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country, "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color]}
     tracks.append(tr)						# add it to the tracks
     print "P==>: ", idflarm, pname, country, regi, cn, type
 # ----------  end of for

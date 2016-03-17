@@ -41,7 +41,9 @@ if (today != date):						# it is today
 	live=False						# mark as NOT live
 
 #print trackid,":", eventid,":", since,":", date,":", time
-conn=sqlite3.connect(dbpath+'SWiface.db')                       # open th DB in read only mode
+filename=dbpath+'SWiface.db'		                        # open th DB in read only mode
+fd = os.open(filename, os.O_RDONLY)
+conn = sqlite3.connect('/dev/fd/%d' % fd)
 cursD=conn.cursor()                                             # cursor for the ogndata table
 if (since == "0"):						# if no timme since showw all
 	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ?", [trackid,date])                                # get all the glifers flying now
@@ -72,6 +74,5 @@ for row in cursD.fetchall():
 tp={"trackId": id, "live": live, "track": tracks}
 j=json.dumps(tp, indent=4)
 print j
-conn.commit()
 conn.close()
-
+os.close(fd)

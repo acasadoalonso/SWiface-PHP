@@ -17,7 +17,6 @@ pwd=os.environ['PWD']
 cucpath=pwd+"/cuc/"
 run=os.environ['APACHE_RUN_USER']
 
-
 print "Generate live .CUC files V1.1 from  " +dbpath+ "SWIface.db the GLIDERS table"
 start_time = time.time()
 local_time = datetime.datetime.now()
@@ -31,7 +30,9 @@ cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
 buf=cuchdr.read()						# start reading the header file
 datafile.write(buf)						# copy into the output file
 # 
-conn=sqlite3.connect(dbpath+'SWiface.db')			# open th DB in read only mode
+filename=dbpath+'SWiface.db'					# open th DB in read only mode
+fd = os.open(filename, os.O_RDONLY)
+conn = sqlite3.connect('/dev/fd/%d' % fd)
 cursD=conn.cursor()						# cursor for the ogndata table
 cursG=conn.cursor()						# cursor for the glider table
 pn=0								# number of pilots found
@@ -89,6 +90,7 @@ cuchdr.close()
 cuctail.close()
 conn.commit()
 conn.close()
+os.close(fd)
 if pn == 0:
 	print "No pilots found ... CUC invalid"
 	exit(-1)

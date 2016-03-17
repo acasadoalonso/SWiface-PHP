@@ -1,6 +1,8 @@
 <?php
-//$username    = $_GET['username'];
-//$cpassword   = $_GET['cpassword'];
+if (isset($_GET['username']))
+        $username = $_GET['username'];
+if (isset($_GET['cpassord']))
+        $cpassword = $_GET['cpassword'];
 $contestname = $_GET['contestname'];
 $querytype   = $_GET['querytype'];
 $trackerid   = $_GET['trackerid'];

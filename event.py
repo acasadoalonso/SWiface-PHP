@@ -5,6 +5,7 @@
 import json
 import time
 import sys
+import os
 import QSGP
 import kpilot
 import sqlite3
@@ -35,7 +36,9 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	tracks=[]
 
 #
-	conn=sqlite3.connect(dbpath+'SWiface.db')                       # open th DB in read only mode
+	filename=dbpath+'SWiface.db'		                       	# open th DB in read only mode
+	fd = os.open(filename, os.O_RDONLY)
+	conn = sqlite3.connect('/dev/fd/%d' % fd)
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
@@ -86,3 +89,5 @@ else:									# in the case of the QSGP event just read the JSON file generated 
 		j=json.dumps(QSGP.QSGP, indent=4)
 		#print "Not found...", fname
 print j
+conn.close()
+os.close(fd)

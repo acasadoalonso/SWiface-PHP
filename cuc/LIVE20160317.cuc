@@ -33,6 +33,10 @@ ValFailed=True
 \\psf\Home\Desktop\Flights\
 
 [Pilots]
+"Pilot NN-0","",*0,"FLRDD84DF","Duo Discus","G-CHWB","3","",0,"",0,"",1,"",""
+"Pilot NN-1","",*0,"FLRDDBC42","DG-1000 T","G-RYPE","E6","",0,"",0,"",1,"",""
+"Pilot NN-2","",*0,"FLRDDDE1A","Antares 18 T         ","D-9200"," ","",0,"",0,"",1,"",""
+"Pilot NN-3","",*0,"FLRDDF9BB","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
 [Starts]
  
 [Day_17/03/2016]

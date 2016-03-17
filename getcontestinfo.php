@@ -1,8 +1,14 @@
 <?php
-$username = $_GET['username'];
-$cpassword = $_GET['cpassword'];
+if (isset($_GET['username']))
+	$username = $_GET['username'];
+if (isset($_GET['cpassord']))
+	$cpassword = $_GET['cpassword'];
 $contestname = $_GET['contestname'];
-$cdate = $_GET['date'];
+if (isset($_GET['date']))
+	$cdate = $_GET['date'];
+else
+	$cdate = 0;
+
 $cwd =getcwd();
 $gcucpath=$cwd."/"; 
 #{date}20160309{/date}{task}1{/task}{validday}1{/validday} 
@@ -51,7 +57,7 @@ elseif ($contestname == "LIVE")
 		ob_start();
 		passthru('/usr/bin/python2.7 '.$gcucpath.'gencuc.py >>cucmsgs.log', $rc);
 		$output = ob_get_clean(); 
-		# echo $output;
+		#echo $rc, $output;
 		if ($rc == 0)
 			{
 			$myfilename="cuc/".$contestname.$cdate.".cuc";

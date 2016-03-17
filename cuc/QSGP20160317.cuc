@@ -1,0 +1,76 @@
+[Options]
+Title=Angel Casado OGN-SGP test
+PeriodFrom=0
+PeriodTo=401521
+AvtoSaveFlight=True
+AvtoSaveTime=60
+AvtoPublishTime=-300
+TakeoffAlt=0m
+TaskPicWidth=600
+TaskPicHeight=400
+TaskPicCompression=90
+TaskPicBorder=12
+UtcOffset=1
+NeedLegs=False
+StrictName=False
+UseBinFiles=True
+CommentPrefix=1
+
+[Warnings]
+HighEnl=300
+AsViolate=True
+MinFinAlt=0m
+MaxFinAlt=10000m
+MaxStartAlt=0m
+MaxAlt=0m
+MaxAltCorr=50.0m
+AltTimeout=0
+StartGsp=0km/h
+FixRate=10
+ValFailed=True
+
+[SearchPath]
+\\psf\Home\Desktop\Flights\
+
+[Pilots]
+"Rodriguez Aldo","",*0,"*","ASW-20","D-7670","70","",0,"",0,"",1,"",""
+"Gonzalez de Herrero Carlos","",*0,"*","ASW-27B","D-3356","7A","",0,"",0,"",1,"",""
+"Limpert Christoph","",*0,"*","ASW 27","D-6817","JH","",0,"",0,"",1,"",""
+"Ruch Christophe","",*0,"*","Ventus 2ax","D-9908","EY","",0,"",0,"",1,"",""
+"Huttel Felix","",*0,"*","ASW 27b","D-6327","HH","",0,"",0,"",1,"",""
+"Ortega Francisco","",*0,"*","ASW27","D-2787","27B","",0,"",0,"",1,"",""
+"Elduayen Madariga Gorka","",*0,"*","DISCUS CS","D-5070","B2","",0,"",0,"",1,"",""
+"Bily Jean-Francois","",*0,"*","Lak 17b","F-CPLE","727","",0,"",0,"",1,"",""
+"Gatfield Jon","",*0,"*","ASG29e","G-DLOE","YO","",0,"",0,"",1,"",""
+"Arias Jorge","",*0,"*","Ventus2","D-0118","OLE","",0,"",0,"",1,"",""
+"Bouderlique Louis","",*0,"*","ASG29E","F-CFMD","MD","",0,"",0,"",1,"",""
+"Avanzini Luciano","",*0,"*","Ventus 2 ax","D-1234","57","",0,"",0,"",1,"",""
+"Monedero Miguel","",*0,"*","Asw20c wl","D-3507","BM","",0,"",0,"",1,"",""
+"Young Mike","",*0,"*","Asg29","G-CKPU","57","",0,"",0,"",1,"",""
+"Vispe Sola Pablo","",*0,"*","ASW24","D-9024","EX","",0,"",0,"",1,"",""
+"de Pechy Philippe","",*0,"*","ASG 29E","D-KLOE","CT","",0,"",0,"",1,"",""
+"LECLERCQ Serge L","",*0,"*","ASG 29","EC-XXX","SL","",0,"",0,"",1,"",""
+"della rosa silverio","",*0,"*","ventus2ax","d-9575","S5","",0,"",0,"",1,"",""
+V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=TrueC301299000000301299000003[Starts]
+ 
+[Day_17/03/2016]
+D17032016-010400000
+V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=True
+C301299000000301299000003
+C4223150N00151500ELa Cerdanya - LECD
+C4223150N00151500ELa Cerdanya - LECD
+C4234110N00044360WSanta Cilia - LECI
+C4206290N00028590EBenabarre
+C4203020N00117320EOliana
+C4223150N00151500ELa Cerdanya - LECD
+C4223150N00151500ELa Cerdanya - LECD
+TSK,WpDis=True,MinDis=True,NearDis=0.5km,NearAlt=200.0m,MinFinAlt=0.0km
+XTest day
+E000,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E001,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E002,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E003,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E004,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E005,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+
+
