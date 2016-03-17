@@ -11,8 +11,7 @@ import sys
 import os
 from pytz       import timezone
 
-TIMEZONE="CET"				#  <=== change this to the appropiate time zone.
-#TIMEZONE="CEST"			#  <=== change this to the appropiate time zone.
+dbpath='/nfs/OGN/SWdata/';
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
@@ -37,11 +36,9 @@ else:
 	time=     datetimes.strftime("%H%M%S")
 
 
-if (today == date):
-        dbpath='/nfs/OGN/SWdata/';
-else:
-	dbpath='/nfs/OGN/SWdata/archive/';
-	live=False
+if (today != date):						# it is today
+	dbpath=dbpath+'/archive/';				# no user archive folder
+	live=False						# mark as NOT live
 
 #print trackid,":", eventid,":", since,":", date,":", time
 conn=sqlite3.connect(dbpath+'SWiface.db')                       # open th DB in read only mode
