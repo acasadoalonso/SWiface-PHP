@@ -7,19 +7,22 @@ import time
 import datetime
 import os
 
+localtime=datetime.datetime.now()
+todaydate=localtime.strftime("%Y%m%d")
 today=datetime.date.today()
 yesterday=datetime.date(today.year, today.month, today.day -1)
+yesterdaydate=yesterday.strftime("%Y%m%d")
 
 evQ=[]							# create the event entity
 evL=[]							# new instance of the event
 eg=[]							# create the event group
 
-ev1={'id':"QSGP-Today", 'startOpenTs': int(time.time())}# Today's Day event
+ev1={'id':"QSGP"+todaydate, 'startOpenTs': int(time.time())}# Today's Day event
 evQ.append(ev1)						# add the basic event
 
-ev2={'id':"LIVE-today", 'startOpenTs': int(time.time())}# Live today's event
+ev2={'id':"LIVE"+todaydate, 'startOpenTs': int(time.time())}# Live today's event
 evL.append(ev2)						# add today's event
-#ev3={'id':"LIVE-yesterday", 'startOpenTs': int(time.time()-86400)}
+#ev3={'id':"LIVE"+yesterdaydate", 'startOpenTs': int(time.time()-86400)}
 #evL.append(ev3)						# add yesterday's event
 
 
@@ -33,7 +36,7 @@ for fn in cuc:
 		m=int(fn[8:10])				# month
 		d=int(fn[10:12])			# day
  		td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1) # number of second until beginning of the day
-		ts=td.total_seconds()			# timestamp
+		ts=td.total_seconds()+9*60*60		# timestamp 09:00:00 UTC
 		ex3={'id':fb , 'startOpenTs': int(ts)}
 		if (LQ == "LIVE"):			# if LIVE event
 			evL.append(ex3)			# add this event to the LIVE event group

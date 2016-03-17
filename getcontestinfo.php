@@ -3,12 +3,43 @@ $username = $_GET['username'];
 $cpassword = $_GET['cpassword'];
 $contestname = $_GET['contestname'];
 $cdate = $_GET['date'];
-$gcucpath="/var/www/html/"; 
+$cwd =getcwd();
+$gcucpath=$cwd."/"; 
+#{date}20160309{/date}{task}1{/task}{validday}1{/validday} 
+$ci1="{date}";
+$ci2="{/date}{task}1{/task}{validday}1{/validday}";
 if ($cdate == 0)
 	{
-	$myfile = fopen("contestinfo.txt", "r") or die("Unable to open file!");
-	echo fread($myfile,filesize("contestinfo.txt"));
-	fclose($myfile);
+	$dtz= new DateTimeZone("UTC");
+	$dt=  new DateTime("now", $dtz);
+	$ts= $dt->format("U");
+	$ts -=86400*5;
+
+	$date = date_create_from_format('U', $ts);
+	$tf =  $date->format("Ymd");
+	echo $ci1,$tf,$ci2;
+
+	$ts += 86400;
+	$date = date_create_from_format('U', $ts);
+	$tf =  $date->format("Ymd");
+	echo $ci1,$tf,$ci2;
+
+	$ts += 86400;
+	$date = date_create_from_format('U', $ts);
+	$tf =  $date->format("Ymd");
+	echo $ci1,$tf,$ci2;
+
+	$ts += 86400;
+	$date = date_create_from_format('U', $ts);
+	$tf =  $date->format("Ymd");
+	echo $ci1,$tf,$ci2;
+
+	$ts += 86400;
+	$date = date_create_from_format('U', $ts);
+	$tf =  $date->format("Ymd");
+	echo $ci1,$tf,$ci2;
+
+	echo $ci1,$dt->format("Ymd"),$ci2;
 	}
 elseif ($contestname == "LIVE")
 	{

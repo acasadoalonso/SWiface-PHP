@@ -13,6 +13,8 @@ import os
 import kpilot
 import QSGP
 import json
+import math
+import pycountry
 
 dbpath ="/var/www/html/cucfiles/"
 cucpath="/var/www/html/cuc/"
@@ -96,7 +98,9 @@ for row in cursD.fetchall():					# search all the rows
     cursP.execute("select nationality from PILOT where id_pilot = ? ", [idcont])		# set the tcountry from the PILOT table
     pil=cursP.fetchone()
     country=pil[0]
-    tr={"trackId": idflarm, "pilotName": pname,  "competitionId": cn, "country": country, "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color]}
+    ccc = pycountry.countries.get(alpha2=pil[0])
+    country=ccc.alpha3
+    tr={"trackId": "QSGP"+fl:dte_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country, "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color]}
     tracks.append(tr)						# add it to the tracks
     print "P==>: ", idflarm, pname, country, regi, cn, type
 # ----------  end of for
@@ -133,6 +137,8 @@ for row in cursD.fetchall():					# search all the rows
 	else:
 		type="Turnpoint"
 		oz="Cylinder"
+	lati= math.degrees(lati)
+	long= math.degrees(long)
 	tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": ozra, "trigger":"Enter"}
 	tp.append(tpx)
     	print "W==>: ", name, lati, long, alti, type, ozra
