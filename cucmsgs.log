@@ -1,72 +1,53 @@
 Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 11:14:06.980873
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-No pilots found ... CUC invalid
+Time is now: 2016-03-18 13:42:51.281756
+CUC data file is:  /var/www/html/cuc/LIVE20160318.cuc  User: www-data
+D==>:  FLRDD0B98 Clive Mansfield  EC-LAH RU Twin Astir II
+D==>:  FLRDD84DF Pilot NN-1 G-CHWB 3 Duo Discus
+D==>:  FLRDD9CDE Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDDBC42 Pilot NN-3 G-RYPE E6 DG-1000 T
+D==>:  FLRDDDE1A Pilot NN-4 D-9200   Antares 18 T         
+D==>:  FLRDDE1FC Sergi Pujol NO-NAME NN NOTYPE
+D==>:  FLRDDE305 Pilot NN-6 EC-IBF AB Astir CS
+D==>:  FLRDDE4A7 Pilot NN-7 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE4AB Pilot NN-8 EC-MFQ AE LS-4
+D==>:  FLRDDE649 Tow plane Pilot NO-NAME NN NOTYPE
+D==>:  FLRDDF9BB Pilot NN-10 NO-NAME NN NOTYPE
+D==>:  ICA3836BC Pilot NN-11 F-JAGC VL3 VL3 Evolution
+Pilots found ...  12
+======================
 Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 14:38:43.776387
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDF9BB Pilot NN-2 NO-NAME NN NOTYPE
-Pilots found ...  3
+Time is now: 2016-03-18 13:42:55.623082
+CUC data file is:  /var/www/html/cuc/LIVE20160318.cuc  User: www-data
+D==>:  FLRDD0B98 Clive Mansfield  EC-LAH RU Twin Astir II
+D==>:  FLRDD84DF Pilot NN-1 G-CHWB 3 Duo Discus
+D==>:  FLRDD9CDE Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDDBC42 Pilot NN-3 G-RYPE E6 DG-1000 T
+D==>:  FLRDDDE1A Pilot NN-4 D-9200   Antares 18 T         
+D==>:  FLRDDE1FC Sergi Pujol NO-NAME NN NOTYPE
+D==>:  FLRDDE305 Pilot NN-6 EC-IBF AB Astir CS
+D==>:  FLRDDE4A7 Pilot NN-7 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE4AB Pilot NN-8 EC-MFQ AE LS-4
+D==>:  FLRDDE649 Tow plane Pilot NO-NAME NN NOTYPE
+D==>:  FLRDDF9BB Pilot NN-10 NO-NAME NN NOTYPE
+D==>:  ICA3836BC Pilot NN-11 F-JAGC VL3 VL3 Evolution
+Pilots found ...  12
+======================
 Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 15:50:14.515830
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Pilots found ...  4
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 16:05:20.763302
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Pilots found ...  4
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 19:21:27.168959
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 19:24:41.664466
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 19:26:33.490033
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 19:29:45.031359
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Pilots found ...  4
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 19:31:18.633031
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Pilots found ...  4
-Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
-Time is now: 2016-03-17 20:21:05.489100
-CUC data file is:  /var/www/html/cuc/LIVE20160317.cuc  User: www-data
-D==>:  FLRDD84DF Pilot NN-0 G-CHWB 3 Duo Discus
-D==>:  FLRDDBC42 Pilot NN-1 G-RYPE E6 DG-1000 T
-D==>:  FLRDDDE1A Pilot NN-2 D-9200   Antares 18 T         
-D==>:  FLRDDF9BB Pilot NN-3 NO-NAME NN NOTYPE
-Pilots found ...  4
+Time is now: 2016-03-18 16:16:52.487431
+CUC data file is:  /var/www/html/cuc/LIVE20160318.cuc  User: www-data
+D==>:  FLRDD0B98 Clive Mansfield  EC-LAH RU Twin Astir II
+D==>:  FLRDD0FF7 Pilot NN-1 NO-NAME NN NOTYPE
+D==>:  FLRDD84DF Pilot NN-2 G-CHWB 3 Duo Discus
+D==>:  FLRDD9CDE Pilot NN-3 NO-NAME NN NOTYPE
+D==>:  FLRDDBC42 Pilot NN-4 G-RYPE E6 DG-1000 T
+D==>:  FLRDDDE1A Pilot NN-5 D-9200   Antares 18 T         
+D==>:  FLRDDE1FC Sergi Pujol NO-NAME NN NOTYPE
+D==>:  FLRDDE305 Pilot NN-7 EC-IBF AB Astir CS
+D==>:  FLRDDE4A7 Pilot NN-8 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE4AB Pilot NN-9 EC-MFQ AE LS-4
+D==>:  FLRDDE649 Tow plane Pilot NO-NAME NN NOTYPE
+D==>:  FLRDDF9BB Pilot NN-11 NO-NAME NN NOTYPE
+D==>:  FLRDF044F Pilot NN-12 NO-NAME NN NOTYPE
+D==>:  ICA3836BC Pilot NN-13 F-JAGC VL3 VL3 Evolution
+Pilots found ...  14
+======================

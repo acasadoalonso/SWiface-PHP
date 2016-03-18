@@ -9,7 +9,6 @@ import datetime
 import time
 import sys
 import os
-from pytz       import timezone
 
 dbpath='/nfs/OGN/SWdata/';
 

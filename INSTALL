@@ -1,0 +1,52 @@
+Installation instructions:
+
+- Download this repo from GitHub.com
+- Install the python dependencies modules								pip install sqlite3 pycountry json math ...
+- go to the apache2 data directory									cd /var/www/html
+- Make the cuc and cucfiles forlder									mkdir cuc && mkdir cucfiles
+- copy the xxx.cucx files into the cucfilels direcory							cp ../*.cucx	cucfiles						
+- unzip the .cucx file											cd cucfiles && unzip *.cucx && cd ..
+- run the cuc file generator utility									python ccucxtocuc.py
+- adjust the kpylot and QSGP files									vi kpilot.py  && vi QSGP.py
+- adjust the $dbpath on the *.py									vi *.py
+- restart the apache2 service										sudo service apache2 restart
+
+
+
+Dependencias:
+
+ccucxtocuc.py:import sqlite3
+ccucxtocuc.py:import datetime
+ccucxtocuc.py:import time
+ccucxtocuc.py:import sys
+ccucxtocuc.py:import os
+ccucxtocuc.py:import kpilot
+ccucxtocuc.py:import QSGP
+ccucxtocuc.py:import json
+ccucxtocuc.py:import math
+ccucxtocuc.py:import pycountry
+eventgroups.py:import json
+eventgroups.py:import time
+eventgroups.py:import datetime
+eventgroups.py:import os
+event.py:import json
+event.py:import time
+event.py:import sys
+event.py:import os
+event.py:import QSGP
+event.py:import kpilot
+event.py:import sqlite3
+event.py:import datetime
+gencuc.py:import sqlite3
+gencuc.py:import datetime
+gencuc.py:import time
+gencuc.py:import sys
+gencuc.py:import os
+gencuc.py:import kpilot
+ro.py:import sqlite3
+ro.py:import os
+trackpoints.py:import json
+trackpoints.py:import sqlite3
+trackpoints.py:import datetime
+trackpoints.py:import time
+trackpoints.py:import sys

@@ -19,6 +19,9 @@ import pycountry
 dbpath ="/var/www/html/cucfiles/"
 cucpath="/var/www/html/cuc/"
 
+# 
+# to run this program, first copy the .CUCX fiile into the cucfiles direcory and unzip that file.
+#
 
 print "Generate .CUC files V1.0 from  " +cucpath+ "contest.db the unzip of the .CUCX file"
 start_time = time.time()
@@ -31,30 +34,42 @@ print "CUC generated data file is: ", CUC_DATA, JSONFILE	# just a trace
 datafile = open (CUC_DATA, 'w')					# open the output file
 jsonfile = open (JSONFILE, 'w')					# open the output file
 cuchdr   = open (cucpath + "LIVEhdr.txt", 'r')			# opend the header file
-cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
+cuctail  = open (cucpath + "LIVEtail2.txt", 'r')		# open the trailer file
 eventname="LIVE Pyrenees"
 
-conn=sqlite3.connect(dbpath+'contest.db')			# open th DB in read only mode
+conn=sqlite3.connect(dbpath+'contest.db')			# open the DB embedded into the .CUCX file unzipped 
 cursD=conn.cursor()						# cursor for the CONTESTANT table
 cursP=conn.cursor()						# cursor for the PILOT table
 print "From the contest.db ..."
 print "Contest data:"
-cursD.execute ('select * from CONTEST')
+cursD.execute ('select * from CONTEST')				# get the CONTEST data information
 for row in cursD.fetchall():
     print row
     eventname=row[2]
 
 print "Location data:"
-cursD.execute ('select * from LOCATION')
+cursD.execute ('select * from LOCATION')			# get the LOCATION information
 for row in cursD.fetchall():
     print row
 
 print "Pilot data:"
-cursD.execute ('select * from PILOT')
+cursD.execute ('select * from PILOT')				# and all the pilots
 for row in cursD.fetchall():
     print row
 
-buf=cuchdr.read()						# start reading the header file
+print "Contestant data:"
+cursD.execute ('select * from CONTESTANT')			# and all the pilots/contestant
+for row in cursD.fetchall():
+    print row
+
+print "Waypoint information:"
+cursD.execute ('select * from POINT')				# and all the pilots/contestant
+for row in cursD.fetchall():
+    print row
+
+# --------------------------------------------------------------
+
+buf=cuchdr.read()						# start reading the pseudo CUC header file
 datafile.write(buf)						# copy into the output file
 
 # Build the tracks
@@ -70,9 +85,8 @@ tracks=[]							# create the instance for the tracks
 #
 
 pn=0								# number of pilots found
-cursD.execute('select name, aircraft_model, contestant_number, aircraft_registration, flight_recorders, id_contestant from CONTESTANT')		# get all the glifers flying now 
+cursD.execute('select name, aircraft_model, contestant_number, aircraft_registration, flight_recorders, id_contestant from CONTESTANT')		# get all the CONTESTAN pilots
 for row in cursD.fetchall():					# search all the rows
-    print row
     pname=row[0]						# flarmid is the first field
     type=row[1]							# get glider type
     cn=row[2]							# get the competition numbers
@@ -149,21 +163,32 @@ for row in cursD.fetchall():					# search all the rows
 	tp.append(tpx)
     	print "W==>: ", name, lati, long, alti, type, ozra
 #	C4238680N00186830ELa Cerdanya - LECD
+	N=True
+	if lati < 0:
+		lati *=-1.0
+		N=False
 	f=lati - int(lati)
-	f=int(f)*10000
+	f=int(f*100000.0)
 	buf='C'+("%02d"%int(lati))+("%05d"%f)
-	if (lati > 0.0):
+	if (N):
 		buf += 'N'
 	else:
 		buf += 'S'
+	E=True
+	if long < 0: 
+		long *=-1.0
+		E=False
 	f=long - int(long)
-	f=int(f)*10000
-	buf +=("%02d"%int(long))+("%05d"%f)
-	if (long > 0.0):
+	f=int(f*100000.0)
+	buf +=("%03d"%int(long))+("%05d"%f)
+	if (E):
 		buf += 'E'
 	else:
 		buf += 'W'
-    	datafile.write(buf)						# write the pilot information into the pseudo CUC file
+	buf +=name
+	buf +="\n"
+	#print "Buf==>", buf
+    	datafile.write(buf)					# write the pilot information into the pseudo CUC file
 # 								TP templates
 
 

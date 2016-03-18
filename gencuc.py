@@ -93,7 +93,9 @@ conn.close()
 os.close(fd)
 if pn == 0:
 	print "No pilots found ... CUC invalid"
+	print "==============================="
 	exit(-1)
 else:
 	print "Pilots found ... ", pn
+	print "======================"
 	exit(0)

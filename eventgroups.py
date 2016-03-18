@@ -10,20 +10,15 @@ import os
 localtime=datetime.datetime.now()
 todaydate=localtime.strftime("%Y%m%d")
 today=datetime.date.today()
-yesterday=datetime.date(today.year, today.month, today.day -1)
-yesterdaydate=yesterday.strftime("%Y%m%d")
 
 evQ=[]							# create the event entity
 evL=[]							# new instance of the event
-eg=[]							# create the event group
 
 ev1={'id':"QSGP"+todaydate, 'startOpenTs': int(time.time())}# Today's Day event
 evQ.append(ev1)						# add the basic event
 
 ev2={'id':"LIVE"+todaydate, 'startOpenTs': int(time.time())}# Live today's event
 evL.append(ev2)						# add today's event
-#ev3={'id':"LIVE"+yesterdaydate", 'startOpenTs': int(time.time()-86400)}
-#evL.append(ev3)						# add yesterday's event
 
 
 cuc=os.listdir('cuc')					# scan the cuc directory
@@ -45,8 +40,10 @@ for fn in cuc:
 
 # create the event groups
 
+eg=[]							# create the event group
 eg1={'name':'QSGP', 'description':'QSGP La Cerdanya - Spain', 'events': evQ}
 eg2={'name':'OGN LIVE', 'description':'OGN Live tracking in Pyrenees', 'events': evL}
+
 eg.append(eg1)						# append the individual events groups
 eg.append(eg2)						# so far the QSGP and the LIVE
 j=json.dumps(eg, indent=4)				# convert it to JSON format
