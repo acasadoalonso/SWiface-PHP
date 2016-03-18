@@ -2,9 +2,11 @@
 
 
 
-This is the repository for hte SILENT Wings <===> OGN interface, the Apache2 scripts invoke fby the SWviewer.
+This is the repository for hte SILENT Wings <===> OGN interface, the Apache2 scripts invoked  by the SWviewer.
 
 This program manages the data that is gathered there by the collector routines and stored on a SQLITE3 database.
+
+Currently the system is running on a Raspberry Pi 3 with a HDD SDD of 128 Gb., using Raspbian Jessie distro.
 
 For any bug please report it thru the GitHub account, open an issue and I will try to solve it.
 
