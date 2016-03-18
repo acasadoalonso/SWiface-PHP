@@ -1,0 +1,13 @@
+
+
+
+
+This is the repository for hte SILENT Wings <===> OGN interface, the Apache2 scripts invoke fby the SWviewer.
+
+This program manages the data that is gathered there by the collector routines and stored on a SQLITE3 database.
+
+For any bug please report it thru the GitHub account, open an issue and I will try to solve it.
+
+Angel Casado
+
+acasado (at) acm.org 
