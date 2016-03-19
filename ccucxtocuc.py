@@ -16,6 +16,7 @@ import json
 import math
 import pycountry
 
+SWdbpath ="/nfs/OGN/SWdata/"
 dbpath ="/var/www/html/cucfiles/"
 cucpath="/var/www/html/cuc/"
 
@@ -38,6 +39,8 @@ cuctail  = open (cucpath + "LIVEtail2.txt", 'r')		# open the trailer file
 eventname="LIVE Pyrenees"
 
 conn=sqlite3.connect(dbpath+'contest.db')			# open the DB embedded into the .CUCX file unzipped 
+connG=sqlite3.connect(SWdbpath+'SWiface.db')			# open the DB with all the GLIDERS information
+cursG=connG.cursor()						# cursor for the GLIDERS table
 cursD=conn.cursor()						# cursor for the CONTESTANT table
 cursP=conn.cursor()						# cursor for the PILOT table
 print "From the contest.db ..."
@@ -99,6 +102,10 @@ for row in cursD.fetchall():					# search all the rows
    	 idflarm=idflarm.rstrip('\r')
     else:
 	 idflarm="*"
+    cursG.execute('select * from GLIDERS where registration = ?', [regi])
+    for rowg in cursG.fetchall():
+	 if (idflarm != "FLR"+rowg[0]):
+		print "Warning ... IDFLARM does not match with OGN", "Suggested IDFLARM: FLR", rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4]
     idcont=row[5]						# get the global ID of the contestant 
     if pname == "":
 	if idflarm in kpilot.kpilot:				# check if know the pilot because is our database kpilot.py
@@ -228,6 +235,7 @@ cuchdr.close()
 cuctail.close()
 conn.commit()
 conn.close()
+connG.close()
 if pn == 0:
 	print "No pilots found ... CUC invalid"
 	exit(-1)
