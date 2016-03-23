@@ -37,7 +37,9 @@ if ($querytype == "getintfixes")
 	// echo var_dump($db); 
 	$results = $db->query($query);
 	// echo var_dump($results); 
-	while ($row = $results->fetchArray()) 
+	if ($results) 
+	   {
+	   while ($row = $results->fetchArray()) 
 		{
 	    	// echo var_dump($row);
 		// echo count($row); 
@@ -49,6 +51,7 @@ if ($querytype == "getintfixes")
 		$alti   =$row[5];
 		$output .= $idflarm.',20'. $date. $time. ','. $lati. ','. $long. ','. $alti. ",1\n";
 		}
+	    }
 	if ($_GET["compression"] == "gzip") 
 		{
       		print gzencode($output);

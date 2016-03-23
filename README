@@ -4,11 +4,40 @@
 
 This is the repository for hte SILENT Wings <===> OGN interface, the Apache2 scripts invoked  by the SWviewer.
 
-Implements the Silent Wings interface as defined on the SW wiki page: https://github.com/swingsopen/swtracking/wiki/Tracking-Protocol 
-
 This program manages the data that is gathered there by the collector routines and stored on a SQLITE3 database.
 
-and: http://wiki.silentwings.no/index.php?title=Tracking_Protocol
+Implements the Silent Wings interface as defined on the SW wiki page: 	https://github.com/swingsopen/swtracking/wiki/Tracking-Protocol 
+
+and: 									http://wiki.silentwings.no/index.php?title=Tracking_Protocol
+
+and provides real time scoring to:					http://sgp.aero
+
+
+ccucxtocuc.py								Utility to convert SeeYou .cucx files to pseudo .cuc old format files used by Silent Wings
+COPYING									Copywrigth 
+cuc									.cuc files converted by the utility
+cucfiles								.cucx originals
+eventgroups.php								SW JSON interface
+eventgroups.py								SW JSON interface
+event.php								SW JSON interface
+event.py								SW JSON interface
+gencuc.py								Small utility to find the gliders flying and build a pseudo .CUC file
+getactivecontests.php							SW PHP interface
+getcontestinfo.php							SW PHP interface
+getprotocolinfo.php							SW PHP interface
+gettrackerdata.php							SW PHP interface
+index.html								Default HTML page
+info.php								Infor about PHP
+INSTALL									Install instructions
+kpilot.py								List on known pilots
+QSGP.py									QSGP default event
+README									This files
+SGP_json_calls.txt							Details of the SGP interface
+sgp.py									SGP interface
+trackpoints.php								SW JSON interface
+trackpoints.py								SW JSON interface
+utils									Small test utilities
+
 
 Currently the system is running on a Raspberry Pi 3 with a HDD SDD of 128 Gb., using Raspbian Jessie distro.
 

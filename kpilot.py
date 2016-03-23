@@ -12,6 +12,7 @@ kpilot  = {
            "FLRDD0B98"   : "Clive Mansfield ",
            "FLRDDE1FC"   : "Sergi Pujol",
            "FLRDDC1AC"   : "Cerdanya Pilot",
-           "FLRDDE649"   : "Tow plane Pilot",
+           "FLRDDE649"   : "LECD Tow plane Pilot",
+           "FLRDDD5F2"   : "LECI Tow plane Pilot",
         }
 

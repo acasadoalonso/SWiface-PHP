@@ -1,0 +1,83 @@
+[Options]
+Title=Angel Casado OGN-SGP test
+PeriodFrom=0
+PeriodTo=401521
+AvtoSaveFlight=True
+AvtoSaveTime=60
+AvtoPublishTime=-300
+TakeoffAlt=0m
+TaskPicWidth=600
+TaskPicHeight=400
+TaskPicCompression=90
+TaskPicBorder=12
+UtcOffset=1
+NeedLegs=False
+StrictName=False
+UseBinFiles=True
+CommentPrefix=1
+
+[Warnings]
+HighEnl=300
+AsViolate=True
+MinFinAlt=0m
+MaxFinAlt=10000m
+MaxStartAlt=0m
+MaxAlt=0m
+MaxAltCorr=50.0m
+AltTimeout=0
+StartGsp=0km/h
+FixRate=10
+ValFailed=True
+
+[SearchPath]
+\\psf\Home\Desktop\Flights\
+
+[Pilots]
+"Pilot NN-0","",*0,"FLRDD4F23","Pegase","F-CHKL","GO","",0,"",0,"",1,"",""
+"Pilot NN-1","",*0,"FLRDD84DF","Duo Discus","G-CHWB","3","",0,"",0,"",1,"",""
+"Pilot NN-2","",*0,"FLRDD9210","DG-300","F-CTVV","RZ","",0,"",0,"",1,"",""
+"Pilot NN-3","",*0,"FLRDD946D","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-4","",*0,"FLRDD9F5C","Duo Discus","EC-KYA","BY","",0,"",0,"",1,"",""
+"Pilot NN-5","",*0,"FLRDDA3BD","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-6","",*0,"FLRDDA9B7","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-7","",*0,"FLRDDAC1A","Twin Astir II","F-CFHK","T36","",0,"",0,"",1,"",""
+"Pilot NN-8","",*0,"FLRDDAE68","DG-505               ","D-7927"," ","",0,"",0,"",1,"",""
+"Pilot NN-9","",*0,"FLRDDBC42","DG-1000 T","G-RYPE","E6","",0,"",0,"",1,"",""
+"Pilot NN-10","",*0,"FLRDDC24E","DR-400","F-GBIM","XX","",0,"",0,"",1,"",""
+"Pilot NN-11","",*0,"FLRDDD2D2","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-12","",*0,"FLRDDD5F2","DR-400","EC-LYS","XX","",0,"",0,"",1,"",""
+"Pilot NN-13","",*0,"FLRDDD951","Astir CS-77","F-CEXP","R19","",0,"",0,"",1,"",""
+"Pilot NN-14","",*0,"FLRDDD952","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-15","",*0,"FLRDDD953","Duo Discus","F-CTAR","L2","",0,"",0,"",1,"",""
+"Pilot NN-16","",*0,"FLRDDD95F","Pegase","F-CFRO","B17","",0,"",0,"",1,"",""
+"Pilot NN-17","",*0,"FLRDDDE1A","Antares 18 T         ","D-9200"," ","",0,"",0,"",1,"",""
+"Pilot NN-18","",*0,"FLRDDE4A7","Astir CS-77","G-EEVL","SA1","",0,"",0,"",1,"",""
+"Tow plane Pilot","",*0,"FLRDDE649","MS-894 Minerva","EC-HRF","CD","",0,"",0,"",1,"",""
+"Pilot NN-20","",*0,"FLRDDF94D","Unknown","STG-G-C","GC","",0,"",0,"",1,"",""
+"Pilot NN-21","",*0,"FLRDDF9BB","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-22","",*0,"FLRDF0456","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-23","",*0,"FLRDF091B","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+"Pilot NN-24","",*0,"ICA01CAFE","NOTYPE","NO-NAME","NN","",0,"",0,"",1,"",""
+[Starts]
+ 
+[Day_22/03/2016]
+D22032016-010400000
+V,HighEnl=300,AsViolate=True,MinFinAlt=0m,MaxFinAlt=10000m,MaxStartAlt=0m,MaxAlt=0m,MaxAltCorr=50.0m,AltTimeout=0,StartGsp=0km/h,FixRate=10,ValFailed=True
+C301299000000301299000003
+C4223150N00151500ELa Cerdanya - LECD
+C4223150N00151500ELa Cerdanya - LECD
+C4234110N00044360WSanta Cilia - LECI
+C4206290N00028590EBenabarre
+C4203020N00117320EOliana
+C4223150N00151500ELa Cerdanya - LECD
+C4223150N00151500ELa Cerdanya - LECD
+TSK,WpDis=True,MinDis=True,NearDis=0.5km,NearAlt=200.0m,MinFinAlt=0.0km
+XTest day
+E000,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E001,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E002,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E003,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E004,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+E005,0,,,0,0,-1,-1,-1,-1,0,0,-1,-1,0,0,-1,-1,0,0,"",-1,-1,"",-1,,,,,,
+
+
