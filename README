@@ -4,7 +4,11 @@
 
 This is the repository for hte SILENT Wings <===> OGN interface, the Apache2 scripts invoked  by the SWviewer.
 
+Implements the Silent Wings interface as defined on the SW wiki page: https://github.com/swingsopen/swtracking/wiki/Tracking-Protocol 
+
 This program manages the data that is gathered there by the collector routines and stored on a SQLITE3 database.
+
+and: http://wiki.silentwings.no/index.php?title=Tracking_Protocol
 
 Currently the system is running on a Raspberry Pi 3 with a HDD SDD of 128 Gb., using Raspbian Jessie distro.
 
