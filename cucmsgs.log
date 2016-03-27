@@ -1,0 +1,258 @@
+Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
+Time is now: 2016-03-27 15:33:21.802242
+CUC data file is:  /var/www/html/cuc/LIVE20160327.cuc  User: www-data
+D==>:  FLRDD4F23 Pilot NN-0 F-CHKL GO Pegase
+D==>:  FLRDD9210 Pilot NN-1 F-CTVV RZ DG-300
+D==>:  FLRDD946D Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDD96B1 Pilot NN-3 D-5070 B2 Discus
+D==>:  FLRDD9F5C Pilot NN-4 EC-KYA BY Duo Discus
+D==>:  FLRDDA9B7 Pilot NN-5 NO-NAME NN NOTYPE
+D==>:  FLRDDAC1A Pilot NN-6 F-CFHK T36 Twin Astir II
+D==>:  FLRDDAE68 Pilot NN-7 D-7927   DG-505               
+D==>:  FLRDDB136 Pilot NN-8 D-4716   Ka-6                 
+D==>:  FLRDDBACE Pilot NN-9 D-KCPF XX DG-500
+D==>:  FLRDDBC42 Pilot NN-10 G-RYPE E6 DG-1000 T
+D==>:  FLRDDC24E Pilot NN-11 F-GBIM XX DR-400
+D==>:  FLRDDD591 Pedro Toquero EC-JEQ XX ASK-21
+D==>:  FLRDDD5F0 Pilot NN-13 EC-ZSG XX Lambada
+D==>:  FLRDDD5F2 LECI Tow plane Pilot EC-LYS XX DR-400
+D==>:  FLRDDD8E2 Pilot NN-15 F-CGEP XX Pegase
+D==>:  FLRDDD951 Pilot NN-16 F-CEXP R19 Astir CS-77
+D==>:  FLRDDD95F Pilot NN-17 F-CFRO B17 Pegase
+D==>:  FLRDDDB8B Luis Ferreira EC-JAA XX DG-1000
+D==>:  FLRDDDF60 Pilot NN-19 NO-NAME NN NOTYPE
+D==>:  FLRDDE2CD Pilot NN-20 F-CPQC BT Janus B
+D==>:  FLRDDE304 Pilot NN-21 EC-HKB W2 Astir Jeans
+D==>:  FLRDDE45D Pilot NN-22 EC-LXD 1L DG-500
+D==>:  FLRDDE4A7 Pilot NN-23 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE649 LECD Tow plane Pilot EC-HRF CD MS-894 Minerva
+D==>:  FLRDDE65F Pilot NN-25 F-CGSN SN Pegase
+D==>:  FLRDDE669 Pilot NN-26 F-CIHM HM alliance 34
+D==>:  FLRDDE66D Pilot NN-27 F-GNHE HE MS-894 Minerva
+D==>:  FLRDDE9EF Pilot NN-28 D-KCCL 9T ASH-31 MI
+D==>:  FLRDDEA10 Pilot NN-29 STG-A-S AS Unknown
+D==>:  FLRDDF94D Pilot NN-30 STG-G-C GC Unknown
+D==>:  FLRDDF99B Pilot NN-31 STG-D-G DG Unknown
+D==>:  FLRDDF9A0 Pilot NN-32 F-CFIO XX Speed Astir
+D==>:  FLRDDFA27 Pilot NN-33 STG-D-K DK Unknown
+D==>:  FLRDF0456 Pilot NN-34 NO-NAME NN NOTYPE
+D==>:  FLRDF091B Pilot NN-35 NO-NAME NN NOTYPE
+Pilots found ...  36
+======================
+Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
+Time is now: 2016-03-27 15:33:27.156462
+CUC data file is:  /var/www/html/cuc/LIVE20160327.cuc  User: www-data
+D==>:  FLRDD4F23 Pilot NN-0 F-CHKL GO Pegase
+D==>:  FLRDD9210 Pilot NN-1 F-CTVV RZ DG-300
+D==>:  FLRDD946D Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDD96B1 Pilot NN-3 D-5070 B2 Discus
+D==>:  FLRDD9F5C Pilot NN-4 EC-KYA BY Duo Discus
+D==>:  FLRDDA9B7 Pilot NN-5 NO-NAME NN NOTYPE
+D==>:  FLRDDAC1A Pilot NN-6 F-CFHK T36 Twin Astir II
+D==>:  FLRDDAE68 Pilot NN-7 D-7927   DG-505               
+D==>:  FLRDDB136 Pilot NN-8 D-4716   Ka-6                 
+D==>:  FLRDDBACE Pilot NN-9 D-KCPF XX DG-500
+D==>:  FLRDDBC42 Pilot NN-10 G-RYPE E6 DG-1000 T
+D==>:  FLRDDC24E Pilot NN-11 F-GBIM XX DR-400
+D==>:  FLRDDD591 Pedro Toquero EC-JEQ XX ASK-21
+D==>:  FLRDDD5F0 Pilot NN-13 EC-ZSG XX Lambada
+D==>:  FLRDDD5F2 LECI Tow plane Pilot EC-LYS XX DR-400
+D==>:  FLRDDD8E2 Pilot NN-15 F-CGEP XX Pegase
+D==>:  FLRDDD951 Pilot NN-16 F-CEXP R19 Astir CS-77
+D==>:  FLRDDD95F Pilot NN-17 F-CFRO B17 Pegase
+D==>:  FLRDDDB8B Luis Ferreira EC-JAA XX DG-1000
+D==>:  FLRDDDF60 Pilot NN-19 NO-NAME NN NOTYPE
+D==>:  FLRDDE2CD Pilot NN-20 F-CPQC BT Janus B
+D==>:  FLRDDE304 Pilot NN-21 EC-HKB W2 Astir Jeans
+D==>:  FLRDDE45D Pilot NN-22 EC-LXD 1L DG-500
+D==>:  FLRDDE4A7 Pilot NN-23 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE649 LECD Tow plane Pilot EC-HRF CD MS-894 Minerva
+D==>:  FLRDDE65F Pilot NN-25 F-CGSN SN Pegase
+D==>:  FLRDDE669 Pilot NN-26 F-CIHM HM alliance 34
+D==>:  FLRDDE66D Pilot NN-27 F-GNHE HE MS-894 Minerva
+D==>:  FLRDDE9EF Pilot NN-28 D-KCCL 9T ASH-31 MI
+D==>:  FLRDDEA10 Pilot NN-29 STG-A-S AS Unknown
+D==>:  FLRDDF94D Pilot NN-30 STG-G-C GC Unknown
+D==>:  FLRDDF99B Pilot NN-31 STG-D-G DG Unknown
+D==>:  FLRDDF9A0 Pilot NN-32 F-CFIO XX Speed Astir
+D==>:  FLRDDFA27 Pilot NN-33 STG-D-K DK Unknown
+D==>:  FLRDF0456 Pilot NN-34 NO-NAME NN NOTYPE
+D==>:  FLRDF091B Pilot NN-35 NO-NAME NN NOTYPE
+Pilots found ...  36
+======================
+Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
+Time is now: 2016-03-27 15:38:19.787854
+CUC data file is:  /var/www/html/cuc/LIVE20160327.cuc  User: www-data
+D==>:  FLRDD4F23 Pilot NN-0 F-CHKL GO Pegase
+D==>:  FLRDD9210 Pilot NN-1 F-CTVV RZ DG-300
+D==>:  FLRDD946D Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDD96B1 Pilot NN-3 D-5070 B2 Discus
+D==>:  FLRDD9F5C Pilot NN-4 EC-KYA BY Duo Discus
+D==>:  FLRDDA9B7 Pilot NN-5 NO-NAME NN NOTYPE
+D==>:  FLRDDAC1A Pilot NN-6 F-CFHK T36 Twin Astir II
+D==>:  FLRDDAE68 Pilot NN-7 D-7927   DG-505               
+D==>:  FLRDDB136 Pilot NN-8 D-4716   Ka-6                 
+D==>:  FLRDDBACE Pilot NN-9 D-KCPF XX DG-500
+D==>:  FLRDDBC42 Pilot NN-10 G-RYPE E6 DG-1000 T
+D==>:  FLRDDC24E Pilot NN-11 F-GBIM XX DR-400
+D==>:  FLRDDD591 Pedro Toquero EC-JEQ XX ASK-21
+D==>:  FLRDDD5F0 Pilot NN-13 EC-ZSG XX Lambada
+D==>:  FLRDDD5F2 LECI Tow plane Pilot EC-LYS XX DR-400
+D==>:  FLRDDD8E2 Pilot NN-15 F-CGEP XX Pegase
+D==>:  FLRDDD951 Pilot NN-16 F-CEXP R19 Astir CS-77
+D==>:  FLRDDD952 Pilot NN-17 NO-NAME NN NOTYPE
+D==>:  FLRDDD95F Pilot NN-18 F-CFRO B17 Pegase
+D==>:  FLRDDDB8B Luis Ferreira EC-JAA XX DG-1000
+D==>:  FLRDDDF60 Pilot NN-20 NO-NAME NN NOTYPE
+D==>:  FLRDDE2CD Pilot NN-21 F-CPQC BT Janus B
+D==>:  FLRDDE304 Pilot NN-22 EC-HKB W2 Astir Jeans
+D==>:  FLRDDE45D Pilot NN-23 EC-LXD 1L DG-500
+D==>:  FLRDDE4A7 Pilot NN-24 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE649 LECD Tow plane Pilot EC-HRF CD MS-894 Minerva
+D==>:  FLRDDE65F Pilot NN-26 F-CGSN SN Pegase
+D==>:  FLRDDE669 Pilot NN-27 F-CIHM HM alliance 34
+D==>:  FLRDDE66D Pilot NN-28 F-GNHE HE MS-894 Minerva
+D==>:  FLRDDE9EF Pilot NN-29 D-KCCL 9T ASH-31 MI
+D==>:  FLRDDEA10 Pilot NN-30 STG-A-S AS Unknown
+D==>:  FLRDDF94D Pilot NN-31 STG-G-C GC Unknown
+D==>:  FLRDDF99B Pilot NN-32 STG-D-G DG Unknown
+D==>:  FLRDDF9A0 Pilot NN-33 F-CFIO XX Speed Astir
+D==>:  FLRDDFA27 Pilot NN-34 STG-D-K DK Unknown
+D==>:  FLRDF0456 Pilot NN-35 NO-NAME NN NOTYPE
+D==>:  FLRDF091B Pilot NN-36 NO-NAME NN NOTYPE
+Pilots found ...  37
+======================
+Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
+Time is now: 2016-03-27 15:41:25.814791
+CUC data file is:  /var/www/html/cuc/LIVE20160327.cuc  User: www-data
+D==>:  FLRDD4F23 Pilot NN-0 F-CHKL GO Pegase
+D==>:  FLRDD9210 Pilot NN-1 F-CTVV RZ DG-300
+D==>:  FLRDD946D Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDD96B1 Pilot NN-3 D-5070 B2 Discus
+D==>:  FLRDD9F5C Pilot NN-4 EC-KYA BY Duo Discus
+D==>:  FLRDDA9B7 Pilot NN-5 NO-NAME NN NOTYPE
+D==>:  FLRDDAC1A Pilot NN-6 F-CFHK T36 Twin Astir II
+D==>:  FLRDDAE68 Pilot NN-7 D-7927   DG-505               
+D==>:  FLRDDB136 Pilot NN-8 D-4716   Ka-6                 
+D==>:  FLRDDBACE Pilot NN-9 D-KCPF XX DG-500
+D==>:  FLRDDBC42 Pilot NN-10 G-RYPE E6 DG-1000 T
+D==>:  FLRDDC24E Pilot NN-11 F-GBIM XX DR-400
+D==>:  FLRDDD591 Pedro Toquero EC-JEQ XX ASK-21
+D==>:  FLRDDD5F0 Pilot NN-13 EC-ZSG XX Lambada
+D==>:  FLRDDD5F2 LECI Tow plane Pilot EC-LYS XX DR-400
+D==>:  FLRDDD8E2 Pilot NN-15 F-CGEP XX Pegase
+D==>:  FLRDDD951 Pilot NN-16 F-CEXP R19 Astir CS-77
+D==>:  FLRDDD952 Pilot NN-17 NO-NAME NN NOTYPE
+D==>:  FLRDDD95F Pilot NN-18 F-CFRO B17 Pegase
+D==>:  FLRDDDB8B Luis Ferreira EC-JAA XX DG-1000
+D==>:  FLRDDDF60 Pilot NN-20 NO-NAME NN NOTYPE
+D==>:  FLRDDE2CD Pilot NN-21 F-CPQC BT Janus B
+D==>:  FLRDDE304 Pilot NN-22 EC-HKB W2 Astir Jeans
+D==>:  FLRDDE45D Pilot NN-23 EC-LXD 1L DG-500
+D==>:  FLRDDE4A7 Pilot NN-24 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE649 LECD Tow plane Pilot EC-HRF CD MS-894 Minerva
+D==>:  FLRDDE65F Pilot NN-26 F-CGSN SN Pegase
+D==>:  FLRDDE669 Pilot NN-27 F-CIHM HM alliance 34
+D==>:  FLRDDE66D Pilot NN-28 F-GNHE HE MS-894 Minerva
+D==>:  FLRDDE9EF Pilot NN-29 D-KCCL 9T ASH-31 MI
+D==>:  FLRDDEA10 Pilot NN-30 STG-A-S AS Unknown
+D==>:  FLRDDF94D Pilot NN-31 STG-G-C GC Unknown
+D==>:  FLRDDF99B Pilot NN-32 STG-D-G DG Unknown
+D==>:  FLRDDF9A0 Pilot NN-33 F-CFIO XX Speed Astir
+D==>:  FLRDDFA27 Pilot NN-34 STG-D-K DK Unknown
+D==>:  FLRDF0456 Pilot NN-35 NO-NAME NN NOTYPE
+D==>:  FLRDF091B Pilot NN-36 NO-NAME NN NOTYPE
+D==>:  ICA3EE14E Pilot NN-37 D-0183   Janus                
+Pilots found ...  38
+======================
+Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
+Time is now: 2016-03-27 15:44:21.952240
+CUC data file is:  /var/www/html/cuc/LIVE20160327.cuc  User: www-data
+D==>:  FLRDD4F23 Pilot NN-0 F-CHKL GO Pegase
+D==>:  FLRDD9210 Pilot NN-1 F-CTVV RZ DG-300
+D==>:  FLRDD946D Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDD96B1 Pilot NN-3 D-5070 B2 Discus
+D==>:  FLRDD9F5C Pilot NN-4 EC-KYA BY Duo Discus
+D==>:  FLRDDA9B7 Pilot NN-5 NO-NAME NN NOTYPE
+D==>:  FLRDDAC1A Pilot NN-6 F-CFHK T36 Twin Astir II
+D==>:  FLRDDAE68 Pilot NN-7 D-7927   DG-505               
+D==>:  FLRDDB136 Pilot NN-8 D-4716   Ka-6                 
+D==>:  FLRDDBACE Pilot NN-9 D-KCPF XX DG-500
+D==>:  FLRDDBC42 Pilot NN-10 G-RYPE E6 DG-1000 T
+D==>:  FLRDDC24E Pilot NN-11 F-GBIM XX DR-400
+D==>:  FLRDDD591 Pedro Toquero EC-JEQ XX ASK-21
+D==>:  FLRDDD5F0 Pilot NN-13 EC-ZSG XX Lambada
+D==>:  FLRDDD5F2 LECI Tow plane Pilot EC-LYS XX DR-400
+D==>:  FLRDDD8E2 Pilot NN-15 F-CGEP XX Pegase
+D==>:  FLRDDD951 Pilot NN-16 F-CEXP R19 Astir CS-77
+D==>:  FLRDDD952 Pilot NN-17 NO-NAME NN NOTYPE
+D==>:  FLRDDD95F Pilot NN-18 F-CFRO B17 Pegase
+D==>:  FLRDDDB8B Luis Ferreira EC-JAA XX DG-1000
+D==>:  FLRDDDF60 Pilot NN-20 NO-NAME NN NOTYPE
+D==>:  FLRDDE2CD Pilot NN-21 F-CPQC BT Janus B
+D==>:  FLRDDE304 Pilot NN-22 EC-HKB W2 Astir Jeans
+D==>:  FLRDDE45D Pilot NN-23 EC-LXD 1L DG-500
+D==>:  FLRDDE4A7 Pilot NN-24 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE649 LECD Tow plane Pilot EC-HRF CD MS-894 Minerva
+D==>:  FLRDDE65F Pilot NN-26 F-CGSN SN Pegase
+D==>:  FLRDDE669 Pilot NN-27 F-CIHM HM alliance 34
+D==>:  FLRDDE66D Pilot NN-28 F-GNHE HE MS-894 Minerva
+D==>:  FLRDDE9EF Pilot NN-29 D-KCCL 9T ASH-31 MI
+D==>:  FLRDDEA10 Pilot NN-30 STG-A-S AS Unknown
+D==>:  FLRDDF94D Pilot NN-31 STG-G-C GC Unknown
+D==>:  FLRDDF99B Pilot NN-32 STG-D-G DG Unknown
+D==>:  FLRDDF9A0 Pilot NN-33 F-CFIO XX Speed Astir
+D==>:  FLRDDFA27 Pilot NN-34 STG-D-K DK Unknown
+D==>:  FLRDF0456 Pilot NN-35 NO-NAME NN NOTYPE
+D==>:  FLRDF091B Pilot NN-36 NO-NAME NN NOTYPE
+D==>:  ICA3EE14E Pilot NN-37 D-0183   Janus                
+Pilots found ...  38
+======================
+Generate live .CUC files V1.1 from  /nfs/OGN/SWdata/SWIface.db the GLIDERS table
+Time is now: 2016-03-27 18:16:26.434344
+CUC data file is:  /var/www/html/cuc/LIVE20160327.cuc  User: www-data
+D==>:  FLRDD4F23 Pilot NN-0 F-CHKL GO Pegase
+D==>:  FLRDD9210 Pilot NN-1 F-CTVV RZ DG-300
+D==>:  FLRDD946D Pilot NN-2 NO-NAME NN NOTYPE
+D==>:  FLRDD96B1 Pilot NN-3 D-5070 B2 Discus
+D==>:  FLRDD982A Pilot NN-4 X-Wing P7 UFO
+D==>:  FLRDD9F5C Pilot NN-5 EC-KYA BY Duo Discus
+D==>:  FLRDDA888 Pilot NN-6 NO-NAME NN NOTYPE
+D==>:  FLRDDA9B7 Pilot NN-7 NO-NAME NN NOTYPE
+D==>:  FLRDDAC1A Pilot NN-8 F-CFHK T36 Twin Astir II
+D==>:  FLRDDAE68 Pilot NN-9 D-7927   DG-505               
+D==>:  FLRDDAE9D Pilot NN-10 F-CESI   LS-3                 
+D==>:  FLRDDB136 Pilot NN-11 D-4716   Ka-6                 
+D==>:  FLRDDBACE Pilot NN-12 D-KCPF XX DG-500
+D==>:  FLRDDBC42 Pilot NN-13 G-RYPE E6 DG-1000 T
+D==>:  FLRDDC24E Pilot NN-14 F-GBIM XX DR-400
+D==>:  FLRDDD591 Pedro Toquero EC-JEQ XX ASK-21
+D==>:  FLRDDD5F0 Pilot NN-16 EC-ZSG XX Lambada
+D==>:  FLRDDD5F2 LECI Tow plane Pilot EC-LYS XX DR-400
+D==>:  FLRDDD8E2 Pilot NN-18 F-CGEP XX Pegase
+D==>:  FLRDDD951 Pilot NN-19 F-CEXP R19 Astir CS-77
+D==>:  FLRDDD952 Pilot NN-20 NO-NAME NN NOTYPE
+D==>:  FLRDDD95F Pilot NN-21 F-CFRO B17 Pegase
+D==>:  FLRDDDB8B Luis Ferreira EC-JAA XX DG-1000
+D==>:  FLRDDDF60 Pilot NN-23 NO-NAME NN NOTYPE
+D==>:  FLRDDE2CD Pilot NN-24 F-CPQC BT Janus B
+D==>:  FLRDDE304 Pilot NN-25 EC-HKB W2 Astir Jeans
+D==>:  FLRDDE45D Pilot NN-26 EC-LXD 1L DG-500
+D==>:  FLRDDE4A7 Pilot NN-27 G-EEVL SA1 Astir CS-77
+D==>:  FLRDDE636 Pilot NN-28 STG-D-V DV Unknown
+D==>:  FLRDDE649 LECD Tow plane Pilot EC-HRF CD MS-894 Minerva
+D==>:  FLRDDE65F Pilot NN-30 F-CGSN SN Pegase
+D==>:  FLRDDE669 Pilot NN-31 F-CIHM HM alliance 34
+D==>:  FLRDDE66D Pilot NN-32 F-GNHE HE MS-894 Minerva
+D==>:  FLRDDE9EF Pilot NN-33 D-KCCL 9T ASH-31 MI
+D==>:  FLRDDEA10 Pilot NN-34 STG-A-S AS Unknown
+D==>:  FLRDDF94D Pilot NN-35 STG-G-C GC Unknown
+D==>:  FLRDDF99B Pilot NN-36 STG-D-G DG Unknown
+D==>:  FLRDDF9A0 Pilot NN-37 F-CFIO XX Speed Astir
+D==>:  FLRDDFA27 Pilot NN-38 STG-D-K DK Unknown
+D==>:  FLRDDFE47 Pilot NN-39 F-CEGA GA ASK-13
+D==>:  FLRDF0456 Pilot NN-40 NO-NAME NN NOTYPE
+D==>:  FLRDF091B Pilot NN-41 NO-NAME NN NOTYPE
+D==>:  ICA3EE14E Pilot NN-42 D-0183   Janus                
+Pilots found ...  43
+======================

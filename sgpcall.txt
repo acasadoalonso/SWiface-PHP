@@ -1,0 +1,34 @@
+
+
+SGP real time scoring interface:
+
+
+The final specs are: 
+CALL: http://qsgp.ddns.net
+Parameters: sgpgetfixes
+	id : is the flarm id of the glider to score
+	since: is the Unixtimestamp since you need the new fixes, if 0 if will be for the beginning for today’s fixes. If this parameter is omitted, 0 is assumed
+		I check the date, if the date is for today, I get the data from the LIVE database, otherwise I get the data from the ARCHIVE database. 
+	compression: the compression type, either none or gzip. 
+
+Call:
+
+http://qsgp.ddns.net/sgpgetfixes?id=FLARMID&since=UTCTIMESTAMP&compression=none
+
+and the resulting output is:
+{"trackId": “FLRDDD123", “live”: true,  "track": { "t": utctimestamp, "e":long, "n":lati, "a":alti}}
+
+Sample Call:
+http://192.168.1.211//sgpgetfixes?since=0&id=FLRDDDB8B 
+Output:
+
+{ "track": [ { "a": 693.7248000000001, "e": -0.72265, "t": 1458987719, "n": 42.56946666666666 }, { "a": 693.7248000000001, "e": -0.72265, "t": 1458987719, "n": 42.56946666666666 }, { "a": 693.7248000000001, "e": -0.7226333333333333, "t": 1458987720, "n": 42.56946666666666 } ], "trackId": "FLRDDDB8B", "live": true }
+
+
+Sample Call:
+http://192.168.1.211//sgpgetfixes?since=1459004225&id=FLRDDDB8B
+
+Output:
+
+{ "track": [ { "a": 681.8376000000001, "e": -0.7252333333333333, "t": 1459004245, "n": 42.56806666666667 }, { "a": 681.8376000000001, "e": -0.72525, "t": 1459004245, "n": 42.56805 }, { "a": 681.8376000000001, "e": -0.7252333333333333, "t": 1459004265, "n": 42.56806666666667 }, { "a": 681.8376000000001, "e": -0.7252333333333333, "t": 1459004265, "n": 42.56806666666667 }, { "a": 679.7040000000001, "e": -0.7252166666666666, "t": 1459004278, "n": 42.56805 }, { "a": 679.7040000000001, "e": -0.7252166666666666, "t": 1459004278, "n": 42.56806666666667 }, { "a": 678.7896000000001, "e": -0.7252166666666666, "t": 1459004298, "n": 42.56805 }, { "a": 678.7896000000001, "e": -0.7252166666666666, "t": 1459004298, "n": 42.56803333333333 }, { "a": 678.7896000000001, "e": -0.7252166666666666, "t": 1459004300, "n": 42.56805 }, { "a": 678.7896000000001, "e": -0.7252166666666666, "t": 1459004300, "n": 42.56803333333333 } ], "trackId": "FLRDDDB8B", "live": true }
+
