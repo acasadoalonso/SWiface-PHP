@@ -34,6 +34,7 @@ QSGP.py									QSGP default event
 README									This files
 SGP_json_calls.txt							Details of the SGP interface
 sgp.py									SGP interface
+csgpjson.py								Utility to convert SGP to SW JSON specs interface
 trackpoints.php								SW JSON interface
 trackpoints.py								SW JSON interface
 utils									Small test utilities
