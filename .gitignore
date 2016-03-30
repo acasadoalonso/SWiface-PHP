@@ -4,3 +4,4 @@ lost+found
 *.pyc
 *.pyo
 *.bak
+*.log

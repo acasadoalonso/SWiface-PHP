@@ -1,0 +1,304 @@
+{
+    "startOpenTs": 1441549800, 
+    "name": "SGP World Final", 
+    "turnpoints": [
+        {
+            "name": "100CALCNT", 
+            "trigger": "Enter", 
+            "longitude": 8.769616666666666, 
+            "observationZone": "Line", 
+            "radius": 2500, 
+            "latitude": 45.80801666666667, 
+            "type": "Start"
+        }, 
+        {
+            "name": "038GANDINO", 
+            "trigger": "Enter", 
+            "longitude": 9.903333333333334, 
+            "observationZone": "Cylinder", 
+            "radius": 500, 
+            "latitude": 45.81138333333333, 
+            "type": "Turnpoint"
+        }, 
+        {
+            "name": "046LAVENO", 
+            "trigger": "Enter", 
+            "longitude": 8.615283333333334, 
+            "observationZone": "Cylinder", 
+            "radius": 500, 
+            "latitude": 45.911116666666665, 
+            "type": "Turnpoint"
+        }, 
+        {
+            "name": "ALZATE", 
+            "trigger": "Enter", 
+            "longitude": 9.161116666666667, 
+            "observationZone": "Cylinder", 
+            "radius": 500, 
+            "latitude": 45.76945, 
+            "type": "Turnpoint"
+        }, 
+        {
+            "name": "101VAHOSP", 
+            "trigger": "Enter", 
+            "longitude": 8.84055, 
+            "observationZone": "Cylinder", 
+            "radius": 500, 
+            "latitude": 45.80833333333333, 
+            "type": "Turnpoint"
+        }, 
+        {
+            "name": "100CALCNT", 
+            "trigger": "Enter", 
+            "longitude": 8.769616666666666, 
+            "observationZone": "Line", 
+            "radius": 250, 
+            "latitude": 45.80801666666667, 
+            "type": "Finish"
+        }
+    ], 
+    "tracks": [
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1942b"
+            ], 
+            "aircraft": "ASG 29 E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Tom Claffey", 
+            "country": "AUS", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "57"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#19ba2"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Werner Amann", 
+            "country": "AUT", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "WG"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1931a"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Carlos Rocca Vidal", 
+            "country": "CHL", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "PG"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1875f"
+            ], 
+            "aircraft": "Ventus 2cxa", 
+            "3dModel": "ventus2", 
+            "pilotName": "Didier Hauss", 
+            "country": "FRA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "DID"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1953c"
+            ], 
+            "aircraft": "JS 1", 
+            "3dModel": "ventus2", 
+            "pilotName": "Maximilian Seis", 
+            "country": "FRA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "FD"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1964d"
+            ], 
+            "aircraft": "Ventus 2cxa", 
+            "3dModel": "ventus2", 
+            "pilotName": "Giorgio Galetto", 
+            "country": "ITA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "Y"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1975e"
+            ], 
+            "aircraft": "ASG 29 E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Roman Mracek", 
+            "country": "CZE", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "QX"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1986f"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Riccardo Brigliadori", 
+            "country": "ITA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "LEO"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#19980"
+            ], 
+            "aircraft": "JS 1 evo", 
+            "3dModel": "ventus2", 
+            "pilotName": "Laurens J. Goudriaan", 
+            "country": "ZAF", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "EVO"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#19209"
+            ], 
+            "aircraft": "ASG 29 E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Zdislaw Bednarczuk", 
+            "country": "POL", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "ZB"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18870"
+            ], 
+            "aircraft": "Ventus 2cxa", 
+            "3dModel": "ventus2", 
+            "pilotName": "Uli Schwenk", 
+            "country": "DEU", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "LX"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18981"
+            ], 
+            "aircraft": "Ventus 2cxa", 
+            "3dModel": "ventus2", 
+            "pilotName": "Tilo Holighaus", 
+            "country": "DEU", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "LZ"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18ba3"
+            ], 
+            "aircraft": "ASG 29 E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Christophe Abadie", 
+            "country": "FRA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "2L"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18a92"
+            ], 
+            "aircraft": "JS 1", 
+            "3dModel": "ventus2", 
+            "pilotName": "Christophe Ruch", 
+            "country": "FRA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "FC"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18dc5"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Thomas Gostner", 
+            "country": "ITA", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "AY"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18cb4"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Kai Lindenberg", 
+            "country": "DEU", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "MC"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18fe7"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Sebastian Kawa", 
+            "country": "POL", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "PL"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#18ed6"
+            ], 
+            "aircraft": "ASG 29 E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Rasmus \u00d8rskov", 
+            "country": "DNK", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "29"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#1b429"
+            ], 
+            "aircraft": "JS 1", 
+            "3dModel": "ventus2", 
+            "pilotName": "Petr Panek", 
+            "country": "CZE", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "IGC"
+        }, 
+        {
+            "registration": "EC-XXX", 
+            "ribbonColors": [
+                "#19a91"
+            ], 
+            "aircraft": "Ventus 2cxt", 
+            "3dModel": "ventus2", 
+            "pilotName": "Ren\u00e8 Vidal", 
+            "country": "CHL", 
+            "trackId": "QSGP20160330:FLRDDDDDD", 
+            "competitionId": "IK"
+        }
+    ], 
+    "taskType": "SailplaneGrandPrix", 
+    "description": "6th SGP World Final"
+}
