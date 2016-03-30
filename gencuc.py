@@ -46,11 +46,11 @@ for row in cursD.fetchall():					# search all the rows
                 regi=gli[0]					# get the registration 
                 cn=gli[1]					# get the competition numbers
 		if cn == "":
-			cn="XX"					# if none ?
+			cn=str(pn)					# if none ?
                 type=gli[2]					# get glider type
     else:
                 regi='NO-NAME'
-                cn='NN'
+                cn=str(pn)
                 type='NOTYPE'
     if idflarm in kpilot.kpilot:				# check if know the pilot because is our database kpilot.py
 	pname=kpilot.kpilot[idflarm]				# in that case place the name of the pilot

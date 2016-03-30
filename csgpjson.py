@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 #
 #   This script get the dat from the sgp.aero server and gen the SW JSON file
 #
@@ -12,7 +14,38 @@ import kpilot
 import QSGP
 import math
 import pycountry
+#-------------------------------------------------------------------------------------------------------------------#
 
+def fixcoding(addr):
+        if addr != None:
+                addr=addr.replace(u'á', u'a')
+                addr=addr.replace(u'à', u'a')
+                addr=addr.replace(u'â', u'a')
+                addr=addr.replace(u'Á', u'A')
+                addr=addr.replace(u'é', u'e')
+                addr=addr.replace(u'è', u'e')
+                addr=addr.replace(u'ê', u'e')
+                addr=addr.replace(u'É', u'E')
+                addr=addr.replace(u'í', u'i')
+                addr=addr.replace(u'ì', u'i')
+                addr=addr.replace(u'î', u'i')
+                addr=addr.replace(u'Í', u'I')
+                addr=addr.replace(u'ó', u'o')
+                addr=addr.replace(u'ò', u'o')
+                addr=addr.replace(u'ô', u'o')
+                addr=addr.replace(u'Ó', u'O')
+                addr=addr.replace(u'Ò', u'O')
+                addr=addr.replace(u'ú', u'u')
+                addr=addr.replace(u'ù', u'u')
+                addr=addr.replace(u'û', u'u')
+                addr=addr.replace(u'Ú', u'U')
+                addr=addr.replace(u'ü', u'u')
+                addr=addr.replace(u'ñ', u'n')
+                addr=addr.replace(u'Ñ', u'N')
+                addr=addr.replace(u'Ø', u'O')
+        return addr
+
+#-------------------------------------------------------------------------------------------------------------------#
 #
 # arguments:   compid, dayindex, print
 #		where compid is the assigned competition ID or 0 for the list of competitions.
@@ -63,15 +96,15 @@ jsonfile = open (JSONFILE, 'w')                                 # open the outpu
 j = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
 j_obj = json.load(j)
 if prt:
-	print j_obj
+	#print j_obj
 	j=json.dumps(j_obj, indent=4)
 	print j
 #
 # the different pieces of information
 #
 pilots=j_obj["p"]						# get the pilot information
-print "Pilots:"
-print "======:"
+print "Pilots:", len(pilots)
+print "=========="
 for id in pilots:
 #                        
 	pid= 		pilots[id]["i"] 			# get the pilot ID   
@@ -94,8 +127,9 @@ for id in pilots:
     	color="#"+ccc[2:]                                       # set the JSON color required
 	ccc = pycountry.countries.get(alpha2=country)		# the the 3 letter country code
     	country=ccc.alpha3					# convert to a 3 letter code
-	print pid, fname, lname, compid, country, model, j, rankingid, registration, flarmid    
-	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": fname+" "+lname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color]}
+	pilotname=fixcoding(fname+" "+lname).encode('utf8')
+	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
+	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color]}
 	tracks.append(tr)                                       # add it to the tracks
 
 #print tracks
@@ -154,12 +188,12 @@ task_wpla   		=task_data["u"]
 task_wptlist		=task_wpla["wptList"]	
 print "Task info"
 print "========="
-print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Task at:", task_at, task_wptlist
+print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Task at:", task_at, task_wptlist, len(task_wp)
 print "Waypoints of the task"
 print "====================="
 #
 wp=0
-while wp < task_wptlist:
+while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
 		if wp == 0:
 			wpinit=wp_name
@@ -177,6 +211,7 @@ while wp < task_wptlist:
 			oz="Cylinder"
 		else:
 			oz="Line"	
+		#wp_id				=task_wp[wp]["id"]	# Wyapoint ID
 		print "WP:", wp_name, wp_lat, wp_lon,  wp_type, wp_radius, type, oz
 		tpx={"latitude": wp_lat, "longitude": wp_lon, "name": wp_name, "observationZone": oz, "type": type, "radius": wp_radius, "trigger":"Enter"}
         	tp.append(tpx)
