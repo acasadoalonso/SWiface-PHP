@@ -1,6 +1,6 @@
 import json
 import urllib2
-qsgpID=10
+qsgpID=14
 numberofdays=9
 j = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
 j_obj = json.load(j)

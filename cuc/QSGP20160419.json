@@ -1,0 +1,264 @@
+{
+    "tracks": [
+        {
+            "registration": "D-9024", 
+            "ribbonColors": [
+                "#23ca9"
+            ], 
+            "aircraft": "ASW 24", 
+            "3dModel": "ventus2", 
+            "pilotName": "Pablo Vispe Sola", 
+            "country": "ESP", 
+            "trackId": "QSGP20160419:FLRDDAA75", 
+            "competitionId": "EX"
+        }, 
+        {
+            "registration": "F-CPLE", 
+            "ribbonColors": [
+                "#23b98"
+            ], 
+            "aircraft": "LAK 17b", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jean-Fran\u00e7ois Bily", 
+            "country": "FRA", 
+            "trackId": "QSGP20160419:FLRDD0FF7", 
+            "competitionId": "LE"
+        }, 
+        {
+            "registration": "HB-3194", 
+            "ribbonColors": [
+                "#251fd"
+            ], 
+            "aircraft": "Ventus 2ax", 
+            "3dModel": "ventus2", 
+            "pilotName": "Fridolin Hauser", 
+            "country": "CHE", 
+            "trackId": "QSGP20160419:FLRDD4EA5", 
+            "competitionId": "HQ"
+        }, 
+        {
+            "registration": "G-CKPU", 
+            "ribbonColors": [
+                "#230ee"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "pilotName": "Mike Young", 
+            "country": "GBR", 
+            "trackId": "QSGP20160419:FLRDDEC93", 
+            "competitionId": "57"
+        }, 
+        {
+            "registration": "F-CFMD", 
+            "ribbonColors": [
+                "#22ecc"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Louis Bouderlique", 
+            "country": "FRA", 
+            "trackId": "QSGP20160419:ICA100000", 
+            "competitionId": "MD"
+        }, 
+        {
+            "registration": "D-9908", 
+            "ribbonColors": [
+                "#22fdd"
+            ], 
+            "aircraft": "Ventus 2ax", 
+            "3dModel": "ventus2", 
+            "pilotName": "Christophe Ruch", 
+            "country": "FRA", 
+            "trackId": "QSGP20160419:OGNC9C26C", 
+            "competitionId": "EY"
+        }, 
+        {
+            "registration": "D-3356", 
+            "ribbonColors": [
+                "#23a87"
+            ], 
+            "aircraft": "ASW 27", 
+            "3dModel": "ventus2", 
+            "pilotName": "Carlos Gonzalez de Herrero", 
+            "country": "ESP", 
+            "trackId": "QSGP20160419:FLRDDD58F", 
+            "competitionId": "7A"
+        }, 
+        {
+            "registration": "D-6817", 
+            "ribbonColors": [
+                "#23976"
+            ], 
+            "aircraft": "ASW 27", 
+            "3dModel": "ventus2", 
+            "pilotName": "Christoph Limpert", 
+            "country": "DEU", 
+            "trackId": "QSGP20160419:FLRDDEDA3", 
+            "competitionId": "JH"
+        }, 
+        {
+            "registration": "D-7670", 
+            "ribbonColors": [
+                "#23865"
+            ], 
+            "aircraft": "ASW 20", 
+            "3dModel": "ventus2", 
+            "pilotName": "Aldo Rodriguez", 
+            "country": "ESP", 
+            "trackId": "QSGP20160419:FLRDD0230", 
+            "competitionId": "70"
+        }, 
+        {
+            "registration": "D-6327", 
+            "ribbonColors": [
+                "#23754"
+            ], 
+            "aircraft": "ASW 27", 
+            "3dModel": "ventus2", 
+            "pilotName": "Felix Huttel", 
+            "country": "DEU", 
+            "trackId": "QSGP20160419:FLRDD91E0", 
+            "competitionId": "HH"
+        }, 
+        {
+            "registration": "D-9575", 
+            "ribbonColors": [
+                "#23643"
+            ], 
+            "aircraft": "Ventus 2ax", 
+            "3dModel": "ventus2", 
+            "pilotName": "Silverio Della Rosa", 
+            "country": "ITA", 
+            "trackId": "QSGP20160419:FLRDD8EB5", 
+            "competitionId": "S5"
+        }, 
+        {
+            "registration": "G-DLOE", 
+            "ribbonColors": [
+                "#23532"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jon Gatfield", 
+            "country": "GBR", 
+            "trackId": "QSGP20160419:FLRDDECCF", 
+            "competitionId": "YO"
+        }, 
+        {
+            "registration": "F-CGVL", 
+            "ribbonColors": [
+                "#23310"
+            ], 
+            "aircraft": "Ventus 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jorge Arias ", 
+            "country": "ESP", 
+            "trackId": "QSGP20160419:OGNCDDD34", 
+            "competitionId": "VL"
+        }, 
+        {
+            "registration": "D-KLOE", 
+            "ribbonColors": [
+                "#23421"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Philippe de Pechy", 
+            "country": "FRA", 
+            "trackId": "QSGP20160419:FLRDDDED7", 
+            "competitionId": "CT"
+        }, 
+        {
+            "registration": "D-5070", 
+            "ribbonColors": [
+                "#23dba"
+            ], 
+            "aircraft": "Discus cs", 
+            "3dModel": "ventus2", 
+            "pilotName": "Gorka Elduayen Madariga", 
+            "country": "ESP", 
+            "trackId": "QSGP20160419:FLRDD96B1", 
+            "competitionId": "B2"
+        }
+    ], 
+    "task": {
+        "startOpenTs": 1461024000000, 
+        "turnpoints": [
+            {
+                "name": "Cerdanya", 
+                "trigger": "Enter", 
+                "longitude": 1.8638833333333333, 
+                "observationZone": "Line", 
+                "radius": 2500, 
+                "latitude": 42.3875, 
+                "type": "Start"
+            }, 
+            {
+                "name": "F13/La Llagonne", 
+                "trigger": "Enter", 
+                "longitude": 2.1202833333333335, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 42.54305, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Antena And", 
+                "trigger": "Enter", 
+                "longitude": 1.4622166666666667, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 42.50638333333333, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Boumort", 
+                "trigger": "Enter", 
+                "longitude": 1.1386166666666666, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 42.23166666666667, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Pic Orri", 
+                "trigger": "Enter", 
+                "longitude": 1.2138833333333334, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 42.40833333333333, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Mont Louis", 
+                "trigger": "Enter", 
+                "longitude": 2.120833333333333, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 42.50888333333333, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Puigcerda", 
+                "trigger": "Enter", 
+                "longitude": 1.9275, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 42.433616666666666, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Finish 25", 
+                "trigger": "Enter", 
+                "longitude": 1.8690666666666667, 
+                "observationZone": "Line", 
+                "radius": 250, 
+                "latitude": 42.38925, 
+                "type": "Finish"
+            }
+        ], 
+        "taskType": "SailplaneGrandPrix"
+    }, 
+    "name": "Spain SGP", 
+    "description": "Spain SGP 2016"
+}

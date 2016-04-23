@@ -89,4 +89,4 @@ else:									# in the case of the QSGP event just read the JSON file generated 
 		j=json.dumps(QSGP.QSGP, indent=4)
 		#print "Not found...", fname
 print j
-os.close(fd)
+#os.close(fd)

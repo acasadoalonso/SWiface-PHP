@@ -1,9 +1,0 @@
-{date}20160320{/date}{task}1{/task}{validday}1{/validday}
-{date}20160321{/date}{task}1{/task}{validday}1{/validday}
-{date}20160322{/date}{task}1{/task}{validday}1{/validday}
-{date}20160323{/date}{task}1{/task}{validday}1{/validday}
-{date}20160324{/date}{task}1{/task}{validday}1{/validday}
-{date}20160325{/date}{task}1{/task}{validday}1{/validday}
-{date}20160326{/date}{task}1{/task}{validday}1{/validday}
-{date}20160327{/date}{task}1{/task}{validday}1{/validday}
-{date}20160328{/date}{task}1{/task}{validday}1{/validday}

@@ -156,9 +156,12 @@ print date, title, shorttitle, "Start time(millis):", starttime, "Day type:", da
 
 d = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
 d_obj = json.load(d)
-d=json.dumps(d_obj, indent=4)
+if prt:
+	print "____________________________________________________________"
+	d=json.dumps(d_obj, indent=4)
+	print d
 if numberofactivedays == 0:
-	exit()
+	print "No active days ..."
 
 print "Day: ", day, "DayID: ", dayid
 print "============================="
@@ -173,9 +176,12 @@ comp_shortdaytitle	=d_obj["t"]				# short day title
 comp_starttime		=d_obj["a"]				# start time millis from midnite
 comp_startaltitude	=d_obj["h"]				# start altitude
 comp_finishaltitude	=d_obj["f"]				# finish altitude
-comp_taskinfo		=d_obj["k"]				# task infor data
 print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "Start time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
-day +=1
+if "k" in d_obj:
+	comp_taskinfo		=d_obj["k"]				# task infor data
+else:
+	print "No task for that day..."
+	exit()
 task_type   		=comp_taskinfo["@type"]
 task_id  	    	=comp_taskinfo["id"]
 task_listid 		=comp_taskinfo["taskListId"]
@@ -188,7 +194,7 @@ task_wpla   		=task_data["u"]
 task_wptlist		=task_wpla["wptList"]	
 print "Task info"
 print "========="
-print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Task at:", task_at, task_wptlist, len(task_wp)
+print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Task at:", task_at, task_wptlist,"WP#", len(task_wp)
 print "Waypoints of the task"
 print "====================="
 #
@@ -222,7 +228,14 @@ while wp < len(task_wp):
 print "WP:================================>"
 # event
 
-event={"name": comp_shortname, "description" : comp_name, "taskType": "SailplaneGrandPrix", "startOpenTs": (comp_date + comp_starttime)/1000, "turnpoints": tp,  "tracks": tracks}
+print comp_shortname
+print comp_name
+print comp_date
+print comp_starttime/1000
+print tp
+#event={"name": comp_shortname, "description" : comp_name, "taskType": "SailplaneGrandPrix", "startOpenTs": (comp_date + comp_starttime)/1000, "turnpoints": tp,  "tracks": tracks}
+task={ "taskType": "SailplaneGrandPrix", "startOpenTs": comp_date , "turnpoints": tp}
+event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
 jsonfile.write(j)
 
