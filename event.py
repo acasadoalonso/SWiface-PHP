@@ -56,7 +56,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
        	        	type=gli[2]                                     # get glider type
     		else:
                 	regi='NO-NAME'
-                	cn='NN'
+                	cn=str(pn)
                 	type='NOTYPE'
     		if idflarm in kpilot.kpilot:                            # check if know the pilot because is our database kpilot.py
         		pname=kpilot.kpilot[idflarm]                    # in that case place the name of the pilot
