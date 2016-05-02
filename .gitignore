@@ -1,6 +1,8 @@
 .DS_Store
 lost+found
 SoaringSpot
+cuc/
+cucfiles/
 *.pyc
 *.pyo
 *.bak

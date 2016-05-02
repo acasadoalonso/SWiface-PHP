@@ -129,7 +129,7 @@ for id in pilots:
     	country=ccc.alpha3					# convert to a 3 letter code
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
-	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color]}
+	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	tracks.append(tr)                                       # add it to the tracks
 
 #print tracks

@@ -30,9 +30,11 @@ if (since == "0"):
 	date=eventid[6:12]
 	
 else:
-	datetimes=datetime.datetime.utcfromtimestamp(int(since))
-	date=     datetimes.strftime("%y%m%d")
-	time=     datetimes.strftime("%H%M%S")
+	datetimes=datetime.datetime.utcfromtimestamp(int(since))	# time converted from UNIX timestamp
+	date =     datetimes.strftime("%y%m%d")				# date converted
+	time =     datetimes.strftime("%H%M%S")				# time converted
+	datetimet=datetime.datetime.utcnow() - datetime.timedelta(0,15) # UTC time minos 15 seconds for buffering 
+	timet =    datetimet.strftime("%H%M%S")				# UTC now minos 15 seconds
 
 
 if (today != date):						# it is today
@@ -45,9 +47,10 @@ fd = os.open(filename, os.O_RDONLY)
 conn = sqlite3.connect('/dev/fd/%d' % fd)
 cursD=conn.cursor()                                             # cursor for the ogndata table
 if (since == "0"):						# if no timme since showw all
-	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ?", [trackid,date])                                # get all the glifers flying now
+	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ?", [trackid,date])   # get all the positions now
 else:
-	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ? and time > ? ", [trackid, date, time])           # get all the glifers flying now
+	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ? and time > ? and time <= ?  order by time",                                               [trackid, date, time, timet])           
+
 tn=0
 #tracks=[{"t":0, "n":0, "e":0, "a":0}]
 tracks=[]
