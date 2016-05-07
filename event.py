@@ -51,17 +51,20 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
     		if gli and gli != None:                                 # did we find it ??? Index is unique, only one row
                 	regi=gli[0]                                     # get the registration
                 	cn=gli[1]                                       # get the competition numbers
-                	if cn == "":
-                        	cn="XX"                                 # if none ?
+                	if cn == "" or cn == " ":			# if not competition number, use the last two letter of the registration 
+                        	cn=regi[4:6]                            # if none ?
        	        	type=gli[2]                                     # get glider type
     		else:
-                	regi='NO-NAME'
-                	cn=str(pn)
-                	type='NOTYPE'
+                	regi='NO-NAME'					# just indicate no name
+                	cn=str(pn)					# the CN is the pilot number found 
+                	type='NOTYPE'					# No glider type
     		if idflarm in kpilot.kpilot:                            # check if know the pilot because is our database kpilot.py
         		pname=kpilot.kpilot[idflarm]                    # in that case place the name of the pilot
     		else:
-        		pname="Pilot NN-"+str(pn)                       # otherwise just say: NoName#
+			if regi == 'NO-NAME':				# if the gliders is not registered on the DDB
+        			pname="Pilot NN-"+str(pn)               # otherwise just say: NoName#
+			else:
+				pname=regi				# use the registration as pilot name 
 #    		print "D==>: ", idflarm, pname, regi, cn, type
 #                                                               write the Pilot detail
 

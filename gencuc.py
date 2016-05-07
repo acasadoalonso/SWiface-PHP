@@ -45,8 +45,8 @@ for row in cursD.fetchall():					# search all the rows
     if gli and gli != None:					# did we find it ??? Index is unique, only one row
                 regi=gli[0]					# get the registration 
                 cn=gli[1]					# get the competition numbers
-		if cn == "":
-			cn=str(pn)					# if none ?
+		if cn == "" or cn == " ":
+                        cn=regi[4:6]                            # if none ?
                 type=gli[2]					# get glider type
     else:
                 regi='NO-NAME'
@@ -55,7 +55,10 @@ for row in cursD.fetchall():					# search all the rows
     if idflarm in kpilot.kpilot:				# check if know the pilot because is our database kpilot.py
 	pname=kpilot.kpilot[idflarm]				# in that case place the name of the pilot
     else:
-	pname="Pilot NN-"+str(pn)				# otherwise just say: NoName#
+	if regi == 'NO-NAME':
+		pname="Pilot NN-"+str(pn)			# otherwise just say: NoName#
+	else:
+		pname=regi					# use the registration as pilot name
     print "D==>: ", idflarm, pname, regi, cn, type
 #   								write the Pilot detail
 #   "Tpilot","",*0,"FLRDDE1FC","Ventus","EC-TTT","TT","",0,"",0,"",1,"",""		# the template to use
