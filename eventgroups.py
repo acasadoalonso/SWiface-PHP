@@ -10,7 +10,7 @@ import os
 localtime=datetime.datetime.now()
 todaydate=localtime.strftime("%Y%m%d")
 today=datetime.date.today()
-
+eventname="CNVV"                                        # event name
 evQ=[]							# create the event entity
 evL=[]							# new instance of the event
 
@@ -25,12 +25,12 @@ cuc=os.listdir('cuc')					# scan the cuc directory
 for fn in cuc:
 	ft=fn[fn.find('.')+1:]				# file type
 	fb=fn[0:fn.find('.')]				# file base name
-	if (ft == 'cuc'):				# only .cuc files
+	if (ft == 'cuc' or ft == 'json'):		# only .cuc files
 		LQ=fn[0:4]				# either LIVE or QSGP for the time being
 		y=int(fn[4:8])				# year
 		m=int(fn[8:10])				# month
 		d=int(fn[10:12])			# day
- 		td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1) # number of second until beginning of the day
+		td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1) # number of second until beginning of the day
 		ts=td.total_seconds()+9*60*60		# timestamp 09:00:00 UTC
 		ex3={'id':fb , 'startOpenTs': int(ts)}
 		if (LQ == "LIVE"):			# if LIVE event
@@ -41,7 +41,7 @@ for fn in cuc:
 # create the event groups
 
 eg=[]							# create the event group
-eg1={'name':'QSGP', 'description':'QSGP La Cerdanya - Spain', 'events': evQ}
+eg1={'name':eventname,  'description':'XLVIII CNVV - Spain', 'events': evQ}
 eg2={'name':'OGN LIVE', 'description':'OGN Live tracking in Pyrenees', 'events': evL}
 
 eg.append(eg1)						# append the individual events groups
