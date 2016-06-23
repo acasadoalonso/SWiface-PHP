@@ -205,7 +205,7 @@ for cl in getemb(cd,'classes'):
 				idflarm=' '     # if not found mark it as blank        
 
 		else:
-			regi="reg_NOTYET "      # if we do not have the registration ID on the soaringspot 
+			regi="reg_NOTYET"      # if we do not have the registration ID on the soaringspot 
 			idflarm=' '
 			
 		if 'flight_recorders' in contestants:
@@ -219,26 +219,26 @@ for cl in getemb(cd,'classes'):
 			if idflarm != ' ':
 				fr=idflarm                
 			else:                
-				fr="fr_NOTYET "
+				fr="fr_NOTYET"+str(npil)
 				warnings.append(pname) # add it to the list of warnings
 				nwarnings += 1  # and increase the number of warnings
 		      
 		if 'handicap' in contestants:
 			hd=contestants['handicap']
 		else:
-			hd="hd_NOTYET "
+			hd="hd_NOTYET"
 		if 'club' in contestants:
 			club=contestants['club']
 		else:
-			club="club_NOTYET "
+			club="club_NOTYET"
 		if 'aircraft_model' in contestants:
 			ar=contestants['aircraft_model']
 		else:
-			ar="am_NOTYET "
+			ar="am_NOTYET"
 		if 'contestant_number' in contestants:
 			cn=contestants['contestant_number']
 		else:
-			cn="cn_NOTYET "
+			cn="cn_NOTYET"
 			     
 		rgb=0x111*npil			        # the the RGB color
 		ccc=hex(rgb)			        # convert it to hex
@@ -274,7 +274,8 @@ for cl in getemb(cd,'classes'):
 	url5=getlinks(ctt[idx],"points")                # look for the waypoints within the task 
 	cpp=gdata(url5,        "points")                # look for the waypoints within the task within the day IDX
 	print "= Waypoints for the task within the class  ============"
-	tasklen=0                                       # task lenght for double check 
+	tasklen=0                                       # task length for double check 
+	ntp=0
 	for point in cpp:                               # search for each waypoint within the task 
 		lati= point["latitude"]
 		long= point["longitude"]
@@ -309,15 +310,24 @@ for cl in getemb(cd,'classes'):
 							# built the turning point 
 		tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": rad, "trigger":"Enter"}
 		tp.append(tpx)                          # add it to the TP
+		ntp +=1					# number of TPs 
 		tasklen += dist                         # compute the task distance
 		
 	print "=Task length: ", tasklen, "Number of pilots in the class: ", npilc # just a control of the total task distance
-	local_time = datetime.datetime.utcnow()            # the local time
-	td=local_time-datetime.datetime(1970,1,1)       # number of second until beginning of the day
-	ts=int(td.total_seconds()+9*60*60)              # timestamp + 09:00:00 UTC
+	
+	tps=[]						# create the instance for the turn points
+	while ntp > 0:					# reverse the order of the TPs
+		ntp -=1
+		tps.append(tp[ntp])
+	local_time = datetime.datetime.utcnow()         # the local time
 							# build the event
-
-	event={"name": classtype+"-"+eventname, "description" : classtype, "taskType": taskType, "startOpenTs": ts, "turnpoints": tp,  "tracks": tracks}
+# event
+        y=local_time.year
+        m=local_time.month
+        d=local_time.day
+        td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1)         # number of second until beginning of the day
+        ts=int(td.total_seconds()+9*60*60)                              # timestamp 09:00:00 UTC
+	event={"name": classtype+"-"+eventname, "description" : classtype,  "eventRevision": 0, "task" : { "taskType": taskType, "startOpenTs": ts, "turnpoints": tps },  "tracks": tracks}
 	
 	j=json.dumps(event, indent=4)                   # dump it
 	jsonfile.write(j)                               # write it into the JSON file

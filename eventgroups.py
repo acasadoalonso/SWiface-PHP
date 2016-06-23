@@ -14,9 +14,6 @@ eventname="CNVV"                                        # event name
 evQ=[]							# create the event entity
 evL=[]							# new instance of the event
 
-ev1={'id':"QSGP"+todaydate, 'startOpenTs': int(time.time())}# Today's Day event
-evQ.append(ev1)						# add the basic event
-
 ev2={'id':"LIVE"+todaydate, 'startOpenTs': int(time.time())}# Live today's event
 evL.append(ev2)						# add today's event
 
