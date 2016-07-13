@@ -187,10 +187,14 @@ for cl in getemb(cd,'classes'):
 		if 'aircraft_registration' in contestants:
 			regi=contestants['aircraft_registration']
 			ff=False                # assume false initially 
+			idflarm=' '
 			cursG.execute('select * from GLIDERS where registration = ?', [regi])
 			for rowg in cursG.fetchall(): # look for that registration on the OGN database 
 				print "\t\t", rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4], rowg[5]
+				source=rowg[4]
 				devicetype=rowg[5]
+				if idflarm != ' ' and source == 'F':
+					continue
 				if devicetype == 'F':
 					idflarm="FLR"+rowg[0] # prepend FLR in order to be consistent
 				elif devicetype == 'O':
@@ -212,9 +216,6 @@ for cl in getemb(cd,'classes'):
 			fr=contestants['flight_recorders']
 			fr=fr.rstrip('\n')
 			fr=fr.rstrip('\r')
-			if (idflarm != ' ' and idflarm != fr):
-				print "Warning ... IDFLARM does not match with OGN", "Suggested IDFLARM: FLR", \
-				      rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4]  
 		else:
 			if idflarm != ' ':
 				fr=idflarm                
@@ -257,13 +258,15 @@ for cl in getemb(cd,'classes'):
 		country = ccc.alpha3
 		
 		print "\t", fname+" "+lname, nation, country, regi, cn, fr, hd, ar, club, igcid 
+		if idflarm==' ':
+			idflarm=str(npil)
 							# create the track
 		if igcid != 0:					
-			tr={"trackId": "CNVV"+fl_date_time+":"+fr, "pilotName": pname,  "competitionId": cn, "country": country,\
+			tr={"trackId": "CNVV"+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
 			    "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color],\
 			    "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+str(igcid)+".jpg"}
 		else:        
-			tr={"trackId": "CNVV"+fl_date_time+":"+fr, "pilotName": pname,  "competitionId": cn, "country": country,\
+			tr={"trackId": "CNVV"+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
 			    "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color]}
 		tracks.append(tr)			# add it to the tracks
 
@@ -327,7 +330,7 @@ for cl in getemb(cd,'classes'):
         d=local_time.day
         td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1)         # number of second until beginning of the day
         ts=int(td.total_seconds()+9*60*60)                              # timestamp 09:00:00 UTC
-	event={"name": classtype+"-"+eventname, "description" : classtype,  "eventRevision": 0, "task" : { "taskType": taskType, "startOpenTs": ts, "turnpoints": tps },  "tracks": tracks}
+	event={"name": classtype+"-"+eventname, "description" : classtype,  "eventRevision": 0, "task" : { "taskName": classtype, "taskType": taskType, "startOpenTs": ts, "turnpoints": tps },  "tracks": tracks}
 	
 	j=json.dumps(event, indent=4)                   # dump it
 	jsonfile.write(j)                               # write it into the JSON file
