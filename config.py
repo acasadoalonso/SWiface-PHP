@@ -1,4 +1,18 @@
 #!/usr/bin/python
+#
+# configuration for the Silent Wings OGN interface the online part
+#
+
+
+MySQL 	= True
+DBname 	= "SWIFACE"
+DBuser 	= "ogn"
+DBpasswd= "ogn"
+DBhost 	= "casadonfs"
+SQLite3 = "SWiface.db"
+DBpath ="/nfs/OGN/SWdata/"
+
+# defaullt event if no JSOn file fount  
 
 tp1={"latitude": 42.3868, "longitude": 1.8683, "name": "LECD", "observationZone": "Line", "type": "Start", "radius": 1000, "trigger":"Enter"}
 tp2={"latitude": 42.5675, "longitude": -0.72566, "name": "LECI", "observationZone": "Cylinder", "type": "Turnpoint", "radius": 500, "trigger":"Enter"}

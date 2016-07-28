@@ -5,12 +5,13 @@
  
 import json
 import sqlite3
+import MySQLdb 
 import datetime
 import time
 import sys
 import os
+import config
 
-dbpath='/nfs/OGN/SWdata/';
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
@@ -38,18 +39,26 @@ else:
 
 
 if (today != date):						# it is today
-	dbpath=dbpath+'/archive/';				# no user archive folder
+	dbpath=config.DBpath+'/archive/';			# no user archive folder
 	live=False						# mark as NOT live
+else:
+	dbpath=config.DBpath
 
 #print trackid,":", eventid,":", since,":", date,":", time
-filename=dbpath+'SWiface.db'		                        # open th DB in read only mode
-fd = os.open(filename, os.O_RDONLY)
-conn = sqlite3.connect('/dev/fd/%d' % fd)
+
+if (config.MySQL):
+	conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+else:
+
+	filename=dbpath+'SWiface.db'		                        # open th DB in read only mode
+	fd = os.open(filename, os.O_RDONLY)
+	conn = sqlite3.connect('/dev/fd/%d' % fd)
+
 cursD=conn.cursor()                                             # cursor for the ogndata table
 if (since == "0"):						# if no timme since showw all
-	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ?", [trackid,date])   # get all the positions now
+	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '%s' and date = '%s' ;" % (trackid,date))   # get all the positions now
 else:
-	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ? and time > ? and time <= ?  order by time",                                               [trackid, date, time, timet])           
+	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '%s' and date = '%s' and time > '%s' and time <= '%s'  order by time" %  (trackid, date, time, timet))           
 
 tn=0
 #tracks=[{"t":0, "n":0, "e":0, "a":0}]
@@ -77,4 +86,5 @@ tp={"trackId": id, "live": live, "track": tracks}
 j=json.dumps(tp, indent=4)
 print j
 conn.close()
-os.close(fd)
+if ( not config.MySQL):
+	os.close(fd)

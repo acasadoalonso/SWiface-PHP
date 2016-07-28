@@ -13,7 +13,9 @@ import OpenSSL
 import uritemplate
 import pycountry
 import sqlite3
+import MySQLdb
 import math
+import config
 
 from simplehal import HalDocument, Resolver
 from pprint import pprint
@@ -99,7 +101,7 @@ print "Util to get the api.soaringspot.com data and convert it to a JSON file co
 print "==================================================================================================================\n\n"
 print "Index day: ", idx, "Class requested: ", classreq
 # ===== SETUP parameters =======================#                                          
-SWdbpath ="/nfs/OGN/SWdata/"                    # where to find the SQLITE3 database
+SWdbpath =config.DBpath                         # where to find the SQLITE3 database
 cucpath="./cuc/"                                # where to store the JSON files
 secpath="./SoaringSpot/"                        # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
@@ -117,7 +119,11 @@ local_time = datetime.datetime.now()            # the local time
 print "Local Time is now:", local_time		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")	# get the local time
 
-connG=sqlite3.connect(SWdbpath+'SWiface.db')	# open the DB with all the GLIDERS information
+if (config.MySQL):
+        connG=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+else:
+	connG=sqlite3.connect(SWdbpath+config.SQLite3)	# open the DB with all the GLIDERS information
+
 cursG=connG.cursor()				# cursor for the GLIDERS table
 
 nonce=base64.b64encode(OpenSSL.rand.bytes(36))  # get the once base
@@ -188,7 +194,7 @@ for cl in getemb(cd,'classes'):
 			regi=contestants['aircraft_registration']
 			ff=False                # assume false initially 
 			idflarm=' '
-			cursG.execute('select * from GLIDERS where registration = ?', [regi])
+			cursG.execute("select * from GLIDERS where registration ='%s'; " % regi)
 			for rowg in cursG.fetchall(): # look for that registration on the OGN database 
 				print "\t\t", rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4], rowg[5]
 				source=rowg[4]

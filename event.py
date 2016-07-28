@@ -9,10 +9,11 @@ import os
 import QSGP
 import kpilot
 import sqlite3
+import MySQLdb
 import datetime
+import config
 
 cucpath="./cuc/" 
-dbpath ="/nfs/OGN/SWdata/"
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
 #
@@ -36,17 +37,21 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	tracks=[]
 
 #
-	filename=dbpath+'SWiface.db'		                       	# open th DB in read only mode
-	fd = os.open(filename, os.O_RDONLY)
-	conn = sqlite3.connect('/dev/fd/%d' % fd)
+	if (config.MySQL):
+		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+	else:
+		filename=config.DBpath+config.SQLite3		                # open th DB in read only mode
+		fd = os.open(filename, os.O_RDONLY)
+		conn = sqlite3.connect('/dev/fd/%d' % fd)
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
-	cursD.execute('select distinct idflarm from OGNDATA where date = ?', [dateid])           # get all the glifers flying now
+	cursD.execute("select distinct idflarm from OGNDATA where date = '%s'; " % dateid)           # get all the glifers flying now
 	for row in cursD.fetchall():                                    # search all the rows
 		idflarm=row[0]                                          # flarmid is the first field
 		idf=idflarm[3:9]                                        # we skip the first 3 chars
-		cursG.execute("select registration, cn, type from GLIDERS where idglider = ?", [idf])               # search now into the gliding database
+		country="ESP"						# by deafult SPAIN 
+		cursG.execute("select registration, cn, type from GLIDERS where idglider = '%s';" % idf)               # search now into the gliding database
 		gli=cursG.fetchone()                                    # get the data from the DB
 		if gli and gli != None:                                 # did we find it ??? Index is unique, only one row
 			regi=gli[0]                                     # get the registration
@@ -54,6 +59,24 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 			if cn == "" or cn == " ":			# if not competition number, use the last two letter of the registration 
 				cn=regi[4:6]                            # if none ?
 			type=gli[2]                                     # get glider type
+			if   regi[0:1] == "F":
+				country="FRA"
+			elif regi[0:1] == "D":
+				country="GER"
+			elif regi[0:1] == "G":
+				country="GBR"
+			elif regi[0:1] == "I":
+				country="ITA"
+			elif regi[0:2] == "OO":
+				country="BEL"
+			elif regi[0:2] == "OE":
+				country="AUT"
+			elif regi[0:2] == "HB":
+				country="CHE"
+			elif regi[0:2] == "CC":
+				country="CHL"
+			elif regi[0:2] == "PH":
+				country="NLD"
 		else:
 			regi='NO-NAME'					# just indicate no name
 			cn=str(pn)					# the CN is the pilot number found 
@@ -70,7 +93,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 
 		pn +=1
     
-		tr={"trackId": eventid+':'+idflarm, "pilotName": pname,  "competitionId": cn, "country": "ESP", "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":["red"]}
+		tr={"trackId": eventid+':'+idflarm, "pilotName": pname,  "competitionId": cn, "country": country, "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":["red"]}
 		tracks.append(tr)
 
 # event 
@@ -93,4 +116,8 @@ else:									# in the case of the QSGP event just read the JSON file generated 
 		j=json.dumps(QSGP.QSGP, indent=4)
 		#print "Not found...", fname
 print j
+conn.close()
+if ( not config.MySQL):
+        os.close(fd)
+
 
