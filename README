@@ -4,7 +4,7 @@
 
 This is the repository for hte SILENT Wings <===> OGN interface, the Apache2 scripts invoked  by the SWviewer.
 
-This program manages the data that is gathered there by the collector routines and stored on a SQLITE3 database.
+This program manages the data that is gathered there by the collector routines and stored on a SQLITE3  or MySQL database.
 
 Implements the Silent Wings interface as defined on the SW wiki page: 	https://github.com/swingsopen/swtracking/wiki/Tracking-Protocol 
 
@@ -30,7 +30,7 @@ index.html								Default HTML page
 info.php								Infor about PHP
 INSTALL									Install instructions
 kpilot.py								List on known pilots
-QSGP.py									QSGP default event
+config.py								configuration file
 README									This files
 SGP_json_calls.txt							Details of the SGP interface
 sgp.py									SGP interface
@@ -40,7 +40,7 @@ trackpoints.py								SW JSON interface
 utils									Small test utilities
 
 
-Currently the system is running on a Raspberry Pi 3 with a HDD SDD of 128 Gb., using Raspbian Jessie distro.
+Currently the system is running on a Raspberry Pi 3 with a HDD SDD of 128 Gb., using Raspbian Jessie distro. The MySQL version runs on a WDC Mirror nas/NFS server 
 
 For any bug please report it thru the GitHub account, open an issue and I will try to solve it.
 

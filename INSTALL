@@ -7,8 +7,9 @@ Installation instructions:
 - copy the xxx.cucx files into the cucfilels direcory							cp ../*.cucx	cucfiles						
 - unzip the .cucx file											cd cucfiles && unzip *.cucx && cd ..
 - run the cuc file generator utility									python ccucxtocuc.py
-- adjust the kpylot and QSGP files									vi kpilot.py  && vi QSGP.py
-- adjust the $dbpath on the *.py									vi *.py
+  or the Get soaring spot data										python gsoaringspot.py
+- adjust the kpilotd files										vi kpilot.py  
+- adjust the $dbpath, MySQL, DBuser, DBpasswd, DBhost  on the config.py					vi config.py
 - restart the apache2 service										sudo service apache2 restart
 
 
@@ -36,6 +37,7 @@ event.py:import os
 event.py:import QSGP
 event.py:import kpilot
 event.py:import sqlite3
+event.py:import MySQLdb
 event.py:import datetime
 gencuc.py:import sqlite3
 gencuc.py:import datetime
@@ -47,6 +49,7 @@ ro.py:import sqlite3
 ro.py:import os
 trackpoints.py:import json
 trackpoints.py:import sqlite3
+trackpoints.py:import MySQLdb
 trackpoints.py:import datetime
 trackpoints.py:import time
 trackpoints.py:import sys
