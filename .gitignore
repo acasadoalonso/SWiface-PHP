@@ -3,6 +3,7 @@ lost+found
 SoaringSpot
 cuc/
 cucfiles/
+files/
 *.pyc
 *.pyo
 *.bak
