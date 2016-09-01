@@ -1,4 +1,6 @@
 <?php
+$mysql=true;
+
 if (isset($_GET['username']))
         $username = $_GET['username'];
 if (isset($_GET['cpassord']))
@@ -30,16 +32,23 @@ if ($querytype == "getintfixes")
 	{
 	$output= "{datadelay}0{/datadelay}\n";
 	$query1="SELECT idflarm, date, time, latitude, longitude, altitude FROM OGNDATA WHERE idflarm = '".$trackerid."'";
-	$query2=" and date = '".$syear."' and time >= '".$stime."' and time <= '".$etime."'";
+	$query2=" and date = '".$syear."' and time >= '".$stime."' and time <= '".$etime."'"." order by time";
 	$query=$query1.$query2;
 	 // echo $query;
-	$db = new SQLite3($DB, SQLITE3_OPEN_READONLY);
+	if ($mysql)
+		{
+		$db = new mysqli("casadonfs", "ogn", "ogn", "SWIFACE");
+		}
+	else
+		{
+		$db = new SQLite3($DB, SQLITE3_OPEN_READONLY);
+		}
 	// echo var_dump($db); 
 	$results = $db->query($query);
 	// echo var_dump($results); 
 	if ($results) 
 	   {
-	   while ($row = $results->fetchArray()) 
+	   while ($row = $results->fetch_array()) 
 		{
 	    	// echo var_dump($row);
 		// echo count($row); 
@@ -51,6 +60,7 @@ if ($querytype == "getintfixes")
 		$alti   =$row[5];
 		$output .= $idflarm.',20'. $date. $time. ','. $lati. ','. $long. ','. $alti. ",1\n";
 		}
+	    $db->close(); 
 	    }
 	if ($_GET["compression"] == "gzip") 
 		{

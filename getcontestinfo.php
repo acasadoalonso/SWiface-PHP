@@ -66,7 +66,7 @@ elseif ($contestname == "LIVE")
 			fclose($myfile);
 			}
 		else
-			{echo "No flights found";}
+			{echo "No flights found...";}
 		}
 	else
 		{

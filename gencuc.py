@@ -3,21 +3,28 @@
 #
 #   This script looks into the SWiface database and generates a pseudo .CUC file
 #
-
-
-import sqlite3
+import config
+if config.MySQL:
+	import MySQLdb
+else:
+	import sqlite3
 import datetime
 import time
 import sys
 import os
 import kpilot
 
+
 dbpath ="/nfs/OGN/SWdata/"
 pwd=os.environ['PWD']
 cucpath=pwd+"/cuc/"
-run=os.environ['APACHE_RUN_USER']
+run="batch"
+#run=os.environ['APACHE_RUN_USER']
 
-print "Generate live .CUC files V1.1 from  " +dbpath+ "SWIface.db the GLIDERS table"
+if (config.MySQL):
+	print "Generate live .CUC files V1.2 from  MySQL DB:", config.DBhost, config.DBname 
+else:
+	print "Generate live .CUC files V1.2 from  " +dbpath+ "SWIface.db the GLIDERS table"
 start_time = time.time()
 local_time = datetime.datetime.now()
 print "Time is now:", local_time				# print the time for information only
@@ -29,10 +36,14 @@ cuchdr   = open (cucpath + "LIVEhdr.txt", 'r')			# opend the header file
 cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
 buf=cuchdr.read()						# start reading the header file
 datafile.write(buf)						# copy into the output file
-# 
-filename=dbpath+'SWiface.db'					# open th DB in read only mode
-fd = os.open(filename, os.O_RDONLY)
-conn = sqlite3.connect('/dev/fd/%d' % fd)
+
+#
+if (config.MySQL):
+	conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+else:
+	filename=dbpath+'SWiface.db'				# open th DB in read only mode
+	fd = os.open(filename, os.O_RDONLY)
+	conn = sqlite3.connect('/dev/fd/%d' % fd)
 cursD=conn.cursor()						# cursor for the ogndata table
 cursG=conn.cursor()						# cursor for the glider table
 pn=0								# number of pilots found
@@ -40,7 +51,8 @@ cursD.execute('select distinct idflarm from OGNDATA')		# get all the glifers fly
 for row in cursD.fetchall():					# search all the rows
     idflarm=row[0]						# flarmid is the first field
     idf=idflarm[3:9]						# we skip the first 3 chars      
-    cursG.execute("select registration, cn, type from GLIDERS where idglider = ?", [idf])		# search now into the gliding database
+    sqlcmd="select registration, cn, type from GLIDERS where idglider = '%s';" % idf		# search now into the gliding database
+    cursG.execute(sqlcmd)
     gli=cursG.fetchone()					# get the data from the DB
     if gli and gli != None:					# did we find it ??? Index is unique, only one row
                 regi=gli[0]					# get the registration 
@@ -93,7 +105,8 @@ cuchdr.close()
 cuctail.close()
 conn.commit()
 conn.close()
-os.close(fd)
+if not config.MySQL: 
+	os.close(fd)
 if pn == 0:
 	print "No pilots found ... CUC invalid"
 	print "==============================="
