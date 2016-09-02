@@ -14,15 +14,17 @@ import sys
 import os
 import kpilot
 
-
+ipaddr=sys.argv[1:] 
 dbpath ="/nfs/OGN/SWdata/"
 pwd=os.environ['PWD']
 cucpath=pwd+"/cuc/"
-run="batch"
-#run=os.environ['APACHE_RUN_USER']
+if ipaddr:
+	user=sys.argv[1]
+else:
+	user=os.environ['USER']
 
 if (config.MySQL):
-	print "Generate live .CUC files V1.2 from  MySQL DB:", config.DBhost, config.DBname 
+	print "Generate live .CUC files V1.2 from  MySQL DB:", config.DBname,"at", config.DBhost 
 else:
 	print "Generate live .CUC files V1.2 from  " +dbpath+ "SWIface.db the GLIDERS table"
 start_time = time.time()
@@ -30,7 +32,7 @@ local_time = datetime.datetime.now()
 print "Time is now:", local_time				# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")			# get the local time
 CUC_DATA = cucpath + "LIVE" + fl_date_time+'.cuc'		# name of the CUC to be generated
-print "CUC data file is: ", CUC_DATA, " User:", run		# just a trace
+print "CUC data file is: ", CUC_DATA, " User:", user		# just a trace
 datafile = open (CUC_DATA, 'w')					# open the output file
 cuchdr   = open (cucpath + "LIVEhdr.txt", 'r')			# opend the header file
 cuctail  = open (cucpath + "LIVEtail.txt", 'r')			# open the trailer file
@@ -47,6 +49,7 @@ else:
 cursD=conn.cursor()						# cursor for the ogndata table
 cursG=conn.cursor()						# cursor for the glider table
 pn=0								# number of pilots found
+en=0								# number of pilots found
 cursD.execute('select distinct idflarm from OGNDATA')		# get all the glifers flying now 
 for row in cursD.fetchall():					# search all the rows
     idflarm=row[0]						# flarmid is the first field
@@ -71,11 +74,16 @@ for row in cursD.fetchall():					# search all the rows
 		pname="Pilot NN-"+str(pn)			# otherwise just say: NoName#
 	else:
 		pname=regi					# use the registration as pilot name
-    print "D==>: ", idflarm, pname, regi, cn, type
 #   								write the Pilot detail
 #   "Tpilot","",*0,"FLRDDE1FC","Ventus","EC-TTT","TT","",0,"",0,"",1,"",""		# the template to use
     pn +=1 
     buf='"' +pname+ '","",*0,"' +idflarm+ '","' +type+ '","' +regi+ '","' +cn+ '","",0,"",0,"",1,"",""\n' 	# write tha into the psuedo CUC file
+    if (regi == "NO-NAME" and en > 0):
+	continue
+    print "D==>: ", idflarm, pname, regi, cn, type
+    if regi[0] == 'F' and en > 0:
+	continue
+    en +=1							# entry number 
     datafile.write(buf)						# write the pilot information into the pseudo CUC file
     
 # write the day entry
@@ -112,6 +120,6 @@ if pn == 0:
 	print "==============================="
 	exit(-1)
 else:
-	print "Pilots found ... ", pn
-	print "======================"
+	print "Pilots found ... ", pn, en
+	print "==========================="
 	exit(0)

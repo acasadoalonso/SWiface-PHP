@@ -1,5 +1,10 @@
 <?php
+
 $mysql=true;
+$dbhost="casadonfs";
+$dbuser="ogn";
+$dbpass="ogn";
+$dbname="SWIFACE";
 
 if (isset($_GET['username']))
         $username = $_GET['username'];
@@ -26,32 +31,35 @@ else
 	}
 	
 $DB=$DBpath.'SWiface.db';
-// echo $DB; 
-// phpinfo();
 if ($querytype == "getintfixes")
 	{
 	$output= "{datadelay}0{/datadelay}\n";
 	$query1="SELECT idflarm, date, time, latitude, longitude, altitude FROM OGNDATA WHERE idflarm = '".$trackerid."'";
 	$query2=" and date = '".$syear."' and time >= '".$stime."' and time <= '".$etime."'"." order by time";
 	$query=$query1.$query2;
-	 // echo $query;
 	if ($mysql)
 		{
-		$db = new mysqli("casadonfs", "ogn", "ogn", "SWIFACE");
+		$db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 		}
 	else
 		{
 		$db = new SQLite3($DB, SQLITE3_OPEN_READONLY);
 		}
-	// echo var_dump($db); 
+	 
 	$results = $db->query($query);
-	// echo var_dump($results); 
+	 
 	if ($results) 
 	   {
-	   while ($row = $results->fetch_array()) 
+	   if ($mysql)
 		{
-	    	// echo var_dump($row);
-		// echo count($row); 
+	   	$row = $results->fetch_array() ;
+		}
+	   else
+		{
+	   	$row = $results->fetchArray() ;
+		}
+	   while ($row)
+		{
 		$idflarm=$row[0];
 		$date   =$row[1];
 		$time   =$row[2];
@@ -59,6 +67,14 @@ if ($querytype == "getintfixes")
 		$long   =$row[4];
 		$alti   =$row[5];
 		$output .= $idflarm.',20'. $date. $time. ','. $lati. ','. $long. ','. $alti. ",1\n";
+	   	if ($mysql)
+			{
+	   		$row = $results->fetch_array() ;
+			}
+	   	else
+			{
+	   		$row = $results->fetchArray() ;
+			}
 		}
 	    $db->close(); 
 	    }
