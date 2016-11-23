@@ -15,7 +15,7 @@ import os
 import kpilot
 
 ipaddr=sys.argv[1:] 
-dbpath ="/nfs/OGN/SWdata/"
+dbpath =config.DBpath
 pwd=os.environ['PWD']
 cucpath=pwd+"/cuc/"
 if ipaddr:

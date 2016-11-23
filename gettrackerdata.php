@@ -5,6 +5,9 @@ $dbhost="casadonfs";
 $dbuser="ogn";
 $dbpass="ogn";
 $dbname="SWIFACE";
+$dtzlocal= new DateTimeZone('Europe/madrid');
+$dtlocal = new DateTime("now", $dtzlocal);
+$tslocal = $dtlocal->format("O");
 
 if (isset($_GET['username']))
         $username = $_GET['username'];
@@ -34,6 +37,7 @@ $DB=$DBpath.'SWiface.db';
 if ($querytype == "getintfixes")
 	{
 	$output= "{datadelay}0{/datadelay}\n";
+	$output= $tslocal;
 	$query1="SELECT idflarm, date, time, latitude, longitude, altitude FROM OGNDATA WHERE idflarm = '".$trackerid."'";
 	$query2=" and date = '".$syear."' and time >= '".$stime."' and time <= '".$etime."'"." order by time";
 	$query=$query1.$query2;

@@ -9,8 +9,9 @@ import datetime
 import time
 import sys
 import os
+import config
 
-dbpath='/nfs/OGN/SWdata/';
+dbpath=DBpath
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio

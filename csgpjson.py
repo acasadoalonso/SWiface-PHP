@@ -11,7 +11,7 @@ import datetime
 import time
 import os
 import kpilot
-import QSGP
+import config
 import math
 import pycountry
 #-------------------------------------------------------------------------------------------------------------------#
@@ -129,7 +129,8 @@ for id in pilots:
     	country=ccc.alpha3					# convert to a 3 letter code
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
-	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
+	# tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
+	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://192.168.8.244/pic/"+compid+".jpg"}
 	tracks.append(tr)                                       # add it to the tracks
 
 #print tracks

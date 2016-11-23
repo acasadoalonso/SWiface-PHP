@@ -1,12 +1,3 @@
-# SWS configuration file 
-# SWS hostname: SWserver
-# Config generated: 2016-11-23 12:00:21 
-DBpath='/nfs/OGN/SWdata/' 
-DBhost='casadonfs' 
-DBuser='ogn' 
-DBname='SWIFACE' 
-DBpasswd='ogn' 
-MySQL=True 
 # --------------------------------------#
 
 # default event if no JSON file found  

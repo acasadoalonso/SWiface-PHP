@@ -76,6 +76,8 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 				country="CHL"
 			elif regi[0:2] == "PH":
 				country="NLD"
+			elif regi[0:2] == "ZS":
+				country="ZAF"
 		else:
 			regi='NO-NAME'					# just indicate no name
 			cn=str(pn)					# the CN is the pilot number found 

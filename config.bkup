@@ -1,12 +1,50 @@
-# SWS configuration file 
-# SWS hostname: SWserver
-# Config generated: 2016-11-23 12:00:21 
-DBpath='/nfs/OGN/SWdata/' 
-DBhost='casadonfs' 
-DBuser='ogn' 
-DBname='SWIFACE' 
-DBpasswd='ogn' 
-MySQL=True 
+#!/usr/bin/python
+#
+# configuration for the Silent Wings OGN interface the online part
+#
+
+#-------------------------------------
+# OGN-Silent Wings interface --- Settings
+#-------------------------------------
+#
+#-------------------------------------
+# Setting values from config.ini file
+#-------------------------------------
+#
+import socket
+import os
+from configparser import ConfigParser
+hostname=socket.gethostname()
+if 'DBname' in os.environ:
+	DBname=os.environ['DBname']
+	DBpath=os.environ['DBpath']
+	DBhost=os.environ['DBhost']
+	DBuser=os.environ['DBuser']
+	DBpasswd=os.environ['DBpasswd']
+	MySQLtext=os.environ['MySQLtext']
+else:
+	cfg=ConfigParser()
+	cfg.read('/etc/local/SWSconfig.ini')
+
+	DBpath                  = cfg.get('server', 'DBpath').strip("'")
+	MySQLtext               = cfg.get('server', 'MySQL').strip("'")
+	DBhost                  = cfg.get('server', 'DBhost').strip("'")
+	DBuser                  = cfg.get('server', 'DBuser').strip("'")
+	DBpasswd                = cfg.get('server', 'DBpasswd').strip("'")
+	DBname                  = cfg.get('server', 'DBname').strip("'")
+	os.environ['DBname']=DBname
+	os.environ['DBpath']=DBpath
+	os.environ['DBhost']=DBhost
+	os.environ['DBuser']=DBuser
+	os.environ['DBpasswd']=DBpasswd
+	os.environ['MySQLtext']=MySQLtext
+
+#print os.environ.keys()
+
+if (MySQLtext == "True"):
+	MySQL=True
+else:
+	MySQL=False
 # --------------------------------------#
 
 # default event if no JSON file found  

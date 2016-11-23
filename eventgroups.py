@@ -10,7 +10,7 @@ import os
 localtime=datetime.datetime.now()
 todaydate=localtime.strftime("%Y%m%d")
 today=datetime.date.today()
-eventname="CNVV"                                        # event name
+eventname="SGP"                                        # event name
 evQ=[]							# create the event entity
 evL=[]							# new instance of the event
 
@@ -38,7 +38,7 @@ for fn in cuc:
 # create the event groups
 
 eg=[]							# create the event group
-eg1={'name':eventname,  'description':'XLVIII CNVV - Spain', 'events': evQ}
+eg1={'name':eventname,  'description':'Final SGP 2017 - Potch Soutch Africa', 'events': evQ}
 eg2={'name':'OGN LIVE', 'description':'OGN Live tracking in Pyrenees', 'events': evL}
 
 eg.append(eg1)						# append the individual events groups
