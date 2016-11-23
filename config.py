@@ -1,6 +1,6 @@
 # SWS configuration file 
 # SWS hostname: SWserver
-# Config generated: 2016-11-23 12:00:21 
+# Config generated: 2016-11-23 16:47:08 
 DBpath='/nfs/OGN/SWdata/' 
 DBhost='casadonfs' 
 DBuser='ogn' 

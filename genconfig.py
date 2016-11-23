@@ -25,12 +25,12 @@ datafile.write("# Config generated: "+datetime.datetime.now().strftime("%Y-%m-%d
 cfg=ConfigParser()
 cfg.read('/etc/local/SWSconfig.ini')
 
-DBpath                  = cfg.get('server', 'DBpath').strip("'")
-MySQLtext               = cfg.get('server', 'MySQL').strip("'")
-DBhost                  = cfg.get('server', 'DBhost').strip("'")
-DBuser                  = cfg.get('server', 'DBuser').strip("'")
-DBpasswd                = cfg.get('server', 'DBpasswd').strip("'")
-DBname                  = cfg.get('server', 'DBname').strip("'")
+DBpath                  = cfg.get('server', 'DBpath').strip("'").strip('"')
+MySQLtext               = cfg.get('server', 'MySQL').strip("'").strip('"')
+DBhost                  = cfg.get('server', 'DBhost').strip("'").strip('"')
+DBuser                  = cfg.get('server', 'DBuser').strip("'").strip('"')
+DBpasswd                = cfg.get('server', 'DBpasswd').strip("'").strip('"')
+DBname                  = cfg.get('server', 'DBname').strip("'").strip('"')
 
 
 datafile.write("DBpath='"+DBpath+"' \n")
