@@ -4,6 +4,7 @@ SoaringSpot
 cuc/
 cucfiles/
 files/
+index.html
 *.pyc
 *.pyo
 *.bak

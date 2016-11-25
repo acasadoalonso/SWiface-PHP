@@ -23,14 +23,15 @@ $syear = substr($starttime, 2, 6);
 $stime = substr($starttime, 8);
 $eyear = substr($endtime, 2, 6);
 $etime = substr($endtime, 8);
+$ini_array = parse_ini_file("/etc/local/SWSconfig.ini");
 if ($syear == date('ymd'))
 	{
-	$DBpath='/nfs/OGN/SWdata/';
+	$DBpath=$ini_array['DBpath'];
 	//echo "Today";
 	}
 else 
 	{
-	$DBpath='/nfs/OGN/SWdata/archive/';
+	$DBpath=$ini_array['DBpath'].'archive';
 	}
 	
 $DB=$DBpath.'SWiface.db';
