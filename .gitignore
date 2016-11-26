@@ -2,9 +2,9 @@
 lost+found
 SoaringSpot
 config.py
-cuc/
-cucfiles/
-files/
+cuc
+cucfiles
+files
 index.html
 *.pyc
 *.pyo
