@@ -6,6 +6,7 @@ cuc
 cucfiles
 files
 index.html
+info.php
 *.pyc
 *.pyo
 *.bak

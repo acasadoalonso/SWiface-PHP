@@ -103,7 +103,7 @@ print "Index day: ", idx, "Class requested: ", classreq
 print "Reading data from clientid/secretkey files"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
-initials = "CNVV"				# initailas of the files generated
+initials = config.Initials			# initials of the files generated
 cucpath="./cuc/"                                # where to store the JSON files
 secpath="./SoaringSpot/"                        # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL

@@ -57,8 +57,8 @@ qsgpIDreq=sys.argv[1:]						# first arg is the event ID
 dayreq   =sys.argv[2:]						# second arg is the day index within the event
 prtreq   =sys.argv[3:]						# print request
 
-
-cucpath="/var/www/html/cuc/"					# driectory where to stor the JSON file generated
+initials=config.Initials					# initials of the filename
+cucpath="./cuc/"						# directory where to stor the JSON file generated
 tp=[]								# turn pint list
 tracks=[]							# track list
 #
@@ -92,7 +92,7 @@ else:
 	print "CompID:", qsgpID, "Time is now:", local_time     # print the time for information only
 
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
-JSONFILE = cucpath + "QSGP" + fl_date_time+'.json'              # name of the CUC to be generated
+JSONFILE = cucpath + initials + fl_date_time+'.json'            # name of the CUC to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
 #
@@ -134,8 +134,8 @@ for id in pilots:
     	country=ccc.alpha3					# convert to a 3 letter code
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
-	# tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
-	tr={"trackId": "QSGP"+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://192.168.8.244/pic/"+compid+".jpg"}
+	# tr={"trackId": initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
+	tr={"trackId": initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://192.168.8.244/pic/"+compid+".jpg"}
 	tracks.append(tr)                                       # add it to the tracks
 
 #print tracks

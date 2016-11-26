@@ -31,6 +31,7 @@ DBhost                  = cfg.get('server', 'DBhost').strip("'").strip('"')
 DBuser                  = cfg.get('server', 'DBuser').strip("'").strip('"')
 DBpasswd                = cfg.get('server', 'DBpasswd').strip("'").strip('"')
 DBname                  = cfg.get('server', 'DBname').strip("'").strip('"')
+Initials                = cfg.get('server', 'Initials').strip("'").strip('"')
 
 
 datafile.write("DBpath='"+DBpath+"' \n")
@@ -38,6 +39,7 @@ datafile.write("DBhost='"+DBhost+"' \n")
 datafile.write("DBuser='"+DBuser+"' \n")
 datafile.write("DBname='"+DBname+"' \n")
 datafile.write("DBpasswd='"+DBpasswd+"' \n")
+datafile.write("Initials='"+Initials+"' \n")
 datafile.write("MySQL="+MySQLtext+" \n")
 # --------------------------------------#
 datafile.write(tailfile.read())

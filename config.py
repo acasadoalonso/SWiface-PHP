@@ -1,11 +1,12 @@
 # SWS configuration file 
 # SWS hostname: SWserver
-# Config generated: 2016-11-24 13:48:53 
+# Config generated: 2016-11-26 17:12:17 
 DBpath='/nfs/OGN/SWdata/' 
 DBhost='casadonfs' 
 DBuser='ogn' 
 DBname='SWIFACE' 
 DBpasswd='ogn' 
+Initials='TEST' 
 MySQL=True 
 # --------------------------------------#
 
