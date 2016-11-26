@@ -1,6 +1,7 @@
 .DS_Store
 lost+found
 SoaringSpot
+config.py
 cuc/
 cucfiles/
 files/

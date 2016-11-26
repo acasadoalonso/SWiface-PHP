@@ -100,8 +100,10 @@ else:
 print "Util to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs V1.1"
 print "==================================================================================================================\n\n"
 print "Index day: ", idx, "Class requested: ", classreq
+print "Reading data from clientid/secretkey files"
 # ===== SETUP parameters =======================#                                          
-SWdbpath =config.DBpath                         # where to find the SQLITE3 database
+SWdbpath = config.DBpath                        # where to find the SQLITE3 database
+initials = "CNVV"				# initailas of the files generated
 cucpath="./cuc/"                                # where to store the JSON files
 secpath="./SoaringSpot/"                        # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
@@ -121,6 +123,7 @@ fl_date_time = local_time.strftime("%Y%m%d")	# get the local time
 
 if (config.MySQL):
         connG=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+	print "Config:", config.DBhost, config.DBuser, config.DBname
 else:
 	connG=sqlite3.connect(SWdbpath+config.SQLite3)	# open the DB with all the GLIDERS information
 
@@ -174,7 +177,7 @@ for cl in getemb(cd,'classes'):
 		if classreq != ' ' and classtype != classreq: # if a class in particular is requested and it is not this one
 			continue                # try next one
 	classid         =cl['id']               # internal ID of the class
-	JSONFILE = cucpath + "CNVV" + fl_date_time+"-"+classtype+".json"
+	JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
 						# name of the JSON to be generated, one per class
 	print "\n\nJSON generated data file for the class is: ",JSONFILE # just a trace
 	print "\n= Class = Category:", category,"Type:", classtype, "Class ID:", classid
@@ -268,11 +271,11 @@ for cl in getemb(cd,'classes'):
 			idflarm=str(npil)
 							# create the track
 		if igcid != 0:					
-			tr={"trackId": "CNVV"+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
+			tr={"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
 			    "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color],\
 			    "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+str(igcid)+".jpg"}
 		else:        
-			tr={"trackId": "CNVV"+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
+			tr={"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
 			    "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color]}
 		tracks.append(tr)			# add it to the tracks
 

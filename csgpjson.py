@@ -64,8 +64,8 @@ tracks=[]							# track list
 #
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
-	qsgpID   =    sys.argv[1]
-	day      =int(sys.argv[2])
+	qsgpID   =        sys.argv[1]
+	day      =    int(sys.argv[2])
 else:
 	qsgpID='0'
 
@@ -75,16 +75,21 @@ else:
 	prt=False
  
 print "Generate .json files V1.0 from  the www.sgp.aero web server"
+print "Usage python csgpjson.py COMPID indexday"
 start_time = time.time()
 local_time = datetime.datetime.now()
-print "Time is now:", local_time                                # print the time for information only
+j = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/comps/')
+j_obj = json.load(j)
 if qsgpID == '0':
-	j = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/comps/')
-	j_obj = json.load(j)
 	#print j_obj
 	j=json.dumps(j_obj, indent=4)
 	print j
 	exit(0)
+else:
+	for xx in j_obj:
+		if xx['id'] == int(qsgpID):
+			print "Title:", xx['fullEditionTitle']
+	print "CompID:", qsgpID, "Time is now:", local_time     # print the time for information only
 
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
 JSONFILE = cucpath + "QSGP" + fl_date_time+'.json'              # name of the CUC to be generated
