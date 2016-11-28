@@ -11,10 +11,11 @@ import datetime
 import time
 import os
 import kpilot
-import config
 import math
 import pycountry
+import socket
 #-------------------------------------------------------------------------------------------------------------------#
+import config
 
 def fixcoding(addr):
         if addr != None:
@@ -56,8 +57,8 @@ def fixcoding(addr):
 qsgpIDreq=sys.argv[1:]						# first arg is the event ID
 dayreq   =sys.argv[2:]						# second arg is the day index within the event
 prtreq   =sys.argv[3:]						# print request
-
-initials=config.Initials					# initials of the filename
+hostname=socket.gethostname()
+print config.DBhost, hostname
 cucpath="./cuc/"						# directory where to stor the JSON file generated
 tp=[]								# turn pint list
 tracks=[]							# track list
@@ -92,7 +93,7 @@ else:
 	print "CompID:", qsgpID, "Time is now:", local_time     # print the time for information only
 
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
-JSONFILE = cucpath + initials + fl_date_time+'.json'            # name of the CUC to be generated
+JSONFILE = cucpath + config.Initials + fl_date_time+'.json'            # name of the CUC to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
 #
@@ -130,12 +131,17 @@ for id in pilots:
 	rgb=0x111*int(id)                                       # the the RGB color
     	ccc=hex(rgb)                                            # convert it to hex
     	color="#"+ccc[2:]                                       # set the JSON color required
-	ccc = pycountry.countries.get(alpha2=country)		# the the 3 letter country code
-    	country=ccc.alpha3					# convert to a 3 letter code
+	if hostname == "SWserver":				# deal with the different implementation of pycountry
+		ccc = pycountry.countries.get(alpha2=country)	# the the 3 letter country code
+    		country=ccc.alpha3				# convert to a 3 letter code
+	else:
+		ccc = pycountry.countries.get(alpha_2=country)	# the the 3 letter country code
+    		country=ccc.alpha_3				# convert to a 3 letter code
+
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
-	# tr={"trackId": initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
-	tr={"trackId": initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://192.168.8.244/pic/"+compid+".jpg"}
+	# tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
+	tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://192.168.8.244/pic/"+compid+".jpg"}
 	tracks.append(tr)                                       # add it to the tracks
 
 #print tracks

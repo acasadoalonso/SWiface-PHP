@@ -1,12 +1,14 @@
 .DS_Store
 lost+found
 SoaringSpot
+LT24
 config.py
 cuc
 cucfiles
 files
 index.html
 info.php
+tx.php
 *.pyc
 *.pyo
 *.bak

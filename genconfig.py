@@ -33,16 +33,24 @@ DBpasswd                = cfg.get('server', 'DBpasswd').strip("'").strip('"')
 DBname                  = cfg.get('server', 'DBname').strip("'").strip('"')
 Initials                = cfg.get('server', 'Initials').strip("'").strip('"')
 
+eventname1              = cfg.get('location', 'eventname1').strip("'").strip('"')
+eventname2              = cfg.get('location', 'eventname2').strip("'").strip('"')
+
+eventdesc1              = cfg.get('location', 'eventdesc1').strip("'").strip('"')
+eventdesc2              = cfg.get('location', 'eventdesc2').strip("'").strip('"')
 
 datafile.write("DBpath='"+DBpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")
 datafile.write("DBuser='"+DBuser+"' \n")
 datafile.write("DBname='"+DBname+"' \n")
 datafile.write("DBpasswd='"+DBpasswd+"' \n")
-datafile.write("Initials='"+Initials+"' \n")
 datafile.write("MySQL="+MySQLtext+" \n")
+datafile.write("Initials='"+Initials+"' \n")
+datafile.write("eventname1='"+eventname1+"' \n")
+datafile.write("eventname2='"+eventname2+"' \n")
+datafile.write("eventdesc1='"+eventdesc1+"' \n")
+datafile.write("eventdesc2='"+eventdesc2+"' \n")
 # --------------------------------------#
 datafile.write(tailfile.read())
 datafile.close()
 tailfile.close()
-

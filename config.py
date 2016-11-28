@@ -1,13 +1,17 @@
 # SWS configuration file 
 # SWS hostname: SWserver
-# Config generated: 2016-11-26 17:12:17 
+# Config generated: 2016-11-28 17:43:59 
 DBpath='/nfs/OGN/SWdata/' 
 DBhost='casadonfs' 
 DBuser='ogn' 
 DBname='SWIFACE' 
 DBpasswd='ogn' 
-Initials='TEST' 
 MySQL=True 
+Initials='TEST' 
+eventname1='CNVV 2017' 
+eventname2='OGN LIVE' 
+eventdesc1='Campeonato Nacional Chileno de Vuelo a Vela' 
+eventdesc2='OGN Live tracking in South Africa' 
 # --------------------------------------#
 
 # default event if no JSON file found  
