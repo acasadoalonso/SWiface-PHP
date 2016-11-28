@@ -57,8 +57,7 @@ def fixcoding(addr):
 qsgpIDreq=sys.argv[1:]						# first arg is the event ID
 dayreq   =sys.argv[2:]						# second arg is the day index within the event
 prtreq   =sys.argv[3:]						# print request
-hostname=socket.gethostname()
-print config.DBhost, hostname
+ 
 cucpath="./cuc/"						# directory where to stor the JSON file generated
 tp=[]								# turn pint list
 tracks=[]							# track list
@@ -77,6 +76,8 @@ else:
  
 print "Generate .json files V1.0 from  the www.sgp.aero web server"
 print "Usage python csgpjson.py COMPID indexday"
+hostname=socket.gethostname()
+print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
 local_time = datetime.datetime.now()
 j = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/comps/')
