@@ -21,7 +21,31 @@ import lt24tasks
 
 from simplehal import HalDocument, Resolver
 from pprint import pprint
+import hashlib
+import base64
+import hmac
+import urllib
+import urllib2
+import random
 
+#-------------------------------------------------------------------------------------------------------------------#
+def otpReply(question):
+        signature = hmac.new(LT24_appSecret, msg=question, digestmod=hashlib.sha256).hexdigest()
+        #print signature
+        vc=signature[0:16]
+        #print vc
+        return "/ak/" + LT24_appKey + "/vc/" + vc
+
+def lt24req(cmd):
+        global LT24qwe
+        lt24req="http://api.livetrack24.com/api/v2/"
+        reply=otpReply(LT24qwe)
+        lt24url=lt24req+cmd+reply
+        f=urllib2.urlopen(lt24url)
+        response = f.read()
+        qwepos= response.find("qwe")
+        LT24qwe=response[qwepos+6:qwepos+22]
+        return (response)
 #-------------------------------------------------------------------------------------------------------------------#
 
 
@@ -86,6 +110,7 @@ SWdbpath = config.DBpath                        # where to find the SQLITE3 data
 initials = config.Initials			# initials of the files generated
 cucpath="./cuc/"                                # where to store the JSON files
 secpath="./SoaringSpot/"                        # where to find the clientid and secretkey files 
+LT24path="./LT24/"                              # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
 taskType= "SailplaneRacing"                     # race type
@@ -181,7 +206,7 @@ for cl in getemb(cd,'classes'):
 			dist=0
 			tpn=lt24tp[name[0:2]]
 			tpname=tpn[0:3].strip()
-			tp.append( tpname+".gl."+str(ozra)+" ")
+			tp.append( tpname+".ss."+str(ozra)+" ")
 			
 		elif (wtyp == "finish"):
 			type="Finish"
@@ -209,15 +234,32 @@ for cl in getemb(cd,'classes'):
 	TaskID=lt24tasks.lt24date[taskdate][classtype][0] # get the task id and task password from the table
 	Tpasswd=lt24tasks.lt24date[taskdate][classtype][1]
 	lt24pre = "http://www.livetrack24.com/api.php?a=A43C46&cm=50;3;255;"+TaskID+";"+Tpasswd+";"+str(int(tasklen))+";"
-	lt24buf = "t1.1 race WO1100 WC2300 SO+0 TC2359 "+lt24wp
+	lt24buf = "t1.1 race wo1100 wc2300 so+0 tc2359 "+lt24wp
 	lt24buf = lt24buf.strip()
 	lt24str = lt24pre+lt24buf
-	print "LT24:", lt24str
+	#print "LT24:", lt24str
 	lt24url = lt24pre + urllib.quote_plus(lt24buf)
-	print "LT24:", lt24url
-	f=urllib2.urlopen(lt24url)
-	print f.read()
+	#print "LT24:", lt24url
+	#f=urllib2.urlopen(lt24url)
 
-		
+	#LT24_appKey="A43C46"
+	#LT24_appSecret="569024gn87894hdfg67dgd89dgmsm580165"
 
+
+	f=open(LT24path+"clientid")                     # open the file with the client id
+	client=f.read()                                 # read it
+	LT24_appKey=client.rstrip()                     # clear the whitespace at the end
+	f=open(LT24path+"secretkey")                    # open the file with the secret key
+	secretkey=f.read()                              # read it
+	LT24_appSecret=secretkey.rstrip()               # clear the whitespace at the end
+	LT24qwe=" "
+	print "op/ping", lt24req("op/ping")
+	print "op/6/username/acasado/pass/xxxxxx", lt24req("op/6/username/acasado/pass/correo")
+	print "op/ping", lt24req("op/ping")
+	print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
+	req= "op/setTask/taskID/"+TaskID+"/pass/"+Tpasswd+"/minDist/"+str(int(tasklen))+"/taskDef/"+urllib.quote_plus(lt24buf)
+	print req, lt24req(req)
+	print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
+	print "op/getTaskPilots/taskID/"+TaskID, lt24req("op/getTaskPilots/taskID/"+TaskID)
+	print "op/getTaskPilotsDetailed/taskID/"+TaskID, lt24req("op/getTaskPilotsDetailed/taskID/"+TaskID)
 exit(0)
