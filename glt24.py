@@ -199,28 +199,24 @@ for cl in getemb(cd,'classes'):
 		if ozr2 <= 0:
 			ozr2=500
 
+		tpn=lt24tp[name[0:2]]
+		tpname=tpn[0:6].strip()
 		if   (wtyp == "start"):                 # convert from CU format to SW format
 			type="Start"
 			oz  ="Line"
 			rad=ozra
 			dist=0
-			tpn=lt24tp[name[0:2]]
-			tpname=tpn[0:3].strip()
 			tp.append( tpname+".ss."+str(ozra)+" ")
 			
 		elif (wtyp == "finish"):
 			type="Finish"
 			oz  ="Cylinder"
 			rad=ozra
-			tpn=lt24tp[name[0:2]]
-			tpname=tpn[0:3].strip()
 			tp.append( tpname+".gl."+str(ozra)+" ")
 		else:
 			type="Turnpoint"
 			oz  ="Cylinder"
 			rad=ozr2
-			tpn=lt24tp[name[0:2]]
-			tpname=tpn[0:3].strip()
 			tp.append( tpname+".gl.r"+str(ozr2)+" ")
 		print "\t", "%-20s" % name, "\t\t", wtyp, type, oz, dist, ozty, ozra, ozr2, oz, type, rad, pidx        # print it as a reference
 		ntp +=1					# number of TPs 
@@ -254,12 +250,20 @@ for cl in getemb(cd,'classes'):
 	LT24_appSecret=secretkey.rstrip()               # clear the whitespace at the end
 	LT24qwe=" "
 	print "op/ping", lt24req("op/ping")
-	print "op/6/username/acasado/pass/xxxxxx", lt24req("op/6/username/acasado/pass/correo")
-	print "op/ping", lt24req("op/ping")
-	print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
-	req= "op/setTask/taskID/"+TaskID+"/pass/"+Tpasswd+"/minDist/"+str(int(tasklen))+"/taskDef/"+urllib.quote_plus(lt24buf)
-	print req, lt24req(req)
-	print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
+	replylogin = lt24req("op/6/username/acasado/pass/correo")
+	print "op/6/username/acasado/pass/xxxxxx", replylogin
+	LT24login = json.loads(replylogin)
+	if LT24login["error"] == "":
+
+		print "op/ping", lt24req("op/ping")
+		print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
+		req= "op/setTask/taskID/"+TaskID+"/pass/"+Tpasswd+"/minDist/"+str(int(tasklen))+"/taskDef/"+urllib.quote_plus(lt24buf)
+		replydeftask=lt24req(req)
+		print req, replydeftask
+		LT24deftask=json.loads(replydeftask)
+		if LT24deftask['OK'] != 1:
+			print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
+
 	print "op/getTaskPilots/taskID/"+TaskID, lt24req("op/getTaskPilots/taskID/"+TaskID)
 	print "op/getTaskPilotsDetailed/taskID/"+TaskID, lt24req("op/getTaskPilotsDetailed/taskID/"+TaskID)
 exit(0)
