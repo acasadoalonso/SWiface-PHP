@@ -14,27 +14,32 @@ and provides real time scoring to:					http://sgp.aero
 
 
 ccucxtocuc.py								Utility to convert SeeYou .cucx files to pseudo .cuc old format files used by Silent Wings
+config.py								Configuration file 
+configtail.txt								Configuration file  text included in config.py by default
 COPYING									Copywrigth 
 cuc									.cuc files converted by the utility
 cucfiles								.cucx originals
+doc 									Documentation files
 eventgroups.php								SW JSON interface
 eventgroups.py								SW JSON interface
 event.php								SW JSON interface
 event.py								SW JSON interface
+genconfig.py								Small utility to generate the config.py file from the /etc/local/*.ini file
 gencuc.py								Small utility to find the gliders flying and build a pseudo .CUC file
 getactivecontests.php							SW PHP interface
 getcontestinfo.php							SW PHP interface
 getprotocolinfo.php							SW PHP interface
 gettrackerdata.php							SW PHP interface
-index.html								Default HTML page
 info.php								Infor about PHP
 INSTALL									Install instructions
 kpilot.py								List on known pilots
-config.py								configuration file
+lt24tasks.py								Index to convert days into LT24 task ISs and passwords
 README									This files
-SGP_json_calls.txt							Details of the SGP interface
-sgp.py									SGP interface
-csgpjson.py								Utility to convert SGP to SW JSON specs interface
+pic									Pilot's pictures
+simplehal.py								SimpleHAL interface
+sgp2sws.py								Utility to convert SGP to SWS JSON specs interface
+soa2lt24.py								Utility to get the data from Soaringspot.com and move it to livetrack24.com
+soa2sws.py								Utility to convert Soaringspot.com to SWS JSON specs interface
 trackpoints.php								SW JSON interface
 trackpoints.py								SW JSON interface
 utils									Small test utilities
