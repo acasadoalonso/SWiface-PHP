@@ -33,7 +33,6 @@ gettrackerdata.php							SW PHP interface
 info.php								Infor about PHP
 INSTALL									Install instructions
 kpilot.py								List on known pilots
-lt24tasks.py								Index to convert days into LT24 task ISs and passwords
 README									This files
 pic									Pilot's pictures
 simplehal.py								SimpleHAL interface

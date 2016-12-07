@@ -17,7 +17,6 @@ import MySQLdb
 import math
 import urllib
 import config
-import lt24tasks
 
 from simplehal import HalDocument, Resolver
 from pprint import pprint
@@ -80,7 +79,7 @@ def getlinks (base, ctype):
         global apiurl
         return (base['_links'] [apiurl+'rel/'+ctype]['href'])
 
-def getlt24tp(tp):
+def getLT24tp(tp):
 	fd=open("./LT24/lt24tp.txt", "r")
 	for line in fd: 
 		idx=line[0:2]
@@ -99,7 +98,8 @@ if clsreq:
         classreq=clsreq[0]                      # class requested
 else:
         classreq=' '                            # none 
-lt24tp={}
+LT24tp={}
+LT24date={}
 # ---------------------------------------------------------------- #
 print "Util to get the api.soaringspot.com data and convert it to a LiveTrack24 API"
 print "============================================================================\n\n"
@@ -120,14 +120,11 @@ start_time = time.time()                        # get the time now
 utc = datetime.datetime.utcnow()                # the UTC time
 print "UTC Time is now:", utc  	                # print the time for information only
 date = utc.strftime("%Y-%m-%dT%H:%M:%SZ")       # get the local time
-print date                                      #
 
 local_time = datetime.datetime.now()            # the local time
 print "Local Time is now:", local_time		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")	# get the local time
 
-getlt24tp   (lt24tp)
-print "Total number of WayPoints on the LT24 file:" , len(lt24tp.keys())
 nonce=base64.b64encode(OpenSSL.rand.bytes(36))  # get the once base
 f=open(secpath+"clientid")                      # open the file with the client id
 client=f.read()                                 # read it
@@ -140,6 +137,59 @@ digest = hmac.new(secretkey, msg=message, digestmod=hashlib.sha256).digest() # a
 signature = base64.b64encode(digest).decode()   # build the digital signature
                                                 # the AUTHORIZATION ID is built now   
 auth=apiurl+rel+'/hmac/v1 ClientID="'+client+'",Signature="'+signature+'",Nonce="'+nonce+'",Created="'+date+'" ' 
+
+#
+# LOGIN into Livetract24 and get the list of tasks.
+#
+
+getLT24tp   (LT24tp)				# get the LT34 wayoint list
+print "\nTotal number of WayPoints on the LT24 file:" , len(LT24tp.keys())
+f=open(LT24path+"clientid")                     # open the file with the client id
+client=f.read()                                 # read it
+LT24_appKey=client.rstrip()                     # clear the whitespace at the end
+f=open(LT24path+"secretkey")                    # open the file with the secret key
+secretkey=f.read()                              # read it
+LT24_appSecret=secretkey.rstrip()               # clear the whitespace at the end
+LT24qwe=" "
+lt24req("op/ping")				# the first time always is in error but we get the first QWE
+replylogin = lt24req("op/6/username/acasado/pass/correo") 
+LT24login = json.loads(replylogin)		# parse the JSON string
+print "LT24 login:", LT24login['userID'], LT24login['username']
+#
+# Build the LT24 tasks
+#
+LT24task2get='36'
+if LT24login["error"] == "":
+		print "LT24 op/ping", json.loads(lt24req("op/ping"))['ip']
+		LT24tasks = json.loads(lt24req("/op/tasksList/tasksToGet/"+LT24task2get))
+		#print json.dumps(LT24tasks, indent=4)
+		tday={}
+		pdate=""
+		compname=""
+		print "LT24 Days and Task IDs"
+		print "======================"
+		for td in LT24tasks['tasksList']:
+			tdate=td['date']
+			compname=td['compName']
+			pos=td['taskName'].find(', ')
+			tclass=td['taskName'][pos+2:]
+			tid=str(td['taskID'])
+			#print tclass, tdate, tid, pdate
+			if pdate!=tdate and pdate != "":
+				LT24date[pdate]=tday
+				pdate=tdate
+				tday={}
+			#print td
+			tday[tclass]=tid
+			pdate=tdate
+		if pdate != "":
+			LT24date[pdate]=tday
+			tday={}
+		for day in LT24date:
+			print "Day:", day, "TaskIDs", LT24date[day], compname
+		print "\n\n"
+	
+# --------------------------------------------------------------------------------
 
 url1=apiurl+rel                                 # get the initial base of the tree 
 cd=gdata(url1, 'contests', prt='no')[0]         # get the contest data, first instance
@@ -199,7 +249,7 @@ for cl in getemb(cd,'classes'):
 		if ozr2 <= 0:
 			ozr2=500
 
-		tpn=lt24tp[name[0:2]]
+		tpn=LT24tp[name[0:2]]
 		tpname=tpn[0:6].strip()
 		if   (wtyp == "start"):                 # convert from CU format to SW format
 			type="Start"
@@ -227,8 +277,8 @@ for cl in getemb(cd,'classes'):
 	while ntp > 0:                                  # reverse the order of the TPs
                 ntp -=1
                 lt24wp += tp[ntp]
-	TaskID=lt24tasks.lt24date[taskdate][classtype][0] # get the task id and task password from the table
-	Tpasswd=lt24tasks.lt24date[taskdate][classtype][1]
+	TaskID=LT24date[taskdate][classtype] 		# get the task id and task password from the table
+	Tpasswd='9611'
 	lt24pre = "http://www.livetrack24.com/api.php?a=A43C46&cm=50;3;255;"+TaskID+";"+Tpasswd+";"+str(int(tasklen))+";"
 	lt24buf = "t1.1 race wo1100 wc2300 so+0 tc2359 "+lt24wp
 	lt24buf = lt24buf.strip()
@@ -238,32 +288,24 @@ for cl in getemb(cd,'classes'):
 	#print "LT24:", lt24url
 	#f=urllib2.urlopen(lt24url)
 
-	#LT24_appKey="A43C46"
-	#LT24_appSecret="569024gn87894hdfg67dgd89dgmsm580165"
-
-
-	f=open(LT24path+"clientid")                     # open the file with the client id
-	client=f.read()                                 # read it
-	LT24_appKey=client.rstrip()                     # clear the whitespace at the end
-	f=open(LT24path+"secretkey")                    # open the file with the secret key
-	secretkey=f.read()                              # read it
-	LT24_appSecret=secretkey.rstrip()               # clear the whitespace at the end
-	LT24qwe=" "
-	print "op/ping", lt24req("op/ping")
-	replylogin = lt24req("op/6/username/acasado/pass/correo")
-	print "op/6/username/acasado/pass/xxxxxx", replylogin
-	LT24login = json.loads(replylogin)
 	if LT24login["error"] == "":
-
-		print "op/ping", lt24req("op/ping")
-		print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
-		req= "op/setTask/taskID/"+TaskID+"/pass/"+Tpasswd+"/minDist/"+str(int(tasklen))+"/taskDef/"+urllib.quote_plus(lt24buf)
+		print "LT24 op/ping", json.loads(lt24req("op/ping"))['ip']
+		replygettask=lt24req("op/getTaskDef/taskID/"+TaskID)
+		LT24gettask=json.loads(replygettask)
+		print "LT24 TaskID="+TaskID, "was:", LT24gettask['taskDefinition']
+		req = "op/setTask/taskID/"+TaskID+"/pass/"+Tpasswd+"/minDist/"+str(int(tasklen))+"/taskDef/"+urllib.quote_plus(lt24buf)
 		replydeftask=lt24req(req)
-		print req, replydeftask
 		LT24deftask=json.loads(replydeftask)
+		print "LT24 req="+req, LT24deftask['OK'] 
 		if LT24deftask['OK'] != 1:
-			print "op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
+			print "LT24 op/getTaskDef/taskID/"+TaskID, lt24req("op/getTaskDef/taskID/"+TaskID)
 
-	print "op/getTaskPilots/taskID/"+TaskID, lt24req("op/getTaskPilots/taskID/"+TaskID)
-	print "op/getTaskPilotsDetailed/taskID/"+TaskID, lt24req("op/getTaskPilotsDetailed/taskID/"+TaskID)
+	LT24pilot=json.loads(lt24req("op/getTaskPilots/taskID/"+TaskID))
+	print LT24pilot['taskPilots'], "\n"
+	LT24wp=json.loads(lt24req("/op/getCompWaypoints/taskID/"+TaskID))
+	#print "LT24 Number of WP:", len(LT24wp['compWaypoints']), len(LT24tp.keys())
+	if len(LT24wp['compWaypoints']) == len(LT24tp.keys()):
+		continue
+	else:
+		exit(-1)
 exit(0)
