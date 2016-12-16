@@ -149,8 +149,8 @@ category        =cd['category']
 eventname       =cd['name']
 compid          =cd['id']
 country         =cd['country']                  # country code - 2 chars code
-ccc             =pycountry.countries.get(alpha2=country) # convert the 2 chars ID to the 3 chars ID
-country3        =ccc.alpha3
+ccc             =pycountry.countries.get(alpha_2=country) # convert the 2 chars ID to the 3 chars ID
+country3        =ccc.alpha_3
 endate          =cd['end_date']
 lc              =getemb(cd,'location')          # location data 
 lcname          =lc['name']                     # location name
@@ -199,12 +199,15 @@ for cl in getemb(cd,'classes'):
 			idflarm=' '
 			cursG.execute("select * from GLIDERS where registration ='%s'; " % regi)
 			for rowg in cursG.fetchall(): # look for that registration on the OGN database 
-				print "\t\t", rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4], rowg[5]
+				#print "\t\t", rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4], rowg[5]
 				source=rowg[4]
 				devicetype=rowg[5]
+				deviceID=rowg[0]
 				if idflarm != ' ' and source == 'F':
 					continue
 				if devicetype == 'F':
+					if deviceID[0].isdigit():
+						print "Warning: flarmid numeric ...", deviceID
 					idflarm="FLR"+rowg[0] # prepend FLR in order to be consistent
 				elif devicetype == 'O':
 					idflarm="OGN"+rowg[0] # prepend OGN in order to be consistent
@@ -263,8 +266,8 @@ for cl in getemb(cd,'classes'):
 		else:
 			email="email_NOTYET"
 		igcid=getemb(contestants,'pilot')[0]['igc_id']
-		ccc     = pycountry.countries.get(alpha2=nation) # convert the 2 char ISO code to 3 chars ISO code
-		country = ccc.alpha3
+		ccc     = pycountry.countries.get(alpha_2=nation) # convert the 2 char ISO code to 3 chars ISO code
+		country = ccc.alpha_3
 		
 		print "\t", fname+" "+lname, nation, country, regi, cn, fr, hd, ar, club, igcid 
 		if idflarm==' ':
