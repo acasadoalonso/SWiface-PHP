@@ -4,18 +4,24 @@
 #
 import json
 import time
-import datetime
+from datetime import datetime
+from datetime import timedelta
+from datetime import date
 import os
 import config
 
-localtime=datetime.datetime.now()
+localtime=datetime.now()
+yesterday=localtime-timedelta(days=1)
 todaydate=localtime.strftime("%Y%m%d")
-today=datetime.date.today()
+yesterdaydate=yesterday.strftime("%Y%m%d")
+today=date.today()
 evQ=[]                                                  # create the event entity
 evL=[]                                                  # new instance of the event
 
 ev2={'id':"LIVE"+todaydate, 'startOpenTs': int(time.time())}# Live today's event
+ev3={'id':"LIVE"+yesterdaydate, 'startOpenTs': int(time.time()) - 86400}# Live yesterday's event
 evL.append(ev2)                                         # add today's event
+evL.append(ev3)                                         # add today's event
 
 
 cuc=os.listdir('cuc')                                   # scan the cuc directory
@@ -27,7 +33,7 @@ for fn in cuc:
                 y=int(fn[4:8])                          # year
                 m=int(fn[8:10])                         # month
                 d=int(fn[10:12])                        # day
-                td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1) # number of second until beginning of the day
+                td=datetime(y,m,d)-datetime(1970,1,1)   # number of second until beginning of the day
                 ts=td.total_seconds()+9*60*60           # timestamp 09:00:00 UTC
                 ex3={'id':fb , 'startOpenTs': int(ts)}
                 if (LQ == "LIVE"):                      # if LIVE event

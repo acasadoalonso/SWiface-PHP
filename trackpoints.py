@@ -22,6 +22,7 @@ trackid=id[id.find(':')+1:]
 eventid=id[0:12]
 since  =sys.argv[2]
 live=True
+DBname=config.DBname
 
 localtime=datetime.datetime.now()
 today=localtime.strftime("%y%m%d")
@@ -41,16 +42,17 @@ else:
 if (today != date):						# it is today
 	dbpath=config.DBpath+'/archive/';			# no user archive folder
 	live=False						# mark as NOT live
+	DBname='SWARCHIVE'
 else:
 	dbpath=config.DBpath
 
 #print trackid,":", eventid,":", since,":", date,":", time
 
 if (config.MySQL):
-	conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+	conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname)     # connect with the database
 else:
 
-	filename=dbpath+'SWiface.db'		                        # open th DB in read only mode
+	filename=dbpath+'SWiface.db'		                # open th DB in read only mode
 	fd = os.open(filename, os.O_RDONLY)
 	conn = sqlite3.connect('/dev/fd/%d' % fd)
 

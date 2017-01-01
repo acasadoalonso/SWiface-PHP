@@ -22,9 +22,12 @@ eventid=arg1[0:]							# the argument is the event ID
 dateid=eventid[6:12]							# the date is part of the event id
 localtime=datetime.datetime.now()					# get today's date
 today=localtime.strftime("%y%m%d")					# in string format yymmdd
+DBpath=config.DBpath							# use the configuration DB path
+DBname=config.DBname							# use the configuration DB path
 
 if (today != dateid):
-        dbpath=dbpath+'/archive/'					# use the archive folder instead
+        DBpath=DBpath+'/archive/'					# use the archive folder instead
+        DBname='SWARCHIVE'
 
 if (id == "LIVE"):							# if it a dummy envent LIVE
 
@@ -37,9 +40,9 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 
 #
 	if (config.MySQL):
-		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
+		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname)     # connect with the database
 	else:
-		filename=config.DBpath+config.SQLite3		                # open th DB in read only mode
+		filename=DBpath+config.SQLite3		                # open th DB in read only mode
 		fd = os.open(filename, os.O_RDONLY)
 		conn = sqlite3.connect('/dev/fd/%d' % fd)
 	cursD=conn.cursor()                                             # cursor for the ogndata table
