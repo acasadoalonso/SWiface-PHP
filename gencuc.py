@@ -13,6 +13,7 @@ import time
 import sys
 import os
 import kpilot
+import kglider
 
 ipaddr=sys.argv[1:] 
 dbpath =config.DBpath
@@ -54,6 +55,8 @@ cursD.execute('select distinct idflarm from OGNDATA')		# get all the glifers fly
 for row in cursD.fetchall():					# search all the rows
     idflarm=row[0]						# flarmid is the first field
     idf=idflarm[3:9]						# we skip the first 3 chars      
+    if kglider.kglid and idflarm not in kglider.kglider:
+		continue
     sqlcmd="select registration, cn, type from GLIDERS where idglider = '%s';" % idf		# search now into the gliding database
     cursG.execute(sqlcmd)
     gli=cursG.fetchone()					# get the data from the DB

@@ -1,6 +1,6 @@
 <?php
 
-$mysql=true;
+//$mysql=true;
 $dbhost="casadonfs";
 $dbuser="ogn";
 $dbpass="ogn";
