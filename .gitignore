@@ -16,3 +16,4 @@ tx.php
 *.log
 cuc/archive/
 cuc/qsgp/
+cuc/bkup/
