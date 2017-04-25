@@ -1,7 +1,7 @@
 #::::::::::::::
 #kglider.py		Select the gliders that we want to show up
 #::::::::::::::
-kglid = False
+kglid = True
 kglider  = [
            "FLRDDDB8B"   ,
            "FLRDDD591"   ,

@@ -10,10 +10,10 @@ import urllib2
 import datetime
 import time
 import os
-import kpilot
 import math
 import pycountry
 import socket
+import kglid
 #-------------------------------------------------------------------------------------------------------------------#
 import config
 
@@ -45,7 +45,13 @@ def fixcoding(addr):
                 addr=addr.replace(u'Ñ', u'N')
                 addr=addr.replace(u'Ø', u'O')
         return addr
+#-------------------------------------------------------------------------------------------------------------------#
 
+def getflarmid(reg):					# return the flarmId from the registration
+	for r in kglid.kglid:				# explore the whole table
+		if kglid.kglid[r] == reg:		# if registration is the same
+			return ('FLR'+r)		# return the FlarmID
+	return ('')
 #-------------------------------------------------------------------------------------------------------------------#
 #
 # arguments:   compid, dayindex, print
@@ -125,6 +131,8 @@ for id in pilots:
 	if int(qsgpID) >= 14:
 		flarmid= 	pilots[id]["q"]			# flarm id
 		registration= 	pilots[id]["w"]			# registration
+		if flarmid == '':
+			flarmid = getflarmid(registration)	# get the FlarmId from the registration
 	else:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
@@ -133,16 +141,18 @@ for id in pilots:
     	ccc=hex(rgb)                                            # convert it to hex
     	color="#"+ccc[2:]                                       # set the JSON color required
 	if hostname == "SWserver":				# deal with the different implementation of pycountry
-		ccc = pycountry.countries.get(alpha2=country)	# the the 3 letter country code
-    		country=ccc.alpha3				# convert to a 3 letter code
+		ccc = pycountry.countries.get(alpha_2=country)	# the the 3 letter country code
+    		country=ccc.alpha_3				# convert to a 3 letter code
 	else:
 		ccc = pycountry.countries.get(alpha_2=country)	# the the 3 letter country code
     		country=ccc.alpha_3				# convert to a 3 letter code
 
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
-	# tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
-	tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://192.168.8.244/pic/"+compid+".jpg"}
+	if config.PicPilots == 'FAI':
+		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
+	else:
+		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://SWS/pic/"+compid+".jpg"}
 	tracks.append(tr)                                       # add it to the tracks
 
 #print tracks
@@ -246,7 +256,6 @@ print comp_name
 print comp_date
 print comp_starttime/1000
 print tp
-#event={"name": comp_shortname, "description" : comp_name, "taskType": "SailplaneGrandPrix", "startOpenTs": (comp_date + comp_starttime)/1000, "turnpoints": tp,  "tracks": tracks}
 task={ "taskType": "SailplaneGrandPrix", "startOpenTs": comp_date , "turnpoints": tp}
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
