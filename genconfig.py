@@ -39,7 +39,10 @@ eventname2              = cfg.get('location', 'eventname2').strip("'").strip('"'
 
 eventdesc1              = cfg.get('location', 'eventdesc1').strip("'").strip('"')
 eventdesc2              = cfg.get('location', 'eventdesc2').strip("'").strip('"')
-PicPilots               = cfg.get('location', 'PicPilots').strip("'").strip('"')
+try:
+	PicPilots       = cfg.get('location', 'PicPilots').strip("'").strip('"')
+except:
+	PicPilots	= ' '
 
 datafile.write("DBpath='"+DBpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")
