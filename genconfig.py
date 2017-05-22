@@ -11,6 +11,7 @@
 # Setting values from config.ini file
 #-------------------------------------
 #
+configfile='/etc/local/SWSconfig.ini'
 import socket
 import os
 import datetime
@@ -23,7 +24,7 @@ hostname=socket.gethostname()
 datafile.write("# SWS hostname: "+hostname+"\n")
 datafile.write("# Config generated: "+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" \n")
 cfg=ConfigParser()
-cfg.read('/etc/local/SWSconfig.ini')
+cfg.read(configfile)
 
 DBpath                  = cfg.get('server', 'DBpath').strip("'").strip('"')
 MySQLtext               = cfg.get('server', 'MySQL').strip("'").strip('"')
