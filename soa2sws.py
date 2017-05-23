@@ -241,7 +241,7 @@ for cl in getemb(cd,'classes'):
 		else:
 			hd="hd_NOTYET"
 		if 'club' in contestants:
-			club=contestants['club']
+			club=fixcoding(contestants['club'])
 		else:
 			club="club_NOTYET"
 		if 'aircraft_model' in contestants:
@@ -298,7 +298,7 @@ for cl in getemb(cd,'classes'):
 		lati= math.degrees(lati)                # the latitude is in radians, convert to GMS
 		long= math.degrees(long)
 		wtyp= point["type"]                     # waypoint type start/point/finish
-		name= point["name"]                     # waypoint name
+		name= fixcoding(point["name"])          # waypoint name
 		pidx= point["point_index"]              # waypoint number within the task
 		ozty= point["oz_type"];			# oz type: next/symmetric/previous
 		ozra= point["oz_radius1"];		# oz radius
