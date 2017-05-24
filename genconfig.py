@@ -11,17 +11,22 @@
 # Setting values from config.ini file
 #-------------------------------------
 #
-configfile='/etc/local/SWSconfig.ini'
 import socket
 import os
 import datetime
 from configparser import ConfigParser
+configdir=os.getenv('CONFIGDIR')
+if configdir == None:
+	configdir='/etc/local/'
+configfile=configdir+'SWSconfig.ini'
+
 datafile = open("config.py", "w")
 tailfile = open("configtail.txt", "r")
 datafile.write("# SWS configuration file \n")
 
 hostname=socket.gethostname()
 datafile.write("# SWS hostname: "+hostname+"\n")
+datafile.write("# SWS config file: "+configfile+"\n")
 datafile.write("# Config generated: "+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" \n")
 cfg=ConfigParser()
 cfg.read(configfile)
