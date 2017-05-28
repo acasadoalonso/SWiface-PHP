@@ -6,3 +6,4 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule "^(.*)$" "$1.php"
 Options +ExecCGI 
 AddHandler cgi-script .py 
+Header set Access-Control-Allow-Origin "*"

@@ -110,6 +110,7 @@ apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
 taskType= "SailplaneRacing"                     # race type
 # ==============================================#
+tsks = {}					# task file
 
 start_time = time.time()                        # get the time now
 utc = datetime.datetime.utcnow()                # the UTC time
@@ -178,13 +179,16 @@ for cl in getemb(cd,'classes'):
 			continue                # try next one
 	classid         =cl['id']               # internal ID of the class
 	JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
+	TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
 						# name of the JSON to be generated, one per class
 	print "\n\nJSON generated data file for the class is: ",JSONFILE # just a trace
 	print "\n= Class = Category:", category,"Type:", classtype, "Class ID:", classid
 	jsonfile = open (JSONFILE, 'w')		# open the output file, one per class 
+	taskfile = open (TASKFILE, 'w')		# open the output file, one per class 
 	url3=getlinks(cl, "contestants")        # search for the contestants on each class
 	ctt=gdata(url3,   "contestants")        # get the contestants data
 	print "= Contestants for the class ==========================="
+	wlist=[]
 	for  contestants in ctt:                # inspect the data of each contestant 
 		npil  += 1                      # increase the number of total pilots
 		npilc += 1                      # increase the number of pilot within this class
@@ -268,7 +272,8 @@ for cl in getemb(cd,'classes'):
 		igcid=getemb(contestants,'pilot')[0]['igc_id']
 		ccc     = pycountry.countries.get(alpha_2=nation) # convert the 2 char ISO code to 3 chars ISO code
 		country = ccc.alpha_3
-		
+		if fr[3:9] != 'NOTYET':
+			wlist.append(fr[3:9])
 		print "\t", fname+" "+lname, nation, country, regi, cn, fr, hd, ar, club, igcid 
 		if idflarm==' ':
 			idflarm=str(npil)
@@ -291,6 +296,7 @@ for cl in getemb(cd,'classes'):
 	print "= Waypoints for the task within the class  ============"
 	tasklen=0                                       # task length for double check 
 	ntp=0
+	legs=[]						# legs for the task file
 	for point in cpp:                               # search for each waypoint within the task 
 		lati= point["latitude"]
 		long= point["longitude"]
@@ -325,6 +331,10 @@ for cl in getemb(cd,'classes'):
 							# built the turning point 
 		tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": rad, "trigger":"Enter"}
 		tp.append(tpx)                          # add it to the TP
+		tlegs=[lati,long]
+		legs.append(tlegs)
+		trad=[rad]
+		legs.append(trad)
 		ntp +=1					# number of TPs 
 		tasklen += dist                         # compute the task distance
 		
@@ -348,6 +358,15 @@ for cl in getemb(cd,'classes'):
 	jsonfile.write(j)                               # write it into the JSON file
 	jsonfile.close()                                # close the JSON file for this class
 	#print j
+	
+	tsk={"name":classtype, "color": "0000FF", "legs":legs, "wlist":wlist}
+	tsks=[]
+	tsks.append(tsk)
+	tasks={"tasks":tsks}
+	j=json.dumps(tasks, indent=4)                   # dump it
+	#print j
+	taskfile.write(j)                               # write it into the JSON file
+	taskfile.close()                                # close the JSON file for this class
 
 		
 print "= Pilots ===========================", npil      # print the number of pilots as a reference and control
