@@ -10,7 +10,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/4851.jpg", 
             "pilotName": "Anton Sibanc", 
             "country": "SVN", 
-            "trackId": "FAID20170528:1", 
+            "trackId": "CNVV20170530:1", 
             "competitionId": "cn_NOTYET"
         }, 
         {
@@ -23,7 +23,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3381.jpg", 
             "pilotName": "Jose Miguel Garcia Gomez", 
             "country": "ESP", 
-            "trackId": "FAID20170528:FLRDDE3AF", 
+            "trackId": "CNVV20170530:FLRDDE3AF", 
             "competitionId": "cn_NOTYET"
         }, 
         {
@@ -36,7 +36,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/676.jpg", 
             "pilotName": "Jorge Madrigal Revuelta", 
             "country": "ESP", 
-            "trackId": "FAID20170528:FLRDD878F", 
+            "trackId": "CNVV20170530:FLRDD878F", 
             "competitionId": "JM"
         }, 
         {
@@ -48,7 +48,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Manuel Escribano", 
             "country": "ESP", 
-            "trackId": "FAID20170528:FLRDD920C", 
+            "trackId": "CNVV20170530:FLRDD920C", 
             "competitionId": "DD"
         }, 
         {
@@ -61,7 +61,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/847.jpg", 
             "pilotName": "Inaki Ulibarri", 
             "country": "ESP", 
-            "trackId": "FAID20170528:ICA4B5175", 
+            "trackId": "CNVV20170530:ICA4B5175", 
             "competitionId": "LD"
         }, 
         {
@@ -74,7 +74,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3367.jpg", 
             "pilotName": "Pedro Rodriguez Inciarte", 
             "country": "ESP", 
-            "trackId": "FAID20170528:6", 
+            "trackId": "CNVV20170530:6", 
             "competitionId": "RI"
         }, 
         {
@@ -87,7 +87,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3362.jpg", 
             "pilotName": "Pep Valls Marti", 
             "country": "ESP", 
-            "trackId": "FAID20170528:FLRDDE81B", 
+            "trackId": "CNVV20170530:FLRDDE81B", 
             "competitionId": "VA"
         }, 
         {
@@ -100,65 +100,52 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5971.jpg", 
             "pilotName": "Francesc Pampols", 
             "country": "ESP", 
-            "trackId": "FAID20170528:FLRDDDE81", 
+            "trackId": "CNVV20170530:FLRDDDE81", 
             "competitionId": "IK"
-        }, 
-        {
-            "registration": "D-2520", 
-            "ribbonColors": [
-                "#999"
-            ], 
-            "aircraft": "Janus C RG", 
-            "3dModel": "ventus2", 
-            "portraitUrl": "http://rankingdata.fai.org/PilotImages/9398.jpg", 
-            "pilotName": "Angel Garcia", 
-            "country": "ESP", 
-            "trackId": "FAID20170528:FLRDDE48A", 
-            "competitionId": "K5"
         }, 
         {
             "registration": "G-CJWX", 
             "ribbonColors": [
-                "#aaa"
+                "#999"
             ], 
             "aircraft": "Ventus 2cT/18m", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/376.jpg", 
             "pilotName": "Stephen Olender", 
             "country": "GBR", 
-            "trackId": "FAID20170528:10", 
+            "trackId": "CNVV20170530:9", 
             "competitionId": "SO"
         }, 
         {
             "registration": "D-KSEO", 
             "ribbonColors": [
-                "#bbb"
+                "#aaa"
             ], 
             "aircraft": "LAK 17/18m", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/8995.jpg", 
             "pilotName": "Gorka Elduayen", 
             "country": "ESP", 
-            "trackId": "FAID20170528:11", 
+            "trackId": "CNVV20170530:10", 
             "competitionId": "GO"
         }, 
         {
             "registration": "D-KTAJ", 
             "ribbonColors": [
-                "#ccc"
+                "#bbb"
             ], 
             "aircraft": "ASH 31 Mi/21m", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/210.jpg", 
             "pilotName": "Alvaro De Orleans-Borbon", 
             "country": "ESP", 
-            "trackId": "FAID20170528:FLRDDEA0B", 
+            "trackId": "CNVV20170530:FLRDDEA0B", 
             "competitionId": "AJ"
         }
     ], 
     "eventRevision": 0, 
     "task": {
-        "startOpenTs": 1495962000, 
+        "startOpenTs": 1496048400, 
         "taskName": "open", 
         "turnpoints": [
             {

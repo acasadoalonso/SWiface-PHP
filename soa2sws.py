@@ -15,6 +15,7 @@ import pycountry
 import sqlite3
 import MySQLdb
 import math
+import os
 import config
 
 from simplehal import HalDocument, Resolver
@@ -104,8 +105,9 @@ print "Reading data from clientid/secretkey files"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
 initials = config.Initials			# initials of the files generated
-cucpath="./cuc/"                                # where to store the JSON files
-secpath="./SoaringSpot/"                        # where to find the clientid and secretkey files 
+cwd=os.getcwd()					# get the current working directory
+cucpath=cwd+"/cuc/"                             # where to store the JSON files
+secpath=cwd+"/SoaringSpot/"                     # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
 taskType= "SailplaneRacing"                     # race type
@@ -181,7 +183,11 @@ for cl in getemb(cd,'classes'):
 	JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
 	TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
 						# name of the JSON to be generated, one per class
-	print "\n\nJSON generated data file for the class is: ",JSONFILE # just a trace
+	
+	os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
+	os.system('rm  '+TASKFILE)
+	print "JSON generated data file for the class is: ",JSONFILE # just a trace
+	print "TASK generated data file for the class is: ",TASKFILE # just a trace
 	print "\n= Class = Category:", category,"Type:", classtype, "Class ID:", classid
 	jsonfile = open (JSONFILE, 'w')		# open the output file, one per class 
 	taskfile = open (TASKFILE, 'w')		# open the output file, one per class 
@@ -357,16 +363,22 @@ for cl in getemb(cd,'classes'):
 	j=json.dumps(event, indent=4)                   # dump it
 	jsonfile.write(j)                               # write it into the JSON file
 	jsonfile.close()                                # close the JSON file for this class
+        os.chmod(JSONFILE, 0o777) 			# make the JSON file accessible  
 	#print j
-	
+	print "Generate TSK file ..."
 	tsk={"name":classtype, "color": "0000FF", "legs":legs, "wlist":wlist}
 	tsks=[]
 	tsks.append(tsk)
 	tasks={"tasks":tsks}
 	j=json.dumps(tasks, indent=4)                   # dump it
 	#print j
-	taskfile.write(j)                               # write it into the JSON file
-	taskfile.close()                                # close the JSON file for this class
+	taskfile.write(j)                               # write it into the task file on json format
+	taskfile.close()                                # close the TASK file for this class
+        os.chmod(TASKFILE, 0o777) 			# make the TASK file accessible  
+	latest=cucpath+initials+'/'+classtype+'-latest.tsk'	# files that contains the latest TASK file to be used on live.glidernet.org 
+	print TASKFILE+' ==>  '+latest			# print is as a reference
+	os.system('rm  '+latest)			# remove the previous one
+	os.link(TASKFILE, latest)			# link the recently generated file now to be the latest !!!
 
 		
 print "= Pilots ===========================", npil      # print the number of pilots as a reference and control
