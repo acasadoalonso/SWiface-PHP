@@ -48,8 +48,11 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
-	cursD.execute("select distinct idflarm from OGNDATA where date = '%s'; " % dateid)           # get all the glifers flying now
-	for row in cursD.fetchmany(size=20):                            # search for the first 20 the rows
+	#cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) asc LIMIT 0,32 ;" 
+	cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
+	#print cmd
+	cursD.execute(cmd)
+	for row in cursD.fetchall():                                    # search for the first 20 the rows
 		idflarm=row[0]                                          # flarmid is the first field
 		idf=idflarm[3:9]                                        # we skip the first 3 chars
 		country="ESP"						# by deafult SPAIN 
@@ -85,6 +88,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 			regi='NO-NAME'					# just indicate no name
 			cn=str(pn)					# the CN is the pilot number found 
 			type='NOTYPE'					# No glider type
+			continue
 		if idflarm in kpilot.kpilot:                            # check if know the pilot because is our database kpilot.py
 			pname=kpilot.kpilot[idflarm]                    # in that case place the name of the pilot
 		else:

@@ -45,6 +45,8 @@ eventname2              = cfg.get('location', 'eventname2').strip("'").strip('"'
 
 eventdesc1              = cfg.get('location', 'eventdesc1').strip("'").strip('"')
 eventdesc2              = cfg.get('location', 'eventdesc2').strip("'").strip('"')
+loclatitude             = cfg.get('location', 'location_latitude').strip("'").strip('"')
+loclongitud             = cfg.get('location', 'location_longitud').strip("'").strip('"')
 try:
 	PicPilots       = cfg.get('location', 'PicPilots').strip("'").strip('"')
 except:
@@ -62,6 +64,8 @@ datafile.write("eventname1='"+eventname1+"' \n")
 datafile.write("eventname2='"+eventname2+"' \n")
 datafile.write("eventdesc1='"+eventdesc1+"' \n")
 datafile.write("eventdesc2='"+eventdesc2+"' \n")
+datafile.write("loclatitude='"+loclatitude+"' \n")
+datafile.write("loclongitud='"+loclongitud+"' \n")
 datafile.write("PicPilots='"+PicPilots+"' \n")
 # --------------------------------------#
 datafile.write(tailfile.read())
