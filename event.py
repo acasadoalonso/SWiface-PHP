@@ -49,7 +49,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
 	cursD.execute("select distinct idflarm from OGNDATA where date = '%s'; " % dateid)           # get all the glifers flying now
-	for row in cursD.fetchall():                                    # search all the rows
+	for row in cursD.fetchmany(size=20):                            # search for the first 20 the rows
 		idflarm=row[0]                                          # flarmid is the first field
 		idf=idflarm[3:9]                                        # we skip the first 3 chars
 		country="ESP"						# by deafult SPAIN 
