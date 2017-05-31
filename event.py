@@ -40,7 +40,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 
 #
 	if (config.MySQL):
-		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname)     # connect with the database
+		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname, connect_timeout=1000)     # connect with the database
 	else:
 		filename=DBpath+config.SQLite3		                # open th DB in read only mode
 		fd = os.open(filename, os.O_RDONLY)
@@ -48,8 +48,8 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
-	#cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) asc LIMIT 0,32 ;" 
-	cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
+	cmd="select distinct idflarm, GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) as distance from OGNDATA where date = '"+dateid+"' order by distance ASC LIMIT 0,32 ;" 
+	#cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd
 	cursD.execute(cmd)
 	for row in cursD.fetchall():                                    # search for the first 20 the rows
