@@ -48,10 +48,14 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
-	cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
-	#cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
+	cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
+	cmd2="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd
-	cursD.execute(cmd)
+	try:
+		cursD.execute(cmd1)
+        except MySQLdb.Error, e:
+		cursD.execute(cmd2)
+
 	for row in cursD.fetchall():                                    # search for the first 20 the rows
 		idflarm=row[0]                                          # flarmid is the first field
 		idf=idflarm[3:9]                                        # we skip the first 3 chars
