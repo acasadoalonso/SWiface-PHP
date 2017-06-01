@@ -48,7 +48,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
-	cmd="select distinct idflarm, GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) as distance from OGNDATA where date = '"+dateid+"' order by distance ASC LIMIT 0,32 ;" 
+	cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
 	#cmd="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd
 	cursD.execute(cmd)
