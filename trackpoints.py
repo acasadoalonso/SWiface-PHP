@@ -49,7 +49,7 @@ else:
 #print trackid,":", eventid,":", since,":", date,":", time
 
 if (config.MySQL):						# Are we using MySQL ??
-	conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname)     # connect with the database
+	conn=MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread, db=DBname)     # connect with the database
 else:
 
 	filename=dbpath+config.SQLite3				# open th DB in read only mode

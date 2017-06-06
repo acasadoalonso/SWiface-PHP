@@ -40,7 +40,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 
 #
 	if (config.MySQL):
-		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname, connect_timeout=1000)     # connect with the database
+		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread, db=DBname, connect_timeout=1000)     # connect with the database
 	else:
 		filename=DBpath+config.SQLite3		                # open th DB in read only mode
 		fd = os.open(filename, os.O_RDONLY)
