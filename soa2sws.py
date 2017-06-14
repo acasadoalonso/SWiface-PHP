@@ -106,7 +106,7 @@ print "Reading data from clientid/secretkey files"
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
 initials = config.Initials			# initials of the files generated
 cwd=os.getcwd()					# get the current working directory
-cucpath=cwd+"/cuc/"                             # where to store the JSON files
+cucpath=config.cucFileLocation                  # where to store the JSON files
 secpath=cwd+"/SoaringSpot/"                     # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1

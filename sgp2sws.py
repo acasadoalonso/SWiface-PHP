@@ -64,7 +64,7 @@ qsgpIDreq=sys.argv[1:]						# first arg is the event ID
 dayreq   =sys.argv[2:]						# second arg is the day index within the event
 prtreq   =sys.argv[3:]						# print request
  
-cucpath="./cuc/"						# directory where to stor the JSON file generated
+cucpath=config.cucFileLocation					# directory where to stor the JSON file generated
 tp=[]								# turn pint list
 tracks=[]							# track list
 #
@@ -100,9 +100,12 @@ else:
 	print "CompID:", qsgpID, "Time is now:", local_time     # print the time for information only
 
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
-JSONFILE = cucpath + config.Initials + fl_date_time+'.json'            # name of the CUC to be generated
+JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JSON to be generated
+TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
+print "TASK generated data file is: ", TASKFILE 		# just a trace
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
+taskfile = open (TASKFILE, 'w')                                 # open the output file
 #
 # get the JSON string for the web server
 #
@@ -115,6 +118,7 @@ if prt:
 #
 # the different pieces of information
 #
+wlist=[]
 pilots=j_obj["p"]						# get the pilot information
 print "Pilots:", len(pilots)
 print "=========="
@@ -137,6 +141,7 @@ for id in pilots:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
 
+	wlist.append(flarmid[3:9])				# add device to the white list
 	rgb=0x111*int(id)                                       # the the RGB color
     	ccc=hex(rgb)                                            # convert it to hex
     	color="#"+ccc[2:]                                       # set the JSON color required
@@ -222,6 +227,7 @@ print "Waypoints of the task"
 print "====================="
 #
 wp=0
+legs=[]
 while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
 		if wp == 0:
@@ -244,6 +250,10 @@ while wp < len(task_wp):
 		print "WP:", wp_name, wp_lat, wp_lon,  wp_type, wp_radius, type, oz
 		tpx={"latitude": wp_lat, "longitude": wp_lon, "name": wp_name, "observationZone": oz, "type": type, "radius": wp_radius, "trigger":"Enter"}
         	tp.append(tpx)
+		tlegs=[wp_lat,wp_lon]
+		legs.append(tlegs)
+		trad=[wp_radius]
+		legs.append(trad)
 		if wp > 0 and  (wp_name == wpinit or wp_type=="line"):
 			break
 		wp +=1
@@ -260,9 +270,18 @@ task={ "taskType": "SailplaneGrandPrix", "startOpenTs": comp_date , "turnpoints"
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
 jsonfile.write(j)
+print "Generate TSK file ..."
+tsk={"name":"SGPrace", "color": "0000FF", "legs":legs, "wlist":wlist}
+tsks=[]
+tsks.append(tsk)
+tasks={"tasks":tsks}
+j=json.dumps(tasks, indent=4)                   # dump it
+#print j
+taskfile.write(j)                               # write it into the task file on json format
 
 #
 # close the files and exit
 #
 
 jsonfile.close()
+taskfile.close()

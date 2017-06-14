@@ -108,7 +108,7 @@ print "Reading data from clientid/secretkey files"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
 initials = config.Initials			# initials of the files generated
-cucpath="./cuc/"                                # where to store the JSON files
+cucpath=config.cucFileLocation                  # where to store the JSON files
 secpath="./SoaringSpot/"                        # where to find the clientid and secretkey files 
 LT24path="./LT24/"                              # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL

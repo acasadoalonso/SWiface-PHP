@@ -24,7 +24,7 @@ evL.append(ev2)                                         # add today's event
 evL.append(ev3)                                         # add today's event
 
 
-cuc=os.listdir('cuc')                                   # scan the cuc directory
+cuc=os.listdir(config.cucFileLocation)                  # scan the cuc directory
 for fn in cuc:
         ft=fn[fn.find('.')+1:]                          # file type
         fb=fn[0:fn.find('.')]                           # file base name

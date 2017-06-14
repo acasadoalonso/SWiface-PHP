@@ -31,6 +31,11 @@ datafile.write("# Config generated: "+datetime.datetime.now().strftime("%Y-%m-%d
 cfg=ConfigParser()
 cfg.read(configfile)
 
+try:
+        cucFileLocation = cfg.get('server', 'cucFileLocation').strip("'").strip('"')
+except:
+        cucFileLocation = "/var/www/html/cuc/"
+
 DBpath                  = cfg.get('server', 'DBpath').strip("'").strip('"')
 MySQLtext               = cfg.get('server', 'MySQL').strip("'").strip('"')
 DBhost                  = cfg.get('server', 'DBhost').strip("'").strip('"')
@@ -54,6 +59,7 @@ try:
 except:
 	PicPilots	= ' '
 
+datafile.write("cucFileLocation='"+cucFileLocation+"'; \n")
 datafile.write("DBpath='"+DBpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")
 datafile.write("DBname='"+DBname+"' \n")
