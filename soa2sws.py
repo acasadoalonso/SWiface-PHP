@@ -380,6 +380,12 @@ for cl in getemb(cd,'classes'):
 	os.system('rm  '+latest)			# remove the previous one
 	os.link(TASKFILE, latest)			# link the recently generated file now to be the latest !!!
 
+        html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
+        cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
+        print cmd
+        os.system(cmd)
+	print "Use: "+html
+
 		
 print "= Pilots ===========================", npil      # print the number of pilots as a reference and control
 

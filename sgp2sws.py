@@ -285,3 +285,13 @@ taskfile.write(j)                               # write it into the task file on
 
 jsonfile.close()
 taskfile.close()
+os.chmod(TASKFILE, 0o777)                       # make the TASK file accessible
+latest=cucpath+config.Initials+'/SGPrace-latest.tsk'     # the latest TASK file to be used on live.glidernet.org
+print TASKFILE+' ==>  '+latest                  # print is as a reference
+os.system('rm  '+latest)                        # remove the previous one
+os.link(TASKFILE, latest)                       # link the recently generated file now to be the latest !!!
+html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
+cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
+print cmd
+os.system(cmd)
+print "Use: "+html
