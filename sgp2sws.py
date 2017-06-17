@@ -286,6 +286,7 @@ taskfile.write(j)                               # write it into the task file on
 jsonfile.close()
 taskfile.close()
 os.chmod(TASKFILE, 0o777)                       # make the TASK file accessible
+os.chmod(JSONFILE, 0o777)                       # make the JSON file accessible
 latest=cucpath+config.Initials+'/SGPrace-latest.tsk'     # the latest TASK file to be used on live.glidernet.org
 print TASKFILE+' ==>  '+latest                  # print is as a reference
 os.system('rm  '+latest)                        # remove the previous one
