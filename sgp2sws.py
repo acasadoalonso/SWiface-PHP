@@ -104,6 +104,9 @@ JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JS
 TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
+
+os.system('rm  '+JSONFILE)		                        # remove the previous one
+os.system('rm  '+TASKFILE)		                        # remove the previous one
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
 taskfile = open (TASKFILE, 'w')                                 # open the output file
 #
@@ -119,6 +122,10 @@ if prt:
 # the different pieces of information
 #
 wlist=[]
+nwarnings=0                                     		# number of warnings ...
+warnings=[]                                     		# warnings glider
+
+npil=0								# number of pilots found
 pilots=j_obj["p"]						# get the pilot information
 print "Pilots:", len(pilots)
 print "=========="
@@ -140,8 +147,12 @@ for id in pilots:
 	else:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
+	if flarmid != '':
+		wlist.append(flarmid[3:9])			# add device to the white list
+	else:
+		warnings.append(lname) 				# add it to the list of warnings
+                nwarnings += 1  				# and increase the number of warnings
 
-	wlist.append(flarmid[3:9])				# add device to the white list
 	rgb=0x111*int(id)                                       # the the RGB color
     	ccc=hex(rgb)                                            # convert it to hex
     	color="#"+ccc[2:]                                       # set the JSON color required
@@ -159,6 +170,7 @@ for id in pilots:
 	else:
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://SWS/pic/"+compid+".jpg"}
 	tracks.append(tr)                                       # add it to the tracks
+	npil += 1						# increase the number of pilots
 
 #print tracks
 print "Competition"
@@ -291,8 +303,22 @@ latest=cucpath+config.Initials+'/SGPrace-latest.tsk'     # the latest TASK file 
 print TASKFILE+' ==>  '+latest                  # print is as a reference
 os.system('rm  '+latest)                        # remove the previous one
 os.link(TASKFILE, latest)                       # link the recently generated file now to be the latest !!!
-html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
-cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
+
+os.system("gist -login")
+cmd="gist -u cc96aef4247255aa51c11ba0ce501032 "+TASKFILE
+#cmd="gist  "+TASKFILE
 print cmd
 os.system(cmd)
+html="https://gist.githubusercontent.com/acasadoalonso/cc96aef4247255aa51c11ba0ce501032/raw"
 print "Use: "+html
+
+if npil == 0:
+        print "JSON invalid: No pilots found ... "
+        exit(-1)
+else:
+        print "Pilots found ... ", npil, "Warnings:", nwarnings
+        if nwarnings > 0:
+                print "Pilots with no FLARMID: ", warnings
+        exit(0)
+
+
