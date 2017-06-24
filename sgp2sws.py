@@ -71,7 +71,12 @@ tracks=[]							# track list
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
 	qsgpID   =        sys.argv[1]
-	day      =    int(sys.argv[2])
+	days     =        str(sys.argv[2])
+	if days[0].isdigit():	
+		day =     int(days)
+		days=''
+	else:
+		day=0
 else:
 	qsgpID='0'
 
@@ -182,9 +187,20 @@ comp_name		=comp['t']				# event name
 comp_shortname		=comp['l']				# event short name
 comp_id			=comp['i']
 print "Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, comp_firstday, comp_lastday
-print "Index of Days"
 numberofactivedays	=j_obj["j"]
 indexofdays		=j_obj["i"]
+#print "Index of Days", indexofdays
+if days != '':
+	cday=0 
+	for dayday in indexofdays:
+		#print "DAYDAY", days, dayday
+		if dayday["l"] == days:
+			day = cday
+			break
+		else:
+			cday += 1
+			continue
+	
 date			=indexofdays[day]["d"]			# date    
 title			=indexofdays[day]["t"] 			# day tittle   
 shorttitle		=indexofdays[day]["l"]    		# day short title
