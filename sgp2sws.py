@@ -305,11 +305,11 @@ os.system('rm  '+latest)                        # remove the previous one
 os.link(TASKFILE, latest)                       # link the recently generated file now to be the latest !!!
 
 os.system("gist -login")
-cmd="gist -u cc96aef4247255aa51c11ba0ce501032 "+TASKFILE
-#cmd="gist  "+TASKFILE
+cmd="gist -u 725f8409f32584fad9fda1bbc9b7db27 "+latest
+#cmd="gist  "+latest
 print cmd
 os.system(cmd)
-html="https://gist.githubusercontent.com/acasadoalonso/cc96aef4247255aa51c11ba0ce501032/raw"
+html="https://gist.githubusercontent.com/acasadoalonso/725f8409f32584fad9fda1bbc9b7db27/raw"
 print "Use: "+html
 
 if npil == 0:
