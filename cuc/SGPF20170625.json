@@ -88,7 +88,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/9548.jpg", 
             "pilotName": "Jean-Georges Schwartz", 
             "country": "FRA", 
-            "trackId": "SGPF20170625:FLRDDE6EC", 
+            "trackId": "SGPF20170625:FLRDDED6C", 
             "competitionId": "JG"
         }, 
         {
@@ -140,7 +140,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/7134.jpg", 
             "pilotName": "Lucas Delobel", 
             "country": "FRA", 
-            "trackId": "SGPF20170625:FLRDDEA8B", 
+            "trackId": "SGPF20170625:ICA700000", 
             "competitionId": "FB"
         }, 
         {
@@ -223,7 +223,7 @@
         }
     ], 
     "task": {
-        "startOpenTs": "2017-06-24", 
+        "startOpenTs": "2017-06-25", 
         "turnpoints": [
             {
                 "name": "START", 
@@ -235,30 +235,30 @@
                 "type": "Start"
             }, 
             {
-                "name": "042BonnyLoire", 
+                "name": "157Luplante", 
                 "trigger": "Enter", 
-                "longitude": 2.8402833333333333, 
+                "longitude": 1.3991666666666667, 
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "latitude": 47.55916666666667, 
+                "latitude": 48.3, 
                 "type": "Turnpoint"
             }, 
             {
-                "name": "203PontYonneAero", 
+                "name": "141LeGault", 
                 "trigger": "Enter", 
-                "longitude": 3.2508333333333335, 
+                "longitude": 1.48445, 
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "latitude": 48.29055, 
+                "latitude": 48.24333333333333, 
                 "type": "Turnpoint"
             }, 
             {
-                "name": "002Buno10", 
+                "name": "160Malesherbes", 
                 "trigger": "Enter", 
-                "longitude": 2.4172166666666666, 
+                "longitude": 2.40195, 
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "latitude": 48.350833333333334, 
+                "latitude": 48.29278333333333, 
                 "type": "Turnpoint"
             }, 
             {
