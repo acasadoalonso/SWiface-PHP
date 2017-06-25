@@ -194,7 +194,7 @@ if days != '':
 	cday=0 
 	for dayday in indexofdays:
 		#print "DAYDAY", days, dayday
-		if dayday["l"] == days:
+		if dayday["l"].upper() == days.upper():
 			day = cday
 			break
 		else:
@@ -207,7 +207,7 @@ shorttitle		=indexofdays[day]["l"]    		# day short title
 starttime		=indexofdays[day]["a"]    		# start time millis from midnite
 daytype			=indexofdays[day]["y"]    		# day type: 1, 2, 3 ...
 dayid			=indexofdays[day]["i"] 			# day ID 
-print date, title, shorttitle, "Start time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays
+print "DATE:", date, "Title:", title, "Day:", shorttitle,"==>", day, "Start time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays
 
 
 d = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
@@ -289,10 +289,10 @@ while wp < len(task_wp):
 print "WP:================================>"
 # event
 
-print comp_shortname
-print comp_name
-print comp_date
-print comp_starttime/1000
+print "Comp short name:", comp_shortname
+print "Comp full  name:", comp_name
+print "Comp date:", comp_date
+print "Comp Start time:", comp_starttime/1000
 print tp
 task={ "taskType": "SailplaneGrandPrix", "startOpenTs": comp_date , "turnpoints": tp}
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}

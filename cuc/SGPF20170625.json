@@ -1,0 +1,296 @@
+{
+    "tracks": [
+        {
+            "registration": "D-0089", 
+            "ribbonColors": [
+                "#45fba"
+            ], 
+            "aircraft": "ASW 27b", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/435.jpg", 
+            "pilotName": "Kai Lindenberg", 
+            "country": "DEU", 
+            "trackId": "SGPF20170625:FLRDDA837", 
+            "competitionId": "LY"
+        }, 
+        {
+            "registration": "D-1091", 
+            "ribbonColors": [
+                "#460cb"
+            ], 
+            "aircraft": "ASW 27", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3964.jpg", 
+            "pilotName": "Daan Spruyt", 
+            "country": "BEL", 
+            "trackId": "SGPF20170625:ICA3EE4DA", 
+            "competitionId": "FS"
+        }, 
+        {
+            "registration": "D-5231", 
+            "ribbonColors": [
+                "#461dc"
+            ], 
+            "aircraft": "Ventus 2c", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/8480.jpg", 
+            "pilotName": "Geert De Palmenaer", 
+            "country": "BEL", 
+            "trackId": "SGPF20170625:FLRDD5175", 
+            "competitionId": "LE"
+        }, 
+        {
+            "registration": "F-CZSX", 
+            "ribbonColors": [
+                "#462ed"
+            ], 
+            "aircraft": "ASW 28", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3590.jpg", 
+            "pilotName": "Micka\u00ebl Charuel", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDD44E", 
+            "competitionId": "Z6"
+        }, 
+        {
+            "registration": "F-CBUN", 
+            "ribbonColors": [
+                "#463fe"
+            ], 
+            "aircraft": "ASW 28", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/8094.jpg", 
+            "pilotName": "Cecile Bonnet", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDD5254", 
+            "competitionId": "6"
+        }, 
+        {
+            "registration": "F-CDFX", 
+            "ribbonColors": [
+                "#4650f"
+            ], 
+            "aircraft": "Discus 2a", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/1202.jpg", 
+            "pilotName": "Guillaume Girard", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDD9E17", 
+            "competitionId": "CFM1"
+        }, 
+        {
+            "registration": "D-KJGS", 
+            "ribbonColors": [
+                "#45a65"
+            ], 
+            "aircraft": "ASG 29es", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/9548.jpg", 
+            "pilotName": "Jean-Georges Schwartz", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDE6EC", 
+            "competitionId": "JG"
+        }, 
+        {
+            "registration": "F-CFDQ", 
+            "ribbonColors": [
+                "#45732"
+            ], 
+            "aircraft": "Discus 2a", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/297.jpg", 
+            "pilotName": "Frederic Hoyeau", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDDCFC", 
+            "competitionId": "DA"
+        }, 
+        {
+            "registration": "D-2915", 
+            "ribbonColors": [
+                "#45ea9"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/700.jpg", 
+            "pilotName": "Alain Mazalerat", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDDDCA", 
+            "competitionId": "ZA"
+        }, 
+        {
+            "registration": "D-8166", 
+            "ribbonColors": [
+                "#45d98"
+            ], 
+            "aircraft": "Ventus 2a", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/1228.jpg", 
+            "pilotName": "Christophe Sturm", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDDC1B", 
+            "competitionId": "C"
+        }, 
+        {
+            "registration": "F-CIFB", 
+            "ribbonColors": [
+                "#45621"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/7134.jpg", 
+            "pilotName": "Lucas Delobel", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDEA8B", 
+            "competitionId": "FB"
+        }, 
+        {
+            "registration": "D-KLLA", 
+            "ribbonColors": [
+                "#45510"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/2252.jpg", 
+            "pilotName": "Christophe Abadie", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDD9B43", 
+            "competitionId": "2L"
+        }, 
+        {
+            "registration": "F-CIJT", 
+            "ribbonColors": [
+                "#45843"
+            ], 
+            "aircraft": "Ventus 2bxr", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/6782.jpg", 
+            "pilotName": "Jacques Palueau", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDAD9A", 
+            "competitionId": "EL"
+        }, 
+        {
+            "registration": "D-6164", 
+            "ribbonColors": [
+                "#45954"
+            ], 
+            "aircraft": "Ventus 2cxa", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/255.jpg", 
+            "pilotName": "Didier Hauss", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDDE96", 
+            "competitionId": "DID"
+        }, 
+        {
+            "registration": "D-6790", 
+            "ribbonColors": [
+                "#45c87"
+            ], 
+            "aircraft": "Discus 2b", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/9203.jpg", 
+            "pilotName": "Toni Kittler", 
+            "country": "DEU", 
+            "trackId": "SGPF20170625:FLRDDEB1F", 
+            "competitionId": "BW3"
+        }, 
+        {
+            "registration": "D-KLOE", 
+            "ribbonColors": [
+                "#451dd"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/196.jpg", 
+            "pilotName": "Philippe de Pechy", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDEFB2", 
+            "competitionId": "CT"
+        }, 
+        {
+            "registration": "F-CLFM", 
+            "ribbonColors": [
+                "#45b76"
+            ], 
+            "aircraft": "ASW 27", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/4264.jpg", 
+            "pilotName": "Aude Grangeray", 
+            "country": "FRA", 
+            "trackId": "SGPF20170625:FLRDDE9BB", 
+            "competitionId": "TIF"
+        }
+    ], 
+    "task": {
+        "startOpenTs": "2017-06-24", 
+        "turnpoints": [
+            {
+                "name": "START", 
+                "trigger": "Enter", 
+                "longitude": 2.427216666666667, 
+                "observationZone": "Line", 
+                "radius": 2500, 
+                "latitude": 48.3525, 
+                "type": "Start"
+            }, 
+            {
+                "name": "042BonnyLoire", 
+                "trigger": "Enter", 
+                "longitude": 2.8402833333333333, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 47.55916666666667, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "203PontYonneAero", 
+                "trigger": "Enter", 
+                "longitude": 3.2508333333333335, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.29055, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "002Buno10", 
+                "trigger": "Enter", 
+                "longitude": 2.4172166666666666, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.350833333333334, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "report Milly", 
+                "trigger": "Enter", 
+                "longitude": 2.4686166666666667, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.404716666666666, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "VAUDOUE REPORT", 
+                "trigger": "Enter", 
+                "longitude": 2.5083333333333333, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.34916666666667, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "ROAD", 
+                "trigger": "Enter", 
+                "longitude": 2.4311166666666666, 
+                "observationZone": "Line", 
+                "radius": 250, 
+                "latitude": 48.349716666666666, 
+                "type": "Finish"
+            }
+        ], 
+        "taskType": "SailplaneGrandPrix"
+    }, 
+    "name": "France SGP", 
+    "description": "France SGP 2017"
+}
