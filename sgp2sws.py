@@ -173,7 +173,7 @@ for id in pilots:
 	if config.PicPilots == 'FAI':
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	else:
-		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://localhost/SWS/pic/"+compid+".jpg", "3dModelVariant": "http://localhost/SWS/pic/"+compid+".sponsor.jpg"}
+		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": SWSserver+"SWS/pic/"+compid+".jpg", "3dModelVariant": SWSserver+"SWS/pic/"+compid+".sponsor.jpg"}
 	tracks.append(tr)                                       # add it to the tracks
 	npil += 1						# increase the number of pilots
 

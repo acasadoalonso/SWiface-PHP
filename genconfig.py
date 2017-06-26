@@ -49,6 +49,10 @@ try:
 	DBpasswdread    = cfg.get('server', 'DBpasswdread').strip("'").strip('"')
 except:
 	DBpasswdread    = DBpasswd
+try:
+	SWSserver       = cfg.get('server', 'SWSserver').strip("'").strip('"')
+except:
+	SWSserver       = 'http://localhost/'
 DBname                  = cfg.get('server', 'DBname').strip("'").strip('"')
 SQLite3                 = cfg.get('server', 'SQLite3').strip("'").strip('"')
 Initials                = cfg.get('server', 'Initials').strip("'").strip('"')
@@ -76,6 +80,7 @@ datafile.write("DBuserread='"+DBuserread+"' \n")
 datafile.write("DBpasswdread='"+DBpasswdread+"' \n")
 datafile.write("MySQL="+MySQLtext+" \n")
 datafile.write("Initials='"+Initials+"' \n")
+datafile.write("SWSserver='"+SWSserver+"' \n")
 datafile.write("eventname1='"+eventname1+"' \n")
 datafile.write("eventname2='"+eventname2+"' \n")
 datafile.write("eventdesc1='"+eventdesc1+"' \n")
