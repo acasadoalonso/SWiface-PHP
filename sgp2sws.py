@@ -107,13 +107,17 @@ else:
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
 JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JSON to be generated
 TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
+COMPFILE = cucpath +'competitiongliders.lst'      		# name of the COMP to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
+print "COMP generated data file is: ", COMPFILE 		# just a trace
 
 os.system('rm  '+JSONFILE)		                        # remove the previous one
 os.system('rm  '+TASKFILE)		                        # remove the previous one
+os.system('rm  '+COMPFILE)		                        # remove the previous one
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
 taskfile = open (TASKFILE, 'w')                                 # open the output file
+compfile = open (COMPFILE, 'w')                                 # open the output file
 #
 # get the JSON string for the web server
 #
@@ -127,6 +131,7 @@ if prt:
 # the different pieces of information
 #
 wlist=[]
+clist=[]
 nwarnings=0                                     		# number of warnings ...
 warnings=[]                                     		# warnings glider
 
@@ -154,6 +159,7 @@ for id in pilots:
 		registration= 	"EC-XXX"
 	if flarmid != '':
 		wlist.append(flarmid[3:9])			# add device to the white list
+		clist.append(flarmid)				# add device to the white list
 	else:
 		warnings.append(lname) 				# add it to the list of warnings
                 nwarnings += 1  				# and increase the number of warnings
@@ -306,6 +312,9 @@ tasks={"tasks":tsks}
 j=json.dumps(tasks, indent=4)                   # dump it
 #print j
 taskfile.write(j)                               # write it into the task file on json format
+j=json.dumps(clist, indent=4)                   # dump it
+#print j
+compfile.write(j)                               # write it into the comp file on json format
 
 #
 # close the files and exit
