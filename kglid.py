@@ -1,1 +1,1 @@
-/home/pi/src/SWsrc/kglid.py
+/nfs/OGN/src/kglid.py

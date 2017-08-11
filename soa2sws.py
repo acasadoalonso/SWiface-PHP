@@ -295,7 +295,10 @@ for cl in getemb(cd,'classes'):
 
 	url4=getlinks(cl, "tasks")                      # look for the tasks within that class 
 	ctt=gdata(url4,   "tasks")                      # get the TASKS data for the day
-	print "= Tasks ==", ctt[idx]["task_date"], ctt[idx]["result_status"],  ctt[idx]["task_distance"]/1000, "Kms.", ctt[idx]["task_type"]
+	print "= Tasks ==", ctt[idx]["task_date"]
+	print "= Tasks ==", ctt[idx]["result_status"]
+	print "= Tasks ==", ctt[idx]["task_distance"]/1000
+	print "= Tasks ==", "Kms.", ctt[idx]["task_type"]
 	
 	url5=getlinks(ctt[idx],"points")                # look for the waypoints within the task 
 	cpp=gdata(url5,        "points")                # look for the waypoints within the task within the day IDX
@@ -377,7 +380,10 @@ for cl in getemb(cd,'classes'):
         os.chmod(TASKFILE, 0o777) 			# make the TASK file accessible  
 	latest=cucpath+initials+'/'+classtype+'-latest.tsk'	# files that contains the latest TASK file to be used on live.glidernet.org 
 	print TASKFILE+' ==>  '+latest			# print is as a reference
-	os.system('rm  '+latest)			# remove the previous one
+	try:
+		os.system('rm  '+latest)		# remove the previous one
+	except:
+		print "No previous task file"
 	os.link(TASKFILE, latest)			# link the recently generated file now to be the latest !!!
 
         html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
