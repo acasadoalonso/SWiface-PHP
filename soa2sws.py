@@ -169,7 +169,7 @@ warnings=[]                                     # warnings glider
 
 # Build the tracks and turn points, exploring the contestants and task within each class
                                                 # go thru the different classes now within the day
-for cl in getemb(cd,'classes'):        
+for cl in getemb(cd,'classes'):
                                                 # search for each class
 	tracks=[]				# create the instance for the tracks 
 	tp=[]					# create the instance for the turn points
@@ -183,7 +183,7 @@ for cl in getemb(cd,'classes'):
 	JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
 	TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
 						# name of the JSON to be generated, one per class
-	
+
 	os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
 	os.system('rm  '+TASKFILE)
 	print "JSON generated data file for the class is: ",JSONFILE # just a trace
@@ -195,6 +195,8 @@ for cl in getemb(cd,'classes'):
 	ctt=gdata(url3,   "contestants")        # get the contestants data
 	print "= Contestants for the class ==========================="
 	wlist=[]
+	flist=[]				# Filter list for glidertracker.org
+	flist.append("ID,CALL,CN,TYPE,INDEX")	# Initialize with header row
 	for  contestants in ctt:                # inspect the data of each contestant 
 		npil  += 1                      # increase the number of total pilots
 		npilc += 1                      # increase the number of pilot within this class
@@ -226,26 +228,26 @@ for cl in getemb(cd,'classes'):
 				else :
 					idflarm="RDN"+rowg[0] # prepend FLR in order to be consistent        
 				ff=True         # mark that at least we found one 
-			
+
 			if not ff:
 				idflarm=' '     # if not found mark it as blank        
 
 		else:
 			regi="reg_NOTYET"      # if we do not have the registration ID on the soaringspot 
 			idflarm=' '
-			
+
 		if 'flight_recorders' in contestants:
 			fr=contestants['flight_recorders']
 			fr=fr.rstrip('\n')
 			fr=fr.rstrip('\r')
 		else:
 			if idflarm != ' ':
-				fr=idflarm                
-			else:                
+				fr=idflarm
+			else:
 				fr="fr_NOTYET"+str(npil)
 				warnings.append(pname) # add it to the list of warnings
 				nwarnings += 1  # and increase the number of warnings
-		      
+
 		if 'handicap' in contestants:
 			hd=contestants['handicap']
 		else:
@@ -262,7 +264,7 @@ for cl in getemb(cd,'classes'):
 			cn=contestants['contestant_number']
 		else:
 			cn="cn_NOTYET"
-			     
+
 		rgb=0x111*npil			        # the the RGB color
 		ccc=hex(rgb)			        # convert it to hex
 		color="#"+ccc[2:]		        # set the JSON color required
@@ -280,6 +282,9 @@ for cl in getemb(cd,'classes'):
 		country = ccc.alpha_3
 		if fr[3:9] != 'NOTYET':
 			wlist.append(fr[3:9])
+			flist.append(fr+","+regi+","+cn+","+ar+","+str(hd)) # Populate the filter list
+
+		# print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
 		print "\t", fname+" "+lname, nation, country, regi, cn, fr, hd, ar, club, igcid 
 		if idflarm==' ':
 			idflarm=str(npil)
@@ -335,7 +340,7 @@ for cl in getemb(cd,'classes'):
 			type="Turnpoint"
 			oz  ="Cylinder"
 			rad=ozr2
-			
+
 		print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx        # print it as a reference
 							# built the turning point 
 		tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": rad, "trigger":"Enter"}
@@ -346,9 +351,9 @@ for cl in getemb(cd,'classes'):
 		legs.append(trad)
 		ntp +=1					# number of TPs 
 		tasklen += dist                         # compute the task distance
-		
+
 	print "=Task length: ", tasklen, "Number of pilots in the class: ", npilc # just a control of the total task distance
-	
+
 	tps=[]						# create the instance for the turn points
 	while ntp > 0:					# reverse the order of the TPs
 		ntp -=1
@@ -362,7 +367,7 @@ for cl in getemb(cd,'classes'):
         td=datetime.datetime(y,m,d)-datetime.datetime(1970,1,1)         # number of second until beginning of the day
         ts=int(td.total_seconds()+9*60*60)                              # timestamp 09:00:00 UTC
 	event={"name": classtype+"-"+eventname, "description" : classtype,  "eventRevision": 0, "task" : { "taskName": classtype, "taskType": taskType, "startOpenTs": ts, "turnpoints": tps },  "tracks": tracks}
-	
+
 	j=json.dumps(event, indent=4)                   # dump it
 	jsonfile.write(j)                               # write it into the JSON file
 	jsonfile.close()                                # close the JSON file for this class
@@ -377,7 +382,7 @@ for cl in getemb(cd,'classes'):
 	#print j
 	taskfile.write(j)                               # write it into the task file on json format
 	taskfile.close()                                # close the TASK file for this class
-        os.chmod(TASKFILE, 0o777) 			# make the TASK file accessible  
+        os.chmod(TASKFILE, 0o777) 			# make the TASK file accessible
 	latest=cucpath+initials+'/'+classtype+'-latest.tsk'	# files that contains the latest TASK file to be used on live.glidernet.org 
 	print TASKFILE+' ==>  '+latest			# print is as a reference
 	try:
@@ -386,17 +391,23 @@ for cl in getemb(cd,'classes'):
 		print "No previous task file"
 	os.link(TASKFILE, latest)			# link the recently generated file now to be the latest !!!
 
-        html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
-        cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
-        print cmd
+        # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
+        # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
+        cmd="gist "+TASKFILE+" > /home/pi/SWdata/gist.log"
+	# print cmd
         os.system(cmd)
-	print "Use: "+html
+	# print "Use: "+html
 
-		
+	# Write a csv file of all gliders to be used as filter file for glidertracker.org
+	with open(cucpath + initials + fl_date_time+"-"+classtype+"filter.csv", 'wb') as myfile:
+		for item in flist:
+			myfile.write("%s\n" % item)
+
+
 print "= Pilots ===========================", npil      # print the number of pilots as a reference and control
 
 
-connG.close()                                           # close the connection 
+connG.close()                                           # close the connection
 
 if npil == 0:
 	print "JSON invalid: No pilots found ... "
@@ -406,4 +417,3 @@ else:
 	if nwarnings > 0:
 		print "Pilots with no FLARMID: ", warnings
 	exit(0)
-	
