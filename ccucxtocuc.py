@@ -11,7 +11,6 @@ import time
 import sys
 import os
 import kpilot
-import QSGP
 import json
 import math
 import pycountry
