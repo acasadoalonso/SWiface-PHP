@@ -185,7 +185,7 @@ for row in cursD.fetchall():					# search all the rows
 =======
 	ccc = pycountry.countries.get(alpha_2=pil[0])            # convert it to the 3 chars ISO code
 >>>>>>> e01b5ea056c20613dc060f0bb801dbd5d383bccd
-	country=ccc.alpha3
+	country=ccc.alpha_3
 	if pil[1]:                                              # get the IGC ranking list ID
 			igcid=pil[1]
 	else:
