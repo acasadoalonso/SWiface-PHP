@@ -198,7 +198,7 @@ category        =cd['category']
 eventname       =cd['name']
 compid          =cd['id']
 country         =cd['country']                  # country code - 2 chars code
-ccc             =pycountry.countries.get(alpha2=country) # convert the 2 chars ID to the 3 chars ID
+ccc             =pycountry.countries.get(alpha_2=country) # convert the 2 chars ID to the 3 chars ID
 country3        =ccc.alpha3
 endate          =cd['end_date']
 lc              =getemb(cd,'location')          # location data 
