@@ -9,7 +9,6 @@ import config
 
 import string
 import requests
-import sys
 import time
 import sqlite3
 
