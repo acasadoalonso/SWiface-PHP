@@ -180,7 +180,7 @@ for row in cursD.fetchall():					# search all the rows
 	cursP.execute("select nationality, igc_id from PILOT where id_pilot = ? ", [idcont])		# set the tcountry from the PILOT table
 	pil=cursP.fetchone()
 	country=pil[0]                                          # get the country of the pilot
-	ccc = pycountry.countries.get(alpha2=pil[0])            # convert it to the 3 chars ISO code
+	ccc = pycountry.countries.get(alpha_2=pil[0])           # convert it to the 3 chars ISO code
 	country=ccc.alpha3
 	if pil[1]:                                              # get the IGC ranking list ID
 			igcid=pil[1]

@@ -1,1 +1,1 @@
-main/kglid.py
+/nfs/OGN/src/kglid.py
