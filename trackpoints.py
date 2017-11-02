@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Silent Wings interface --- JSON formaat
+# Silent Wings interface --- JSON format
 #
  
 import json
@@ -81,7 +81,10 @@ for row in cursD.fetchall(): 					# get all the records from the DDBB
 	lati=row[3]						# latitude
 	alti=row[4]						# altitude
 	#print "T==>", tn, date, time, trackid, lati, long, alti, dt, ts
-	tracks.append({"t": int(ts), "e":long, "n":lati, "a":alti}) # append it to the previous record
+	if alti == 0:
+		tracks.append({"t": int(ts), "e":long, "n":lati }) # append it to the previous record, no altitude
+	else:
+		tracks.append({"t": int(ts), "e":long, "n":lati, "a":alti}) # append it to the previous record
 	tn +=1
 
 tp={"trackId": id, "live": live, "track": tracks}		# build the JSON record
