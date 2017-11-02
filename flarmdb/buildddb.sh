@@ -1,3 +1,7 @@
+#!/bin/bash
+# source the config file 
+eval "$(egrep "^[^ ]*=[^;&]*'" ../config.py )"
+
 cd /var/www/html/flarmdb
 rm *.fln
 rm *.csv
@@ -11,7 +15,7 @@ cat flarmhdr flarmdata.txt  >flarmdata.py
 cat ognhdr   ognddbdata.txt >ognddbdata.py 
 cat kglidhdr ognddbdata.py  flarmdata.py kglidtrail >kglid.py
 ls -la
-cd /nfs/OGN/SWdata
+
 echo "Registered gliders: "
-echo "select count(*) from GLIDERS;" | sqlite3 SWiface.db
+echo "select count(*) from GLIDERS;" | sqlite3 ${DBpath}${SQLite3}
 cd 
