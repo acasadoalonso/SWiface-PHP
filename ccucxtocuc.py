@@ -15,6 +15,7 @@ import QSGP
 import json
 import math
 import pycountry
+import config
 #-------------------------------------------------------------------------------------------------------------------#
 
 def fixcoding(addr):
@@ -47,12 +48,9 @@ def fixcoding(addr):
         return addr
 
 
-SWdbpath ="./"
 dbpath ="./cucfiles/"
 cucpath="./cuc/"
-dbname="SWiface.db"
-comp="CNVV"
-eventname="LIVE Pyrenees"
+eventname="LIVE Pyrenees"					# TODO: Why is this initialized here?
 taskType="SailplaneRacing"
 
 # 
@@ -64,8 +62,8 @@ start_time = time.time()
 local_time = datetime.datetime.now()
 print "Time is now:", local_time				# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")			# get the local time
-CUC_DATA = cucpath + comp + fl_date_time+'.cuc'		        # name of the CUC to be generated
-JSONFILE = cucpath + comp + fl_date_time+'.json'		# name of the CUC to be generated
+CUC_DATA = cucpath + config.Initials + fl_date_time+'.cuc'		        # name of the CUC to be generated
+JSONFILE = cucpath + config.Initials + fl_date_time+'.json'		# name of the CUC to be generated
 print "CUC generated data file is: ", CUC_DATA, JSONFILE	# just a trace
 datafile = open (CUC_DATA, 'w')					# open the output file
 jsonfile = open (JSONFILE, 'w')					# open the output file
@@ -74,7 +72,7 @@ cuctail  = open (cucpath + "LIVEtail2.txt", 'r')		# open the trailer file
 
 
 conn =sqlite3.connect(dbpath+'contest.db')			# open the DB embedded into the .CUCX file unzipped 
-connG=sqlite3.connect(SWdbpath+dbname)			        # open the DB with all the GLIDERS information
+connG=sqlite3.connect(config.DBpath+config.DBname)			        # open the DB with all the GLIDERS information
 cursG =connG.cursor()						# cursor for the GLIDERS table
 cursD =conn.cursor()						# cursor for the CONTESTANT table
 cursP =conn.cursor()						# cursor for the PILOT table
@@ -187,7 +185,7 @@ for row in cursD.fetchall():					# search all the rows
 	else:
 			igcid=-1
 			
-	tr={"trackId": comp+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
+	tr={"trackId": config.Initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,\
             "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors":[color], \
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+str(igcid)+".jpg"}
 	
