@@ -71,7 +71,8 @@ if prtreq and prtreq[0] == 'prt':
     prt = True
 else:
     prt = False
-conn=sqlite3.connect(config.DBpath+config.DBname)
+print "Database:", config.DBpath+config.SQLite3
+conn=sqlite3.connect(config.DBpath+config.SQLite3)
 curs=conn.cursor()
 curs.execute("delete from GLIDERS")             # delete all rows
 

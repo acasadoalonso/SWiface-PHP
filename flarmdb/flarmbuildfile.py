@@ -12,9 +12,7 @@ import requests
 import time
 import sqlite3
 
-print config.DBname
-
-dbpath=r'/nfs/OGN/SWdata/'
+print "Database:", config.DBpath+config.SQLite3
 
 def flarmdb (prt, curs):
     cin=0
@@ -35,7 +33,7 @@ def flarmdb (prt, curs):
         try:
             line = db.readline()
 	    if not line:
-		print cin, cout
+		print "Input records", cin, " and DB records out", cout
 		return True
             line_lng = len(line)
 	    cin +=1
@@ -97,7 +95,7 @@ if prtreq and prtreq[0] == 'prt':
     prt = True
 else:
     prt = False
-conn=sqlite3.connect(config.DBpath+config.DBname)
+conn=sqlite3.connect(config.DBpath+config.SQLite3)
 curs=conn.cursor()    
     
 print "Start build Flarm file from Flarmnet"

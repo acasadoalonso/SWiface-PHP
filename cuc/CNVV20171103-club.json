@@ -10,7 +10,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/6985.jpg", 
             "pilotName": "Joao Rosa", 
             "country": "PRT", 
-            "trackId": "CNVV20171102:FLRDDEFE7", 
+            "trackId": "CNVV20171103:FLRDDEFE7", 
             "competitionId": "ET"
         }, 
         {
@@ -23,7 +23,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3362.jpg", 
             "pilotName": "Pep Valls", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDD5DB", 
+            "trackId": "CNVV20171103:FLRDDD5DB", 
             "competitionId": "LS"
         }, 
         {
@@ -36,7 +36,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5973.jpg", 
             "pilotName": "Jaime Arcos", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDD906", 
+            "trackId": "CNVV20171103:FLRDDD906", 
             "competitionId": "S14"
         }, 
         {
@@ -49,7 +49,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3877.jpg", 
             "pilotName": "Sergio Reinaudo", 
             "country": "ARG", 
-            "trackId": "CNVV20171102:14", 
+            "trackId": "CNVV20171103:14", 
             "competitionId": "R"
         }, 
         {
@@ -62,7 +62,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/9398.jpg", 
             "pilotName": "Angel Garcia", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDE48A", 
+            "trackId": "CNVV20171103:FLRDDE48A", 
             "competitionId": "K5"
         }, 
         {
@@ -74,7 +74,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Claudio Marin", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:16", 
+            "trackId": "CNVV20171103:16", 
             "competitionId": "HP"
         }, 
         {
@@ -87,7 +87,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3351.jpg", 
             "pilotName": "Rafael Mexia", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDF052", 
+            "trackId": "CNVV20171103:FLRDDF052", 
             "competitionId": "NZ"
         }, 
         {
@@ -100,7 +100,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/9443.jpg", 
             "pilotName": "Manel Dosta", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDE20E", 
+            "trackId": "CNVV20171103:FLRDDE20E", 
             "competitionId": "TC"
         }, 
         {
@@ -113,7 +113,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/692.jpg", 
             "pilotName": "Jesus Broto", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDC159", 
+            "trackId": "CNVV20171103:FLRDDC159", 
             "competitionId": "BB"
         }, 
         {
@@ -126,7 +126,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/4331.jpg", 
             "pilotName": "Jaume Prats", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDD964A", 
+            "trackId": "CNVV20171103:FLRDD964A", 
             "competitionId": "29"
         }, 
         {
@@ -138,7 +138,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Angel Saiz Navarro", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDE3F2", 
+            "trackId": "CNVV20171103:FLRDDE3F2", 
             "competitionId": "L08"
         }, 
         {
@@ -150,7 +150,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Jorge Servet Del Rio", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDE3F1", 
+            "trackId": "CNVV20171103:FLRDDE3F1", 
             "competitionId": "77"
         }, 
         {
@@ -163,7 +163,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/8996.jpg", 
             "pilotName": "Alfonso Rodriguez", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDE3F3", 
+            "trackId": "CNVV20171103:FLRDDE3F3", 
             "competitionId": "94"
         }, 
         {
@@ -176,7 +176,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3349.jpg", 
             "pilotName": "Ignacio Monzon Fueyo", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDEC57", 
+            "trackId": "CNVV20171103:FLRDDEC57", 
             "competitionId": "11"
         }, 
         {
@@ -189,13 +189,13 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/9401.jpg", 
             "pilotName": "Alejandro Lorenzo", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDE45D", 
+            "trackId": "CNVV20171103:FLRDDE45D", 
             "competitionId": "1L"
         }
     ], 
     "eventRevision": 0, 
     "task": {
-        "startOpenTs": 1509613200, 
+        "startOpenTs": 1509699600, 
         "taskName": "club", 
         "turnpoints": [
             {

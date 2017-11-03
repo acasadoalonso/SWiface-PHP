@@ -10,7 +10,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/847.jpg", 
             "pilotName": "Inaki Ulibarri", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:ICA4B5175", 
+            "trackId": "CNVV20171103:ICA4B5175", 
             "competitionId": "LD"
         }, 
         {
@@ -23,7 +23,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/4851.jpg", 
             "pilotName": "Anton Sibanc", 
             "country": "SVN", 
-            "trackId": "CNVV20171102:FLRD0006C", 
+            "trackId": "CNVV20171103:FLRD0006C", 
             "competitionId": "E3"
         }, 
         {
@@ -36,7 +36,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3367.jpg", 
             "pilotName": "Pedro Rodriguez Inciarte", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDEE86", 
+            "trackId": "CNVV20171103:FLRDDEE86", 
             "competitionId": "PD"
         }, 
         {
@@ -49,7 +49,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5971.jpg", 
             "pilotName": "Francesc Pampols", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDDE81", 
+            "trackId": "CNVV20171103:FLRDDDE81", 
             "competitionId": "IK"
         }, 
         {
@@ -62,7 +62,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/376.jpg", 
             "pilotName": "Stephen Olender", 
             "country": "GBR", 
-            "trackId": "CNVV20171102:5", 
+            "trackId": "CNVV20171103:5", 
             "competitionId": "63"
         }, 
         {
@@ -75,7 +75,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/676.jpg", 
             "pilotName": "Jorge Madrigal Revuelta", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDD878F", 
+            "trackId": "CNVV20171103:FLRDD878F", 
             "competitionId": "RO"
         }, 
         {
@@ -88,7 +88,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/10306.jpg", 
             "pilotName": "Joan Fresno Gil", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDD9F5C", 
+            "trackId": "CNVV20171103:FLRDD9F5C", 
             "competitionId": "AY"
         }, 
         {
@@ -101,7 +101,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/10307.jpg", 
             "pilotName": "Manuel Escribano Zafra", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDD920C", 
+            "trackId": "CNVV20171103:FLRDD920C", 
             "competitionId": "DR"
         }, 
         {
@@ -114,7 +114,7 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/8995.jpg", 
             "pilotName": "Gorka Elduayen", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDEAB0", 
+            "trackId": "CNVV20171103:FLRDDEAB0", 
             "competitionId": "AG"
         }, 
         {
@@ -127,13 +127,13 @@
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/210.jpg", 
             "pilotName": "Alvaro De Orleans-Borbon", 
             "country": "ESP", 
-            "trackId": "CNVV20171102:FLRDDEA0B", 
+            "trackId": "CNVV20171103:FLRDDEA0B", 
             "competitionId": "AJ"
         }
     ], 
     "eventRevision": 0, 
     "task": {
-        "startOpenTs": 1509613200, 
+        "startOpenTs": 1509699600, 
         "taskName": "open", 
         "turnpoints": [
             {

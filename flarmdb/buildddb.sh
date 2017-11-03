@@ -9,8 +9,10 @@ wget -o flarmdata.log  www.flarmnet.org/files/data.fln
 mv data.fln flarmdata.fln
 wget -o ognddbdata.log ddb.glidernet.org/download
 mv download ognddbdata.csv
+echo "Start gen the DB"
 python ognbuildfile.py 
 python flarmbuildfile.py 
+echo "End of gen the DB"
 cat flarmhdr flarmdata.txt  >flarmdata.py 
 cat ognhdr   ognddbdata.txt >ognddbdata.py 
 cat kglidhdr ognddbdata.py  flarmdata.py kglidtrail >kglid.py
