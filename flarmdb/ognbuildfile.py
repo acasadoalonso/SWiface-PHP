@@ -3,7 +3,7 @@
 # Program to read OGN  database and create a file as the base for known gliders
 #
 import sys
-sys.path.insert(0, '/var/www/html')
+sys.path.insert(0, '../')
 import config
 
 import string

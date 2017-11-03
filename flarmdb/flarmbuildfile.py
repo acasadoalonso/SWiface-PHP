@@ -4,7 +4,7 @@
 #
 
 import sys
-sys.path.insert(0, '/var/www/html')
+sys.path.insert(0, '../')
 import config
 
 import string
