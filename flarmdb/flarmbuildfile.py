@@ -1,15 +1,20 @@
+#!/usr/bin/env python
 #
 # Program to read flarm_id database and create a file as the base for known gliders
 #
 
+import sys
+sys.path.insert(0, '/var/www/html')
+import config
+
 import string
 import requests
-import sys
 import time
-import sqlite3 
+import sqlite3
+
+print config.DBname
 
 dbpath=r'/nfs/OGN/SWdata/'
-dbname=r'SWiface.db'
 
 def flarmdb (prt, curs):
     cin=0
@@ -92,7 +97,7 @@ if prtreq and prtreq[0] == 'prt':
     prt = True
 else:
     prt = False
-conn=sqlite3.connect(dbpath+dbname)
+conn=sqlite3.connect(config.DBpath+config.DBname)
 curs=conn.cursor()    
     
 print "Start build Flarm file from Flarmnet"
