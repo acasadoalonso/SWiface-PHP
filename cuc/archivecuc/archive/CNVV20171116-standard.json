@@ -1,0 +1,275 @@
+{
+    "tracks": [
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#111"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Javier Codini", 
+            "country": "ARG", 
+            "trackId": "CNVV20171116:1", 
+            "competitionId": "A6"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#222"
+            ], 
+            "aircraft": "Jantar Std 3", 
+            "3dModel": "ventus2", 
+            "pilotName": "Federico Buscema", 
+            "country": "ARG", 
+            "trackId": "CNVV20171116:2", 
+            "competitionId": "NU"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#333"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Al Simmons", 
+            "country": "USA", 
+            "trackId": "CNVV20171116:3", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#444"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Erick Redweik", 
+            "country": "USA", 
+            "trackId": "CNVV20171116:4", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#555"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Riszard Krolikowski", 
+            "country": "USA", 
+            "trackId": "CNVV20171116:5", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#666"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Joao Widmer", 
+            "country": "BRA", 
+            "trackId": "CNVV20171116:6", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#777"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Marian Nowak", 
+            "country": "CAN", 
+            "trackId": "CNVV20171116:7", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#888"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Krzysztof Wiercioch", 
+            "country": "CAN", 
+            "trackId": "CNVV20171116:8", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#999"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jerzy Szemplinski", 
+            "country": "CAN", 
+            "trackId": "CNVV20171116:9", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#aaa"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Goesta Worf", 
+            "country": "DEU", 
+            "trackId": "CNVV20171116:10", 
+            "competitionId": "FV"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#bbb"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Javier Sondon", 
+            "country": "ARG", 
+            "trackId": "CNVV20171116:11", 
+            "competitionId": "QM"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#ccc"
+            ], 
+            "aircraft": "Jantar Std 3", 
+            "3dModel": "ventus2", 
+            "pilotName": "Renato Stefanuto", 
+            "country": "BRA", 
+            "trackId": "CNVV20171116:12", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#ddd"
+            ], 
+            "aircraft": "Jantar Std 3", 
+            "3dModel": "ventus2", 
+            "pilotName": "Claudio Schmidt", 
+            "country": "BRA", 
+            "trackId": "CNVV20171116:13", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#eee"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Gonzalo Riera", 
+            "country": "ARG", 
+            "trackId": "CNVV20171116:14", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#fff"
+            ], 
+            "aircraft": "Jantar Std 3", 
+            "3dModel": "ventus2", 
+            "pilotName": "Fabio Pimienta", 
+            "country": "BRA", 
+            "trackId": "CNVV20171116:15", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#1110"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Andres de la Huerta", 
+            "country": "ARG", 
+            "trackId": "CNVV20171116:16", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#1221"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Cristian Franzini", 
+            "country": "ARG", 
+            "trackId": "CNVV20171116:17", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#1332"
+            ], 
+            "aircraft": "Jantar Std 2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jorge Carrizo", 
+            "country": "CHL", 
+            "trackId": "CNVV20171116:18", 
+            "competitionId": "cn_NOTYET"
+        }
+    ], 
+    "eventRevision": 0, 
+    "task": {
+        "startOpenTs": 1510822800, 
+        "taskName": "standard", 
+        "turnpoints": [
+            {
+                "name": "6-Pte de Madera", 
+                "trigger": "Enter", 
+                "longitude": -60.158981152772846, 
+                "observationZone": "Line", 
+                "radius": 5000, 
+                "latitude": -37.98223459705033, 
+                "type": "Start"
+            }, 
+            {
+                "name": "Tres Picos", 
+                "trigger": "Enter", 
+                "longitude": -62.20980009258033, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -38.28908426060753, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Ecia Acelain", 
+                "trigger": "Enter", 
+                "longitude": -59.62415002000328, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -37.2603997149956, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "1-Otto Ballod", 
+                "trigger": "Enter", 
+                "longitude": -60.13554677373333, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -38.02945169478237, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "1-Otto Ballod", 
+                "trigger": "Enter", 
+                "longitude": -60.13554677373333, 
+                "observationZone": "Cylinder", 
+                "radius": 3000, 
+                "latitude": -38.02945169478237, 
+                "type": "Finish"
+            }
+        ], 
+        "taskType": "SailplaneRacing"
+    }, 
+    "name": "standard-2\u00ba FAI Panamerican Championship", 
+    "description": "standard"
+}

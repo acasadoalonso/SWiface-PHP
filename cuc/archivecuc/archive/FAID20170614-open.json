@@ -1,0 +1,231 @@
+{
+    "tracks": [
+        {
+            "registration": "reg_NOTYET", 
+            "ribbonColors": [
+                "#111"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/4851.jpg", 
+            "pilotName": "Anton Sibanc", 
+            "country": "SVN", 
+            "trackId": "FAID20170614:1", 
+            "competitionId": "cn_NOTYET"
+        }, 
+        {
+            "registration": "EC-KYA", 
+            "ribbonColors": [
+                "#222"
+            ], 
+            "aircraft": "Duo Discus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Juan Jose Fresno", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDD9F5C", 
+            "competitionId": "BY"
+        }, 
+        {
+            "registration": "D-2584", 
+            "ribbonColors": [
+                "#333"
+            ], 
+            "aircraft": "LS 6/18m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3381.jpg", 
+            "pilotName": "Jose Miguel Garcia Gomez", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDDE3AF", 
+            "competitionId": "HW"
+        }, 
+        {
+            "registration": "D-KPRO", 
+            "ribbonColors": [
+                "#444"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/676.jpg", 
+            "pilotName": "Jorge Madrigal Revuelta", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDD878F", 
+            "competitionId": "JM"
+        }, 
+        {
+            "registration": "D-KADR", 
+            "ribbonColors": [
+                "#555"
+            ], 
+            "aircraft": "Duo Discus T", 
+            "3dModel": "ventus2", 
+            "pilotName": "Manuel Escribano", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDD920C", 
+            "competitionId": "DD"
+        }, 
+        {
+            "registration": "D-1377", 
+            "ribbonColors": [
+                "#666"
+            ], 
+            "aircraft": "Duo Discus", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/847.jpg", 
+            "pilotName": "Inaki Ulibarri", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:ICA4B5175", 
+            "competitionId": "LD"
+        }, 
+        {
+            "registration": "D-KPDS", 
+            "ribbonColors": [
+                "#777"
+            ], 
+            "aircraft": "DG 1000/20m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3367.jpg", 
+            "pilotName": "Pedro Rodriguez Inciarte", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:7", 
+            "competitionId": "RI"
+        }, 
+        {
+            "registration": "EC-DOU", 
+            "ribbonColors": [
+                "#888"
+            ], 
+            "aircraft": "Jantar 2b", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3362.jpg", 
+            "pilotName": "Pep Valls Marti", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDDE81B", 
+            "competitionId": "VA"
+        }, 
+        {
+            "registration": "D-KKIK", 
+            "ribbonColors": [
+                "#999"
+            ], 
+            "aircraft": "Ventus 2cT/18m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/5971.jpg", 
+            "pilotName": "Francesc Pampols", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDDDE81", 
+            "competitionId": "IK"
+        }, 
+        {
+            "registration": "G-CJWX", 
+            "ribbonColors": [
+                "#aaa"
+            ], 
+            "aircraft": "Ventus 2cT/18m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/376.jpg", 
+            "pilotName": "Stephen Olender", 
+            "country": "GBR", 
+            "trackId": "FAID20170614:10", 
+            "competitionId": "SO"
+        }, 
+        {
+            "registration": "D-KSEO", 
+            "ribbonColors": [
+                "#bbb"
+            ], 
+            "aircraft": "LAK 17/18m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/8995.jpg", 
+            "pilotName": "Gorka Elduayen", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:11", 
+            "competitionId": "GO"
+        }, 
+        {
+            "registration": "D-KTAJ", 
+            "ribbonColors": [
+                "#ccc"
+            ], 
+            "aircraft": "ASH 31 Mi/21m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/210.jpg", 
+            "pilotName": "Alvaro De Orleans-Borbon", 
+            "country": "ESP", 
+            "trackId": "FAID20170614:FLRDDEA0B", 
+            "competitionId": "AJ"
+        }
+    ], 
+    "eventRevision": 0, 
+    "task": {
+        "startOpenTs": 1497430800, 
+        "taskName": "open", 
+        "turnpoints": [
+            {
+                "name": "AD La Mancha (v)", 
+                "trigger": "Enter", 
+                "longitude": -3.247399993947626, 
+                "observationZone": "Line", 
+                "radius": 3000, 
+                "latitude": 39.563867352204525, 
+                "type": "Start"
+            }, 
+            {
+                "name": "La Nava de Ricomalillo", 
+                "trigger": "Enter", 
+                "longitude": -4.990000030714718, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 39.64983211309795, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Las Pedroneras", 
+                "trigger": "Enter", 
+                "longitude": -2.6761165684654293, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 39.45528441987388, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Los Yebenes", 
+                "trigger": "Enter", 
+                "longitude": -3.870716867744075, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 39.58149948554661, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "Madridejos", 
+                "trigger": "Enter", 
+                "longitude": -3.532166588701356, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 39.468384722702055, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "PICO ROMERAL (v)", 
+                "trigger": "Enter", 
+                "longitude": -3.4023165817297567, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 39.66251577438691, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "AD Lillo", 
+                "trigger": "Enter", 
+                "longitude": -3.320500093539674, 
+                "observationZone": "Cylinder", 
+                "radius": 3000, 
+                "latitude": 39.71700019339573, 
+                "type": "Finish"
+            }
+        ], 
+        "taskType": "SailplaneRacing"
+    }, 
+    "name": "open-Campeonato Nacional de Vuelo a Vela 2017", 
+    "description": "open"
+}

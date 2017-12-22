@@ -1,0 +1,79 @@
+{
+    "tracks": [
+        {
+            "registration": "F-XXX", 
+            "ribbonColors": [
+                "#451dd"
+            ], 
+            "aircraft": "ASG-29E 15m", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/196.jpg", 
+            "pilotName": "Philippe de Pechy", 
+            "country": "FRA", 
+            "trackId": "FAID20170619:", 
+            "competitionId": "XX"
+        }
+    ], 
+    "task": {
+        "startOpenTs": "2017-06-23", 
+        "turnpoints": [
+            {
+                "name": "START", 
+                "trigger": "Enter", 
+                "longitude": 2.427216666666667, 
+                "observationZone": "Line", 
+                "radius": 2500, 
+                "latitude": 48.3525, 
+                "type": "Start"
+            }, 
+            {
+                "name": "010Angerville", 
+                "trigger": "Enter", 
+                "longitude": 2.00195, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.31111666666666, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "280Voulx", 
+                "trigger": "Enter", 
+                "longitude": 2.9691666666666667, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.280833333333334, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "179MoretAero", 
+                "trigger": "Enter", 
+                "longitude": 2.7963833333333334, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.34, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "ELECTRIC", 
+                "trigger": "Enter", 
+                "longitude": 2.4488833333333333, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": 48.3475, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "001Buno01", 
+                "trigger": "Enter", 
+                "longitude": 2.42305, 
+                "observationZone": "Line", 
+                "radius": 250, 
+                "latitude": 48.346666666666664, 
+                "type": "Finish"
+            }
+        ], 
+        "taskType": "SailplaneGrandPrix"
+    }, 
+    "name": "France SGP", 
+    "description": "France SGP 2017"
+}

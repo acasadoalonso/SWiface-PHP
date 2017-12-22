@@ -95,12 +95,13 @@ else:
 clsreq=sys.argv[2:]                             # if class is requested
 if clsreq:
         classreq=clsreq[0]                      # class requested
+	print "TTT", classreq
 else:
         classreq=' '                            # none        
 # ---------------------------------------------------------------- #
-print "Util to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs V1.1"
+print "Utility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs V1.1"
 print "==================================================================================================================\n\n"
-print "Index day: ", idx, "Class requested: ", classreq
+print "Index day: ", idx, " Class requested: ", classreq
 print "Reading data from clientid/secretkey files"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
@@ -111,6 +112,7 @@ secpath=cwd+"/SoaringSpot/"                     # where to find the clientid and
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
 taskType= "SailplaneRacing"                     # race type
+
 # ==============================================#
 tsks = {}					# task file
 
@@ -123,7 +125,7 @@ print date                                      #
 local_time = datetime.datetime.now()            # the local time
 print "Local Time is now:", local_time		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")	# get the local time
-
+print "Config params:", SWdbpath, initials, cucpath,secpath
 if (config.MySQL):
         connG=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
 	print "Config:", config.DBhost, config.DBuser, config.DBname
@@ -182,19 +184,22 @@ for cl in getemb(cd,'classes'):
 	classid         =cl['id']               # internal ID of the class
 	JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
 	TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
+	CSVFILE  = cucpath + initials + fl_date_time+"-"+classtype+"filter.csv"
 						# name of the JSON to be generated, one per class
 
 	os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
 	os.system('rm  '+TASKFILE)
+	os.system('rm  '+CSVFILE)
 	print "JSON generated data file for the class is: ",JSONFILE # just a trace
 	print "TASK generated data file for the class is: ",TASKFILE # just a trace
+	print "CSV  generated data file for the class is: ",CSVFILE # just a trace
 	print "\n= Class = Category:", category,"Type:", classtype, "Class ID:", classid
 	jsonfile = open (JSONFILE, 'w')		# open the output file, one per class 
 	taskfile = open (TASKFILE, 'w')		# open the output file, one per class 
 	url3=getlinks(cl, "contestants")        # search for the contestants on each class
 	ctt=gdata(url3,   "contestants")        # get the contestants data
 	print "= Contestants for the class ==========================="
-	wlist=[]
+	wlist=[]				# filter for live.glidernet.org 
 	flist=[]				# Filter list for glidertracker.org
 	flist.append("ID,CALL,CN,TYPE,INDEX")	# Initialize with header row
 	for  contestants in ctt:                # inspect the data of each contestant 
@@ -280,12 +285,16 @@ for cl in getemb(cd,'classes'):
 		igcid=getemb(contestants,'pilot')[0]['igc_id']
 		ccc     = pycountry.countries.get(alpha_2=nation) # convert the 2 char ISO code to 3 chars ISO code
 		country = ccc.alpha_3
-		if fr[3:9] != 'NOTYET':
-			wlist.append(fr[3:9])
-			flist.append(fr+","+regi+","+cn+","+ar+","+str(hd)) # Populate the filter list
+		if idflarm != 'NOTYET':
+			if idflarm != " ":
+				wlist.append(idflarm[3:9])
+			else:
+				print "Missing Flarm:", fname, lname
+				nwarnings += 1  # and increase the number of warnings
+			flist.append(idflarm+","+regi+","+cn+","+ar+","+str(hd)) # Populate the filter list
 
 		# print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
-		print "\t", fname+" "+lname, nation, country, regi, cn, fr, hd, ar, club, igcid 
+		print "\t", fname+" "+lname, nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
 		if idflarm==' ':
 			idflarm=str(npil)
 							# create the track
@@ -303,7 +312,8 @@ for cl in getemb(cd,'classes'):
 	print "= Tasks ==", ctt[idx]["task_date"]
 	print "= Tasks ==", ctt[idx]["result_status"]
 	print "= Tasks ==", ctt[idx]["task_distance"]/1000
-	print "= Tasks ==", "Kms.", ctt[idx]["task_type"]
+	tasktype=ctt[idx]["task_type"]
+	print "= Tasks ==", "Kms.  ", tasktype
 	
 	url5=getlinks(ctt[idx],"points")                # look for the waypoints within the task 
 	cpp=gdata(url5,        "points")                # look for the waypoints within the task within the day IDX
@@ -339,7 +349,10 @@ for cl in getemb(cd,'classes'):
 		else:
 			type="Turnpoint"
 			oz  ="Cylinder"
-			rad=ozr2
+			if tasktype == "assigned_area":
+				rad=ozra
+			else:
+				rad=ozr2
 
 		print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx        # print it as a reference
 							# built the turning point 
@@ -393,7 +406,7 @@ for cl in getemb(cd,'classes'):
 
         # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
         # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
-        cmd="gist "+TASKFILE+" > /home/pi/SWdata/gist.log"
+        cmd="gist "+TASKFILE+" > /nfs/OGN/SWdata/gist.log"
 	# print cmd
         os.system(cmd)
 	# print "Use: "+html

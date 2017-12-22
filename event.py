@@ -48,7 +48,10 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursD=conn.cursor()                                             # cursor for the ogndata table
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
-	cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
+	if (config.MySQL):
+		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
+	else:
+		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"'  ;" 
 	cmd2="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd
 	try:
