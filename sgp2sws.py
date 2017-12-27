@@ -154,6 +154,8 @@ for id in pilots:
 		registration= 	pilots[id]["w"]			# registration
 		if flarmid == '':
 			flarmid = getflarmid(registration)	# get the FlarmId from the registration
+		if len(flarmid) == 6:
+			flarmid = "FLR"+flarmid			# add the FLR assuming Flarm
 	else:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
@@ -193,7 +195,13 @@ comp_name		=comp['t']				# event name
 comp_shortname		=comp['l']				# event short name
 comp_id			=comp['i']
 print "Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, comp_firstday, comp_lastday
-numberofactivedays	=j_obj["j"]
+numberofactivedays	= 0
+
+if 	j_obj.get ("j") != None :
+	numberofactivedays	=j_obj["j"]
+if 	j_obj.get ("i") == None :				# check if is fully setup the web site
+	print "No index of days ... exiting."
+	exit(-1)
 indexofdays		=j_obj["i"]
 #print "Index of Days", indexofdays
 if days != '':
@@ -300,7 +308,7 @@ print "Comp full  name:", comp_name
 print "Comp date:", comp_date
 print "Comp Start time:", comp_starttime/1000
 print tp
-task={ "taskType": "SailplaneGrandPrix", "startOpenTs": comp_date , "turnpoints": tp}
+task={ "taskType": "SailplaneGrandPrix", "taskName":"SGPrace", "startOpenTs": comp_date , "turnpoints": tp}
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
 jsonfile.write(j)
