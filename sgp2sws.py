@@ -290,7 +290,7 @@ while wp < len(task_wp):
 			oz="Line"	
 		#wp_id				=task_wp[wp]["id"]	# Wyapoint ID
 		print "WP:", wp_name, wp_lat, wp_lon,  wp_type, wp_radius, type, oz
-		tpx={"latitude": wp_lat, "longitude": wp_lon, "name": wp_name, "observationZone": oz, "type": type, "radius": wp_radius, "trigger":"Enter"}
+		tpx={"latitude": wp_lat, "longitude": wp_lon, "name": wp_name, "observationZone": oz, "type": type, "radius": wp_radius, "trigger":"Enter", "texture": config.SWSserver+"SWS/tptextures/TP"+str(wp)+".png"}
         	tp.append(tpx)
 		tlegs=[wp_lat,wp_lon]
 		legs.append(tlegs)

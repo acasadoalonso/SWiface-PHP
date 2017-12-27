@@ -44,11 +44,12 @@ for fn in cuc:
 # create the event groups
 
 eg=[]                                                   # create the event group
-eg1={'name':config.eventname1,  'description': config.eventdesc1, 'events': evQ}
-eg2={'name':config.eventname2,  'description': config.eventdesc2, 'events': evL}
+eg1={'name':config.eventname1,  'description': config.eventdesc1, 'events': evQ, "bannerUrl": config.SWSserver+"SWS/SWSbanner.png"}
+eg2={'name':config.eventname2,  'description': config.eventdesc2, 'events': evL, "bannerUrl": config.SWSserver+"SWS/SWSbanner.png"}
 
 eg.append(eg1)                                          # append the individual events groups
 eg.append(eg2)                                          # so far the QSGP and the LIVE
 j=json.dumps(eg, indent=4)                              # convert it to JSON format
 print j                                                 # pass it to the PHP script
 exit()
+
