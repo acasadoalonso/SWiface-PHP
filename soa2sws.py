@@ -290,7 +290,6 @@ for cl in getemb(cd,'classes'):
 				wlist.append(idflarm[3:9])
 			else:
 				print "Missing Flarm:", fname, lname
-				nwarnings += 1  # and increase the number of warnings
 			flist.append(idflarm+","+regi+","+cn+","+ar+","+str(hd)) # Populate the filter list
 
 		# print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID

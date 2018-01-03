@@ -1,0 +1,413 @@
+{
+    "tracks": [
+        {
+            "registration": "D-KXDH", 
+            "ribbonColors": [
+                "#111"
+            ], 
+            "aircraft": "DG 808C/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Frank Bender", 
+            "country": "DEU", 
+            "trackId": "SGPF20180104:FLRDD9D1E", 
+            "competitionId": "DH"
+        }, 
+        {
+            "registration": "OK-2992", 
+            "ribbonColors": [
+                "#222"
+            ], 
+            "aircraft": "ASG 29Es/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Roman Mracek", 
+            "country": "CZE", 
+            "trackId": "SGPF20180104:FLRDDEA8F", 
+            "competitionId": "OK"
+        }, 
+        {
+            "registration": "HB-3425", 
+            "ribbonColors": [
+                "#333"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Fridolin Hauser", 
+            "country": "CHE", 
+            "trackId": "SGPF20180104:ICA4B5208", 
+            "competitionId": "4S"
+        }, 
+        {
+            "registration": "D-8024", 
+            "ribbonColors": [
+                "#444"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Lukasz Wojcik", 
+            "country": "POL", 
+            "trackId": "SGPF20180104:FLRDDEEA2", 
+            "competitionId": "PL"
+        }, 
+        {
+            "registration": "D-KEGP", 
+            "ribbonColors": [
+                "#555"
+            ], 
+            "aircraft": "Arcus M", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jurgen Wenzel", 
+            "country": "DEU", 
+            "trackId": "SGPF20180104:FLRDDEC18", 
+            "competitionId": "JM"
+        }, 
+        {
+            "registration": "G-LIVS", 
+            "ribbonColors": [
+                "#666"
+            ], 
+            "aircraft": "ASH 26E", 
+            "3dModel": "ventus2", 
+            "pilotName": "Phil Sturley", 
+            "country": "GBR", 
+            "trackId": "SGPF20180104:6", 
+            "competitionId": "261"
+        }, 
+        {
+            "registration": "ZS-GEI", 
+            "ribbonColors": [
+                "#777"
+            ], 
+            "aircraft": "JS 1C", 
+            "3dModel": "ventus2", 
+            "pilotName": "Bostjan Pristavec", 
+            "country": "SVN", 
+            "trackId": "SGPF20180104:FLRDDEF7A", 
+            "competitionId": "EJ"
+        }, 
+        {
+            "registration": "D-KJMW", 
+            "ribbonColors": [
+                "#888"
+            ], 
+            "aircraft": "Ventus 3T", 
+            "3dModel": "ventus2", 
+            "pilotName": "Sebastian Nagel", 
+            "country": "DEU", 
+            "trackId": "SGPF20180104:8", 
+            "competitionId": "WM"
+        }, 
+        {
+            "registration": "YU-4467", 
+            "ribbonColors": [
+                "#999"
+            ], 
+            "aircraft": "JS 1C", 
+            "3dModel": "ventus2", 
+            "pilotName": "Sebastian Kawa", 
+            "country": "POL", 
+            "trackId": "SGPF20180104:FLRDDECC4", 
+            "competitionId": "P"
+        }, 
+        {
+            "registration": "D-KCOT", 
+            "ribbonColors": [
+                "#aaa"
+            ], 
+            "aircraft": "JS 1C", 
+            "3dModel": "ventus2", 
+            "pilotName": "Klaus Kalmbach", 
+            "country": "DEU", 
+            "trackId": "SGPF20180104:10", 
+            "competitionId": "OT"
+        }, 
+        {
+            "registration": "D-9683", 
+            "ribbonColors": [
+                "#bbb"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Werner Amann", 
+            "country": "AUT", 
+            "trackId": "SGPF20180104:11", 
+            "competitionId": "WG"
+        }, 
+        {
+            "registration": "OB", 
+            "ribbonColors": [
+                "#ccc"
+            ], 
+            "aircraft": "JS 1C", 
+            "3dModel": "ventus2", 
+            "pilotName": "Mark Tingey", 
+            "country": "NZL", 
+            "trackId": "SGPF20180104:12", 
+            "competitionId": "OB"
+        }, 
+        {
+            "registration": "CC-KWF", 
+            "ribbonColors": [
+                "#ddd"
+            ], 
+            "aircraft": "Mini Nimbus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Rodrigo Jimenez", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDD8E66", 
+            "competitionId": "WF"
+        }, 
+        {
+            "registration": "G-DLOE", 
+            "ribbonColors": [
+                "#eee"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jon Gatfield", 
+            "country": "GBR", 
+            "trackId": "SGPF20180104:FLRDDECCF", 
+            "competitionId": "YO"
+        }, 
+        {
+            "registration": "CC-AVE", 
+            "ribbonColors": [
+                "#fff"
+            ], 
+            "aircraft": "Ventus 2cM/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jose Luis Chanes", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDF0CB5", 
+            "competitionId": "VE"
+        }, 
+        {
+            "registration": "CC-PQW", 
+            "ribbonColors": [
+                "#1110"
+            ], 
+            "aircraft": "Ventus bT 17.6m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Sergio Campos", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDF91F", 
+            "competitionId": "PQ"
+        }, 
+        {
+            "registration": "CC-KWE", 
+            "ribbonColors": [
+                "#1221"
+            ], 
+            "aircraft": "Mini Nimbus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Mario Reyes", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDF93F", 
+            "competitionId": "2"
+        }, 
+        {
+            "registration": "CC-AAW", 
+            "ribbonColors": [
+                "#1332"
+            ], 
+            "aircraft": "Duo Discus T", 
+            "3dModel": "ventus2", 
+            "pilotName": "Mario Naretto", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDEE67", 
+            "competitionId": "DUO"
+        }, 
+        {
+            "registration": "CC-PYV", 
+            "ribbonColors": [
+                "#1443"
+            ], 
+            "aircraft": "Ventus cT 15m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Nicolas Becerra", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDFD1F", 
+            "competitionId": "YV"
+        }, 
+        {
+            "registration": "CC-PQV", 
+            "ribbonColors": [
+                "#1554"
+            ], 
+            "aircraft": "Ventus 2B", 
+            "3dModel": "ventus2", 
+            "pilotName": "Hans Weiner", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDF9D8", 
+            "competitionId": "QV"
+        }, 
+        {
+            "registration": "CC-LWD", 
+            "ribbonColors": [
+                "#1665"
+            ], 
+            "aircraft": "Ventus cM 17.6m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Sergio Uribe", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDFAEE", 
+            "competitionId": "3"
+        }, 
+        {
+            "registration": "CC-PXY", 
+            "ribbonColors": [
+                "#1776"
+            ], 
+            "aircraft": "Nimbus 2 c", 
+            "3dModel": "ventus2", 
+            "pilotName": "Eduardo Boehm", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:22", 
+            "competitionId": "XY"
+        }, 
+        {
+            "registration": "CC-AVR", 
+            "ribbonColors": [
+                "#1887"
+            ], 
+            "aircraft": "Ventus 2cM/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Harald Baumgarten", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDF0CBA", 
+            "competitionId": "VR"
+        }, 
+        {
+            "registration": "D-KHAT", 
+            "ribbonColors": [
+                "#1998"
+            ], 
+            "aircraft": "Ventus 3T", 
+            "3dModel": "ventus2", 
+            "pilotName": "Rene Vidal", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDEF31", 
+            "competitionId": "AT"
+        }, 
+        {
+            "registration": "CC-AIW", 
+            "ribbonColors": [
+                "#1aa9"
+            ], 
+            "aircraft": "Ventus 2cxa 18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Carlos Rocca Vidal", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDF1160", 
+            "competitionId": "5B"
+        }, 
+        {
+            "registration": "CC-AZZ", 
+            "ribbonColors": [
+                "#1bba"
+            ], 
+            "aircraft": "Ventus 2cM/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Tomas Reich", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDF0CC1", 
+            "competitionId": "ZZ"
+        }, 
+        {
+            "registration": "CC-AIG", 
+            "ribbonColors": [
+                "#1ccb"
+            ], 
+            "aircraft": "Arcus M", 
+            "3dModel": "ventus2", 
+            "pilotName": "Andres Errazuriz", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDEB82", 
+            "competitionId": "IG"
+        }, 
+        {
+            "registration": "CC-PQZ", 
+            "ribbonColors": [
+                "#1ddc"
+            ], 
+            "aircraft": "Ventus 2cT/15m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Alejandro Chanes", 
+            "country": "CHL", 
+            "trackId": "SGPF20180104:FLRDDFA81", 
+            "competitionId": "QZ"
+        }
+    ], 
+    "eventRevision": 0, 
+    "task": {
+        "startOpenTs": 1514970000, 
+        "taskName": "open", 
+        "turnpoints": [
+            {
+                "name": "19 Dehesa", 
+                "trigger": "Enter", 
+                "longitude": -70.54333438948173, 
+                "observationZone": "Line", 
+                "radius": 1500, 
+                "latitude": -33.31528245039631, 
+                "type": "Start"
+            }, 
+            {
+                "name": "03 Arenillas", 
+                "trigger": "Enter", 
+                "longitude": -70.55054706924723, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -34.450548682911986, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "31 Inca Lake", 
+                "trigger": "Enter", 
+                "longitude": -70.17694938202293, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -32.86471536141844, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "69 Rio Leones", 
+                "trigger": "Enter", 
+                "longitude": -70.2308327443871, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -32.68721582036221, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "56 Putaendo", 
+                "trigger": "Enter", 
+                "longitude": -70.68888572069314, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -32.57028298177214, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "02 3K", 
+                "trigger": "Enter", 
+                "longitude": -70.5472139369323, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -33.37583207738861, 
+                "type": "Turnpoint"
+            }, 
+            {
+                "name": "01 AD Vitacura", 
+                "trigger": "Enter", 
+                "longitude": -70.57945242981593, 
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "latitude": -33.38028194563273, 
+                "type": "Finish"
+            }
+        ], 
+        "taskType": "SailplaneRacing"
+    }, 
+    "name": "open-56 Campeonato Nacional y 13 Andes Open", 
+    "description": "open"
+}
