@@ -319,6 +319,7 @@ for cl in getemb(cd,'classes'):
 	print "= Waypoints for the task within the class  ============"
 	tasklen=0                                       # task length for double check 
 	ntp=0
+	wp=0
 	legs=[]						# legs for the task file
 	for point in cpp:                               # search for each waypoint within the task 
 		lati= point["latitude"]
@@ -352,10 +353,16 @@ for cl in getemb(cd,'classes'):
 				rad=ozra
 			else:
 				rad=ozr2
+                if   type == "Start":
+                        tptexture=config.SWSserver+"SWS/tptextures/START.png"
+                elif type == "Finish":
+                        tptexture=config.SWSserver+"SWS/tptextures/FINISH.png"
+                else:
+                        tptexture=config.SWSserver+"SWS/tptextures/TP"+str(ntp)+".png"
 
-		print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx        # print it as a reference
+		print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx, tptexture        # print it as a reference
 							# built the turning point 
-		tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": rad, "trigger":"Enter"}
+		tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": rad, "trigger":"Enter", "texture": tptexture}
 		tp.append(tpx)                          # add it to the TP
 		tlegs=[lati,long]
 		legs.append(tlegs)
