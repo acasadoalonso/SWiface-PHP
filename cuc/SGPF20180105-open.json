@@ -355,52 +355,72 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "92 Trucha", 
-                "latitude": -33.094448774151786, 
+                "name": "79 Sanatorio", 
+                "latitude": -32.61916664566163, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP8.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.68861934332081
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "71 Rio Rocin", 
+                "latitude": -32.445550067149156, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP7.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.43444751373445
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "04 Banos", 
+                "latitude": -32.79666618671729, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP6.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.57111959902576
+                "longitude": -70.54778084263154
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "72 Rio Tambillos", 
-                "latitude": -32.35861541939337, 
+                "name": "60 Rio Blanco", 
+                "latitude": -32.90888277968632, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.31360097675068
+                "longitude": -70.30166863626752
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 70000, 
-                "name": "47 Oasis", 
-                "latitude": -31.251383698325945, 
+                "radius": 500, 
+                "name": "09 Chacabuco Pista", 
+                "latitude": -33.05055114835571, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.70111858949747
+                "longitude": -70.70861813721034
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "94 Valle Nevado", 
-                "latitude": -33.38028194563273, 
+                "name": "86 Termas de Colina", 
+                "latitude": -33.183883271144055, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.3141678824499
+                "longitude": -70.59916435575809
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "12 Chicureo Pista", 
-                "latitude": -33.270281749049985, 
+                "name": "54 Pirque", 
+                "latitude": -33.764999180823025, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.65000145374898
+                "longitude": -70.56555299485127
             }, 
             {
                 "observationZone": "Cylinder", 

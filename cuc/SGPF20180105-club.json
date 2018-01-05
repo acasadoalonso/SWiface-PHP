@@ -1,7 +1,7 @@
 {
     "tracks": [
         {
-            "registration": "CC-K16W", 
+            "registration": "CC-K14W", 
             "ribbonColors": [
                 "#111"
             ], 
@@ -9,11 +9,11 @@
             "3dModel": "ventus2", 
             "pilotName": "Juan Pablo Valenzuela", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFABC", 
-            "competitionId": "6W"
+            "trackId": "SGPF20180105:FLRDDFA6E", 
+            "competitionId": "4W"
         }, 
         {
-            "registration": "CC-K15W", 
+            "registration": "CC-K16W", 
             "ribbonColors": [
                 "#222"
             ], 
@@ -21,8 +21,8 @@
             "3dModel": "ventus2", 
             "pilotName": "Pablo Valenzuela", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF9D2", 
-            "competitionId": "5W"
+            "trackId": "SGPF20180105:FLRDDFABC", 
+            "competitionId": "6W"
         }, 
         {
             "registration": "CC-AJQ", 
@@ -151,42 +151,52 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "14 Colina", 
-                "latitude": -33.218334745317364, 
+                "name": "53 Piedras Blancas", 
+                "latitude": -32.71000133143387, 
                 "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP6.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.66304711506703
-            }, 
-            {
-                "observationZone": "Cylinder", 
-                "radius": 12000, 
-                "name": "39 Leonera", 
-                "latitude": -34.035283426658566, 
-                "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
-                "type": "Turnpoint", 
-                "longitude": -70.57221925948112
+                "longitude": -70.5066699340176
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "23 El Cobre", 
-                "latitude": -32.97221570876528, 
+                "name": "04 Banos", 
+                "latitude": -32.79666618671729, 
                 "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.62194986682688
+                "longitude": -70.54778084263154
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 20000, 
-                "name": "53 Piedras Blancas", 
-                "latitude": -32.71000133143387, 
+                "radius": 500, 
+                "name": "20 Democoen", 
+                "latitude": -32.792783224174116, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.47278536554295
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "09 Chacabuco Pista", 
+                "latitude": -33.05055114835571, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.70861813721034
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "95 Vizcachas", 
+                "latitude": -33.598882150019406, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.5066699340176
+                "longitude": -70.52278235027251
             }, 
             {
                 "observationZone": "Cylinder", 
