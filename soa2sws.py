@@ -354,11 +354,11 @@ for cl in getemb(cd,'classes'):
 			else:
 				rad=ozr2
                 if   type == "Start":
-                        tptexture=config.SWSserver+"SWS/tptextures/START.png"
+                        tptexture=config.TPTserver+"SWS/tptextures/START.png"
                 elif type == "Finish":
-                        tptexture=config.SWSserver+"SWS/tptextures/FINISH.png"
+                        tptexture=config.TPTserver+"SWS/tptextures/FINISH.png"
                 else:
-                        tptexture=config.SWSserver+"SWS/tptextures/TP"+str(ntp)+".png"
+                        tptexture=config.TPTserver+"SWS/tptextures/TP"+str(ntp)+".png"
 
 		print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx, tptexture        # print it as a reference
 							# built the turning point 

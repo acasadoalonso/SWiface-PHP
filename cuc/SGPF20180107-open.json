@@ -1,345 +1,357 @@
 {
     "tracks": [
         {
-            "registration": "D-KXDH", 
+            "registration": "D-9529", 
             "ribbonColors": [
                 "#ccc"
+            ], 
+            "aircraft": "ASG 29/18m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Gintas Zube", 
+            "country": "LTU", 
+            "trackId": "SGPF20180107:FLRDDEFE6", 
+            "competitionId": "AR"
+        }, 
+        {
+            "registration": "D-KXDH", 
+            "ribbonColors": [
+                "#ddd"
             ], 
             "aircraft": "DG 808C/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Frank Bender", 
             "country": "DEU", 
-            "trackId": "SGPF20180105:FLRDD9D1E", 
+            "trackId": "SGPF20180107:FLRDD9D1E", 
             "competitionId": "DH"
         }, 
         {
             "registration": "OK-2992", 
             "ribbonColors": [
-                "#ddd"
+                "#eee"
             ], 
             "aircraft": "ASG 29Es/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Roman Mracek", 
             "country": "CZE", 
-            "trackId": "SGPF20180105:FLRDDEA8F", 
+            "trackId": "SGPF20180107:FLRDDEA8F", 
             "competitionId": "OK"
         }, 
         {
             "registration": "HB-3425", 
             "ribbonColors": [
-                "#eee"
+                "#fff"
             ], 
             "aircraft": "ASG 29/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Fridolin Hauser", 
             "country": "CHE", 
-            "trackId": "SGPF20180105:ICA4B5208", 
+            "trackId": "SGPF20180107:ICA4B5208", 
             "competitionId": "4S"
         }, 
         {
             "registration": "D-8024", 
             "ribbonColors": [
-                "#fff"
+                "#1110"
             ], 
             "aircraft": "ASG 29/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Lukasz Wojcik", 
             "country": "POL", 
-            "trackId": "SGPF20180105:FLRDDEEA2", 
+            "trackId": "SGPF20180107:FLRDDEEA2", 
             "competitionId": "PL"
         }, 
         {
             "registration": "D-KEGP", 
             "ribbonColors": [
-                "#1110"
+                "#1221"
             ], 
             "aircraft": "Arcus M", 
             "3dModel": "ventus2", 
             "pilotName": "Jurgen Wenzel", 
             "country": "DEU", 
-            "trackId": "SGPF20180105:FLRDDEC18", 
+            "trackId": "SGPF20180107:FLRDDEC18", 
             "competitionId": "JM"
         }, 
         {
             "registration": "G_LIVS", 
             "ribbonColors": [
-                "#1221"
+                "#1332"
             ], 
             "aircraft": "ASH 26E", 
             "3dModel": "ventus2", 
             "pilotName": "Phil Sturley", 
             "country": "GBR", 
-            "trackId": "SGPF20180105:FLRDDECE2", 
+            "trackId": "SGPF20180107:FLRDDECE2", 
             "competitionId": "261"
         }, 
         {
             "registration": "ZS-GEI", 
             "ribbonColors": [
-                "#1332"
+                "#1443"
             ], 
             "aircraft": "JS 1C", 
             "3dModel": "ventus2", 
             "pilotName": "Bostjan Pristavec", 
             "country": "SVN", 
-            "trackId": "SGPF20180105:FLRDDEF7A", 
+            "trackId": "SGPF20180107:FLRDDEF7A", 
             "competitionId": "EJ"
         }, 
         {
             "registration": "D-KJMW", 
             "ribbonColors": [
-                "#1443"
+                "#1554"
             ], 
             "aircraft": "Ventus 3T", 
             "3dModel": "ventus2", 
             "pilotName": "Sebastian Nagel", 
             "country": "DEU", 
-            "trackId": "SGPF20180105:19", 
+            "trackId": "SGPF20180107:20", 
             "competitionId": "WM"
         }, 
         {
             "registration": "YU-4467", 
             "ribbonColors": [
-                "#1554"
+                "#1665"
             ], 
             "aircraft": "JS 1C", 
             "3dModel": "ventus2", 
             "pilotName": "Sebastian Kawa", 
             "country": "POL", 
-            "trackId": "SGPF20180105:FLRDDECC4", 
+            "trackId": "SGPF20180107:FLRDDECC4", 
             "competitionId": "P"
         }, 
         {
             "registration": "D-KCOT", 
             "ribbonColors": [
-                "#1665"
+                "#1776"
             ], 
             "aircraft": "JS 1C", 
             "3dModel": "ventus2", 
             "pilotName": "Klaus Kalmbach", 
             "country": "DEU", 
-            "trackId": "SGPF20180105:21", 
+            "trackId": "SGPF20180107:22", 
             "competitionId": "OT"
         }, 
         {
             "registration": "D-9683", 
             "ribbonColors": [
-                "#1776"
+                "#1887"
             ], 
             "aircraft": "ASG 29/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Werner Amann", 
             "country": "AUT", 
-            "trackId": "SGPF20180105:22", 
+            "trackId": "SGPF20180107:23", 
             "competitionId": "WG"
         }, 
         {
             "registration": "ZK-GOB", 
             "ribbonColors": [
-                "#1887"
+                "#1998"
             ], 
             "aircraft": "JS 1C", 
             "3dModel": "ventus2", 
             "pilotName": "Mark Tingey", 
             "country": "NZL", 
-            "trackId": "SGPF20180105:ICAC821A9", 
+            "trackId": "SGPF20180107:ICAC821A9", 
             "competitionId": "OB"
         }, 
         {
             "registration": "CC-KWF", 
             "ribbonColors": [
-                "#1998"
+                "#1aa9"
             ], 
             "aircraft": "Mini Nimbus", 
             "3dModel": "ventus2", 
             "pilotName": "Rodrigo Jimenez", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDD8E66", 
+            "trackId": "SGPF20180107:FLRDD8E66", 
             "competitionId": "WF"
         }, 
         {
             "registration": "G-DLOE", 
             "ribbonColors": [
-                "#1aa9"
+                "#1bba"
             ], 
             "aircraft": "ASG 29/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Jon Gatfield", 
             "country": "GBR", 
-            "trackId": "SGPF20180105:FLRDDECCF", 
+            "trackId": "SGPF20180107:FLRDDECCF", 
             "competitionId": "YO"
         }, 
         {
             "registration": "CC-AVE", 
             "ribbonColors": [
-                "#1bba"
+                "#1ccb"
             ], 
             "aircraft": "Ventus 2cM/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Jose Luis Chanes", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDF0CB5", 
+            "trackId": "SGPF20180107:FLRDF0CB5", 
             "competitionId": "VE"
         }, 
         {
             "registration": "CC-PQW", 
             "ribbonColors": [
-                "#1ccb"
+                "#1ddc"
             ], 
             "aircraft": "Ventus bT 17.6m", 
             "3dModel": "ventus2", 
             "pilotName": "Sergio Campos", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF91F", 
+            "trackId": "SGPF20180107:FLRDDF91F", 
             "competitionId": "PQ"
         }, 
         {
             "registration": "CC-KWE", 
             "ribbonColors": [
-                "#1ddc"
+                "#1eed"
             ], 
             "aircraft": "Mini Nimbus", 
             "3dModel": "ventus2", 
             "pilotName": "Mario Reyes", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF93F", 
+            "trackId": "SGPF20180107:FLRDDF93F", 
             "competitionId": "2"
         }, 
         {
             "registration": "CC-AAW", 
             "ribbonColors": [
-                "#1eed"
+                "#1ffe"
             ], 
             "aircraft": "Duo Discus T", 
             "3dModel": "ventus2", 
             "pilotName": "Mario Naretto", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDEE67", 
+            "trackId": "SGPF20180107:FLRDDEE67", 
             "competitionId": "DUO"
         }, 
         {
             "registration": "CC-PYV", 
             "ribbonColors": [
-                "#1ffe"
+                "#210f"
             ], 
             "aircraft": "Ventus cT 15m", 
             "3dModel": "ventus2", 
             "pilotName": "Nicolas Becerra", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFD1F", 
+            "trackId": "SGPF20180107:FLRDDFD1F", 
             "competitionId": "YV"
         }, 
         {
             "registration": "CC-PQV", 
             "ribbonColors": [
-                "#210f"
+                "#2220"
             ], 
             "aircraft": "Ventus 2B", 
             "3dModel": "ventus2", 
             "pilotName": "Hans Weiner", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF9D8", 
+            "trackId": "SGPF20180107:FLRDDF9D8", 
             "competitionId": "QV"
         }, 
         {
             "registration": "CC-LWD", 
             "ribbonColors": [
-                "#2220"
+                "#2331"
             ], 
             "aircraft": "Ventus cM 17.6m", 
             "3dModel": "ventus2", 
             "pilotName": "Sergio Uribe", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFAEE", 
+            "trackId": "SGPF20180107:FLRDDFAEE", 
             "competitionId": "3"
         }, 
         {
             "registration": "CC-PXY", 
             "ribbonColors": [
-                "#2331"
+                "#2442"
             ], 
             "aircraft": "Nimbus 2 c", 
             "3dModel": "ventus2", 
             "pilotName": "Eduardo Boehm", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:33", 
+            "trackId": "SGPF20180107:34", 
             "competitionId": "XY"
         }, 
         {
             "registration": "CC-AVR", 
             "ribbonColors": [
-                "#2442"
+                "#2553"
             ], 
             "aircraft": "Ventus 2cM/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Harald Baumgarten", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDF0CBA", 
+            "trackId": "SGPF20180107:FLRDF0CBA", 
             "competitionId": "VR"
         }, 
         {
             "registration": "D-KHAT", 
             "ribbonColors": [
-                "#2553"
+                "#2664"
             ], 
             "aircraft": "Ventus 3T", 
             "3dModel": "ventus2", 
             "pilotName": "Rene Vidal", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDEF31", 
+            "trackId": "SGPF20180107:FLRDDEF31", 
             "competitionId": "AT"
         }, 
         {
             "registration": "CC-AIW", 
             "ribbonColors": [
-                "#2664"
+                "#2775"
             ], 
             "aircraft": "Ventus 2cxa 18m", 
             "3dModel": "ventus2", 
             "pilotName": "Carlos Rocca Vidal", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDF1160", 
+            "trackId": "SGPF20180107:FLRDF1160", 
             "competitionId": "5B"
         }, 
         {
             "registration": "CC-AZZ", 
             "ribbonColors": [
-                "#2775"
+                "#2886"
             ], 
             "aircraft": "Ventus 2cM/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Tomas Reich", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDF0CC1", 
+            "trackId": "SGPF20180107:FLRDF0CC1", 
             "competitionId": "ZZ"
         }, 
         {
             "registration": "CC-AIG", 
             "ribbonColors": [
-                "#2886"
+                "#2997"
             ], 
             "aircraft": "Arcus M", 
             "3dModel": "ventus2", 
             "pilotName": "Andres Errazuriz", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDEB82", 
+            "trackId": "SGPF20180107:FLRDDEB82", 
             "competitionId": "IG"
         }, 
         {
             "registration": "CC-PQZ", 
             "ribbonColors": [
-                "#2997"
+                "#2aa8"
             ], 
             "aircraft": "Ventus 2cT/15m", 
             "3dModel": "ventus2", 
             "pilotName": "Alejandro Chanes", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFA81", 
+            "trackId": "SGPF20180107:FLRDDFA81", 
             "competitionId": "QZ"
         }
     ], 
     "eventRevision": 0, 
     "task": {
-        "startOpenTs": 1515142800, 
+        "startOpenTs": 1515315600, 
         "taskName": "open", 
         "turnpoints": [
             {
@@ -355,72 +367,72 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "79 Sanatorio", 
-                "latitude": -32.61916664566163, 
+                "name": "80 Santa Martina", 
+                "latitude": -33.27500140976648, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP8.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.68861934332081
+                "longitude": -70.54054767230245
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "71 Rio Rocin", 
-                "latitude": -32.445550067149156, 
+                "name": "48 Olivares Sur", 
+                "latitude": -33.495551633160815, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP7.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.43444751373445
+                "longitude": -70.13916477553985
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "04 Banos", 
-                "latitude": -32.79666618671729, 
+                "name": "69 Rio Leones", 
+                "latitude": -32.68721582036221, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP6.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.54778084263154
+                "longitude": -70.2308327443871
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "60 Rio Blanco", 
-                "latitude": -32.90888277968632, 
+                "name": "83 Sobrante", 
+                "latitude": -32.239715486321785, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.30166863626752
+                "longitude": -70.63554877346462
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "09 Chacabuco Pista", 
-                "latitude": -33.05055114835571, 
+                "radius": 35000, 
+                "name": "67 Rio del Portiillo", 
+                "latitude": -31.94304963481649, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.70861813721034
+                "longitude": -70.41750181440223
             }, 
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "86 Termas de Colina", 
-                "latitude": -33.183883271144055, 
+                "name": "96 Yerbaloca", 
+                "latitude": -33.30861618576647, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.59916435575809
+                "longitude": -70.32138056221541
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "54 Pirque", 
-                "latitude": -33.764999180823025, 
+                "radius": 55000, 
+                "name": "82 Sewel", 
+                "latitude": -34.08695039263531, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.56555299485127
+                "longitude": -70.38695037824824
             }, 
             {
                 "observationZone": "Cylinder", 

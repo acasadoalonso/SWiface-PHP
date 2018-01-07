@@ -9,7 +9,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Juan Pablo Valenzuela", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFA6E", 
+            "trackId": "SGPF20180107:FLRDDFA6E", 
             "competitionId": "4W"
         }, 
         {
@@ -21,7 +21,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Pablo Valenzuela", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFABC", 
+            "trackId": "SGPF20180107:FLRDDFABC", 
             "competitionId": "6W"
         }, 
         {
@@ -33,7 +33,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Diego Gil", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF967", 
+            "trackId": "SGPF20180107:FLRDDF967", 
             "competitionId": "JQ"
         }, 
         {
@@ -45,7 +45,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Cristian Reich", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFAD6", 
+            "trackId": "SGPF20180107:FLRDDFAD6", 
             "competitionId": "WY"
         }, 
         {
@@ -57,7 +57,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Hernan Perez", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFA6D", 
+            "trackId": "SGPF20180107:FLRDDFA6D", 
             "competitionId": "WA"
         }, 
         {
@@ -69,7 +69,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Jean Piere Ohaco", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:6", 
+            "trackId": "SGPF20180107:6", 
             "competitionId": "4Q"
         }, 
         {
@@ -81,7 +81,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Felipe Morgan", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDFAF8", 
+            "trackId": "SGPF20180107:FLRDDFAF8", 
             "competitionId": "3W"
         }, 
         {
@@ -93,7 +93,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Cristobal Lama", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF9D6", 
+            "trackId": "SGPF20180107:FLRDDF9D6", 
             "competitionId": "WX"
         }, 
         {
@@ -105,7 +105,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Jorge Carrizo", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRDDF93C", 
+            "trackId": "SGPF20180107:FLRDDF93C", 
             "competitionId": "9W"
         }, 
         {
@@ -117,7 +117,7 @@
             "3dModel": "ventus2", 
             "pilotName": "Federico Buscema", 
             "country": "ARG", 
-            "trackId": "SGPF20180105:FLRDD52C0", 
+            "trackId": "SGPF20180107:FLRDD52C0", 
             "competitionId": "ND"
         }, 
         {
@@ -129,13 +129,13 @@
             "3dModel": "ventus2", 
             "pilotName": "Jorge Barrenechea", 
             "country": "CHL", 
-            "trackId": "SGPF20180105:FLRA51D93", 
+            "trackId": "SGPF20180107:FLRA51D93", 
             "competitionId": "C2"
         }
     ], 
     "eventRevision": 0, 
     "task": {
-        "startOpenTs": 1515142800, 
+        "startOpenTs": 1515315600, 
         "taskName": "club", 
         "turnpoints": [
             {
@@ -151,26 +151,26 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "53 Piedras Blancas", 
-                "latitude": -32.71000133143387, 
+                "name": "86 Termas de Colina", 
+                "latitude": -33.183883271144055, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP6.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.5066699340176
+                "longitude": -70.59916435575809
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "04 Banos", 
-                "latitude": -32.79666618671729, 
+                "radius": 20000, 
+                "name": "05 Blanco Pista", 
+                "latitude": -33.72528163079927, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.54778084263154
+                "longitude": -70.51083634940981
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 500, 
+                "radius": 30000, 
                 "name": "20 Democoen", 
                 "latitude": -32.792783224174116, 
                 "trigger": "Enter", 
@@ -180,23 +180,23 @@
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "09 Chacabuco Pista", 
-                "latitude": -33.05055114835571, 
+                "radius": 2000, 
+                "name": "55 Puente Mapocho", 
+                "latitude": -33.37083237891622, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.70861813721034
+                "longitude": -70.44999985447416
             }, 
             {
                 "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "95 Vizcachas", 
-                "latitude": -33.598882150019406, 
+                "radius": 2000, 
+                "name": "12 Chicureo Pista", 
+                "latitude": -33.270281749049985, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
                 "type": "Turnpoint", 
-                "longitude": -70.52278235027251
+                "longitude": -70.65000145374898
             }, 
             {
                 "observationZone": "Cylinder", 
