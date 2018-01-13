@@ -35,8 +35,8 @@ else:
 	datetimes=datetime.datetime.utcfromtimestamp(int(since))	# time converted from UNIX timestamp
 	date =     datetimes.strftime("%y%m%d")				# date converted
 	time =     datetimes.strftime("%H%M%S")				# time converted
-	datetimet=datetime.datetime.utcnow() - datetime.timedelta(0,15) # UTC time minus 15 seconds for buffering 
-	timet =    datetimet.strftime("%H%M%S")				# UTC now  minus 15 seconds
+	datetimet=datetime.datetime.utcnow() - datetime.timedelta(0,30) # UTC time minus 30 seconds for buffering 
+	timet =    datetimet.strftime("%H%M%S")				# UTC now  minus 30 seconds
 
 
 if (today != date):						# it is today ?
