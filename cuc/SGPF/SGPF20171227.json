@@ -1,0 +1,297 @@
+{
+    "tracks": [
+        {
+            "registration": "ZS-GCJ", 
+            "ribbonColors": [
+                "#3873f"
+            ], 
+            "aircraft": "JS-1", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3108.jpg", 
+            "pilotName": "Jan Omsels", 
+            "country": "DEU", 
+            "trackId": "SGPF20171227:FLRDDDFA9", 
+            "competitionId": "ZZ"
+        }, 
+        {
+            "registration": "", 
+            "ribbonColors": [
+                "#38fc7"
+            ], 
+            "aircraft": "LAK 17b", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/12.jpg", 
+            "pilotName": "John Coutts", 
+            "country": "NZL", 
+            "trackId": "SGPF20171227:FLRDDE988", 
+            "competitionId": "X"
+        }, 
+        {
+            "registration": "ZS-GCT", 
+            "ribbonColors": [
+                "#3851d"
+            ], 
+            "aircraft": "JS-1", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/201.jpg", 
+            "pilotName": "Bo\u0161tjan Pristavec", 
+            "country": "SVN", 
+            "trackId": "SGPF20171227:FLRDDDE89", 
+            "competitionId": "EG"
+        }, 
+        {
+            "registration": "ZS-GCG", 
+            "ribbonColors": [
+                "#3840c"
+            ], 
+            "aircraft": "JS-1", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3854.jpg", 
+            "pilotName": "Carlos Rocca Vidal", 
+            "country": "CHL", 
+            "trackId": "SGPF20171227:FLRDDDF95", 
+            "competitionId": "ZP"
+        }, 
+        {
+            "registration": "VH-VOG", 
+            "ribbonColors": [
+                "#38a72"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/260.jpg", 
+            "pilotName": "Oscar Goudriaan", 
+            "country": "ZAF", 
+            "trackId": "SGPF20171227:FLRDDEAC3", 
+            "competitionId": "OG"
+        }, 
+        {
+            "registration": "ZS-GEF", 
+            "ribbonColors": [
+                "#38b83"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3.jpg", 
+            "pilotName": "Andy Davis", 
+            "country": "GBR", 
+            "trackId": "SGPF20171227:ICADD1FFF", 
+            "competitionId": "XZ"
+        }, 
+        {
+            "registration": "", 
+            "ribbonColors": [
+                "#38c94"
+            ], 
+            "aircraft": "Ventus 2cxt", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/196.jpg", 
+            "pilotName": "Philippe de Pechy", 
+            "country": "FRA", 
+            "trackId": "SGPF20171227:FLRDDE9D7", 
+            "competitionId": "N2"
+        }, 
+        {
+            "registration": "ZS-GBR", 
+            "ribbonColors": [
+                "#37a73"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/10.jpg", 
+            "pilotName": "Mike Young", 
+            "country": "GBR", 
+            "trackId": "SGPF20171227:ICA10EB2E", 
+            "competitionId": "ZB"
+        }, 
+        {
+            "registration": "ZS-GCP", 
+            "ribbonColors": [
+                "#37c95"
+            ], 
+            "aircraft": "JS-1 evo", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/512.jpg", 
+            "pilotName": "Matthias Sturm", 
+            "country": "DEU", 
+            "trackId": "SGPF20171227:FLRDDDE36", 
+            "competitionId": "BAT"
+        }, 
+        {
+            "registration": "ZS-GCK", 
+            "ribbonColors": [
+                "#37da6"
+            ], 
+            "aircraft": "JS-1 evo", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/248.jpg", 
+            "pilotName": "Holger Karow", 
+            "country": "DEU", 
+            "trackId": "SGPF20171227:OGNC9C26C", 
+            "competitionId": "AG"
+        }, 
+        {
+            "registration": "ZS-GCI", 
+            "ribbonColors": [
+                "#37eb7"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/6173.jpg", 
+            "pilotName": "Freddy Barthelemy", 
+            "country": "FRA", 
+            "trackId": "SGPF20171227:FLRDD82E9", 
+            "competitionId": "JS"
+        }, 
+        {
+            "registration": "ZS-GCY", 
+            "ribbonColors": [
+                "#38961"
+            ], 
+            "aircraft": "JS-1 evo", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/434.jpg", 
+            "pilotName": "Jean-Denis Barrois", 
+            "country": "FRA", 
+            "trackId": "SGPF20171227:ICADDEFED", 
+            "competitionId": "JD"
+        }, 
+        {
+            "registration": "ZS-GUA", 
+            "ribbonColors": [
+                "#38850"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/2252.jpg", 
+            "pilotName": "Christophe Abadie", 
+            "country": "FRA", 
+            "trackId": "SGPF20171227:FLRDF0A3A", 
+            "competitionId": "FVO"
+        }, 
+        {
+            "registration": "ZU-SXA", 
+            "ribbonColors": [
+                "#380d9"
+            ], 
+            "aircraft": "JS-1", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/31.jpg", 
+            "pilotName": "Luciano Avanzini", 
+            "country": "ITA", 
+            "trackId": "SGPF20171227:FLRDDEB5D", 
+            "competitionId": "S"
+        }, 
+        {
+            "registration": "ZS-GFK", 
+            "ribbonColors": [
+                "#382fb"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/197.jpg", 
+            "pilotName": "Petr Krejcirik", 
+            "country": "CZE", 
+            "trackId": "SGPF20171227:FLRDDE832", 
+            "competitionId": "RZ"
+        }, 
+        {
+            "registration": "ZS-GJS", 
+            "ribbonColors": [
+                "#37b84"
+            ], 
+            "aircraft": "JS-1 evo", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/7929.jpg", 
+            "pilotName": "Simon Schr\u00f6der", 
+            "country": "DEU", 
+            "trackId": "SGPF20171227:FLRDDDEFD", 
+            "competitionId": "JS1"
+        }, 
+        {
+            "registration": "ZS-GCH", 
+            "ribbonColors": [
+                "#3862e"
+            ], 
+            "aircraft": "JS-1 TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/530.jpg", 
+            "pilotName": "Vladas Motuza", 
+            "country": "LTU", 
+            "trackId": "SGPF20171227:ICAFA0000", 
+            "competitionId": "SJ"
+        }, 
+        {
+            "registration": "ZS-GCW", 
+            "ribbonColors": [
+                "#37962"
+            ], 
+            "aircraft": "JS-1 evo TJ", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/491.jpg", 
+            "pilotName": "Sebastian Kawa", 
+            "country": "POL", 
+            "trackId": "SGPF20171227:FLRDDE9DF", 
+            "competitionId": "EVO"
+        }
+    ], 
+    "task": {
+        "startOpenTs": 1478304000000, 
+        "taskName": "SGPrace", 
+        "turnpoints": [
+            {
+                "observationZone": "Line", 
+                "radius": 2500, 
+                "name": "02 Potch 03", 
+                "latitude": -26.6775, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP0.png", 
+                "type": "Start", 
+                "longitude": 27.080283333333334
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "47 Klerkskraal", 
+                "latitude": -26.247216666666667, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP1.png", 
+                "type": "Turnpoint", 
+                "longitude": 27.156383333333334
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "102 Ventersdorp", 
+                "latitude": -26.300833333333333, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
+                "type": "Turnpoint", 
+                "longitude": 26.815266666666666
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "74 N12 Traffic", 
+                "latitude": -26.673616666666668, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
+                "type": "Turnpoint", 
+                "longitude": 27.158616666666667
+            }, 
+            {
+                "observationZone": "Line", 
+                "radius": 250, 
+                "name": "01 Potch Club", 
+                "latitude": -26.67053611111111, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
+                "type": "Finish", 
+                "longitude": 27.083080555555554
+            }
+        ], 
+        "taskType": "SailplaneGrandPrix"
+    }, 
+    "name": "SGP Final 2016", 
+    "description": "7th SGP World Final"
+}

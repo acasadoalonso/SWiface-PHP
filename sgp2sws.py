@@ -107,7 +107,7 @@ else:
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
 JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JSON to be generated
 TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
-COMPFILE = cucpath +'competitiongliders.lst'      		# name of the COMP to be generated
+COMPFILE = cucpath +'competitiongliders.LIST'      		# name of the COMP to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
 print "COMP generated data file is: ", COMPFILE 		# just a trace
@@ -152,10 +152,13 @@ for id in pilots:
 	if int(qsgpID) >= 14:
 		flarmid= 	pilots[id]["q"]			# flarm id
 		registration= 	pilots[id]["w"]			# registration
+		flarm = getflarmid(registration)		# get the FlarmId from the registration
 		if flarmid == '':
 			flarmid = getflarmid(registration)	# get the FlarmId from the registration
 		if len(flarmid) == 6:
-			flarmid = "FLR"+flarmid			# add the FLR assuming Flarm
+			flarmid = "FLR"+flarm			# add the FLR assuming Flarm
+		if flarmid[3:9] != flarm[3:9]:
+			print "Warning .... Flarm on system is not the same that Flarms registered on OGN" , flarmid, flarm
 	else:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
@@ -177,7 +180,7 @@ for id in pilots:
     		country=ccc.alpha_3				# convert to a 3 letter code
 
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
-	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid    
+	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, flarm[3:9]
 	if config.PicPilots == 'FAI':
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	else:

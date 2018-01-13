@@ -15,5 +15,6 @@ tx.php
 *.bak
 *.log
 cuc/archive/
+cuc/archivecuc/
 cuc/qsgp/
 cuc/bkup/
