@@ -16,7 +16,22 @@ import socket
 import kglid
 #-------------------------------------------------------------------------------------------------------------------#
 import config
-
+Flags = { 
+	"AUT" : ["red", "white", "red"],
+	"CHL" : ["white", "blue", "white"],
+	"SVN" : ["white", "red", "blue"],
+	"FRA" : ["blue", "white", "red"],
+	"CHE" : ["red", "red", "red"],
+	"LTU" : ["yellow", "green", "red"],
+	"ITA" : ["green", "white", "red"],
+	"GBR" : ["red", "white", "blue"],
+	"DEU" : ["black", "yellow", "red"],
+	"NZL" : ["blue", "blue", "blue"],
+	"CZE" : ["white", "blue", "red"],
+	"POL" : ["white", "red", "white"],
+	"USA" : ["red", "blue", "red"]
+	}
+	
 def fixcoding(addr):
         if addr != None:
                 addr=addr.replace(u'á', u'a')
@@ -169,9 +184,9 @@ for id in pilots:
 		warnings.append(lname) 				# add it to the list of warnings
                 nwarnings += 1  				# and increase the number of warnings
 
-	rgb=0x111*int(id)                                       # the the RGB color
-    	ccc=hex(rgb)                                            # convert it to hex
-    	color="#"+ccc[2:]                                       # set the JSON color required
+	#rgb=0x111*int(id)                                       # the the RGB color
+    	#ccc=hex(rgb)                                            # convert it to hex
+    	#color="#"+ccc[2:]                                       # set the JSON color required
 	if hostname == "SWserver":				# deal with the different implementation of pycountry
 		ccc = pycountry.countries.get(alpha_2=country)	# the the 3 letter country code
     		country=ccc.alpha_3				# convert to a 3 letter code
@@ -179,12 +194,13 @@ for id in pilots:
 		ccc = pycountry.countries.get(alpha_2=country)	# the the 3 letter country code
     		country=ccc.alpha_3				# convert to a 3 letter code
 
-	pilotname=fixcoding(fname+" "+lname).encode('utf8')
+	color=Flags[country]
+	pilotname=fixcoding(fname+" "+lname[0:1]).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, flarm[3:9]
 	if config.PicPilots == 'FAI':
-		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
+		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	else:
-		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":[color], "portraitUrl": config.SWSserver+"SWS/pic/"+compid+".png", "3dModelVariant": config.SWSserver+"SWS/pic/"+compid+".sponsor.png"}
+		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": config.SWSserver+"SWS/pic/"+compid+".png", "3dModelVariant": config.SWSserver+"SWS/pic/"+compid+".sponsor.png"}
 	tracks.append(tr)                                       # add it to the tracks
 	npil += 1						# increase the number of pilots
 

@@ -3,253 +3,291 @@
         {
             "registration": "ZK-GOB", 
             "ribbonColors": [
-                "#4d94c"
+                "blue", 
+                "blue", 
+                "blue"
             ], 
             "aircraft": "JS1C 18m", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/9743.jpg", 
-            "pilotName": "Mark Tingey", 
+            "pilotName": "Mark T", 
             "country": "NZL", 
-            "trackId": "SGPF20180113:ICAC821A9", 
+            "trackId": "SGPF20180115:ICAC821A9", 
             "competitionId": "OB"
         }, 
         {
             "registration": "D-KVII", 
             "ribbonColors": [
-                "#4da5d"
+                "black", 
+                "yellow", 
+                "red"
             ], 
             "aircraft": "Ventus 3t", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/39.jpg", 
-            "pilotName": "Mario Kiessling", 
+            "pilotName": "Mario K", 
             "country": "DEU", 
-            "trackId": "SGPF20180113:FLRDF1160", 
+            "trackId": "SGPF20180115:ICA3ED43C", 
             "competitionId": "I"
         }, 
         {
             "registration": "G-DLOE", 
             "ribbonColors": [
-                "#4db6e"
+                "red", 
+                "white", 
+                "blue"
             ], 
             "aircraft": "ASG29Es", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/1109.jpg", 
-            "pilotName": "Jon Gatfield", 
+            "pilotName": "Jon G", 
             "country": "GBR", 
-            "trackId": "SGPF20180113:FLRDDECCF", 
+            "trackId": "SGPF20180115:FLRDDECCF", 
             "competitionId": "YO"
         }, 
         {
             "registration": "HB-3425", 
             "ribbonColors": [
-                "#4dc7f"
+                "red", 
+                "red", 
+                "red"
             ], 
             "aircraft": "ASG 29", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/1106.jpg", 
-            "pilotName": "Fridolin Hauser", 
+            "pilotName": "Fridolin H", 
             "country": "CHE", 
-            "trackId": "SGPF20180113:ICA4B5208", 
+            "trackId": "SGPF20180115:ICA4B5208", 
             "competitionId": "4S"
         }, 
         {
             "registration": "D-KGCM", 
             "ribbonColors": [
-                "#4e2e5"
+                "green", 
+                "white", 
+                "red"
             ], 
             "aircraft": "Ventus 3", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/215.jpg", 
-            "pilotName": "Giorgio Galetto", 
+            "pilotName": "Giorgio G", 
             "country": "ITA", 
-            "trackId": "SGPF20180113:FLRDDF0F3", 
+            "trackId": "SGPF20180115:FLRDDF0F3", 
             "competitionId": "Y"
         }, 
         {
             "registration": "D-KHAT", 
             "ribbonColors": [
-                "#51726"
+                "white", 
+                "blue", 
+                "white"
             ], 
             "aircraft": "Ventus 3t", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3858.jpg", 
-            "pilotName": "Rene Vidal", 
+            "pilotName": "Rene V", 
             "country": "CHL", 
-            "trackId": "SGPF20180113:FLRDDEF31", 
+            "trackId": "SGPF20180115:FLRDDEF31", 
             "competitionId": "AT"
         }, 
         {
             "registration": "D-KJMW", 
             "ribbonColors": [
-                "#4e0c3"
+                "black", 
+                "yellow", 
+                "red"
             ], 
             "aircraft": "Ventus 3T", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5311.jpg", 
-            "pilotName": "Sebastian N\u00e4gel", 
+            "pilotName": "Sebastian N", 
             "country": "DEU", 
-            "trackId": "SGPF20180113:FLRDDF93F", 
+            "trackId": "SGPF20180115:FLRDDF93F", 
             "competitionId": "WM"
         }, 
         {
             "registration": "D-KVXX", 
             "ribbonColors": [
-                "#50616"
+                "black", 
+                "yellow", 
+                "red"
             ], 
             "aircraft": "Ventus-3", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/2507.jpg", 
-            "pilotName": "Tilo Holighaus", 
+            "pilotName": "Tilo H", 
             "country": "DEU", 
-            "trackId": "SGPF20180113:FLRDF135A", 
+            "trackId": "SGPF20180115:FLRDF135A", 
             "competitionId": "3V"
         }, 
         {
             "registration": "ZS-GEI", 
             "ribbonColors": [
-                "#4dd90"
+                "white", 
+                "red", 
+                "blue"
             ], 
             "aircraft": "JS1C", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/201.jpg", 
-            "pilotName": "Bo\u0161tjan Pristavec", 
+            "pilotName": "Bo\u0161tjan P", 
             "country": "SVN", 
-            "trackId": "SGPF20180113:FLRDDEF7A", 
+            "trackId": "SGPF20180115:FLRDDEF7A", 
             "competitionId": "EJ"
         }, 
         {
             "registration": "D-6164", 
             "ribbonColors": [
-                "#52614"
+                "blue", 
+                "white", 
+                "red"
             ], 
             "aircraft": "Ventus 2 Cxa ", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/255.jpg", 
-            "pilotName": "Didier Hauss", 
+            "pilotName": "Didier H", 
             "country": "FRA", 
-            "trackId": "SGPF20180113:FLRDDDE96", 
+            "trackId": "SGPF20180115:FLRDDDE96", 
             "competitionId": "DID"
         }, 
         {
             "registration": "CC-AZZ", 
             "ribbonColors": [
-                "#550bc"
+                "white", 
+                "blue", 
+                "white"
             ], 
             "aircraft": "Ventus 2CXM", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/893.jpg", 
-            "pilotName": "Tomas Reich", 
+            "pilotName": "Tomas R", 
             "country": "CHL", 
-            "trackId": "SGPF20180113:FLRDF0CC1", 
+            "trackId": "SGPF20180115:FLRDF0CC1", 
             "competitionId": "ZZ"
         }, 
         {
             "registration": "D-9683", 
             "ribbonColors": [
-                "#4dea1"
+                "red", 
+                "white", 
+                "red"
             ], 
             "aircraft": "ASG 29", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/282.jpg", 
-            "pilotName": "Werner Amann", 
+            "pilotName": "Werner A", 
             "country": "AUT", 
-            "trackId": "SGPF20180113:ICA3F066A", 
+            "trackId": "SGPF20180115:ICA3F066A", 
             "competitionId": "WG"
         }, 
         {
             "registration": "CC-AGN", 
             "ribbonColors": [
-                "#55c77"
+                "white", 
+                "blue", 
+                "white"
             ], 
             "aircraft": "Ventus 2cT", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/4534.jpg", 
-            "pilotName": "Andres Errazuriz Beeche", 
+            "pilotName": "Andres E", 
             "country": "CHL", 
-            "trackId": "SGPF20180113:ICA200000", 
+            "trackId": "SGPF20180115:ICA200000", 
             "competitionId": "GN"
         }, 
         {
             "registration": "D-9529", 
             "ribbonColors": [
-                "#4e3f6"
+                "yellow", 
+                "green", 
+                "red"
             ], 
             "aircraft": "ASG29", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3936.jpg", 
-            "pilotName": "Gintas Zube", 
+            "pilotName": "Gintas Z", 
             "country": "LTU", 
-            "trackId": "SGPF20180113:FLRDDEFE6", 
+            "trackId": "SGPF20180115:FLRDDEFE6", 
             "competitionId": "AR"
         }, 
         {
             "registration": "D-KKGT", 
             "ribbonColors": [
-                "#53724"
+                "green", 
+                "white", 
+                "red"
             ], 
             "aircraft": "Ventus3", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/20.jpg", 
-            "pilotName": "Thomas Gostner", 
+            "pilotName": "Thomas G", 
             "country": "ITA", 
-            "trackId": "SGPF20180113:FLRD000E5", 
+            "trackId": "SGPF20180115:FLRD000E5", 
             "competitionId": "GT"
         }, 
         {
             "registration": "YU-4467", 
             "ribbonColors": [
-                "#530be"
+                "white", 
+                "red", 
+                "white"
             ], 
             "aircraft": "JS-1c", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/491.jpg", 
-            "pilotName": "Sebastian Kawa", 
+            "pilotName": "Sebastian K", 
             "country": "POL", 
-            "trackId": "SGPF20180113:FLRDDECC4", 
+            "trackId": "SGPF20180115:FLRDDECC4", 
             "competitionId": "P"
         }, 
         {
             "registration": "OK-2992", 
             "ribbonColors": [
-                "#52fad"
+                "white", 
+                "blue", 
+                "red"
             ], 
             "aircraft": "ASG 29E", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/923.jpg", 
-            "pilotName": "Roman Mracek", 
+            "pilotName": "Roman M", 
             "country": "CZE", 
-            "trackId": "SGPF20180113:FLRDDEA8F", 
+            "trackId": "SGPF20180115:FLRDDEA8F", 
             "competitionId": "QX"
         }, 
         {
             "registration": "G_LIVS", 
             "ribbonColors": [
-                "#3dfc2"
+                "red", 
+                "blue", 
+                "red"
             ], 
             "aircraft": "ASH 26", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/567.jpg", 
-            "pilotName": "Tom Kelley", 
+            "pilotName": "Tom K", 
             "country": "USA", 
-            "trackId": "SGPF20180113:FLRDDECE2", 
+            "trackId": "SGPF20180115:FLRDDECE2", 
             "competitionId": "11"
         }, 
         {
             "registration": "D-8024", 
             "ribbonColors": [
-                "#3cb7f"
+                "white", 
+                "red", 
+                "white"
             ], 
             "aircraft": "Asg-29", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/2342.jpg", 
-            "pilotName": "\u0141ukasz Wojcik", 
+            "pilotName": "\u0141ukasz W", 
             "country": "POL", 
-            "trackId": "SGPF20180113:FLRDDEEA2", 
+            "trackId": "SGPF20180115:FLRDDEEA2", 
             "competitionId": "PL"
         }
     ], 
     "task": {
-        "startOpenTs": "2018-01-12", 
+        "startOpenTs": 1515974400000, 
         "taskName": "SGPrace", 
         "turnpoints": [
             {
@@ -265,42 +303,32 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "23 El Cobre", 
-                "latitude": -32.97221666666667, 
-                "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP1.png", 
-                "type": "Turnpoint", 
-                "longitude": -70.62195
-            }, 
-            {
-                "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "37 Lagunas", 
-                "latitude": -32.895833333333336, 
-                "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
-                "type": "Turnpoint", 
-                "longitude": -70.48778333333334
-            }, 
-            {
-                "observationZone": "Cylinder", 
-                "radius": 500, 
-                "name": "95 Vizcachas", 
-                "latitude": -33.59888333333333, 
-                "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
-                "type": "Turnpoint", 
-                "longitude": -70.52278333333334
-            }, 
-            {
-                "observationZone": "Cylinder", 
-                "radius": 500, 
                 "name": "92 Trucha", 
                 "latitude": -33.09445, 
                 "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP1.png", 
                 "type": "Turnpoint", 
                 "longitude": -70.57111666666667
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "12 Chicureo Pista", 
+                "latitude": -33.27028333333333, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.65
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "21 El Abanico", 
+                "latitude": -33.49333333333333, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.50833333333334
             }, 
             {
                 "observationZone": "Cylinder", 
@@ -308,7 +336,7 @@
                 "name": "86 Termas de Colina", 
                 "latitude": -33.183883333333334, 
                 "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
                 "type": "Turnpoint", 
                 "longitude": -70.59916666666666
             }, 
@@ -318,7 +346,7 @@
                 "name": "02 3K", 
                 "latitude": -33.37583333333333, 
                 "trigger": "Enter", 
-                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP6.png", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
                 "type": "Turnpoint", 
                 "longitude": -70.54721666666667
             }, 
