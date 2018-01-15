@@ -16,7 +16,7 @@ import socket
 import kglid
 #-------------------------------------------------------------------------------------------------------------------#
 import config
-Flags = { 
+Flags = { 						# flag colors assigned to the countries
 	"AUT" : ["red", "white", "red"],
 	"CHL" : ["white", "blue", "white"],
 	"SVN" : ["white", "red", "blue"],
@@ -291,9 +291,11 @@ wp=0
 legs=[]
 while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
+		wp_name = "TP"+str(wp)
 		if wp == 0:
 			wpinit=wp_name
 			type="Start"
+			wp_name = "START"
 		else:
 			type="Turnpoint"
 		wp_lat				=task_wp[wp]["a"]	# latitude
@@ -312,6 +314,7 @@ while wp < len(task_wp):
 			tptexture=config.SWSserver+"SWS/tptextures/START.png"
 		elif type == "Finish":
 			tptexture=config.SWSserver+"SWS/tptextures/FINISH.png"
+			wp_name = "FINISH"
 		else:
 			tptexture=config.SWSserver+"SWS/tptextures/TP"+str(wp)+".png"
 		print "WP:", wp_name, wp_lat, wp_lon,  wp_type, wp_radius, type, oz, tptexture
