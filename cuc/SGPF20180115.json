@@ -293,7 +293,7 @@
             {
                 "observationZone": "Line", 
                 "radius": 2500, 
-                "name": "19 Dehesa", 
+                "name": "TP0", 
                 "latitude": -33.31528333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/START.png", 
@@ -303,7 +303,7 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "92 Trucha", 
+                "name": "TP1", 
                 "latitude": -33.09445, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP1.png", 
@@ -313,7 +313,7 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "12 Chicureo Pista", 
+                "name": "TP2", 
                 "latitude": -33.27028333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
@@ -323,7 +323,7 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "21 El Abanico", 
+                "name": "TP3", 
                 "latitude": -33.49333333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
@@ -333,7 +333,7 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "86 Termas de Colina", 
+                "name": "TP4", 
                 "latitude": -33.183883333333334, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
@@ -343,7 +343,7 @@
             {
                 "observationZone": "Cylinder", 
                 "radius": 500, 
-                "name": "02 3K", 
+                "name": "TP5", 
                 "latitude": -33.37583333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
@@ -353,7 +353,7 @@
             {
                 "observationZone": "Line", 
                 "radius": 250, 
-                "name": "01 AD Vitacura", 
+                "name": "TP6", 
                 "latitude": -33.38028333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/FINISH.png", 

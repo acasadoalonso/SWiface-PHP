@@ -16,7 +16,7 @@ import socket
 import kglid
 #-------------------------------------------------------------------------------------------------------------------#
 import config
-Flags = { 
+Flags = { 						# flag colors assigned to the countries
 	"AUT" : ["red", "white", "red"],
 	"CHL" : ["white", "blue", "white"],
 	"SVN" : ["white", "red", "blue"],
@@ -314,6 +314,7 @@ while wp < len(task_wp):
 			tptexture=config.SWSserver+"SWS/tptextures/FINISH.png"
 		else:
 			tptexture=config.SWSserver+"SWS/tptextures/TP"+str(wp)+".png"
+		wp_name = "TP"+str(wp)
 		print "WP:", wp_name, wp_lat, wp_lon,  wp_type, wp_radius, type, oz, tptexture
 		tpx={"latitude": wp_lat, "longitude": wp_lon, "name": wp_name, "observationZone": oz, "type": type, "radius": wp_radius, "trigger":"Enter", "texture": tptexture} 
         	tp.append(tpx)
