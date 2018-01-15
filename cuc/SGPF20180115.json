@@ -293,7 +293,7 @@
             {
                 "observationZone": "Line", 
                 "radius": 2500, 
-                "name": "TP0", 
+                "name": "START", 
                 "latitude": -33.31528333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/START.png", 
@@ -353,7 +353,7 @@
             {
                 "observationZone": "Line", 
                 "radius": 250, 
-                "name": "TP6", 
+                "name": "FINISH", 
                 "latitude": -33.38028333333333, 
                 "trigger": "Enter", 
                 "texture": "http://repoogn.ddns.net/SWS/tptextures/FINISH.png", 

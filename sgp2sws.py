@@ -291,9 +291,11 @@ wp=0
 legs=[]
 while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
+		wp_name = "TP"+str(wp)
 		if wp == 0:
 			wpinit=wp_name
 			type="Start"
+			wp_name = "START"
 		else:
 			type="Turnpoint"
 		wp_lat				=task_wp[wp]["a"]	# latitude
@@ -312,9 +314,9 @@ while wp < len(task_wp):
 			tptexture=config.SWSserver+"SWS/tptextures/START.png"
 		elif type == "Finish":
 			tptexture=config.SWSserver+"SWS/tptextures/FINISH.png"
+			wp_name = "FINISH"
 		else:
 			tptexture=config.SWSserver+"SWS/tptextures/TP"+str(wp)+".png"
-		wp_name = "TP"+str(wp)
 		print "WP:", wp_name, wp_lat, wp_lon,  wp_type, wp_radius, type, oz, tptexture
 		tpx={"latitude": wp_lat, "longitude": wp_lon, "name": wp_name, "observationZone": oz, "type": type, "radius": wp_radius, "trigger":"Enter", "texture": tptexture} 
         	tp.append(tpx)
