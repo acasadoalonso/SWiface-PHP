@@ -1,0 +1,226 @@
+{
+    "tracks": [
+        {
+            "registration": "CC-K14W", 
+            "ribbonColors": [
+                "#210f"
+            ], 
+            "aircraft": "Pilatus B4 RG", 
+            "3dModel": "ventus2", 
+            "pilotName": "Juan Pablo Valenzuela", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDFA6E", 
+            "competitionId": "4W"
+        }, 
+        {
+            "registration": "CC-K16W", 
+            "ribbonColors": [
+                "#2220"
+            ], 
+            "aircraft": "Pilatus B4 RG", 
+            "3dModel": "ventus2", 
+            "pilotName": "Pablo Valenzuela", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDFABC", 
+            "competitionId": "6W"
+        }, 
+        {
+            "registration": "CC-AJQ", 
+            "ribbonColors": [
+                "#2331"
+            ], 
+            "aircraft": "Pilatus B4 RG", 
+            "3dModel": "ventus2", 
+            "pilotName": "Diego Gil", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDF967", 
+            "competitionId": "JQ"
+        }, 
+        {
+            "registration": "CC-KWY", 
+            "ribbonColors": [
+                "#2442"
+            ], 
+            "aircraft": "mini Nimbus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Cristian Reich", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDFAD6", 
+            "competitionId": "WY"
+        }, 
+        {
+            "registration": "CC-LWA", 
+            "ribbonColors": [
+                "#2553"
+            ], 
+            "aircraft": "Janus C RG", 
+            "3dModel": "ventus2", 
+            "pilotName": "Hernan Perez", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDFA6D", 
+            "competitionId": "WA"
+        }, 
+        {
+            "registration": "CC-K4Q", 
+            "ribbonColors": [
+                "#2664"
+            ], 
+            "aircraft": "Pilatus B4 RG", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jean Piere Ohaco", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:36", 
+            "competitionId": "4Q"
+        }, 
+        {
+            "registration": "CC-K23W", 
+            "ribbonColors": [
+                "#2775"
+            ], 
+            "aircraft": "Mini Nimbus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Felipe Morgan", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDFAF8", 
+            "competitionId": "3W"
+        }, 
+        {
+            "registration": "CC-KWX", 
+            "ribbonColors": [
+                "#2886"
+            ], 
+            "aircraft": "Mini Nimbus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Cristobal Lama", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDF9D6", 
+            "competitionId": "WX"
+        }, 
+        {
+            "registration": "CC-K19W", 
+            "ribbonColors": [
+                "#2997"
+            ], 
+            "aircraft": "Janus 18.2m", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jorge Carrizo", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRDDF93C", 
+            "competitionId": "9W"
+        }, 
+        {
+            "registration": "LV-ELL", 
+            "ribbonColors": [
+                "#2aa8"
+            ], 
+            "aircraft": "Jantar ST2", 
+            "3dModel": "ventus2", 
+            "pilotName": "Federico Buscema", 
+            "country": "ARG", 
+            "trackId": "SGPF20180320:FLRDD52C0", 
+            "competitionId": "ND"
+        }, 
+        {
+            "registration": "CC-PXX", 
+            "ribbonColors": [
+                "#2bb9"
+            ], 
+            "aircraft": "Mini Nimbus", 
+            "3dModel": "ventus2", 
+            "pilotName": "Jorge Barrenechea", 
+            "country": "CHL", 
+            "trackId": "SGPF20180320:FLRA51D93", 
+            "competitionId": "C2"
+        }
+    ], 
+    "eventRevision": 0, 
+    "task": {
+        "startOpenTs": 1521536400, 
+        "taskName": "club", 
+        "turnpoints": [
+            {
+                "observationZone": "Line", 
+                "radius": 2500, 
+                "name": "19 Dehesa", 
+                "latitude": -33.31528245039631, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/START.png", 
+                "type": "Start", 
+                "longitude": -70.54333438948173
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "86 Termas de Colina", 
+                "latitude": -33.183883271144055, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP6.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.59916435575809
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 20000, 
+                "name": "05 Blanco Pista", 
+                "latitude": -33.72528163079927, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.51083634940981
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 30000, 
+                "name": "20 Democoen", 
+                "latitude": -32.792783224174116, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.47278536554295
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 2000, 
+                "name": "55 Puente Mapocho", 
+                "latitude": -33.37083237891622, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.44999985447416
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 2000, 
+                "name": "12 Chicureo Pista", 
+                "latitude": -33.270281749049985, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.65000145374898
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "02 3K", 
+                "latitude": -33.37583207738861, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP1.png", 
+                "type": "Turnpoint", 
+                "longitude": -70.5472139369323
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "01 AD Vitacura", 
+                "latitude": -33.38028194563273, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/FINISH.png", 
+                "type": "Finish", 
+                "longitude": -70.57945242981593
+            }
+        ], 
+        "taskType": "SailplaneRacing"
+    }, 
+    "name": "club-56 Campeonato Nacional y 13 Andes Open", 
+    "description": "club"
+}

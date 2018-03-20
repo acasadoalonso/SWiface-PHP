@@ -17,6 +17,7 @@ import kglid
 #-------------------------------------------------------------------------------------------------------------------#
 import config
 Flags = { 						# flag colors assigned to the countries
+	"ESP" : ["red", "yellow", "red"],
 	"AUT" : ["red", "white", "red"],
 	"CHL" : ["white", "blue", "white"],
 	"SVN" : ["white", "red", "blue"],
@@ -25,7 +26,8 @@ Flags = { 						# flag colors assigned to the countries
 	"LTU" : ["yellow", "green", "red"],
 	"ITA" : ["green", "white", "red"],
 	"GBR" : ["red", "white", "blue"],
-	"DEU" : ["black", "yellow", "red"],
+	"BEL" : ["black", "yellow", "red"],
+	"DEU" : ["black", "red", "yellow"],
 	"NZL" : ["blue", "blue", "blue"],
 	"CZE" : ["white", "blue", "red"],
 	"POL" : ["white", "red", "white"],
