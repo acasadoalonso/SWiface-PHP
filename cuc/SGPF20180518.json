@@ -10,9 +10,9 @@
             "aircraft": "JS 3", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/537.jpg", 
-            "pilotName": "Christophe R", 
+            "pilotName": "Christophe Ruch", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:TBA", 
+            "trackId": "SGPF20180518:TBA", 
             "competitionId": "FM"
         }, 
         {
@@ -25,9 +25,9 @@
             "aircraft": "JS 1C Evo Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/333.jpg", 
-            "pilotName": "Erazem P", 
+            "pilotName": "Erazem Polutnik", 
             "country": "SVN", 
-            "trackId": "CNVV20180518:FLRDDEF7A", 
+            "trackId": "SGPF20180518:FLRDDEF7A", 
             "competitionId": "EJ"
         }, 
         {
@@ -40,9 +40,9 @@
             "aircraft": "ASG 29E", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/3968.jpg", 
-            "pilotName": "Olivier S", 
+            "pilotName": "Olivier Sevrin", 
             "country": "BEL", 
-            "trackId": "CNVV20180518:FLR3E6D9C", 
+            "trackId": "SGPF20180518:FLR3E6D9C", 
             "competitionId": "29"
         }, 
         {
@@ -55,9 +55,9 @@
             "aircraft": "JS 1C Evo", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/6795.jpg", 
-            "pilotName": "Maximilian S", 
+            "pilotName": "Maximilian Seis", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "FD"
         }, 
         {
@@ -70,9 +70,9 @@
             "aircraft": "ASG 29", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/1225.jpg", 
-            "pilotName": "Denis G", 
+            "pilotName": "Denis Guerin", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:FLRDDDECB", 
+            "trackId": "SGPF20180518:FLRDDDECB", 
             "competitionId": "V"
         }, 
         {
@@ -85,9 +85,9 @@
             "aircraft": "Ventus 3T", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/4101.jpg", 
-            "pilotName": "Peter M", 
+            "pilotName": "Peter Millenaar", 
             "country": "NLD", 
-            "trackId": "CNVV20180518:TBA", 
+            "trackId": "SGPF20180518:TBA", 
             "competitionId": "VY"
         }, 
         {
@@ -100,9 +100,9 @@
             "aircraft": "LAK 17A", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5975.jpg", 
-            "pilotName": "Sergi P", 
+            "pilotName": "Sergi Pujol", 
             "country": "ESP", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "LE"
         }, 
         {
@@ -115,9 +115,9 @@
             "aircraft": "ASG 29E", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/96.jpg", 
-            "pilotName": "Gary S", 
+            "pilotName": "Gary Stingemore", 
             "country": "GBR", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "10"
         }, 
         {
@@ -130,9 +130,9 @@
             "aircraft": "JS 1C Evo Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/721.jpg", 
-            "pilotName": "Jeroen V", 
+            "pilotName": "Jeroen Verkuijl", 
             "country": "NLD", 
-            "trackId": "CNVV20180518:TBN", 
+            "trackId": "SGPF20180518:TBN", 
             "competitionId": "APU"
         }, 
         {
@@ -145,9 +145,9 @@
             "aircraft": "JS 1C Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/541.jpg", 
-            "pilotName": "Sebastien D", 
+            "pilotName": "Sebastien Dubreuil", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:FLRDDED8C", 
+            "trackId": "SGPF20180518:FLRDDED8C", 
             "competitionId": "SD"
         }, 
         {
@@ -160,9 +160,9 @@
             "aircraft": "JS 1C Evo Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/461.jpg", 
-            "pilotName": "Sylvain G", 
+            "pilotName": "Sylvain Gerbaud", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "72"
         }, 
         {
@@ -175,9 +175,9 @@
             "aircraft": "LAK 17B FES", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/8995.jpg", 
-            "pilotName": "Gorka E", 
+            "pilotName": "Gorka Elduayen", 
             "country": "ESP", 
-            "trackId": "CNVV20180518:FLRDDEAB0", 
+            "trackId": "SGPF20180518:FLRDDEAB0", 
             "competitionId": "AG"
         }, 
         {
@@ -190,9 +190,9 @@
             "aircraft": "ASG 29Es", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/1686.jpg", 
-            "pilotName": "Pierre J", 
+            "pilotName": "Pierre Jeanneney", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:FLRDDEAE0", 
+            "trackId": "SGPF20180518:FLRDDEAE0", 
             "competitionId": "OT"
         }, 
         {
@@ -205,9 +205,9 @@
             "aircraft": "JS 1C Evo Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5374.jpg", 
-            "pilotName": "Eric B", 
+            "pilotName": "Eric Bernard", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "EB"
         }, 
         {
@@ -220,9 +220,9 @@
             "aircraft": "ASG 29E", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/163.jpg", 
-            "pilotName": "Gilles N", 
+            "pilotName": "Gilles Navas", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "1L"
         }, 
         {
@@ -235,9 +235,9 @@
             "aircraft": "JS 1C Evo Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/5402.jpg", 
-            "pilotName": "Yves G", 
+            "pilotName": "Yves Gerster", 
             "country": "CHE", 
-            "trackId": "CNVV20180518:FLRFFFFFE", 
+            "trackId": "SGPF20180518:FLRFFFFFE", 
             "competitionId": "EVO"
         }, 
         {
@@ -250,9 +250,9 @@
             "aircraft": "JS 3 Jet", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/109.jpg", 
-            "pilotName": "Russell C", 
+            "pilotName": "Russell Cheetham", 
             "country": "GBR", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "E1"
         }, 
         {
@@ -265,9 +265,9 @@
             "aircraft": "Ventus 3T", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/439.jpg", 
-            "pilotName": "Louis B", 
+            "pilotName": "Louis Bouderlique", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "3V"
         }, 
         {
@@ -280,9 +280,9 @@
             "aircraft": "JS 1B Evo", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/2570.jpg", 
-            "pilotName": "Killian W", 
+            "pilotName": "Killian Walbrou", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:", 
+            "trackId": "SGPF20180518:", 
             "competitionId": "JD"
         }, 
         {
@@ -295,9 +295,9 @@
             "aircraft": "JS 3", 
             "3dModel": "ventus2", 
             "portraitUrl": "http://rankingdata.fai.org/PilotImages/434.jpg", 
-            "pilotName": "Jean-Denis B", 
+            "pilotName": "Jean-Denis Barrois", 
             "country": "FRA", 
-            "trackId": "CNVV20180518:FLRDDEFED", 
+            "trackId": "SGPF20180518:FLRDDEFED", 
             "competitionId": "FQ"
         }
     ], 

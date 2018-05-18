@@ -103,7 +103,7 @@ if prtreq and prtreq[0]=="print":
 else:
 	prt=False
  
-print "Generate .json files V1.0 from  the www.sgp.aero web server"
+print "Generate .json files V1.1 from  the www.sgp.aero web server"
 print "Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html "
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
@@ -129,7 +129,7 @@ COMPFILE = cucpath +'competitiongliders.LIST'      		# name of the COMP to be ge
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
 print "COMP generated data file is: ", COMPFILE 		# just a trace
-print "===========================: ===========", COMPFILE 	# just a trace
+print "===========================: " 				# just a trace
 
 os.system('rm  '+JSONFILE)		                        # remove the previous one
 os.system('rm  '+TASKFILE)		                        # remove the previous one
