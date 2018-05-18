@@ -22,6 +22,7 @@ Flags = { 						# flag colors assigned to the countries
 	"CHL" : ["white", "blue", "white"],
 	"SVN" : ["white", "red", "blue"],
 	"FRA" : ["blue", "white", "red"],
+	"NLD" : ["red", "white", "blue"],
 	"CHE" : ["red", "red", "red"],
 	"LTU" : ["yellow", "green", "red"],
 	"ITA" : ["green", "white", "red"],
@@ -103,7 +104,7 @@ else:
 	prt=False
  
 print "Generate .json files V1.0 from  the www.sgp.aero web server"
-print "Usage python csgpjson.py COMPID indexday"
+print "Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html "
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
