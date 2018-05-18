@@ -1,0 +1,383 @@
+{
+    "tracks": [
+        {
+            "registration": "TBA", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 3", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/537.jpg", 
+            "pilotName": "Christophe R", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:TBA", 
+            "competitionId": "FM"
+        }, 
+        {
+            "registration": "ZS-GEI", 
+            "ribbonColors": [
+                "white", 
+                "red", 
+                "blue"
+            ], 
+            "aircraft": "JS 1C Evo Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/333.jpg", 
+            "pilotName": "Erazem P", 
+            "country": "SVN", 
+            "trackId": "CNVV20180518:FLRDDEF7A", 
+            "competitionId": "EJ"
+        }, 
+        {
+            "registration": "D-KGSA", 
+            "ribbonColors": [
+                "black", 
+                "yellow", 
+                "red"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/3968.jpg", 
+            "pilotName": "Olivier S", 
+            "country": "BEL", 
+            "trackId": "CNVV20180518:FLR3E6D9C", 
+            "competitionId": "29"
+        }, 
+        {
+            "registration": "TBA", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 1C Evo", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/6795.jpg", 
+            "pilotName": "Maximilian S", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "FD"
+        }, 
+        {
+            "registration": "D-2729", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "ASG 29", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/1225.jpg", 
+            "pilotName": "Denis G", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:FLRDDDECB", 
+            "competitionId": "V"
+        }, 
+        {
+            "registration": "D-KPEM", 
+            "ribbonColors": [
+                "red", 
+                "white", 
+                "blue"
+            ], 
+            "aircraft": "Ventus 3T", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/4101.jpg", 
+            "pilotName": "Peter M", 
+            "country": "NLD", 
+            "trackId": "CNVV20180518:TBA", 
+            "competitionId": "VY"
+        }, 
+        {
+            "registration": "F-CLPE", 
+            "ribbonColors": [
+                "red", 
+                "yellow", 
+                "red"
+            ], 
+            "aircraft": "LAK 17A", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/5975.jpg", 
+            "pilotName": "Sergi P", 
+            "country": "ESP", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "LE"
+        }, 
+        {
+            "registration": "G-IXXI", 
+            "ribbonColors": [
+                "red", 
+                "white", 
+                "blue"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/96.jpg", 
+            "pilotName": "Gary S", 
+            "country": "GBR", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "10"
+        }, 
+        {
+            "registration": "D-KAPU", 
+            "ribbonColors": [
+                "red", 
+                "white", 
+                "blue"
+            ], 
+            "aircraft": "JS 1C Evo Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/721.jpg", 
+            "pilotName": "Jeroen V", 
+            "country": "NLD", 
+            "trackId": "CNVV20180518:TBN", 
+            "competitionId": "APU"
+        }, 
+        {
+            "registration": "ZS-GBO", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 1C Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/541.jpg", 
+            "pilotName": "Sebastien D", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:FLRDDED8C", 
+            "competitionId": "SD"
+        }, 
+        {
+            "registration": "D-KJSC", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 1C Evo Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/461.jpg", 
+            "pilotName": "Sylvain G", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "72"
+        }, 
+        {
+            "registration": "D-KSEO", 
+            "ribbonColors": [
+                "red", 
+                "yellow", 
+                "red"
+            ], 
+            "aircraft": "LAK 17B FES", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/8995.jpg", 
+            "pilotName": "Gorka E", 
+            "country": "ESP", 
+            "trackId": "CNVV20180518:FLRDDEAB0", 
+            "competitionId": "AG"
+        }, 
+        {
+            "registration": "D-KAPE", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "ASG 29Es", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/1686.jpg", 
+            "pilotName": "Pierre J", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:FLRDDEAE0", 
+            "competitionId": "OT"
+        }, 
+        {
+            "registration": "D-KJEB", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 1C Evo Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/5374.jpg", 
+            "pilotName": "Eric B", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "EB"
+        }, 
+        {
+            "registration": "D-KJII", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "ASG 29E", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/163.jpg", 
+            "pilotName": "Gilles N", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "1L"
+        }, 
+        {
+            "registration": "", 
+            "ribbonColors": [
+                "red", 
+                "red", 
+                "red"
+            ], 
+            "aircraft": "JS 1C Evo Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/5402.jpg", 
+            "pilotName": "Yves G", 
+            "country": "CHE", 
+            "trackId": "CNVV20180518:FLRFFFFFE", 
+            "competitionId": "EVO"
+        }, 
+        {
+            "registration": "D-KADJ", 
+            "ribbonColors": [
+                "red", 
+                "white", 
+                "blue"
+            ], 
+            "aircraft": "JS 3 Jet", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/109.jpg", 
+            "pilotName": "Russell C", 
+            "country": "GBR", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "E1"
+        }, 
+        {
+            "registration": "TBA", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "Ventus 3T", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/439.jpg", 
+            "pilotName": "Louis B", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "3V"
+        }, 
+        {
+            "registration": "TBA", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 1B Evo", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/2570.jpg", 
+            "pilotName": "Killian W", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:", 
+            "competitionId": "JD"
+        }, 
+        {
+            "registration": "ZS-GCY", 
+            "ribbonColors": [
+                "blue", 
+                "white", 
+                "red"
+            ], 
+            "aircraft": "JS 3", 
+            "3dModel": "ventus2", 
+            "portraitUrl": "http://rankingdata.fai.org/PilotImages/434.jpg", 
+            "pilotName": "Jean-Denis B", 
+            "country": "FRA", 
+            "trackId": "CNVV20180518:FLRDDEFED", 
+            "competitionId": "FQ"
+        }
+    ], 
+    "task": {
+        "startOpenTs": "2018-06-01", 
+        "taskName": "SGPrace", 
+        "turnpoints": [
+            {
+                "observationZone": "Line", 
+                "radius": 2500, 
+                "name": "START", 
+                "latitude": 47.791383333333336, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/START.png", 
+                "type": "Start", 
+                "longitude": -1.6383333333333334
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "TP1", 
+                "latitude": 47.57833333333333, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP1.png", 
+                "type": "Turnpoint", 
+                "longitude": -2.6286
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "TP2", 
+                "latitude": 47.681, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP2.png", 
+                "type": "Turnpoint", 
+                "longitude": -1.5885
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "TP3", 
+                "latitude": 47.82021666666667, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP3.png", 
+                "type": "Turnpoint", 
+                "longitude": -1.6232333333333333
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "TP4", 
+                "latitude": 47.7941, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP4.png", 
+                "type": "Turnpoint", 
+                "longitude": -1.6916
+            }, 
+            {
+                "observationZone": "Cylinder", 
+                "radius": 500, 
+                "name": "TP5", 
+                "latitude": 47.791666666666664, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/TP5.png", 
+                "type": "Turnpoint", 
+                "longitude": -1.6436166666666667
+            }, 
+            {
+                "observationZone": "Line", 
+                "radius": 250, 
+                "name": "FINISH", 
+                "latitude": 47.791666666666664, 
+                "trigger": "Enter", 
+                "texture": "http://repoogn.ddns.net/SWS/tptextures/FINISH.png", 
+                "type": "Finish", 
+                "longitude": -1.6436166666666667
+            }
+        ], 
+        "taskType": "SailplaneGrandPrix"
+    }, 
+    "name": "France SGP", 
+    "description": "France SGP 2018"
+}

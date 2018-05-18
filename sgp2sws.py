@@ -129,6 +129,7 @@ COMPFILE = cucpath +'competitiongliders.LIST'      		# name of the COMP to be ge
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
 print "COMP generated data file is: ", COMPFILE 		# just a trace
+print "===========================: ===========", COMPFILE 	# just a trace
 
 os.system('rm  '+JSONFILE)		                        # remove the previous one
 os.system('rm  '+TASKFILE)		                        # remove the previous one
@@ -198,7 +199,7 @@ for id in pilots:
     		country=ccc.alpha_3				# convert to a 3 letter code
 
 	color=Flags[country]
-	pilotname=fixcoding(fname+" "+lname[0:1]).encode('utf8')
+	pilotname=fixcoding(fname+" "+lname).encode('utf8')
 	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, flarm[3:9]
 	if config.PicPilots == 'FAI':
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
