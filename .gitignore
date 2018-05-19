@@ -18,3 +18,6 @@ cuc/archive/
 cuc/archivecuc/
 cuc/qsgp/
 cuc/bkup/
+cuc/*.json
+cuc/*.tsk
+cuc/*.list

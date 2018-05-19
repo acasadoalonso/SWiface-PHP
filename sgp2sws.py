@@ -296,7 +296,7 @@ wp=0
 legs=[]
 while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
-		wp_name = "TP"+str(wp)
+		wp_name = "TP"+str(wp)+"-"+wp_name
 		if wp == 0:
 			wpinit=wp_name
 			type="Start"
@@ -345,6 +345,7 @@ task={ "taskType": "SailplaneGrandPrix", "taskName":"SGPrace", "startOpenTs": co
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
 jsonfile.write(j)
+print "WP:================================>"
 print "Generate TSK file ..."
 tsk={"name":"SGPrace", "color": "0000FF", "legs":legs, "wlist":wlist}
 tsks=[]
