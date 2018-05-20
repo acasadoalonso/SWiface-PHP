@@ -20,4 +20,4 @@ cuc/qsgp/
 cuc/bkup/
 cuc/*.json
 cuc/*.tsk
-cuc/*.list
+cuc/*.LIST
