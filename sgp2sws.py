@@ -210,6 +210,7 @@ for id in pilots:
 	npil += 1						# increase the number of pilots
 
 #print tracks
+print "=========="
 print "Competition"
 print "==========="
 comp=j_obj["c"]							# get the competition information
@@ -270,7 +271,7 @@ comp_shortdaytitle	=d_obj["t"]				# short day title
 comp_starttime		=d_obj["a"]				# start time millis from midnite
 comp_startaltitude	=d_obj["h"]				# start altitude
 comp_finishaltitude	=d_obj["f"]				# finish altitude
-print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "Start time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
+print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
 if "k" in d_obj:
 	comp_taskinfo		=d_obj["k"]				# task infor data
 else:
@@ -286,9 +287,21 @@ task_at     		=task_data["at"]
 task_wp     		=task_data["g"]	
 task_wpla   		=task_data["u"]
 task_wptlist		=task_wpla["wptList"]	
+task_at_country		=task_at["c"]
+task_at_place		=task_at["n"]
+task_at_altitude	=task_at["e"]
+task_at_runway		=task_at["f"]
+task_at_runways		=task_at["k"]
+
+if 	task_at.get ("q") != None :
+	task_at_freq	=task_at["q"]
+else:
+	task_at_freq	=0
+
 print "Task info"
 print "========="
-print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Task at:", task_at, task_wptlist,"WP#", len(task_wp)
+print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "\nTask at:", task_at, "WPLA", task_wpla, "\nWP#", len(task_wp)
+print "Task country", task_at_country,"at", task_at_place, "Task Runway:", task_at_runway, task_at_runways, "Freq:", task_at_freq
 print "Waypoints of the task"
 print "====================="
 #
@@ -340,7 +353,7 @@ print "Comp short name:", comp_shortname
 print "Comp full  name:", comp_name
 print "Comp date:", comp_date
 print "Comp Start time:", comp_starttime/1000
-print tp
+#print tp
 task={ "taskType": "SailplaneGrandPrix", "taskName":"SGPrace", "startOpenTs": comp_date , "turnpoints": tp}
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
