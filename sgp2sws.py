@@ -246,7 +246,7 @@ shorttitle		=indexofdays[day]["l"]    		# day short title
 starttime		=indexofdays[day]["a"]    		# start time millis from midnite
 daytype			=indexofdays[day]["y"]    		# day type: 1, 2, 3 ...
 dayid			=indexofdays[day]["i"] 			# day ID 
-print "DATE:", date, "Title:", title, "Day:", shorttitle,"==>", day, "Start time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays
+print "DATE:", date, "Title:", title, "Day:", shorttitle,"==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays
 
 
 d = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
@@ -258,6 +258,7 @@ if prt:
 if numberofactivedays == 0:
 	print "No active days ..."
 
+print "============================="
 print "Day: ", day, "DayID: ", dayid
 print "============================="
 #print d
@@ -273,7 +274,7 @@ comp_startaltitude	=d_obj["h"]				# start altitude
 comp_finishaltitude	=d_obj["f"]				# finish altitude
 print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
 if "k" in d_obj:
-	comp_taskinfo		=d_obj["k"]				# task infor data
+	comp_taskinfo		=d_obj["k"]			# task infor data
 else:
 	print "No task for that day..."
 	exit()
