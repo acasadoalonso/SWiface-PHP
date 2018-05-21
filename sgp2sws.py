@@ -261,7 +261,7 @@ if numberofactivedays == 0:
 print "============================="
 print "Day: ", day, "DayID: ", dayid
 print "============================="
-#print d
+#print "DDD", d_obj
 comp_day		=d_obj["@type"]
 comp_id			=d_obj["e"]				# again the compatition ID
 comp_dayid		=d_obj["i"]				# the day ID
@@ -283,6 +283,11 @@ task_id  	    	=comp_taskinfo["id"]
 task_listid 		=comp_taskinfo["taskListId"]
 task_name   		=comp_taskinfo["name"]
 task_data   		=comp_taskinfo["data"]
+task_creator		=comp_taskinfo["creator"]		# creator
+task_description	=comp_taskinfo["description"]		# description of the task
+task_desc		=json.loads(task_description) 
+task_length		=task_desc["d"]				# task length
+task_atfrom		=task_desc["ta"]			# task from
 
 task_at     		=task_data["at"]	
 task_wp     		=task_data["g"]	
@@ -293,6 +298,7 @@ task_at_place		=task_at["n"]
 task_at_altitude	=task_at["e"]
 task_at_runway		=task_at["f"]
 task_at_runways		=task_at["k"]
+task_at_icao		=task_at["j"]
 
 if 	task_at.get ("q") != None :
 	task_at_freq	=task_at["q"]
@@ -302,7 +308,8 @@ else:
 print "Task info"
 print "========="
 print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "\nTask at:", task_at, "WPLA", task_wpla, "\nWP#", len(task_wp)
-print "Task country", task_at_country,"at", task_at_place, "Task Runway:", task_at_runway, task_at_runways, "Freq:", task_at_freq
+print "Task country", task_at_country,"at", task_at_place, "Task Runway:", task_at_runway, task_at_runways, "Freq:", task_at_freq, "ICAO code:", task_at_icao
+print "Task creator", task_creator, "\nTask length:", task_length, "From:", task_atfrom
 print "Waypoints of the task"
 print "====================="
 #
