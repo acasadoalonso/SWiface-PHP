@@ -226,6 +226,7 @@ if 	j_obj.get ("j") != None :
 	numberofactivedays	=j_obj["j"]
 if 	j_obj.get ("i") == None :				# check if is fully setup the web site
 	print "No index of days ... exiting."
+	print "WARNING: No valid JSON file generated ....................."
 	exit(-1)
 indexofdays		=j_obj["i"]
 #print "Index of Days", indexofdays
@@ -277,6 +278,9 @@ if "k" in d_obj:
 	comp_taskinfo		=d_obj["k"]			# task infor data
 else:
 	print "No task for that day..."
+	print "WARNING: No valid JSON file generated ....................."
+	os.system('rm  '+JSONFILE)		                        # remove the previous one
+	os.system('rm  '+TASKFILE)		                        # remove the previous one
 	exit()
 task_type   		=comp_taskinfo["@type"]
 task_id  	    	=comp_taskinfo["id"]
