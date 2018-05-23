@@ -43,7 +43,7 @@ else:
 if (today != date):						# it is today ?
 	dbpath=config.DBpath+'/archive/';			# no user archive folder
 	live=False						# mark as NOT live
-	DBname='SWARCHIVE'
+	DBname=config.DBarchive					# use the archive DB
 else:
 	dbpath=config.DBpath					# use the std path
 
