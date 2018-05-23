@@ -24,6 +24,7 @@ localtime=datetime.datetime.now()					# get today's date
 today=localtime.strftime("%y%m%d")					# in string format yymmdd
 DBpath=config.DBpath							# use the configuration DB path
 DBname=config.DBname							# use the configuration DB name
+DBtable=config.DBtable							# use the configuration DB table
 
 if (today != dateid):
         DBpath=DBpath+'/archive/'					# use the archive folder instead
@@ -49,10 +50,10 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
 	if (config.MySQL):
-		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
+		cmd1="select distinct idflarm from "+DBtable+" where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
 	else:
-		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"'  ;" 
-	cmd2="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
+		cmd1="select distinct idflarm from "+DBtable+" where date = '"+dateid+"'  ;" 
+	cmd2="select distinct idflarm from "+DBtable+" where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd
 	try:
 		cursD.execute(cmd1)
