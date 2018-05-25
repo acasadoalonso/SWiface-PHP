@@ -33,6 +33,8 @@ Flags = { 						# flag colors assigned to the countries
 	"CZE" : ["white", "blue", "red"],
 	"POL" : ["white", "red", "white"],
 	"RUS" : ["white", "blue", "red"],
+	"SWE" : ["blue", "yellow", "white"],
+	"NOR" : ["blue", "red", "red"],
 	"USA" : ["red", "blue", "red"]
 	}
 	
