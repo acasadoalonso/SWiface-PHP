@@ -203,7 +203,7 @@ for id in pilots:
 
 	color=Flags[country]
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
-	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, flarm[3:9]
+	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, "OGN", flarm[3:9]
 	if config.PicPilots == 'FAI':
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	else:
@@ -212,6 +212,7 @@ for id in pilots:
 	npil += 1						# increase the number of pilots
 
 #print tracks
+print "Wlist:",wlist
 print "=========="
 print "Competition"
 print "==========="
@@ -300,11 +301,17 @@ task_wp     		=task_data["g"]
 task_wpla   		=task_data["u"]
 task_wptlist		=task_wpla["wptList"]	
 task_at_country		=task_at["c"]
+task_at_timezone	=task_at["z"]
+task_at_elevation	=task_at["e"]
 task_at_place		=task_at["n"]
 task_at_altitude	=task_at["e"]
+task_at_runwaydir	=task_at["d"]
+task_at_runwaywidth	=task_at["w"]
+task_at_runwaysurface	=task_at["f"]
 task_at_runway		=task_at["f"]
 task_at_runways		=task_at["k"]
 task_at_icao		=task_at["j"]
+task_at_source		=task_at["s"]
 
 if 	task_at.get ("q") != None :
 	task_at_freq	=task_at["q"]
@@ -314,7 +321,7 @@ else:
 print "Task info"
 print "========="
 print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "\nTask at:", task_at, "WPLA", task_wpla, "\nWP#", len(task_wp)
-print "Task country", task_at_country,"at", task_at_place, "Task Runway:", task_at_runway, task_at_runways, "Freq:", task_at_freq, "ICAO code:", task_at_icao
+print "Task country", task_at_country,"at", task_at_place, "TZ:", task_at_timezone, "Elevation:", task_at_elevation, "Task Runway:", task_at_runway, task_at_runways, task_at_runwaydir, task_at_runwaywidth, task_at_runwaysurface, "Freq:", task_at_freq, "ICAO code:", task_at_icao
 print "Task creator", task_creator, "\nTask length:", task_length, "From:", task_atfrom
 print "Waypoints of the task"
 print "====================="
@@ -372,7 +379,7 @@ task={ "taskType": "SailplaneGrandPrix", "taskName":"SGPrace", "startOpenTs": co
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
 jsonfile.write(j)
-print "WP:================================>"
+print "Task end:==========================>"
 print "Generate TSK file ..."
 tsk={"name":"SGPrace", "color": "0000FF", "legs":legs, "wlist":wlist}
 tsks=[]
@@ -394,10 +401,12 @@ taskfile.close()
 os.chmod(TASKFILE, 0o777)                       # make the TASK file accessible
 os.chmod(JSONFILE, 0o777)                       # make the JSON file accessible
 latest=cucpath+config.Initials+'/SGPrace-latest.tsk'     # the latest TASK file to be used on live.glidernet.org
-print TASKFILE+' ==>  '+latest                  # print is as a reference
+print "Linking:", TASKFILE+' ==>  '+latest      # print is as a reference
 os.system('rm  '+latest)                        # remove the previous one
-os.link(TASKFILE, latest)                       # link the recently generated file now to be the latest !!!
-
+try:
+	os.system('ln -s '+TASKFILE+' '+latest) # link the recently generated file now to be the latest !!!
+except:
+		print "No latest file ...: ", latest
 os.system("gist -login")
 cmd="gist -u 725f8409f32584fad9fda1bbc9b7db27 "+latest
 #cmd="gist  "+latest
