@@ -320,9 +320,11 @@ else:
 
 print "Task info"
 print "========="
-print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "\nTask at:", task_at, "WPLA", task_wpla, "\nWP#", len(task_wp)
-print "Task country", task_at_country,"at", task_at_place, "TZ:", task_at_timezone, "Elevation:", task_at_elevation, "Task Runway:", task_at_runway, task_at_runways, task_at_runwaydir, task_at_runwaywidth, task_at_runwaysurface, "Freq:", task_at_freq, "ICAO code:", task_at_icao
-print "Task creator", task_creator, "\nTask length:", task_length, "From:", task_atfrom
+print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name 
+#print "Task at:", task_at, "WPLA", task_wpla
+print "Task country:", task_at_country,"at", task_at_place, "TZ:", task_at_timezone, "Elevation:", task_at_elevation, "Task Runway:", task_at_runway, task_at_runways, task_at_runwaydir, task_at_runwaywidth, task_at_runwaysurface, "Freq:", task_at_freq, "ICAO code:", task_at_icao
+print "Task creator:", task_creator, "\nTask length:", task_length, "From:", task_atfrom
+print "Number of WP#:", len(task_wp)
 print "Waypoints of the task"
 print "====================="
 #
@@ -330,7 +332,7 @@ wp=0
 legs=[]
 while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
-		wp_name = "TP"+str(wp)+"-"+wp_name
+		wp_name 			= "TP"+str(wp)+"-"+wp_name
 		if wp == 0:
 			wpinit=wp_name
 			type="Start"
@@ -411,7 +413,10 @@ os.system("gist -login")
 cmd="gist -u 725f8409f32584fad9fda1bbc9b7db27 "+latest
 #cmd="gist  "+latest
 print cmd
-os.system(cmd)
+try:
+	os.system(cmd)
+except:
+	print "Error on gisy ...: ", cmd
 html="https://gist.githubusercontent.com/acasadoalonso/725f8409f32584fad9fda1bbc9b7db27/raw"
 print "Use: "+html
 
