@@ -129,17 +129,21 @@ fl_date_time = local_time.strftime("%Y%m%d")                    # get the local 
 JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JSON to be generated
 TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
 COMPFILE = cucpath +'competitiongliders.LIST'      		# name of the COMP to be generated
+CSVSFILE = cucpath +'competitiongliders.csv'      		# name of the COMP to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
 print "COMP generated data file is: ", COMPFILE 		# just a trace
+print "CSVS generated data file is: ", CSVSFILE 		# just a trace
 print "===========================: " 				# just a trace
 
 os.system('rm  '+JSONFILE)		                        # remove the previous one
 os.system('rm  '+TASKFILE)		                        # remove the previous one
 os.system('rm  '+COMPFILE)		                        # remove the previous one
+os.system('rm  '+CSVSFILE)		                        # remove the previous one
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
 taskfile = open (TASKFILE, 'w')                                 # open the output file
 compfile = open (COMPFILE, 'w')                                 # open the output file
+csvsfile = open (CSVSFILE, 'w')                                 # open the output file
 #
 # get the JSON string for the web server
 #
@@ -154,6 +158,8 @@ if prt:
 #
 wlist=[]
 clist=[]
+flist=[]                                			# Filter list for glidertracker.org
+flist.append("ID,CALL,CN,TYPE,INDEX")   			# Initialize with header row
 nwarnings=0                                     		# number of warnings ...
 warnings=[]                                     		# warnings glider
 
@@ -187,6 +193,7 @@ for id in pilots:
 	if flarmid != '':
 		wlist.append(flarmid[3:9])			# add device to the white list
 		clist.append(flarmid)				# add device to the white list
+  		flist.append(flarmid+","+registration+","+compid+","+model+","+str(1)) # Populate the filter list
 	else:
 		warnings.append(lname) 				# add it to the list of warnings
                 nwarnings += 1  				# and increase the number of warnings
@@ -419,7 +426,9 @@ except:
 	print "Error on gisy ...: ", cmd
 html="https://gist.githubusercontent.com/acasadoalonso/725f8409f32584fad9fda1bbc9b7db27/raw"
 print "Use: "+html
-
+# Write a csv file of all gliders to be used as filter file for glidertracker.org
+for item in flist:
+                        csvsfile.write("%s\n" % item)
 if npil == 0:
         print "JSON invalid: No pilots found ... "
         exit(-1)
