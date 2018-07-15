@@ -35,6 +35,7 @@ Flags = { 						# flag colors assigned to the countries
 	"RUS" : ["white", "blue", "red"],
 	"SWE" : ["blue", "yellow", "white"],
 	"NOR" : ["blue", "red", "red"],
+	"ZAF" : ["red", "green", "yellow"],
 	"USA" : ["red", "blue", "red"]
 	}
 	
@@ -128,7 +129,7 @@ else:
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
 JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JSON to be generated
 TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
-COMPFILE = cucpath +'competitiongliders.LIST'      		# name of the COMP to be generated
+COMPFILE = cucpath +'competitiongliders.lst'      		# name of the COMP to be generated
 CSVSFILE = cucpath +'competitiongliders.csv'      		# name of the COMP to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
@@ -180,13 +181,26 @@ for id in pilots:
 	if int(qsgpID) >= 14:
 		flarmid= 	pilots[id]["q"]			# flarm id
 		registration= 	pilots[id]["w"]			# registration
+		if registration == "":
+			print "\nWarning .... Missing glider registration " , flarmid
+			nwarnings +=1
+			warnings.append(lname) 			# add it to the list of warnings
 		flarm = getflarmid(registration)		# get the FlarmId from the registration
+		#print "FFF", flarmid, "F", flarm, registration
 		if flarmid == '':
 			flarmid = getflarmid(registration)	# get the FlarmId from the registration
-		if len(flarmid) == 6:
+		if len(flarmid) == 6 and flarmid[0:3] != "FLR":
 			flarmid = "FLR"+flarm			# add the FLR assuming Flarm
-		if flarmid[3:9] != flarm[3:9]:
-			print "Warning .... Flarm on system is not the same that Flarms registered on OGN" , flarmid, flarm
+		if flarm == '':
+			flarm = "***NOREG***"
+			print "\nWarning .... Flarm not registered on the OGN" , flarmid, flarm
+			nwarnings +=1
+			warnings.append(lname) 			# add it to the list of warnings
+
+		elif flarmid[3:9] != flarm[3:9]:
+			print "\nWarning .... Flarm on system is not the same that Flarms registered on OGN" , flarmid, flarm
+			nwarnings +=1
+			warnings.append(lname) 			# add it to the list of warnings
 	else:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
@@ -317,7 +331,11 @@ task_at_runwaywidth	=task_at["w"]
 task_at_runwaysurface	=task_at["f"]
 task_at_runway		=task_at["f"]
 task_at_runways		=task_at["k"]
-task_at_icao		=task_at["j"]
+if 	task_at.get ("j") != None :
+	task_at_icao	=task_at["j"]
+else:
+	task_at_icao	="NOID"
+
 task_at_source		=task_at["s"]
 
 if 	task_at.get ("q") != None :
@@ -417,14 +435,14 @@ try:
 except:
 		print "No latest file ...: ", latest
 os.system("gist -login")
-cmd="gist -u 725f8409f32584fad9fda1bbc9b7db27 "+latest
+cmd="gist -u bd0ebff6b31246570fa31b2df6b701c7 "+latest
 #cmd="gist  "+latest
 print cmd
 try:
 	os.system(cmd)
 except:
 	print "Error on gisy ...: ", cmd
-html="https://gist.githubusercontent.com/acasadoalonso/725f8409f32584fad9fda1bbc9b7db27/raw"
+html="https://gist.githubusercontent.com/acasadoalonso/bd0ebff6b31246570fa31b2df6b701c7/raw"
 print "Use: "+html
 # Write a csv file of all gliders to be used as filter file for glidertracker.org
 for item in flist:
