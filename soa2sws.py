@@ -16,6 +16,7 @@ import sqlite3
 import MySQLdb
 import math
 import os
+import socket
 import config
 
 from simplehal import HalDocument, Resolver
@@ -115,7 +116,8 @@ taskType= "SailplaneRacing"                     # race type
 
 # ==============================================#
 tsks = {}					# task file
-
+hostname=socket.gethostname()			# hostname as control
+print "Hostname:", hostname
 start_time = time.time()                        # get the time now
 utc = datetime.datetime.utcnow()                # the UTC time
 print "UTC Time is now:", utc  	                # print the time for information only
@@ -125,7 +127,7 @@ print date                                      #
 local_time = datetime.datetime.now()            # the local time
 print "Local Time is now:", local_time		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")	# get the local time
-print "Config params:", SWdbpath, initials, cucpath,secpath
+print "Config params. SWpath: ", SWdbpath, "Initials:", initials, "CUCpath:", cucpath, "SECpath:", secpath
 if (config.MySQL):
         connG=MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=config.DBname)     # connect with the database
 	print "Config:", config.DBhost, config.DBuser, config.DBname
@@ -154,6 +156,7 @@ category        =cd['category']
 eventname       =cd['name']
 compid          =cd['id']
 country         =cd['country']                  # country code - 2 chars code
+compcountry=country				# contry as defaults for pilots
 ccc             =pycountry.countries.get(alpha_2=country) # convert the 2 chars ID to the 3 chars ID
 country3        =ccc.alpha_3
 endate          =cd['end_date']
@@ -277,7 +280,11 @@ for cl in getemb(cd,'classes'):
 		if 'nationality' in getemb(contestants,'pilot')[0]:
 			nation     =getemb(contestants,'pilot')[0]['nationality']
 		else:
-			nation="ES"                     # by default is SPAIN
+
+			if compcountry != '':
+				nation=compcountry
+			else:
+				nation="ES"             # by default is SPAIN
 		if 'email'       in getemb(contestants,'pilot')[0]:
 			email      =getemb(contestants,'pilot')[0]['email']
 		else:
@@ -418,8 +425,9 @@ for cl in getemb(cd,'classes'):
         # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
         # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
         cmd="gist "+TASKFILE+" > /nfs/OGN/SWdata/gist.log"
-	# print cmd
-        os.system(cmd)
+	print cmd
+	if hostname == 'CASADOUBUNTU':
+        	os.system(cmd)
 	# print "Use: "+html
 
 	# Write a csv file of all gliders to be used as filter file for glidertracker.org

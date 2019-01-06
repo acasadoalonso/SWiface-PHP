@@ -8,7 +8,7 @@
             "aircraft": "Ventus 17.6m", 
             "3dModel": "ventus2", 
             "pilotName": "Sergio Campos", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDDF91F", 
             "competitionId": "QW"
         }, 
@@ -20,7 +20,7 @@
             "aircraft": "Ventus cM 17.6m", 
             "3dModel": "ventus2", 
             "pilotName": "Hans Weiner", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDDFAEE", 
             "competitionId": "WD"
         }, 
@@ -32,7 +32,7 @@
             "aircraft": "Ventus 2", 
             "3dModel": "ventus2", 
             "pilotName": "Andres Novion", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLR200000", 
             "competitionId": "GN"
         }, 
@@ -44,7 +44,7 @@
             "aircraft": "Ventus 2cT/15m", 
             "3dModel": "ventus2", 
             "pilotName": "Rene Vidal", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDDFA81", 
             "competitionId": "QZ"
         }, 
@@ -56,7 +56,7 @@
             "aircraft": "DG 1000/20m", 
             "3dModel": "ventus2", 
             "pilotName": "Rodrigo Lavanderos", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDDF0DE", 
             "competitionId": "SZ"
         }, 
@@ -68,7 +68,7 @@
             "aircraft": "Arcus M", 
             "3dModel": "ventus2", 
             "pilotName": "Andres Errazuriz", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDF1376", 
             "competitionId": "IG"
         }, 
@@ -80,7 +80,7 @@
             "aircraft": "Ventus 2cT/15m", 
             "3dModel": "ventus2", 
             "pilotName": "Arturo Diez", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDDF9D8", 
             "competitionId": "QV"
         }, 
@@ -92,7 +92,7 @@
             "aircraft": "Ventus cT 17.6m", 
             "3dModel": "ventus2", 
             "pilotName": "Nicolas Becerra", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDDFD1F", 
             "competitionId": "YV"
         }, 
@@ -104,7 +104,7 @@
             "aircraft": "Ventus 2cM/18m", 
             "3dModel": "ventus2", 
             "pilotName": "Harald Baumgarten", 
-            "country": "ESP", 
+            "country": "CHL", 
             "trackId": "CNVV20190106:FLRDF0CBA", 
             "competitionId": "VR"
         }
