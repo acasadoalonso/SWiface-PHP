@@ -25,7 +25,7 @@ Flags = { 						# flag colors assigned to the countries
 	"LTU" : ["yellow", "green", "red"],
 	"ITA" : ["green", "white", "red"],
 	"GBR" : ["red", "white", "blue"],
-	"DEU" : ["black", "yellow", "red"],
+	"DEU" : ["black", "red", "yellow"],
 	"NZL" : ["blue", "blue", "blue"],
 	"CZE" : ["white", "blue", "red"],
 	"POL" : ["white", "red", "white"],

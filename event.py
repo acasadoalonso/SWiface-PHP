@@ -49,11 +49,12 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
 	if (config.MySQL):
-		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
+		#cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
+		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
 	else:
 		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"'  ;" 
 	cmd2="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
-	#print cmd
+	#print cmd1
 	try:
 		cursD.execute(cmd1)
         except MySQLdb.Error, e:
@@ -63,6 +64,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 		idflarm=row[0]                                          # flarmid is the first field
 		idf=idflarm[3:9]                                        # we skip the first 3 chars
 		country="ESP"						# by deafult SPAIN 
+		#print idflarm, idf
 		cursG.execute("select registration, cn, type from GLIDERS where idglider = '%s';" % idf)               # search now into the gliding database
 		gli=cursG.fetchone()                                    # get the data from the DB
 		if gli and gli != None:                                 # did we find it ??? Index is unique, only one row

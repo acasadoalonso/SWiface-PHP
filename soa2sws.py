@@ -293,7 +293,10 @@ for cl in getemb(cd,'classes'):
 			flist.append(idflarm+","+regi+","+cn+","+ar+","+str(hd)) # Populate the filter list
 
 		# print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
-		print "\t", fname+" "+lname, nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
+		try:
+			print "\t", fname+" "+lname, nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
+		except:
+			print "\t", pname, nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
 		if idflarm==' ':
 			idflarm=str(npil)
 							# create the track
@@ -328,7 +331,7 @@ for cl in getemb(cd,'classes'):
 		lati= math.degrees(lati)                # the latitude is in radians, convert to GMS
 		long= math.degrees(long)
 		wtyp= point["type"]                     # waypoint type start/point/finish
-		name= fixcoding(point["name"])          # waypoint name
+		name= fixcoding(point["name"]).encode('utf8')          # waypoint name
 		pidx= point["point_index"]              # waypoint number within the task
 		ozty= point["oz_type"];			# oz type: next/symmetric/previous
 		ozra= point["oz_radius1"];		# oz radius
@@ -359,8 +362,10 @@ for cl in getemb(cd,'classes'):
                         tptexture=config.TPTserver+"SWS/tptextures/FINISH.png"
                 else:
                         tptexture=config.TPTserver+"SWS/tptextures/TP"+str(ntp)+".png"
-
-		print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx, tptexture        # print it as a reference
+		try:
+			print "\t", name, wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx, tptexture        # print it as a reference
+		except:
+			print "\t", fixcoding(name), wtyp, type, oz, lati, long, alti, dist, ozty, ozra, ozr2, oz, type, rad, pidx, tptexture        # print it as a reference
 							# built the turning point 
 		tpx={"latitude": lati, "longitude": long, "name": name, "observationZone": oz, "type": type, "radius": rad, "trigger":"Enter", "texture": tptexture}
 		tp.append(tpx)                          # add it to the TP
