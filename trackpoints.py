@@ -23,6 +23,7 @@ eventid=id[0:12]
 since  =sys.argv[2]
 live   =True
 DBname =config.DBname
+DBtable=config.DBtable
 
 localtime=datetime.datetime.now()
 today=localtime.strftime("%y%m%d")
@@ -42,7 +43,7 @@ else:
 if (today != date):						# it is today ?
 	dbpath=config.DBpath+'/archive/';			# no user archive folder
 	live=False						# mark as NOT live
-	DBname='SWARCHIVE'
+	DBname=config.DBarchive					# use the archive DB
 else:
 	dbpath=config.DBpath					# use the std path
 
@@ -58,9 +59,9 @@ else:
 
 cursD=conn.cursor()                                             # cursor for the ogndata table
 if (since == "0"):						# if no timme since showw all
-	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '%s' and date = '%s' order by time;" % (trackid,date))   # get all the positions now
+	cursD.execute("select date, time, longitude, latitude, altitude  from "+DBtable+" where idflarm = '%s' and date = '%s' order by time;" % (trackid,date))   # get all the positions now
 else:
-	cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '%s' and date = '%s' and time > '%s' and time <= '%s'  order by time" %  (trackid, date, time, timet))           
+	cursD.execute("select date, time, longitude, latitude, altitude  from "+DBtable+" where idflarm = '%s' and date = '%s' and time > '%s' and time <= '%s'  order by time" %  (trackid, date, time, timet))           
 
 tn=0
 #tracks=[{"t":0, "n":0, "e":0, "a":0}]

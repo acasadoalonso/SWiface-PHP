@@ -3,6 +3,7 @@ lost+found
 SoaringSpot/
 LT24/
 config.py
+kglid.py
 configtail.txt
 pic/
 cucfiles/
@@ -18,3 +19,6 @@ cuc/archive/
 cuc/archivecuc/
 cuc/qsgp/
 cuc/bkup/
+cuc/*.json
+cuc/*.tsk
+cuc/*.LIST

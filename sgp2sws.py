@@ -17,18 +17,28 @@ import kglid
 #-------------------------------------------------------------------------------------------------------------------#
 import config
 Flags = { 						# flag colors assigned to the countries
+	"ESP" : ["red", "yellow", "red"],
 	"AUT" : ["red", "white", "red"],
 	"CHL" : ["white", "blue", "white"],
 	"SVN" : ["white", "red", "blue"],
 	"FRA" : ["blue", "white", "red"],
+	"NLD" : ["red", "white", "blue"],
 	"CHE" : ["red", "red", "red"],
 	"LTU" : ["yellow", "green", "red"],
 	"ITA" : ["green", "white", "red"],
 	"GBR" : ["red", "white", "blue"],
+<<<<<<< HEAD
+=======
+	"BEL" : ["black", "yellow", "red"],
+>>>>>>> 2319f6dd71bbc5807a0cf119a398acea04db9c75
 	"DEU" : ["black", "red", "yellow"],
 	"NZL" : ["blue", "blue", "blue"],
 	"CZE" : ["white", "blue", "red"],
 	"POL" : ["white", "red", "white"],
+	"RUS" : ["white", "blue", "red"],
+	"SWE" : ["blue", "yellow", "white"],
+	"NOR" : ["blue", "red", "red"],
+	"ZAF" : ["red", "green", "yellow"],
 	"USA" : ["red", "blue", "red"]
 	}
 	
@@ -100,8 +110,8 @@ if prtreq and prtreq[0]=="print":
 else:
 	prt=False
  
-print "Generate .json files V1.0 from  the www.sgp.aero web server"
-print "Usage python csgpjson.py COMPID indexday"
+print "Generate .json files V1.1 from  the www.sgp.aero web server"
+print "Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html "
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
@@ -122,17 +132,22 @@ else:
 fl_date_time = local_time.strftime("%Y%m%d")                    # get the local time
 JSONFILE = cucpath + config.Initials + fl_date_time+'.json'     # name of the JSON to be generated
 TASKFILE = cucpath + config.Initials + fl_date_time+'.tsk'      # name of the TASK to be generated
-COMPFILE = cucpath +'competitiongliders.LIST'      		# name of the COMP to be generated
+COMPFILE = cucpath +'competitiongliders.lst'      		# name of the COMP to be generated
+CSVSFILE = cucpath +'competitiongliders.csv'      		# name of the COMP to be generated
 print "JSON generated data file is: ", JSONFILE 		# just a trace
 print "TASK generated data file is: ", TASKFILE 		# just a trace
 print "COMP generated data file is: ", COMPFILE 		# just a trace
+print "CSVS generated data file is: ", CSVSFILE 		# just a trace
+print "===========================: " 				# just a trace
 
 os.system('rm  '+JSONFILE)		                        # remove the previous one
 os.system('rm  '+TASKFILE)		                        # remove the previous one
 os.system('rm  '+COMPFILE)		                        # remove the previous one
+os.system('rm  '+CSVSFILE)		                        # remove the previous one
 jsonfile = open (JSONFILE, 'w')                                 # open the output file
 taskfile = open (TASKFILE, 'w')                                 # open the output file
 compfile = open (COMPFILE, 'w')                                 # open the output file
+csvsfile = open (CSVSFILE, 'w')                                 # open the output file
 #
 # get the JSON string for the web server
 #
@@ -147,6 +162,8 @@ if prt:
 #
 wlist=[]
 clist=[]
+flist=[]                                			# Filter list for glidertracker.org
+flist.append("ID,CALL,CN,TYPE,INDEX")   			# Initialize with header row
 nwarnings=0                                     		# number of warnings ...
 warnings=[]                                     		# warnings glider
 
@@ -167,19 +184,33 @@ for id in pilots:
 	if int(qsgpID) >= 14:
 		flarmid= 	pilots[id]["q"]			# flarm id
 		registration= 	pilots[id]["w"]			# registration
+		if registration == "":
+			print "\nWarning .... Missing glider registration " , flarmid
+			nwarnings +=1
+			warnings.append(lname) 			# add it to the list of warnings
 		flarm = getflarmid(registration)		# get the FlarmId from the registration
+		#print "FFF", flarmid, "F", flarm, registration
 		if flarmid == '':
 			flarmid = getflarmid(registration)	# get the FlarmId from the registration
-		if len(flarmid) == 6:
+		if len(flarmid) == 6 and flarmid[0:3] != "FLR":
 			flarmid = "FLR"+flarm			# add the FLR assuming Flarm
-		if flarmid[3:9] != flarm[3:9]:
-			print "Warning .... Flarm on system is not the same that Flarms registered on OGN" , flarmid, flarm
+		if flarm == '':
+			flarm = "***NOREG***"
+			print "\nWarning .... Flarm not registered on the OGN" , flarmid, flarm
+			nwarnings +=1
+			warnings.append(lname) 			# add it to the list of warnings
+
+		elif flarmid[3:9] != flarm[3:9]:
+			print "\nWarning .... Flarm on system is not the same that Flarms registered on OGN" , flarmid, flarm
+			nwarnings +=1
+			warnings.append(lname) 			# add it to the list of warnings
 	else:
 		flarmid= 	"FLRDDDDDD"
 		registration= 	"EC-XXX"
 	if flarmid != '':
 		wlist.append(flarmid[3:9])			# add device to the white list
 		clist.append(flarmid)				# add device to the white list
+  		flist.append(flarmid+","+registration+","+compid+","+model+","+str(1)) # Populate the filter list
 	else:
 		warnings.append(lname) 				# add it to the list of warnings
                 nwarnings += 1  				# and increase the number of warnings
@@ -195,8 +226,8 @@ for id in pilots:
     		country=ccc.alpha_3				# convert to a 3 letter code
 
 	color=Flags[country]
-	pilotname=fixcoding(fname+" "+lname[0:1]).encode('utf8')
-	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, flarm[3:9]
+	pilotname=fixcoding(fname+" "+lname).encode('utf8')
+	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, "OGN", flarm[3:9]
 	if config.PicPilots == 'FAI':
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	else:
@@ -205,6 +236,8 @@ for id in pilots:
 	npil += 1						# increase the number of pilots
 
 #print tracks
+print "Wlist:",wlist
+print "=========="
 print "Competition"
 print "==========="
 comp=j_obj["c"]							# get the competition information
@@ -220,6 +253,7 @@ if 	j_obj.get ("j") != None :
 	numberofactivedays	=j_obj["j"]
 if 	j_obj.get ("i") == None :				# check if is fully setup the web site
 	print "No index of days ... exiting."
+	print "WARNING: No valid JSON file generated ....................."
 	exit(-1)
 indexofdays		=j_obj["i"]
 #print "Index of Days", indexofdays
@@ -240,7 +274,7 @@ shorttitle		=indexofdays[day]["l"]    		# day short title
 starttime		=indexofdays[day]["a"]    		# start time millis from midnite
 daytype			=indexofdays[day]["y"]    		# day type: 1, 2, 3 ...
 dayid			=indexofdays[day]["i"] 			# day ID 
-print "DATE:", date, "Title:", title, "Day:", shorttitle,"==>", day, "Start time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays
+print "DATE:", date, "Title:", title, "Day:", shorttitle,"==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays
 
 
 d = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
@@ -252,9 +286,10 @@ if prt:
 if numberofactivedays == 0:
 	print "No active days ..."
 
+print "============================="
 print "Day: ", day, "DayID: ", dayid
 print "============================="
-#print d
+#print "DDD", d_obj
 comp_day		=d_obj["@type"]
 comp_id			=d_obj["e"]				# again the compatition ID
 comp_dayid		=d_obj["i"]				# the day ID
@@ -265,25 +300,59 @@ comp_shortdaytitle	=d_obj["t"]				# short day title
 comp_starttime		=d_obj["a"]				# start time millis from midnite
 comp_startaltitude	=d_obj["h"]				# start altitude
 comp_finishaltitude	=d_obj["f"]				# finish altitude
-print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "Start time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
+print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
 if "k" in d_obj:
-	comp_taskinfo		=d_obj["k"]				# task infor data
+	comp_taskinfo		=d_obj["k"]			# task infor data
 else:
 	print "No task for that day..."
+	print "WARNING: No valid JSON file generated ....................."
+	os.system('rm  '+JSONFILE)		                        # remove the previous one
+	os.system('rm  '+TASKFILE)		                        # remove the previous one
 	exit()
 task_type   		=comp_taskinfo["@type"]
 task_id  	    	=comp_taskinfo["id"]
 task_listid 		=comp_taskinfo["taskListId"]
 task_name   		=comp_taskinfo["name"]
 task_data   		=comp_taskinfo["data"]
+task_creator		=comp_taskinfo["creator"]		# creator
+task_description	=comp_taskinfo["description"]		# description of the task
+task_desc		=json.loads(task_description) 
+task_length		=task_desc["d"]				# task length
+task_atfrom		=task_desc["ta"]			# task from
 
 task_at     		=task_data["at"]	
 task_wp     		=task_data["g"]	
 task_wpla   		=task_data["u"]
 task_wptlist		=task_wpla["wptList"]	
+task_at_country		=task_at["c"]
+task_at_timezone	=task_at["z"]
+task_at_elevation	=task_at["e"]
+task_at_place		=task_at["n"]
+task_at_altitude	=task_at["e"]
+task_at_runwaydir	=task_at["d"]
+task_at_runwaywidth	=task_at["w"]
+task_at_runwaysurface	=task_at["f"]
+task_at_runway		=task_at["f"]
+task_at_runways		=task_at["k"]
+if 	task_at.get ("j") != None :
+	task_at_icao	=task_at["j"]
+else:
+	task_at_icao	="NOID"
+
+task_at_source		=task_at["s"]
+
+if 	task_at.get ("q") != None :
+	task_at_freq	=task_at["q"]
+else:
+	task_at_freq	=0
+
 print "Task info"
 print "========="
-print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Task at:", task_at, task_wptlist,"WP#", len(task_wp)
+print "Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name 
+#print "Task at:", task_at, "WPLA", task_wpla
+print "Task country:", task_at_country,"at", task_at_place, "TZ:", task_at_timezone, "Elevation:", task_at_elevation, "Task Runway:", task_at_runway, task_at_runways, task_at_runwaydir, task_at_runwaywidth, task_at_runwaysurface, "Freq:", task_at_freq, "ICAO code:", task_at_icao
+print "Task creator:", task_creator, "\nTask length:", task_length, "From:", task_atfrom
+print "Number of WP#:", len(task_wp)
 print "Waypoints of the task"
 print "====================="
 #
@@ -291,7 +360,7 @@ wp=0
 legs=[]
 while wp < len(task_wp):
 		wp_name				=task_wp[wp]["n"]	# waypoint name
-		wp_name = "TP"+str(wp)
+		wp_name 			= "TP"+str(wp)+"-"+wp_name
 		if wp == 0:
 			wpinit=wp_name
 			type="Start"
@@ -335,11 +404,12 @@ print "Comp short name:", comp_shortname
 print "Comp full  name:", comp_name
 print "Comp date:", comp_date
 print "Comp Start time:", comp_starttime/1000
-print tp
+#print tp
 task={ "taskType": "SailplaneGrandPrix", "taskName":"SGPrace", "startOpenTs": comp_date , "turnpoints": tp}
 event={"name": comp_shortname, "description" : comp_name, "task" : task , "tracks" : tracks}
 j=json.dumps(event, indent=4)
 jsonfile.write(j)
+print "Task end:==========================>"
 print "Generate TSK file ..."
 tsk={"name":"SGPrace", "color": "0000FF", "legs":legs, "wlist":wlist}
 tsks=[]
@@ -361,18 +431,25 @@ taskfile.close()
 os.chmod(TASKFILE, 0o777)                       # make the TASK file accessible
 os.chmod(JSONFILE, 0o777)                       # make the JSON file accessible
 latest=cucpath+config.Initials+'/SGPrace-latest.tsk'     # the latest TASK file to be used on live.glidernet.org
-print TASKFILE+' ==>  '+latest                  # print is as a reference
+print "Linking:", TASKFILE+' ==>  '+latest      # print is as a reference
 os.system('rm  '+latest)                        # remove the previous one
-os.link(TASKFILE, latest)                       # link the recently generated file now to be the latest !!!
-
+try:
+	os.system('ln -s '+TASKFILE+' '+latest) # link the recently generated file now to be the latest !!!
+except:
+		print "No latest file ...: ", latest
 os.system("gist -login")
-cmd="gist -u 725f8409f32584fad9fda1bbc9b7db27 "+latest
+cmd="gist -u bd0ebff6b31246570fa31b2df6b701c7 "+latest
 #cmd="gist  "+latest
 print cmd
-os.system(cmd)
-html="https://gist.githubusercontent.com/acasadoalonso/725f8409f32584fad9fda1bbc9b7db27/raw"
+try:
+	os.system(cmd)
+except:
+	print "Error on gisy ...: ", cmd
+html="https://gist.githubusercontent.com/acasadoalonso/bd0ebff6b31246570fa31b2df6b701c7/raw"
 print "Use: "+html
-
+# Write a csv file of all gliders to be used as filter file for glidertracker.org
+for item in flist:
+                        csvsfile.write("%s\n" % item)
 if npil == 0:
         print "JSON invalid: No pilots found ... "
         exit(-1)

@@ -58,6 +58,15 @@ try:
 except:
 	TPTserver       = SWSserver
 DBname                  = cfg.get('server', 'DBname').strip("'").strip('"')
+try:
+	DBtable         = cfg.get('server', 'DBtable').strip("'").strip('"')
+except:
+	DBtable         = "OGNDATA"
+try:
+        DBarchive       = cfg.get('server', 'DBarchive').strip("'").strip('"')
+except:
+        DBarchive       = "SWARCHIVE"
+
 SQLite3                 = cfg.get('server', 'SQLite3').strip("'").strip('"')
 Initials                = cfg.get('server', 'Initials').strip("'").strip('"')
 
@@ -77,6 +86,8 @@ datafile.write("cucFileLocation='"+cucFileLocation+"'; \n")
 datafile.write("DBpath='"+DBpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")
 datafile.write("DBname='"+DBname+"' \n")
+datafile.write("DBtable='"+DBtable+"' \n")
+datafile.write("DBarchive='"+DBarchive+"' \n")
 datafile.write("SQLite3='"+SQLite3+"' \n")
 datafile.write("DBuser='"+DBuser+"' \n")
 datafile.write("DBpasswd='"+DBpasswd+"' \n")

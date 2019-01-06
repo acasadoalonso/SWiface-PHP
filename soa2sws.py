@@ -210,7 +210,9 @@ for cl in getemb(cd,'classes'):
 		fname=getemb(contestants,'pilot')[0]['first_name']
 		lname=getemb(contestants,'pilot')[0]['last_name']
 		pname=fixcoding(fname+" "+lname).encode('utf8')  # convert it to utf8 in order to avoid problems 
-		if 'aircraft_registration' in contestants:
+		if 'live_track_id' in contestants:
+			idflarm=contestants['live_track_id']
+		elif 'aircraft_registration' in contestants:
 			regi=contestants['aircraft_registration']
 			ff=False                # assume false initially 
 			idflarm=' '
@@ -246,12 +248,10 @@ for cl in getemb(cd,'classes'):
 			fr=fr.rstrip('\n')
 			fr=fr.rstrip('\r')
 		else:
-			if idflarm != ' ':
-				fr=idflarm
-			else:
-				fr="fr_NOTYET"+str(npil)
-				warnings.append(pname) # add it to the list of warnings
-				nwarnings += 1  # and increase the number of warnings
+			fr="fr_NOTYET"+str(npil)
+		if idflarm == ' ':
+			warnings.append(pname) # add it to the list of warnings
+			nwarnings += 1  # and increase the number of warnings
 
 		if 'handicap' in contestants:
 			hd=contestants['handicap']
