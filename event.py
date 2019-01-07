@@ -50,20 +50,12 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 	cursG=conn.cursor()                                             # cursor for the glider table
 	pn=0                                                            # number of pilots found
 	if (config.MySQL):
-<<<<<<< HEAD
-		#cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
-		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
-	else:
-		cmd1="select distinct idflarm from OGNDATA where date = '"+dateid+"'  ;" 
-	cmd2="select distinct idflarm from OGNDATA where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd1
-=======
 		cmd1="select distinct idflarm from "+DBtable+" where date = '"+dateid+"' order by GETDISTANCE('"+config.loclatitude+"','"+config.loclongitud+"', latitude, longitude) ASC LIMIT 0,32 ;" 
 	else:
 		cmd1="select distinct idflarm from "+DBtable+" where date = '"+dateid+"'  ;" 
 	cmd2="select distinct idflarm from "+DBtable+" where date = '"+dateid+"' LIMIT 0,32 ;" 
 	#print cmd
->>>>>>> 2319f6dd71bbc5807a0cf119a398acea04db9c75
 	try:
 		cursD.execute(cmd1)
         except MySQLdb.Error, e:
