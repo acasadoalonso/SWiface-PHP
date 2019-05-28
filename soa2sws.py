@@ -51,6 +51,17 @@ def fixcoding(addr):
                 addr=addr.replace(u'ñ', u'n')
                 addr=addr.replace(u'Ñ', u'N')
                 addr=addr.replace(u'Ø', u'O')
+                addr=addr.replace(u'Ã', u'a')
+                addr=addr.replace(u'ƒ', u'f')
+                addr=addr.replace(u'Â', u'a')
+                addr=addr.replace(u'¶', u'-')
+                addr=addr.replace(u'…', u'-')
+                addr=addr.replace(u'Ë', u'E')
+                addr=addr.replace(u'†', u'-')
+                addr=addr.replace(u'ä', u'-')
+                addr=addr.replace(u'Ł', u'L')
+                addr=addr.replace(u'ł', u'l')
+                addr=addr.replace(u'ł', u'-')
         return addr
 
 
@@ -136,7 +147,8 @@ else:
 
 cursG=connG.cursor()				# cursor for the GLIDERS table
 
-nonce=base64.b64encode(OpenSSL.rand.bytes(36))  # get the once base
+#nonce=base64.b64encode(OpenSSL.rand.bytes(36))  # get the once base
+nonce=base64.b64encode(os.urandom(36))          # get the once base
 f=open(secpath+"clientid")                      # open the file with the client id
 client=f.read()                                 # read it
 client=client.rstrip()                          # clear the whitespace at the end
@@ -212,7 +224,7 @@ for cl in getemb(cd,'classes'):
 		fr=' '                          # no FR yet
 		fname=getemb(contestants,'pilot')[0]['first_name']
 		lname=getemb(contestants,'pilot')[0]['last_name']
-		pname=fixcoding(fname+" "+lname).encode('utf8')  # convert it to utf8 in order to avoid problems 
+		pname=fixcoding(fname+" "+lname).encode('utf-8').decode('utf-8')  # convert it to utf8 in order to avoid problems 
 		if 'live_track_id' in contestants:
 			idflarm=contestants['live_track_id']
 		elif 'aircraft_registration' in contestants:
@@ -261,7 +273,7 @@ for cl in getemb(cd,'classes'):
 		else:
 			hd="hd_NOTYET"
 		if 'club' in contestants:
-			club=fixcoding(contestants['club'])
+			club=fixcoding(contestants['club']).encode('utf-8').decode('utf-8')
 		else:
 			club="club_NOTYET"
 		if 'aircraft_model' in contestants:
@@ -296,12 +308,12 @@ for cl in getemb(cd,'classes'):
 			if idflarm != " ":
 				wlist.append(idflarm[3:9])
 			else:
-				print "Missing Flarm:", fname, lname
+				print "Missing Flarm:", fixcoding(fname), fixcoding(lname)
 			flist.append(idflarm+","+regi+","+cn+","+ar+","+str(hd)) # Populate the filter list
 
 		# print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
 		try:
-			print "\t", fname+" "+lname, nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
+			print "\t", fixcoding(fname+" "+lname), nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
 		except:
 			print "\t", pname, nation, country, regi, cn, hd, ar, club, igcid , idflarm # , fr
 		if idflarm==' ':
@@ -424,11 +436,6 @@ for cl in getemb(cd,'classes'):
 
         # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
         # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
-        cmd="gist "+TASKFILE+" > /nfs/OGN/SWdata/gist.log"
-	print cmd
-	if hostname == 'CASADOUBUNTU':
-        	os.system(cmd)
-	# print "Use: "+html
 
 	# Write a csv file of all gliders to be used as filter file for glidertracker.org
 	with open(cucpath + initials + fl_date_time+"-"+classtype+"filter.csv", 'wb') as myfile:
@@ -436,7 +443,7 @@ for cl in getemb(cd,'classes'):
 			myfile.write("%s\n" % item)
 
 
-print "= Pilots ===========================", npil      # print the number of pilots as a reference and control
+print "= Pilots ===========================", npil, "\n\n" # print the number of pilots as a reference and control
 
 
 connG.close()                                           # close the connection
@@ -448,4 +455,5 @@ else:
 	print "Pilots found ... ", npil, "Warnings:", nwarnings
 	if nwarnings > 0:
 		print "Pilots with no FLARMID: ", warnings
+        print "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n\n"
 	exit(0)
