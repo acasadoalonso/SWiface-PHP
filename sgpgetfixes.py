@@ -5,18 +5,24 @@
  
 import json
 import sqlite3
+import MySQLdb
+
 import datetime
 import time
 import sys
 import os
 import config
 
-dbpath=DBpath
+
+DBpath=config.DBpath							# use the configuration DB path
+DBname=config.DBname							# use the configuration DB name
+DBtable=config.DBtable							# use the configuration DB table
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
 #
 
+dbpath=DBpath                                                   # use the archive DB
 trackid=sys.argv[1]
 since  =sys.argv[2]
 live=True
@@ -24,6 +30,7 @@ localtime=datetime.datetime.now()
 today=localtime.strftime("%y%m%d")
 date="0"
 time="0"
+filename="SWiface"
 if (since == "0"):
 	date=today
 	
@@ -37,15 +44,20 @@ if (today != date):						# it is today
 	dbpath=dbpath+'/archive/';				# no user archive folder
 	live=False						# mark as NOT live
 
-filename=dbpath+'SWiface.db'		                        # open th DB in read only mode
-fd = os.open(filename, os.O_RDONLY)
-conn = sqlite3.connect('/dev/fd/%d' % fd)
-cursD=conn.cursor()                                             # cursor for the ogndata table
-#print trackid, since, filename
-if (since == "0"):						# if no timme since showw all
-		cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ?", [trackid,date])                                # get all the glifers flying now
+#
+if (config.MySQL):
+		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread, db=DBname, connect_timeout=1000)     # connect with the database
 else:
-		cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ? and time > ? ", [trackid, date, time])           # get all the glifers flying now
+		filename=DBpath+config.SQLite3		        # open th DB in read only mode
+		fd = os.open(filename, os.O_RDONLY)
+		conn = sqlite3.connect('/dev/fd/%d' % fd)
+
+cursD=conn.cursor()                                             # cursor for the ogndata table
+#print trackid, since, filename, "DT", date, "TM", time
+if (since == "0"):						# if no timme since showw all
+		cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '"+trackid+"' and date = '"+date+"'")                                # get all the glifers flying now
+else:
+		cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '"+trackid+"' and date = '"+date+"' and time > '"+time+"'")          # get all the glifers flying now
 tn=0
 #tracks=[{"t":0, "n":0, "e":0, "a":0}]
 tracks=[]
@@ -72,4 +84,7 @@ tp={"trackId": trackid, "live": live, "track": tracks}
 j=json.dumps(tp, indent=4)
 print j
 conn.close()
-os.close(fd)
+if (config.MySQL):
+    exit
+else:
+    os.close(fd)
