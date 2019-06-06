@@ -18,6 +18,7 @@ import kglid
 import config
 Flags = { 						# flag colors assigned to the countries
 	"ESP" : ["red", "yellow", "red"],
+	"AUS" : ["yellow", "green", "yellow"],
 	"AUT" : ["red", "white", "red"],
 	"CHL" : ["white", "blue", "white"],
 	"SVN" : ["white", "red", "blue"],
@@ -27,10 +28,7 @@ Flags = { 						# flag colors assigned to the countries
 	"LTU" : ["yellow", "green", "red"],
 	"ITA" : ["green", "white", "red"],
 	"GBR" : ["red", "white", "blue"],
-<<<<<<< HEAD
-=======
 	"BEL" : ["black", "yellow", "red"],
->>>>>>> 2319f6dd71bbc5807a0cf119a398acea04db9c75
 	"DEU" : ["black", "red", "yellow"],
 	"NZL" : ["blue", "blue", "blue"],
 	"CZE" : ["white", "blue", "red"],
@@ -172,7 +170,8 @@ pilots=j_obj["p"]						# get the pilot information
 print "Pilots:", len(pilots)
 print "=========="
 for id in pilots:
-#                        
+#
+        print "---------------------"
 	pid= 		pilots[id]["i"] 			# get the pilot ID   
 	fname= 		pilots[id]["f"]				# first name    
 	lname= 		pilots[id]["l"] 			# last name   
@@ -185,23 +184,23 @@ for id in pilots:
 		flarmid= 	pilots[id]["q"]			# flarm id
 		registration= 	pilots[id]["w"]			# registration
 		if registration == "":
-			print "\nWarning .... Missing glider registration " , flarmid
+			print "Warning .... Missing glider registration:" , flarmid,"\n\n"
 			nwarnings +=1
 			warnings.append(lname) 			# add it to the list of warnings
 		flarm = getflarmid(registration)		# get the FlarmId from the registration
-		#print "FFF", flarmid, "F", flarm, registration
+                print "FlarmID on SYS:", flarmid, "Flarm reg:", flarm, "Registration:", registration
 		if flarmid == '':
 			flarmid = getflarmid(registration)	# get the FlarmId from the registration
 		if len(flarmid) == 6 and flarmid[0:3] != "FLR":
-			flarmid = "FLR"+flarm			# add the FLR assuming Flarm
+			flarmid = flarm 			# add the FLR assuming Flarm
 		if flarm == '':
 			flarm = "***NOREG***"
-			print "\nWarning .... Flarm not registered on the OGN" , flarmid, flarm
+			print "Warning .... Flarm not registered on the OGN" , flarmid, flarm,"\n\n"
 			nwarnings +=1
 			warnings.append(lname) 			# add it to the list of warnings
 
 		elif flarmid[3:9] != flarm[3:9]:
-			print "\nWarning .... Flarm on system is not the same that Flarms registered on OGN" , flarmid, flarm
+                        print "Warning .... Flarm on system is not the same that Flarms registered on OGN, system:" , flarmid, "OGN:", flarm,"\n\n"
 			nwarnings +=1
 			warnings.append(lname) 			# add it to the list of warnings
 	else:
@@ -227,13 +226,14 @@ for id in pilots:
 
 	color=Flags[country]
 	pilotname=fixcoding(fname+" "+lname).encode('utf8')
-	print pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, "OGN", flarm[3:9]
+        print "Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, "OGN:", flarm[3:9]
 	if config.PicPilots == 'FAI':
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
 	else:
 		tr={"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration, "3dModel": "ventus2", "ribbonColors":color, "portraitUrl": config.SWSserver+"SWS/pic/"+compid+".png", "3dModelVariant": config.SWSserver+"SWS/pic/"+compid+".sponsor.png"}
 	tracks.append(tr)                                       # add it to the tracks
 	npil += 1						# increase the number of pilots
+        print "---------------------"
 
 #print tracks
 print "Wlist:",wlist

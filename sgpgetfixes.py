@@ -2,27 +2,24 @@
 #
 # SGP scoring interface --- JSON formaat
 #
- 
+import MySQLdb
 import json
 import sqlite3
-import MySQLdb
-
 import datetime
 import time
 import sys
 import os
 import config
 
-
-DBpath=config.DBpath							# use the configuration DB path
-DBname=config.DBname							# use the configuration DB name
-DBtable=config.DBtable							# use the configuration DB table
+dbpath=config.DBpath
+DBpath=config.DBpath                                                    # use the configuration DB path
+DBname=config.DBname                                                    # use the configuration DB name
+DBtable=config.DBtable                                                  # use the configuration DB table
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
 #
 
-dbpath=DBpath                                                   # use the archive DB
 trackid=sys.argv[1]
 since  =sys.argv[2]
 live=True
@@ -30,61 +27,69 @@ localtime=datetime.datetime.now()
 today=localtime.strftime("%y%m%d")
 date="0"
 time="0"
-filename="SWiface"
-if (since == "0"):
-	date=today
-	
+
+if (since == "-1"):
+        date=today
+elif (since == "0"):
+        date=today
+
 else:
-	datetimes=datetime.datetime.utcfromtimestamp(int(since))
-	date=     datetimes.strftime("%y%m%d")
-	time=     datetimes.strftime("%H%M%S")
+        datetimes=datetime.datetime.utcfromtimestamp(int(since))
+        date=     datetimes.strftime("%y%m%d")
+        time=     datetimes.strftime("%H%M%S")
 
 
-if (today != date):						# it is today
-	dbpath=dbpath+'/archive/';				# no user archive folder
-	live=False						# mark as NOT live
-
-#
+if (today != date):                                             # it is today
+        dbpath=dbpath+'/archive/';                              # no user archive folder
+        live=False                                              # mark as NOT live
 if (config.MySQL):
-		conn=MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread, db=DBname, connect_timeout=1000)     # connect with the database
+                conn=MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread, db=DBname, connect_timeout=1000)     # connect with the database
 else:
-		filename=DBpath+config.SQLite3		        # open th DB in read only mode
-		fd = os.open(filename, os.O_RDONLY)
-		conn = sqlite3.connect('/dev/fd/%d' % fd)
-
+                filename=DBpath+config.SQLite3                          # open th DB in read only mode
+                fd = os.open(filename, os.O_RDONLY)
+                conn = sqlite3.connect('/dev/fd/%d' % fd)
 cursD=conn.cursor()                                             # cursor for the ogndata table
-#print trackid, since, filename, "DT", date, "TM", time
-if (since == "0"):						# if no timme since showw all
-		cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '"+trackid+"' and date = '"+date+"'")                                # get all the glifers flying now
+
+print trackid, since,  date, time
+
+if (since == "-1"):                                             # if no timme since showw all
+                cursD.execute("select date, time, longitude, latitude, altitude, idflarm  from OGNDATA where date = '"+str(date)+"'")                                # get all the glifers flying now
+elif (since == "0"):                                            # if no timme since showw all
+                cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '"+trackid+"' and date = '"+str(date)+"'")                                # get all the glifers flying now
 else:
-		cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = '"+trackid+"' and date = '"+date+"' and time > '"+time+"'")          # get all the glifers flying now
+                cursD.execute("select date, time, longitude, latitude, altitude  from OGNDATA where idflarm = ? and date = ? and time > ? ", [trackid, date, time])           # get all the glifers flying now
 tn=0
 #tracks=[{"t":0, "n":0, "e":0, "a":0}]
 tracks=[]
 
-for row in cursD.fetchall(): 
-	date=row[0]
-	y=int(date[0:2])+2000
-	M=int(date[2:4])
-	d=int(date[4:6])
-	time=row[1]
-	h=int(time[0:2])
-	m=int(time[2:4])
-	s=int(time[4:6])
-	dt=datetime.datetime(y,M,d,h,m,s)
-	ts=(dt - datetime.datetime(1970, 1, 1)).total_seconds()
-	long=row[2]
-	lati=row[3]
-	alti=row[4]
-	#print "T==>", tn, date, time, trackid, lati, long, alti, dt, ts
-	tracks.append({"t": int(ts), "e":long, "n":lati, "a":alti})
-	tn +=1
+for row in cursD.fetchall():
+        date=row[0]
+        y=int(date[0:2])+2000
+        M=int(date[2:4])
+        d=int(date[4:6])
+        time=row[1]
+        h=int(time[0:2])
+        m=int(time[2:4])
+        s=int(time[4:6])
+        dt=datetime.datetime(y,M,d,h,m,s)
+        ts=(dt - datetime.datetime(1970, 1, 1)).total_seconds()
+        long=row[2]
+        lati=row[3]
+        alti=row[4]
+        #print "T==>", tn, date, time, trackid, lati, long, alti, dt, ts
+        if (since == '-1'):
+                idflarm=row[5]
+                tracks.append({"idflarm": idflarm, "t": int(ts), "e":long, "n":lati, "a":alti})
+        else:
+                tracks.append({"t": int(ts), "e":long, "n":lati, "a":alti})
+        tn +=1
 
 tp={"trackId": trackid, "live": live, "track": tracks}
 j=json.dumps(tp, indent=4)
 print j
-conn.close()
 if (config.MySQL):
-    exit
+        conn.close()
 else:
-    os.close(fd)
+        conn.close()
+        os.close(fd)
+
