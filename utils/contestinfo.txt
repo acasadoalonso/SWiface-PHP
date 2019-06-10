@@ -1,4 +1,0 @@
-{date}20160411{/date}{task}1{/task}{validday}1{/validday}
-{date}20160412{/date}{task}1{/task}{validday}1{/validday}
-{date}20160413{/date}{task}1{/task}{validday}1{/validday}
-{date}20160414{/date}{task}1{/task}{validday}1{/validday}
