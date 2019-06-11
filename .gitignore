@@ -23,5 +23,4 @@ cuc/*.json
 cuc/*.tsk
 cuc/*.LIST
 PAT
-soa2fil.py
 utils/
