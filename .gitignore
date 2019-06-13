@@ -22,5 +22,6 @@ cuc/bkup/
 cuc/*.json
 cuc/*.tsk
 cuc/*.LIST
-PAT
 utils/
+soa2fil.py
+sgp2fil.py

@@ -155,6 +155,7 @@ if prt:
 	#print j_obj
 	j=json.dumps(j_obj, indent=4)
 	print j
+        exit(0)
 #
 # the different pieces of information
 #

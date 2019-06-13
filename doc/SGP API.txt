@@ -1,0 +1,418 @@
+
+/** Competition info call
+* http://www.crosscountry.aero/c/sgp/rest/comp/<comp-id>
+* e.g. http://www.crosscountry.aero/c/sgp/rest/comp/10
+*/
+
+{
+    /**Data for the current, or more recent day*/
+    "d": {/*data exluded for brevity*/},
+    "t": {/*data exluded for brevity*/}},
+    /**compeition info*/
+    "c": {
+        /**score version - integer incremented with every change*/
+        "v": 457,
+        "e": 9,
+        /**competition long name*/
+        "t": "6th SGP World Final",
+        "s": 6,
+        /**last competition date*/
+        "b": "2015-09-12",
+        /**first competition date*/
+        "a": "2015-09-04",
+        /**Competition short name*/
+        "l": "SGP World Final",
+        /**Competition id*/
+        "i": 10
+    },
+    /**Pilot info*/
+    "p": {
+        /**pilot id*/
+        "373": {
+            "valid": true,
+            /**pilot id*/
+            "i": 373,
+            "k": 0,
+            "e": 10,
+            /**First name*/
+            "f": "Thomas",
+            /**Last name*/
+            "l": "Gostner",
+            /**comp id*/
+            "d": "AY",
+            /** country code ISO 3166-1 alpha-2*/
+            "z": "IT",
+            /**Glider model*/
+            "s": "ASG 29",
+            "j": 1029,
+            /**IGC ranking id*/
+            "r": "20"
+        },
+        "372": {
+            "valid": true,
+            "i": 372,
+            "k": 0,
+            "e": 10,
+            "f": "Kai",
+            "l": "Lindenberg",
+            "d": "MC",
+            "z": "DE",
+            "s": "ASG 29",
+            "j": 1029,
+            "r": "435"
+        },
+        "375": {
+            "valid": true,
+            "i": 375,
+            "k": 0,
+            "e": 10,
+            "f": "Sebastian",
+            "l": "Kawa",
+            "d": "PL",
+            "z": "PL",
+            "s": "ASG 29",
+            "j": 1029,
+            "r": "491"
+        },
+        /*other pilot data removed for clarity*/
+    },
+    /**Active day index, zero based index of the day contained in d object above*/
+    "j": 8,
+    "z": {
+        "t": 0,
+        "l": 300
+    },
+    /**Index of days*/
+    "i": [
+        {
+            "w": null,
+            "v": true,
+            "d": "2015-09-04",
+            /**long day title*/
+            "t": "Practice 1 - Friday, 4 September 2015",
+            /**start time - miliseconds from midnight local time*/
+            "a": 49500000,
+            /**short day title*/
+            "l": "Practice day 1",
+            /**day type: 1 - valid, 2 - practice, 3 - cancelled, 4 - rest, 9 - unofficial practice*/
+            "y": 2,
+            /**Competition day id - this id is used to request competition day info*/
+            "i": 69
+        },
+        {
+            "w": null,
+            "v": true,
+            "d": "2015-09-05",
+            "t": "Cancelled - Saturday, 5 September 2015",
+            "a": 52200000,
+            "l": "Cancelled",
+            "y": 3,
+            "i": 70
+        },
+        {
+            "w": "FD",
+            "v": true,
+            "d": "2015-09-06",
+            "t": "Race 1 - Sunday, 6 September 2015",
+            "a": 52200000,
+            "l": "Race 1",
+            "y": 1,
+            "i": 71
+        },
+        {
+            "w": "Y",
+            "v": true,
+            "d": "2015-09-07",
+            "t": "Race 2 - Monday, 7 September 2015",
+            "a": 51000000,
+            "l": "Race 2",
+            "y": 1,
+            "i": 72
+        },
+        {
+            "w": "LZ",
+            "v": true,
+            "d": "2015-09-08",
+            "t": "Race 3 - Tuesday, 8 September 2015",
+            "a": 54600000,
+            "l": "Race 3",
+            "y": 1,
+            "i": 73
+        },
+        {
+            "w": "FC",
+            "v": true,
+            "d": "2015-09-09",
+            "t": "Race 4 - Wednesday, 9 September 2015",
+            "a": 51300000,
+            "l": "Race 4",
+            "y": 1,
+            "i": 74
+        },
+        {
+            "w": "FD",
+            "v": true,
+            "d": "2015-09-10",
+            "t": "Race 5 - Thursday, 10 September 2015",
+            "a": 52200000,
+            "l": "Race 5",
+            "y": 1,
+            "i": 75
+        },
+        {
+            "w": null,
+            "v": true,
+            "d": "2015-09-11",
+            "t": "Cancelled - Friday, 11 September 2015",
+            "a": 54000000,
+            "l": "Cancelled",
+            "y": 3,
+            "i": 76
+        },
+        {
+            "w": null,
+            "v": true,
+            "d": "2015-09-12",
+            "t": "Race 6 - Saturday, 12 September 2015",
+            "a": 54000000,
+            "l": "Race 6",
+            "y": 1,
+            "i": 77
+        }
+    ]
+}
+
+
+
+/** Competition day info call
+* http://www.crosscountry.aero/c/sgp/rest/day/<comp-id>/<comp-day-id>
+* e.g. http://www.crosscountry.aero/c/sgp/rest/day/10/74
+*/
+
+{
+"@type": "CompetitionDay",
+/**Competition day id*/
+"i": 74,
+/**Competition id*/
+"e": 10,
+/**Date - in milisecond time (i.e. unix time * 1000)*/
+"d": 1441756800000,
+/**day type: 1 - valid, 2 - practice, 3 - cancelled, 4 - rest, 9 - unofficial practice*/
+"y": 1,
+/**short day title*/
+"l": "Race 4",
+/**long day title*/
+"t": "Race 4 - Wednesday, 9 September 2015",
+/**start time - miliseconds from midnight local time*/
+"a": 51300000,
+/** start altitude - expressed in m MSL or as defined by scoring software. 0=no limitation*/
+"h": 1500,
+/** finish altitude - expressed in m MSL or as defined by scoring software. 0=no limitation*/
+"f": 350,
+"w": "FC",
+"v": true,
+/**task info*/
+"k": {
+"@type": "Task",
+"id": 80,
+"taskListId": 23,
+/**task name*/
+"name": "Day 5 Alternate",
+"visibility": 0,
+"dateSubmitted": 1441793687000,
+"lastEdited": 1441793687000,
+"creator": "SGP Final VI Scorer",
+"type": 12289,
+"takeoffAirfieldId": 3217,
+"landingAirfieldId": 0,
+"description": "{\"d\":\"157.93 km\",\"v\":true,\"ta\":\"Calcinate del Pesce\"}",
+"data": {
+"at": {
+"i": 3217,
+"n": "Calcinate del Pesce",
+"y": 1,
+"a": 45.80917,
+"o": 8.76833
+},
+/** Task points: start, TPS, finish*/
+"g": [
+{
+/**lat*/
+"a": 45.83721666666667,
+/**lon*/
+"o": 8.771383333333333,
+/**OZ type: line or cylinder for SGP*/
+"y": "line",
+/**OZ radius in meteres*/
+"r": 2500,
+/**Waypoint name name*/
+"n": "052LUVINATE",
+"w": {
+"clazz": 1,
+"name": "052LUVINATE",
+"lat": 45.83721666666667,
+"lon": 8.771383333333333,
+"navType": 1,
+"country": "",
+"alt": 417,
+"altType": 1,
+"idCode": "LUVINATE",
+"notes": "",
+"id": 51
+}
+},
+{
+"a": 45.911116666666665,
+"o": 8.615283333333334,
+"y": "cylinder",
+"r": 500,
+"n": "046LAVENO",
+"w": {
+"clazz": 1,
+"name": "046LAVENO",
+"lat": 45.911116666666665,
+"lon": 8.615283333333334,
+"navType": 1,
+"country": "",
+"alt": 197,
+"altType": 1,
+"idCode": "LAVENO",
+"notes": "Imbarcade",
+"id": 45
+}
+},
+{
+"a": 45.97111666666667,
+"o": 8.795,
+"y": "cylinder",
+"r": 500,
+"n": "067SETTEMI",
+"w": {
+"clazz": 1,
+"name": "067SETTEMI",
+"lat": 45.97111666666667,
+"lon": 8.795,
+"navType": 1,
+"country": "",
+"alt": 940,
+"altType": 1,
+"idCode": "SETTEMI",
+"notes": "Rifugio",
+"id": 66
+}
+},
+{
+"a": 45.87583333333333,
+"o": 8.67695,
+"y": "cylinder",
+"r": 500,
+"n": "041GEMONIO",
+"w": {
+"clazz": 1,
+"name": "041GEMONIO",
+"lat": 45.87583333333333,
+"lon": 8.67695,
+"navType": 1,
+"country": "",
+"alt": 279,
+"altType": 1,
+"idCode": "GEMONIO",
+"notes": "",
+"id": 40
+}
+},
+{
+"a": 45.76195,
+"o": 9.445,
+"y": "cylinder",
+"r": 500,
+"n": "KONG",
+"w": {
+"clazz": 3,
+"name": "KONG",
+"lat": 45.76195,
+"lon": 9.445,
+"navType": 3,
+"country": "",
+"alt": 195,
+"altType": 1,
+"idCode": "KONG",
+"notes": "",
+"rwyDir": 100,
+"rwyLength": 0,
+"frequency": "",
+"id": 85
+}
+},
+{
+"a": 45.797222222222224,
+"o": 8.834444444444445,
+"y": "cylinder",
+"r": 500,
+"n": "CONTROL EAST",
+"w": {
+"clazz": 1,
+"name": "CONTROL EAST",
+"lat": 45.797222222222224,
+"lon": 8.834444444444445,
+"navType": 1,
+"country": "IT",
+"alt": 0,
+"altType": 1,
+"idCode": "",
+"notes": "",
+"id": 80
+}
+},
+{
+"a": 45.80801666666667,
+"o": 8.769616666666666,
+"y": "line",
+"r": 250,
+"n": "100CALCNT",
+"w": {
+"clazz": 3,
+"name": "100CALCNT",
+"lat": 45.80801666666667,
+"lon": 8.769616666666666,
+"navType": 2,
+"country": "",
+"alt": 240,
+"altType": 1,
+"idCode": "CALCNT",
+"notes": "Calcinate Aeroporto 128.45",
+"rwyDir": 0,
+"rwyLength": 0,
+"frequency": "128.45",
+"id": 74
+}
+}
+],
+"u": {
+"wptList": 24,
+"airspace": 0
+}
+}
+},
+/**scoring data*/
+"r": {
+/**results status: 0-preliminary, 1-unofficial, 2- official*/
+"u": 2,
+/**scoring info*/
+"s": [/**removed for brevity*/],
+/**local time offset in milliseconds from UTC (add offset time to utc to get local)*/
+"z": 7200000,
+/**scoring agregation of points to date,*/
+"t": {/**ommited for brevity*/},
+/**max task altitude - 0 = no restriction*/
+"c": 3500,
+"a": 75,
+"b": "varesesgp2015airspace.txt",
+/**max turnpoint altitude in meters. 0 = no restriction, ommited if no TPS have altitude restrictions*/
+"h":[0,0,0,0,0],
+/**bonus turnpoint undex - if zero (i.e. start), or value ommited no bonus applies, extra point given to first rounder of designated turnpoint*/
+"x":0
+}
+}
+
+
