@@ -62,8 +62,8 @@ def getnewpos(lat, lon, alt, N, E, D):
     start = geopy.Point(lat, lon, alt)
 
 # Define a general distance object, initialized with a distance of 1 km.
-    dN = geopy.distance.VincentyDistance(meters = N)    # get the distance as a point
-    dE = geopy.distance.VincentyDistance(meters = E)
+    dN = geopy.distance.VincentyDistance(meters = N/10) # get the distance as a point
+    dE = geopy.distance.VincentyDistance(meters = E/10)
 
 # Use the `destination` method with a bearing of 0 degrees (which is north)
 # in order to go from point `start` 1 km to north.
