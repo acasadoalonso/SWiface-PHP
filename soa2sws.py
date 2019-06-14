@@ -24,46 +24,8 @@ from pprint import pprint
 
 #-------------------------------------------------------------------------------------------------------------------#
 
-def fixcoding(addr):
-        if addr != None:
-                addr=addr.replace(u'á', u'a')
-                addr=addr.replace(u'à', u'a')
-                addr=addr.replace(u'â', u'a')
-                addr=addr.replace(u'Á', u'A')
-                addr=addr.replace(u'é', u'e')
-                addr=addr.replace(u'è', u'e')
-                addr=addr.replace(u'ê', u'e')
-                addr=addr.replace(u'É', u'E')
-                addr=addr.replace(u'í', u'i')
-                addr=addr.replace(u'ì', u'i')
-                addr=addr.replace(u'î', u'i')
-                addr=addr.replace(u'Í', u'I')
-                addr=addr.replace(u'ó', u'o')
-                addr=addr.replace(u'ò', u'o')
-                addr=addr.replace(u'ô', u'o')
-                addr=addr.replace(u'Ó', u'O')
-                addr=addr.replace(u'Ò', u'O')
-                addr=addr.replace(u'ú', u'u')
-                addr=addr.replace(u'ù', u'u')
-                addr=addr.replace(u'û', u'u')
-                addr=addr.replace(u'Ú', u'U')
-                addr=addr.replace(u'ü', u'u')
-                addr=addr.replace(u'ñ', u'n')
-                addr=addr.replace(u'Ñ', u'N')
-                addr=addr.replace(u'Ø', u'O')
-                addr=addr.replace(u'Ã', u'a')
-                addr=addr.replace(u'ƒ', u'f')
-                addr=addr.replace(u'Â', u'a')
-                addr=addr.replace(u'¶', u'-')
-                addr=addr.replace(u'…', u'-')
-                addr=addr.replace(u'Ë', u'E')
-                addr=addr.replace(u'†', u'-')
-                addr=addr.replace(u'ä', u'-')
-                addr=addr.replace(u'Ł', u'L')
-                addr=addr.replace(u'ł', u'l')
-                addr=addr.replace(u'ł', u'-')
-        return addr
 
+from config import fixcoding
 
 ##################################################################
 def getapidata(url, auth):                      # get the data from the API server

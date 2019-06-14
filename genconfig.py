@@ -25,6 +25,7 @@ tailfile = open("configtail.txt", "r")
 datafile.write("# SWS configuration file \n")
 SWSserver ='http://localhost' 
 hostname=socket.gethostname()
+datafile.write("# -*- coding: UTF-8 -*-")
 datafile.write("# SWS hostname: "+hostname+"\n")
 datafile.write("# SWS config file: "+configfile+"\n")
 datafile.write("# Config generated: "+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+" \n")
