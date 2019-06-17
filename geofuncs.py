@@ -3,7 +3,8 @@ import math
 import geopy
 import geopy.distance
 ##########################################################################
-def decdeg2dms(dd):
+def decdeg2dms(dd):              # convert degrees to D, M, S
+    
     negative = dd < 0
     dd = abs(dd)
     minutes,seconds = divmod(dd*3600,60)
@@ -17,27 +18,34 @@ def decdeg2dms(dd):
             seconds = -seconds
     return (degrees,minutes,seconds)
 
-def decdeg2DDMMmmm(dd):
+def decdeg2DDMMmmm(dd):         # convert degrees to D, M, DM
+    
     negative = dd < 0
     dd = abs(dd)
-    degrees,minutes  = divmod(dd,60)
-    minutes,mindec   = divmod(minutes,1000)
+    
+    """decimal degrees to deg dec min"""
+    deg = int(dd)
+    minsec = (dd - deg)*60.0
+    
+    minutes=float(int(minsec))
+    
+    mindec=(minsec-minutes)*1000.0
+    
     if negative:
-        if degrees > 0:
-            degrees = -degrees
-        elif minutes > 0:
-            minutes = -minutes
-        else:
-            seconds = -seconds
-    return (degrees,minutes,mindec)
+        if deg > 0:
+            deg = -deg
+    return (float(deg),minutes,mindec)
 
-def dms2decdeg(g, m, s):
+def dms2decdeg(g, m, s):        # convert DDMMSS to degrees
+    
     return (float(g)+float(m)/60.0+float(s)/3600.0)
 
-def DDMMmmm2decdeg(g, m, dm):
+def DDMMmmm2decdeg(g, m, dm):   # convert DDMMmmm to degrees
+    
     return (float(g)+(float(m)+float(dm)/1000.0)/60.0)
 
-def tolatDMS(dd):
+def tolatDMS(dd):               # convert degrees to string DDMMSS
+    
         x=decdeg2dms(dd)
         if dd > 0:
             fmt="%02d%02d%02d0N"
@@ -45,7 +53,8 @@ def tolatDMS(dd):
             fmt="%02d%02d%02d0S"
         return (fmt%x)
     
-def tolatDDDMMmmm(dd):
+def tolatDDMMmmm(dd):           # convert degrees to string DDMMmmm
+    
         x=decdeg2DDMMmmm(dd)
         if dd > 0:
             fmt="%02d%02d%03dN"
@@ -53,7 +62,7 @@ def tolatDDDMMmmm(dd):
             fmt="%02d%02d%03dS"
         return (fmt%x)
     
-def tolonDMS(dd):
+def tolonDMS(dd):               # convert degrees to string DDDMMSS
     
         x=decdeg2dms(dd)
         if dd > 0:
@@ -62,7 +71,7 @@ def tolonDMS(dd):
             fmt="%03d%02d%02d0W"
         return (fmt%x)
 
-def tolonDDMMmmm(dd):
+def tolonDDMMmmm(dd):           # convert degrees to DDDMMmmm 
     
         x=decdeg2DDMMmmm(dd)
         if dd > 0:
@@ -71,17 +80,19 @@ def tolonDDMMmmm(dd):
             fmt="%03d%02d%03dW"
         return (fmt%x)
 
-def DMS2lat(lat):
-        l=dms2decdeg(int(lat[0:2]), int(lat[2:4]), int(lat[4:7]))
-        if lat[7:8] == 'N':
+def DMS2lat(lat):               # convert string DDMMSS to degrees
+    
+        l=dms2decdeg(int(lat[0:2]), int(lat[2:4]), int(lat[4:6]))
+        if lat[6:7] == 'N':
             return l
-        if lat[7:8] == 'S':
+        if lat[6:7] == 'S':
             return -l
         else:
             return 0
             
-def DDMMmmm2lat(lat):
+def DDMMmmm2lat(lat):           # convert string DDMMmmm to degrees
         l=DDMMmmm2decdeg(int(lat[0:2]), int(lat[2:4]), int(lat[4:7]))
+        
         if lat[7:8] == 'N':
             return l
         if lat[7:8] == 'S':
@@ -89,15 +100,17 @@ def DDMMmmm2lat(lat):
         else:
             return 0 
 
-def DMS2lon(lon):
-        l=dms2decdeg(int(lon[0:3]), int(lon[3:5]), int(lon[5:8]))
-        if lon[8:9] == 'E':
+def DMS2lon(lon):               # convert string DDDMMSS to degrees
+    
+        l=dms2decdeg(int(lon[0:3]), int(lon[3:5]), int(lon[5:7]))
+        if lon[7:8] == 'E':
             return l
-        if lon[8:9] == 'W':
+        if lon[7:8] == 'W':
             return -l
         else:
             return 0
-def DDMMmmm2lon(lon):
+def DDMMmmm2lon(lon):           # convert string DDDMMmmm to degrees
+    
         l=DDMMmmm2decdeg(int(lon[0:3]), int(lon[3:5]), int(lon[5:8]))
         if lon[8:9] == 'E':
             return l
@@ -120,18 +133,18 @@ def getnewpos(lat, lon, alt, N, E, D):
 # in order to go from point `start` 1 km to north.
     d1=dN.destination(point=start, bearing=0)           # go North
     d2=dE.destination(point=d1, bearing=90)             # go Easta
-    print "\n", d1, "\n", d2
+    #print "\n", d1, "\n", d2
     return (d2)                                         # return the result
 
 def getnewcoor(lat, lon, alt, N, E, D):                 # get new coordenates DMS adding NED
     p=getnewpos(lat, lon, alt, N, E, D)                 # get the new position
-    lat=tolatDMS(p.latitude)                            # the new latitude DMS
-    lon=tolonDMS(p.longitude)                           # the new longitude DMS 
+    lat=tolatDDMMmmm(p.latitude)                        # the new latitude DMS
+    lon=tolonDDMMmmm(p.longitude)                       # the new longitude DMS 
     return (lat, lon, alt-D)
 
-def getnewDMS(lat, lon, alt, N, E, D):                  # get the new DMS from DMS adding NED
-    lt=DMS2lat(lat)                                     # convert to decimal degree
-    ln=DMS2lon(lon)                                     #
+def getnewDDMMmmm(lat, lon, alt, N, E, D):              # get the new DMS from DMS adding NED
+    lt=DDMMmmm2lat(lat)                                 # convert to decimal degree
+    ln=DDMMmmm2lon(lon)                                 #
     return(getnewcoor(lt, ln, alt, N, E, D))            # return the tuple in DMS format as well
 
 ##########################################################################
