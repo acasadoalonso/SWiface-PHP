@@ -1,6 +1,7 @@
 import json
 import urllib2
-
+global ogninfo                                  # the OGN info data
+ogninfo={}                                      # the OGN info data
 ####################################################################
 def getogndata():                               # get the data from the API server
 
@@ -9,10 +10,15 @@ def getogndata():                               # get the data from the API serv
 	req.add_header("Accept","application/json")
 	req.add_header("Content-Type","application/hal+json")
 	r = urllib2.urlopen(req)                # open the url resource
-	j_obj = json.load(r)                    # convert to JSON
+	j_obj = json.load(r)                    # convert to JSONa
+        ogninfo=j_obj                           # save the data
 	return j_obj                            # return the JSON object
 
-def getognreg(flarmid, ogninfo):                # get the ogn registrafrion from the flarmID
+def getognreg(flarmid ):                        # get the ogn registrafrion from the flarmID
+
+        global ogninfo                          # the OGN info data
+        if len(ogninfo) == 0:
+            ogninfo=getogndata()
         devices=ogninfo["devices"]              # access to the ogndata
         for dev in devices:                     # loop into the registrations
             if dev["device_id"] == flarmid:     # if matches ??
@@ -20,7 +26,11 @@ def getognreg(flarmid, ogninfo):                # get the ogn registrafrion from
 
         return "NOREG  "                        #if not found !!!
 
-def getogncn(flarmid, ogninfo):                 # get the ogn registrafrion from the flarmID
+def getogncn(flarmid ):                         # get the ogn registrafrion from the flarmID
+
+        global ogninfo                          # the OGN info data
+        if len(ogninfo) == 0:
+            ogninfo=getogndata()
         devices=ogninfo["devices"]              # access to the ogndata
         for dev in devices:                     # loop into the registrations
             if dev["device_id"] == flarmid:     # if matches ??
