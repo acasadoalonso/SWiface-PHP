@@ -23,5 +23,3 @@ cuc/*.json
 cuc/*.tsk
 cuc/*.LIST
 utils/
-soa2fil.py
-sgp2fil.py
