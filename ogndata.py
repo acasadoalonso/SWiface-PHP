@@ -1,7 +1,7 @@
 import json
 import urllib2
-global ogninfo                                  # the OGN info data
-ogninfo={}                                      # the OGN info data
+global _ogninfo_                                # the OGN info data
+_ogninfo_={}                                    # the OGN info data
 ####################################################################
 def getogndata():                               # get the data from the API server
 
@@ -11,15 +11,15 @@ def getogndata():                               # get the data from the API serv
 	req.add_header("Content-Type","application/hal+json")
 	r = urllib2.urlopen(req)                # open the url resource
 	j_obj = json.load(r)                    # convert to JSONa
-        ogninfo=j_obj                           # save the data
+        _ogninfo_=j_obj                         # save the data
 	return j_obj                            # return the JSON object
 
 def getognreg(flarmid ):                        # get the ogn registrafrion from the flarmID
 
-        global ogninfo                          # the OGN info data
-        if len(ogninfo) == 0:
-            ogninfo=getogndata()
-        devices=ogninfo["devices"]              # access to the ogndata
+        global _ogninfo_                        # the OGN info data
+        if len(_ogninfo_) == 0:
+            _ogninfo_=getogndata()
+        devices=_ogninfo_["devices"]            # access to the ogndata
         for dev in devices:                     # loop into the registrations
             if dev["device_id"] == flarmid:     # if matches ??
                 return dev["registration"]      # return the registration
@@ -28,10 +28,10 @@ def getognreg(flarmid ):                        # get the ogn registrafrion from
 
 def getognflarmid(registration ):               # get the ogn flarmID from the registration
 
-        global ogninfo                          # the OGN info data
-        if len(ogninfo) == 0:
-            ogninfo=getogndata()
-        devices=ogninfo["devices"]              # access to the ogndata
+        global _ogninfo_                        # the OGN info data
+        if len(_ogninfo_) == 0:
+            _ogninfo_=getogndata()
+        devices=_ogninfo_["devices"]            # access to the ogndata
         for dev in devices:                     # loop into the registrations
             if dev["registration"] == registration: # if matches ??
                 if   dev['device_type'] == "F":
@@ -49,10 +49,10 @@ def getognflarmid(registration ):               # get the ogn flarmID from the r
 
 def getogncn(flarmid ):                         # get the ogn registrafrion from the flarmID
 
-        global ogninfo                          # the OGN info data
-        if len(ogninfo) == 0:
-            ogninfo=getogndata()
-        devices=ogninfo["devices"]              # access to the ogndata
+        global _ogninfo_                        # the OGN info data
+        if len(_ogninfo_) == 0:
+            _ogninfo_=getogndata()
+        devices=_ogninfo_["devices"]            # access to the ogndata
         for dev in devices:                     # loop into the registrations
             if dev["device_id"] == flarmid:     # if matches ??
                 return dev["cn"]                # return the registration
