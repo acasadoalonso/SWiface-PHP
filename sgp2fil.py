@@ -115,6 +115,9 @@ for id in pilots:                                       # disply the pilot infor
 	rankingid= 	pilots[id]["r"]			# ranking id
 	flarmID= 	pilots[id]["q"]			# FlarmID
 	registration= 	pilots[id]["w"]			# registration
+        if flarmID =="":
+            flarmID=getognflarmid(registration)         # get it from the OGN data
+
 	if hostname == "SWserver":			# deal with the different implementation of pycountry
 		ccc = pycountry.countries.get(alpha_2=country)	# the the 3 letter country code
     		country=ccc.alpha_3			# convert to a 3 letter code

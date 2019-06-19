@@ -26,6 +26,27 @@ def getognreg(flarmid ):                        # get the ogn registrafrion from
 
         return "NOREG  "                        #if not found !!!
 
+def getognflarmid(registration ):               # get the ogn flarmID from the registration
+
+        global ogninfo                          # the OGN info data
+        if len(ogninfo) == 0:
+            ogninfo=getogndata()
+        devices=ogninfo["devices"]              # access to the ogndata
+        for dev in devices:                     # loop into the registrations
+            if dev["registration"] == registration: # if matches ??
+                if   dev['device_type'] == "F":
+                     dvce="FLR"+dev['device_id'] 
+                elif dev['device_type'] == "I":
+                     dvce="ICA"+dev['device_id'] 
+                elif dev['device_type'] == "O":
+                     dvce="OGN"+dev['device_id'] 
+                else:
+                     dvce="UNK"+dev['device_id'] 
+
+                return dvce                     # return the flarmID
+
+        return "NOREG  "                        #if not found !!!
+
 def getogncn(flarmid ):                         # get the ogn registrafrion from the flarmID
 
         global ogninfo                          # the OGN info data
