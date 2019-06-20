@@ -5,16 +5,17 @@ _ogninfo_={}                                    # the OGN info data
 ####################################################################
 def getogndata():                               # get the data from the API server
 
-        url="http://ddb.glidernet.org/download/?j=1"
+        global _ogninfo_                        # the OGN info data
+        url="http://ddb.glidernet.org/download/?j=1" # the OGN DDB source
 	req = urllib2.Request(url)                      
-	req.add_header("Accept","application/json")
+	req.add_header("Accept","application/json") # it return a JSON string
 	req.add_header("Content-Type","application/hal+json")
 	r = urllib2.urlopen(req)                # open the url resource
 	j_obj = json.load(r)                    # convert to JSONa
-        _ogninfo_=j_obj                         # save the data
+        _ogninfo_=j_obj                         # save the data on the global storage
 	return j_obj                            # return the JSON object
 
-def getognreg(flarmid ):                        # get the ogn registrafrion from the flarmID
+def getognreg(flarmid ):                        # get the ogn registration from the flarmID
 
         global _ogninfo_                        # the OGN info data
         if len(_ogninfo_) == 0:
@@ -47,7 +48,7 @@ def getognflarmid(registration ):               # get the ogn flarmID from the r
 
         return "NOREG  "                        #if not found !!!
 
-def getogncn(flarmid ):                         # get the ogn registrafrion from the flarmID
+def getogncn(flarmid ):                         # get the ogn competition ID from the flarmID
 
         global _ogninfo_                        # the OGN info data
         if len(_ogninfo_) == 0:
