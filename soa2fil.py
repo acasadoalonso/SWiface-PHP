@@ -62,21 +62,33 @@ def getlinks (base, ctype):
 
 ###################################################################
 ###################################################################
-day=sys.argv[1:]                                # see if index day is requestedd        
+day         =sys.argv[1:]                       # see if index day is requestedd        
+clsreq      =sys.argv[2:]                       # if class is requested
+execreq     =sys.argv[3:]                       # -e request
+FlarmIDr    =sys.argv[4:]                       # -e request the FlarmID
 if day and day[0].isdigit():                    # if provided and numeric
         idx=int(day[0])                         # index day 
 else:
         idx=0
-clsreq=sys.argv[2:]                             # if class is requested
 if clsreq:
         classreq=clsreq[0]                      # class requested
-	print "TTT", classreq
+        print "Class requested:", classreq
+        if classreq == "ALL":
+            classreq=' ' 
 else:
-        classreq=' '                            # none        
+        classreq=' '                            # none     
+FlarmID=""                                              # the FlarmID of the files to be reconstructed
+execopt=False
+if execreq and execreq[0]=="-e":                        # if we ask to exec the buildIGC
+    if FlarmIDr:
+        FlarmID=FlarmIDr[0]                             # get the FlarmID
+        execopt=True
+
 # ---------------------------------------------------------------- #
 print "Utility to get the api.soaringspot.com data and extract all the IGC files from the SoaringSpot server V1.0"
 print "==========================================================================================================\n\n"
-print "Index day: ", idx, " Class requested: ", classreq
+print "Usage:   python soa2fil.py indexday class -e FlarmID \n\n"
+print "Index day: ", idx, " Class requested: ", classreq, FlarmID
 print "Reading data from clientid/secretkey files"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
@@ -87,7 +99,10 @@ secpath=cwd+"/SoaringSpot/"                     # where to find the clientid and
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
 taskType= "SailplaneRacing"                     # race type
-dirpath=SWdbpath+"/PAT"                         # the subdirectory where to store the extracted files
+dirpath=SWdbpath+"/PAT/"                        # the subdirectory where to store the extracted files
+if execopt:                                     # if we choose the option of gen the IGC file
+    
+    os.system ("rm "+dirpath+"*/*")             # delete all the files to avoid problems
 
 # ==============================================#
 tsks = {}					# task file
@@ -142,10 +157,10 @@ nwarnings=0                                     # number of warnings ...
 warnings=[]                                     # warnings glider
 stats={}                                        # statistics 
 prt=False                                       # print ???
-
+igcdir=''                                       # directory where it goes the IGC files
 # Build the tracks and turn points, exploring the contestants and task within each class
                                                 # go thru the different classes now within the daya
-
+PrevTaskDate=""
 print "Classes:\n========\n\n"
 
 for cl in getemb(cd,'classes'):
@@ -162,40 +177,61 @@ for cl in getemb(cd,'classes'):
         tasktype=ctt["task_type"]
         taskdate=ctt["task_date"]
         print "Task Type: ", tasktype, "Task date: ", taskdate
-        fft=getemb(ctt, "results") 
+        if PrevTaskDate == "":                  # check the cases where the task dates are not the same within an index day
+             PrevTaskDate =  taskdate
+        elif PrevTaskDate != taskdate:
+            print ">>>>Warning: Task dates are different for the same index day !!!"
+        fft=getemb(ctt, "results")              # go to the results data
         for ft in fft:
                 #print "FT", ft, "\n\n"
-                cnt=getemb(ft, "contestant")
-                pil=getemb(cnt, "pilot")[0]
+                cnt=getemb(ft, "contestant")    # go the contestants (pilot) information 
+                pil=getemb(cnt, "pilot")[0]     # get the pilot name information 
                 npil += 1
                 if "igc_file" in ft:
-                    fftc=getlinks(ft, "flight")
-                    igcfile=ft["igc_file"]
+                    fftc=getlinks(ft, "flight") # URL to the file to be downloaded 
+                    igcfile=ft["igc_file"]      # full IGC file DIR/IGCfilename
+                    igcdir=igcfile[0:3]         # the first 3 char are the directory where it goes for example: 95I 
                 else:
                     print ">>> missing FILE >>>>>", fixcoding(pil["first_name"]).encode('utf8'), fixcoding(pil["last_name"])
                     continue
                 igcfilename=dirpath+"/"+igcfile[0:3]+"/"+classname+"-"+igcfile[4:]
                 if not os.path.isdir(dirpath+"/"+igcfile[0:3]):
                     os.system("mkdir "+dirpath+"/"+igcfile[0:3])
-                    print " OK directory made"
-                if "nationality" in pil:
+                    print " OK directory made"  # create the directory if needed 
+                if "nationality" in pil:        # extracts the nationality as a doc
                     nationality=pil['nationality']
                 else:
-                    nationality="UNKOWN"
+                    nationality="UNKOWN"        # report that we are extracting the flight of that pilot
                 print "Pilot:>>>>", fixcoding(pil["first_name"]).encode('utf8'), fixcoding(pil["last_name"]), nationality
-      	        req = urllib2.Request(fftc)                      
+      	        req = urllib2.Request(fftc)     # open the URL                      
                 req.add_header('Authorization', auth)   # build the authorization header
                 req.add_header("Accept","application/json")
                 req.add_header("Content-Type","application/hal+json")
-                r = urllib2.urlopen(req)                # open the url resource
+                r = urllib2.urlopen(req)        # open the url resource
                 #fff=r.read()
-                # call teh routine that will read the file and handle the FLARM records
+                # call the routine that will read the file and handle the FLARM records
                 cnt=getflarmfile(r, igcfile, igcfilename, stats, prt)
                 if prt:
                     print "Number of records:", igcfilename, cnt
                 print "----------------------------------------------------------------"
         print "----------------------------------------------------------------\n\n"
 print stats
+#
+# close the files and exit
+#
+if execopt:
+    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", os.getcwd(), "To:", dirpath
+    if os.path.isdir(dirpath):
+        os.chdir(dirpath)                               # report current directory and the new one
+    else:
+        print "Not available target directory:", dirpath+igcdir
+
+    fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
+    if os.path.isfile(fname):                           # remove to avoid errors
+        os.remove(fname)                                # remove if exists
+                                                        # get the new IGC files based on the FLARM messages
+    os.system('grep "FLARM "'+FlarmID+' */* | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+fname)
+    print "Resulting IGC file is on:", dirpath, "As: ", fname
 
 
 print "= Pilots ===========================", npil      # print the number of pilots as a reference and control

@@ -41,6 +41,8 @@ print "HFFTYFRTYPE:FLrebuild"               # Flarm rebuild
 
 for line in sys.stdin:                      # read one line
     p1=line.find(">>>")
+    if p1 == -1:                            # this should never happens
+        continue                            # ignore this record
     pos=line[p1+4:p1+36+4]                  # get the original position
     ttime=pos[1:7]                          # the time
     lat=pos[7:15]                           # latitude
@@ -50,11 +52,14 @@ for line in sys.stdin:                      # read one line
     north=gdatar(line, "North:")            # get the N data
     east=gdatar(line,"East:")               # get the E data
     down=gdatar(line, "Down:")              # get the D data
-    N=int(north)
-    E=int(east)
-    D=int(down)
-    pa=int(palt)-D                          # the new pressure altitude
-    ga=int(galt)-D                          # get the GPS altitude
+    try:
+        N=int(north)
+        E=int(east)
+        D=int(down)
+        pa=int(palt)-D                      # the new pressure altitude
+        ga=int(galt)-D                      # get the GPS altitude
+    except:
+        print ">:>LINE:", line
     ppa="A%05d"%pa                          # format the pressure altitude
     gga="%05d"%ga                           # format the GPS altitude
     #print ttime, lat, lon, palt, galt, N, E, D, pos, line

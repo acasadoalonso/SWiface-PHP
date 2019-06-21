@@ -59,18 +59,20 @@ print "=================================: \n" 		# just a trace
 if not os.path.isdir(dirpath):                          # check that we have such directory
     print "Not IGC directory\n\n"
     exit(-1)
+os.system("rm "+DBpath+"/TMP/*")                        # remove and clean the working directory 
 ld = os.listdir(dirpath)                                # get the list of files 
 cnt = 0                                                 # count of number of records processed
-for f in ld:
+for f in ld:                                            # scan all the files on the from directory
     fd=open(dirpath+"/"+f, 'r')                         # open the file
     cnt +=getflarmfile(fd, f, DBpath+"/TMP/"+f, stats)  # extract the FLARM data from the embeded records
     fd.close()                                          # close the file
-print "From CD:", os.getcwd(), "To:", os.chdir(DBpath+"/TMP/") # report current directory and the new one
-
-if os.path.isfile(FlarmID+'.igc'):                      # remove to avoid errors
-    os.remove(FlarmID+'.igc')                           # remove if exists
+print "From CD:", os.getcwd(), "To:", DBpath+"/TMP/"
+os.chdir(DBpath+"/TMP/")                                # report current directory and the new one
+fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
+if os.path.isfile(fname):                               # remove to avoid errors
+    os.remove(fname)                                    # remove if exists
                                                         # get the new IGC files based on the FLARM messages
-os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+FlarmID+'.igc')
+os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+fname)
 
 print "Records processed:",cnt, "\n\nStats:", stats
 

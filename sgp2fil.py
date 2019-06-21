@@ -32,7 +32,9 @@ from config import fixcoding
 
 qsgpIDreq=sys.argv[1:]					# first arg is the event ID
 dayreq   =sys.argv[2:]					# second arg is the day index within the event
-prtreq   =sys.argv[3:]					# print request
+execreq  =sys.argv[3:]					# -e request
+FlarmIDr =sys.argv[4:]					# -e request the FlarmID
+prtreq   =sys.argv[5:]					# print request
  
 stats={}                                                # statistics 
 
@@ -56,6 +58,13 @@ if qsgpIDreq and qsgpIDreq[0] != '0':                   # check the arguments
 else:
 	qsgpID='0'                                      # assume ZERO and print the all event descriptions
 
+FlarmID=""                                              # the FlarmID of the files to be reconstructed
+execopt=False
+if execreq and execreq[0]=="-e":                        # if we ask to exec the buildIGC
+    if FlarmIDr:
+        FlarmID=FlarmIDr[0]                             # get the FlarmID
+        execopt=True
+
 if prtreq and prtreq[0]=="print":                       # if we ask to print
 	prt=True
 else:
@@ -63,14 +72,14 @@ else:
  
 print "\n\nExtract the IGC files V1.1 from  the www.sgp.aero web server"
 print "============================================================\n\n"
-print "Usage python sgp2fil.py COMPID indexday or http://host/SWS/sgp2sws.html "
+print "Usage python sgp2fil.py COMPID indexday -e FlarmID print    \n\n"
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
 local_time = datetime.datetime.now()
 j = urllib2.urlopen('http://www.crosscountry.aero/c/sgp/rest/comps/')   # get the data from the server
 j_obj = json.load(j)                                    # convert it
-if qsgpID == '0':
+if qsgpID == '0':                                       # just display the list of competition and exit
 	#print j_obj
 	j=json.dumps(j_obj, indent=4)
 	print j
@@ -180,6 +189,7 @@ print "========"
 rr=results['s']                                         # get the scoring info
 #pprint(rr)
 p=0                                                     # number of pilots
+os.system("rm "+dirpath+"/DAY"+str(day)+"/*")           # delete all the files on that directory 
 for r in rr:                                            # get all the pilots
     #pprint(r)
     pilotid         =r['h']                             # pilot ID
@@ -254,6 +264,16 @@ else:
 #
 # close the files and exit
 #
+if execopt:
+    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", os.getcwd(), "To:", dirpath+"/DAY"+str(day)
+    os.chdir(dirpath+"/DAY"+str(day))                           # report current directory and the new one
+
+    fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
+    if os.path.isfile(fname):                                   # remove to avoid errors
+        os.remove(fname)                                        # remove if exists
+                                                                # get the new IGC files based on the FLARM messages
+    os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+fname)a
+    print "Resulting IGC file is on:", dirpath+"/DAY"+str(day), "As: ", fname
 
 if npil == 0:
         exit(-1)
