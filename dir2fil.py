@@ -48,12 +48,13 @@ else:
  
 print "\n\nExtract the FLARM infor from the IGC files V1.0 "
 print "================================================\n\n"
-print "Usage python dir2fil.py FLARMID  "
+print "Usage python dir2fil.py FLARMID"
+print "===============================\n\n"
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
 local_time = datetime.datetime.now()
-print "=================================: \n" 		# just a trace
+print "================================================\n\n"
 
 
 if not os.path.isdir(dirpath):                          # check that we have such directory

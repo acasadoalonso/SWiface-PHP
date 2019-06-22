@@ -87,9 +87,11 @@ if execreq and execreq[0]=="-e":                        # if we ask to exec the 
 # ---------------------------------------------------------------- #
 print "Utility to get the api.soaringspot.com data and extract all the IGC files from the SoaringSpot server V1.0"
 print "==========================================================================================================\n\n"
-print "Usage:   python soa2fil.py indexday class -e FlarmID \n\n"
+print "Usage:   python soa2fil.py indexday class -e FlarmID "
+print "=====================================================\n\n"
 print "Index day: ", idx, " Class requested: ", classreq, FlarmID
 print "Reading data from clientid/secretkey files"
+print "==========================================\n\n"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
 initials = config.Initials			# initials of the files generated
