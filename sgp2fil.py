@@ -265,14 +265,15 @@ else:
 # close the files and exit
 #
 if execopt:
-    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", os.getcwd(), "To:", dirpath+"/DAY"+str(day)
+    cwd=os.getcwd()
+    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", cwd, "To:", dirpath+"/DAY"+str(day)
     os.chdir(dirpath+"/DAY"+str(day))                           # report current directory and the new one
 
     fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
     if os.path.isfile(fname):                                   # remove to avoid errors
         os.remove(fname)                                        # remove if exists
                                                                 # get the new IGC files based on the FLARM messages
-    os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+fname)a
+    os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python '+cwd+'/genIGC.py '+FlarmID+' > '+fname)
     print "Resulting IGC file is on:", dirpath+"/DAY"+str(day), "As: ", fname
 
 if npil == 0:

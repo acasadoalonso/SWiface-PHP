@@ -64,13 +64,14 @@ for f in ld:                                            # scan all the files on 
     fd=open(dirpath+"/"+f, 'r')                         # open the file
     cnt +=getflarmfile(fd, f, DBpath+"/TMP/"+f, stats)  # extract the FLARM data from the embeded records
     fd.close()                                          # close the file
-print "From CD:", os.getcwd(), "To:", DBpath+"/TMP/"    # report it
+cwd=os.getcwd()
+print "From CD:", cwd, "To:", DBpath+"/TMP/"            # report it
 os.chdir(DBpath+"/TMP/")                                # report current directory and the new one
 fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
 if os.path.isfile(fname):                               # remove to avoid errors
     os.remove(fname)                                    # remove if exists
                                                         # get the new IGC files based on the FLARM messages
-os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+fname)
+os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python '+cwd+'/genIGC.py '+FlarmID+' > '+fname)
 
 print "New IGC rebuilt file:", fname, " is at:", DBpath+"/TMP/", "\n\n"
 print "Records processed:",cnt, "\n\nStats:", stats
