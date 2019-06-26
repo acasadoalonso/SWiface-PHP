@@ -71,8 +71,8 @@ else:
 	prt=False
  
 print "\n\nExtract the IGC files V1.1 from  the www.sgp.aero web server"
-print "============================================================\n\n"
-print "Usage python sgp2fil.py COMPID indexday -e FlarmID print    \n\n"
+print "Usage:      python sgp2fil.py COMPID indexday -e FlarmID print\n\n"
+print "==============================================================\n\n"
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
