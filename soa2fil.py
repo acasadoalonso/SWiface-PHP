@@ -87,9 +87,11 @@ if execreq and execreq[0]=="-e":                        # if we ask to exec the 
 # ---------------------------------------------------------------- #
 print "Utility to get the api.soaringspot.com data and extract all the IGC files from the SoaringSpot server V1.0"
 print "==========================================================================================================\n\n"
-print "Usage:   python soa2fil.py indexday class -e FlarmID \n\n"
+print "Usage:   python soa2fil.py indexday class -e FlarmID "
+print "=====================================================\n\n"
 print "Index day: ", idx, " Class requested: ", classreq, FlarmID
 print "Reading data from clientid/secretkey files"
+print "==========================================\n\n"
 # ===== SETUP parameters =======================#                                          
 SWdbpath = config.DBpath                        # where to find the SQLITE3 database
 initials = config.Initials			# initials of the files generated
@@ -220,7 +222,8 @@ print stats
 # close the files and exit
 #
 if execopt:
-    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", os.getcwd(), "To:", dirpath
+    cwd=os.getcwd()
+    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", cwd, "To:", dirpath
     if os.path.isdir(dirpath):
         os.chdir(dirpath)                               # report current directory and the new one
     else:
@@ -230,7 +233,7 @@ if execopt:
     if os.path.isfile(fname):                           # remove to avoid errors
         os.remove(fname)                                # remove if exists
                                                         # get the new IGC files based on the FLARM messages
-    os.system('grep "FLARM "'+FlarmID+' */* | sort -k 3 | python /var/www/html/SWS/genIGC.py '+FlarmID+' > '+fname)
+    os.system('grep "FLARM "'+FlarmID+' */* | sort -k 3 | python '+cwd+'/genIGC.py '+FlarmID+' > '+fname)
     print "Resulting IGC file is on:", dirpath, "As: ", fname
 
 
