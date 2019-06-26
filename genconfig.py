@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 #
 # configuration for the Silent Wings OGN interface the online part
 #
