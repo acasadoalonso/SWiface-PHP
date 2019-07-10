@@ -43,16 +43,24 @@ if prtreq and prtreq[0]=="print":                       # if we ask to print
 	prt=True
 else:
 	prt=False
+
+if prtreq and prtreq[0]=="dir":                         # if we ask to cwdirectory
+	dir=True
+        dirpath   =sys.argv[3:][0]			# directory full path
+else:
+	dir=False
+
  
 print "\n\nExtract the FLARM infor from the IGC files V1.0 "
 print "================================================\n\n"
-print "Usage:   python dir2fil.py FLARMID"
-print "==================================\n\n"
+print "Usage:   python dir2fil.py FLARMID             or"
+print "         python dir2fil.py FLARMID dir directory-full-path"
+print "==========================================================\n\n"
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
 local_time = datetime.datetime.now()
-print "Extracting FLARM info from files at: ", dirpath
+print "Extracting FLARM info from files at: ", dirpath, FlarmID
 print "==============================================================\n\n"
 
 
@@ -67,8 +75,13 @@ ld = os.listdir(dirpath)                                # get the list of files
 cnt = 0                                                 # count of number of records processed
 for f in ld:                                            # scan all the files on the from directory
     fd=open(dirpath+"/"+f, 'r')                         # open the file
-    cnt +=getflarmfile(fd, f, tmppath+f, stats)         # extract the FLARM data from the embeded records
+    cnt +=getflarmfile(fd, f, tmppath+f, stats, prt)    # extract the FLARM data from the embeded records
     fd.close()                                          # close the file
+print "Records processed:",cnt, "\n\nStats:", stats     # print the stats
+if FlarmID == '':                                       # if no FlarmID, nothing else to do 
+        print "Files processed now at:", tmppath, "\n"
+        print "==============================================================\n\n"
+        exit()                                          # nothing else to do ...
 cwd=os.getcwd()                                         # remember the current directory
 print "From CD:", cwd, "To:", tmppath                   # report it
 os.chdir(tmppath)                                       # report current directory and the new one
@@ -78,8 +91,8 @@ if os.path.isfile(fname):                               # remove to avoid errors
                                                         # get the new IGC files based on the FLARM messages
 os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python '+cwd+'/genIGC.py '+FlarmID+' > '+fname)
 
-print "New IGC rebuilt file:", fname, " is at:", tmppath, "\n\n"
-print "Records processed:",cnt, "\n\nStats:", stats
+print "New IGC rebuilt file:", fname, " is at:", tmppath
+print "==============================================================\n\n"
 
 
 
