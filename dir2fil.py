@@ -44,7 +44,7 @@ if prtreq and prtreq[0]=="print":                       # if we ask to print
 else:
 	prt=False
 
-if prtreq and prtreq[0]=="dir":                         # if we ask to cwdirectory
+if prtreq and (prtreq[0]=="dir" or pretreq[0] == "DIR"): # if we ask to cwdirectory
 	dir=True
         dirpath   =sys.argv[3:][0]			# directory full path
 else:
@@ -54,7 +54,7 @@ else:
 print "\n\nExtract the FLARM infor from the IGC files V1.0 "
 print "================================================\n\n"
 print "Usage:   python dir2fil.py FLARMID             or"
-print "         python dir2fil.py FLARMID dir directory-full-path"
+print "         python dir2fil.py FLARMID DIR directory-full-path"
 print "==========================================================\n\n"
 hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
