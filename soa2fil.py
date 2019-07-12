@@ -93,7 +93,7 @@ print "Index day: ", idx, " Class requested: ", classreq, FlarmID
 print "Reading data from clientid/secretkey files"
 print "==========================================\n\n"
 # ===== SETUP parameters =======================#                                          
-SWdbpath = config.DBpath                        # where to find the SQLITE3 database
+SARpath = config.SARpath                        # where to find the SQLITE3 database
 initials = config.Initials			# initials of the files generated
 cwd=os.getcwd()					# get the current working directory
 cucpath=config.cucFileLocation                  # where to store the JSON files
@@ -101,7 +101,7 @@ secpath=cwd+"/SoaringSpot/"                     # where to find the clientid and
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
 taskType= "SailplaneRacing"                     # race type
-dirpath=SWdbpath+"/PAT/"                        # the subdirectory where to store the extracted files
+dirpath=SARpath+"/IGCfiles/"                    # the subdirectory where to store the extracted files
 if execopt:                                     # if we choose the option of gen the IGC file
     
     os.system ("rm "+dirpath+"*/*")             # delete all the files to avoid problems

@@ -38,6 +38,10 @@ except:
         cucFileLocation = "/var/www/html/cuc/"
 
 DBpath                  = cfg.get('server', 'DBpath').strip("'").strip('"')
+try:
+    SARpath             = cfg.get('server', 'SARpath').strip("'").strip('"')
+except:
+    SARpath             = DBpath
 MySQLtext               = cfg.get('server', 'MySQL').strip("'").strip('"')
 DBhost                  = cfg.get('server', 'DBhost').strip("'").strip('"')
 DBuser                  = cfg.get('server', 'DBuser').strip("'").strip('"')
@@ -85,6 +89,7 @@ except:
 
 datafile.write("cucFileLocation='"+cucFileLocation+"'; \n")
 datafile.write("DBpath='"+DBpath+"' \n")
+datafile.write("SARpath='"+SARpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")
 datafile.write("DBname='"+DBname+"' \n")
 datafile.write("DBtable='"+DBtable+"' \n")

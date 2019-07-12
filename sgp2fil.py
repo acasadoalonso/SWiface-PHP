@@ -39,10 +39,10 @@ prtreq   =sys.argv[5:]					# print request
 stats={}                                                # statistics 
 
 cucpath=config.cucFileLocation				# directory where to stor the JSON file generated
-DBpath=config.DBpath		        		# directory where to stor IGC files
+SARpath=config.SARpath		        		# directory where to stor IGC files
 pilotsID={}                                             # table with the pilots ID and namme
 flarmsID={}                                             # table with the pilots ID and namme
-dirpath=DBpath+"SGP"                                    # directory where will got the IGC files
+dirpath=SARpath+"SGP"                                   # directory where will got the IGC files
 
 
 #

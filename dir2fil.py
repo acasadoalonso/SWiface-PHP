@@ -33,9 +33,9 @@ from config import fixcoding
 FlarmID=str(sys.argv[1:])[2:8]                          # flarm id to scan
 prtreq   =sys.argv[2:]					# print request
 stats={}                                                # statistics 
-DBpath=config.DBpath		        		# directory where to store IGC directory 
-dirpath=DBpath+"IGCfiles"                               # directory where will got the IGC files
-tmppath=DBpath+"TMP/"                                   # directory where will got the IGC files
+SARpath=config.SARpath	                		# directory where to store IGC directory 
+dirpath=SARpath+"IGCfiles"                              # directory where will got the IGC files
+tmppath=SARpath+"TMP/"                                  # directory where will got the IGC files
 
 #
 
@@ -44,14 +44,14 @@ if prtreq and prtreq[0]=="print":                       # if we ask to print
 else:
 	prt=False
 
-if prtreq and (prtreq[0]=="dir" or pretreq[0] == "DIR"): # if we ask to cwdirectory
+if prtreq and (prtreq[0]=="dir" or prtreq[0] == "DIR"): # if we ask to directory
 	dir=True
         dirpath   =sys.argv[3:][0]			# directory full path
 else:
 	dir=False
 
  
-print "\n\nExtract the FLARM infor from the IGC files V1.0 "
+print "\n\nExtract the FLARM infor from the IGC files V1.1 "
 print "================================================\n\n"
 print "Usage:   python dir2fil.py FLARMID             or"
 print "         python dir2fil.py FLARMID DIR directory-full-path"
