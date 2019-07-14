@@ -60,7 +60,7 @@ hostname=socket.gethostname()
 print "DBhost:", config.DBhost, "ServerName:", hostname
 start_time = time.time()
 local_time = datetime.datetime.now()
-print "Extracting FLARM info from files at: ", dirpath, FlarmID
+print "Extracting FLARM info from files at: ", dirpath, ":", FlarmID
 print "==============================================================\n\n"
 
 
@@ -78,7 +78,7 @@ for f in ld:                                            # scan all the files on 
     cnt +=getflarmfile(fd, f, tmppath+f, stats, prt)    # extract the FLARM data from the embeded records
     fd.close()                                          # close the file
 print "Records processed:",cnt, "\n\nStats:", stats     # print the stats
-if FlarmID == '':                                       # if no FlarmID, nothing else to do 
+if FlarmID == '' or FlarmID == 'NFLARM':                # if no FlarmID, nothing else to do 
         print "Files processed now at:", tmppath, "\n"
         print "==============================================================\n\n"
         exit()                                          # nothing else to do ...
