@@ -77,26 +77,24 @@ if clsreq:
             classreq=' ' 
 else:
         classreq=' '                            # none     
-FlarmID=""                                              # the FlarmID of the files to be reconstructed
+FlarmID=""                                      # the FlarmID of the files to be reconstructed
 execopt=False
-if execreq and execreq[0]=="-e":                        # if we ask to exec the buildIGC
+if execreq and execreq[0]=="-e":                # if we ask to exec the buildIGC
     if FlarmIDr:
-        FlarmID=FlarmIDr[0]                             # get the FlarmID
+        FlarmID=FlarmIDr[0]                     # get the FlarmID
         execopt=True
 
 # ---------------------------------------------------------------- #
-print "Utility to get the api.soaringspot.com data and extract all the IGC files from the SoaringSpot server V1.0"
+print "Utility to get the api.soaringspot.com data and extract all the IGC files from the SoaringSpot server V1.1"
 print "==========================================================================================================\n\n"
-print "Usage:   python soa2fil.py indexday class -e FlarmID "
-print "====================================================\n\n"
+print "Usage:   python soa2fil.py indexday class [-e FlarmID ]"
+print "=======================================================\n\n"
 print "Index day: ", idx, " Class requested: ", classreq, FlarmID
 print "Reading data from clientid/secretkey files"
 print "==========================================\n\n"
 # ===== SETUP parameters =======================#                                          
-SARpath = config.SARpath                        # where to find the SQLITE3 database
-initials = config.Initials			# initials of the files generated
+SARpath = config.SARpath                        # where to get/store the IGC files
 cwd=os.getcwd()					# get the current working directory
-cucpath=config.cucFileLocation                  # where to store the JSON files
 secpath=cwd+"/SoaringSpot/"                     # where to find the clientid and secretkey files 
 apiurl="http://api.soaringspot.com/"            # soaringspot API URL
 rel="v1"                                        # we use API version 1
@@ -107,7 +105,6 @@ if execopt:                                     # if we choose the option of gen
     os.system ("rm "+dirpath+"*/*")             # delete all the files to avoid problems
 
 # ==============================================#
-tsks = {}					# task file
 hostname=socket.gethostname()			# hostname as control
 print "Hostname:", hostname
 start_time = time.time()                        # get the time now
@@ -133,6 +130,7 @@ message=nonce+date+client                       # build the message
 digest = hmac.new(secretkey, msg=message, digestmod=hashlib.sha256).digest() # and the message digest
 signature = base64.b64encode(digest).decode()   # build the digital signature
                                                 # the AUTHORIZATION ID is built now   
+
 auth=apiurl+rel+'/hmac/v1 ClientID="'+client+'",Signature="'+signature+'",Nonce="'+nonce+'",Created="'+date+'" ' 
 
 url1=apiurl+rel                                 # get the initial base of the tree 
@@ -155,11 +153,10 @@ print "Loc Name:", lcname,   "Country: ", country, country3, "End date:",  endat
 print "=========================================\n\n"
 
 npil=0                                          # init the number of pilots
-nwarnings=0                                     # number of warnings ...
-warnings=[]                                     # warnings glider
 stats={}                                        # statistics 
 prt=False                                       # print ???
 igcdir=''                                       # directory where it goes the IGC files
+
 # Build the tracks and turn points, exploring the contestants and task within each class
                                                 # go thru the different classes now within the daya
 PrevTaskDate=""
@@ -219,7 +216,7 @@ for cl in getemb(cd,'classes'):
         print "----------------------------------------------------------------\n\n"
 print stats
 #
-# close the files and exit
+# Check if the exec option is requested
 #
 if execopt:
     cwd=os.getcwd()
@@ -230,7 +227,7 @@ if execopt:
         print "Not available target directory:", dirpath+igcdir
 
     fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
-    if os.path.isfile(fname):                           # remove to avoid errors
+    if os.path.isfile(fname):                           # remove the file to avoid errors
         os.remove(fname)                                # remove if exists
                                                         # get the new IGC files based on the FLARM messages
     os.system('grep "FLARM "'+FlarmID+' */* | sort -k 3 | python '+cwd+'/genIGC.py '+FlarmID+' > '+fname)

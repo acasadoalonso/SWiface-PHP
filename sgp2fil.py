@@ -189,7 +189,8 @@ print "========"
 rr=results['s']                                         # get the scoring info
 #pprint(rr)
 p=0                                                     # number of pilots
-os.system("rm "+dirpath+"/DAY"+str(day)+"/*")           # delete all the files on that directory 
+if  os.path.isdir  (dirpath+"/"+str(date)):
+    os.system("rm "+dirpath+"/"+str(date)+"/*")         # delete all the files on that directory 
 for r in rr:                                            # get all the pilots
     #pprint(r)
     pilotid         =r['h']                             # pilot ID
@@ -205,8 +206,9 @@ for r in rr:                                            # get all the pilots
         continue
     fftc="http://www.crosscountry.aero/flight/download/sgp/"+str(filenum)   # the URL to download the IGC fle
     print "Pilot: ", fixcoding(pilotsID[pilotid]), cn, filenum, "FR:", fr, "FlarmID:", flarmsID[pilotid]
-    if not os.path.isdir(dirpath+"/DAY"+str(day)):
-                    os.system("mkdir "+dirpath+"/DAY"+str(day))
+    if not os.path.isdir(dirpath+"/"+str(date)):
+                    os.system("mkdir "+dirpath+"/"+str(date))
+                    os.system("chmod 775 "+dirpath+"/"+str(date))
                     print " OK directory made"
 
     req = urllib2.Request(fftc)
@@ -214,7 +216,7 @@ for r in rr:                                            # get all the pilots
     req.add_header("Content-Type","application/text")
     fd = urllib2.urlopen(req)                           # open the url resource
                                                         # call the routine that will read the file and handle the FLARM records
-    igcfilename=dirpath+"/DAY"+str(day)+"/"+cn+"."+fr[4:7]+".igc"
+    igcfilename=dirpath+"/"+str(date)+"/"+cn+"."+fr[4:7]+".igc"
     cnt=getflarmfile(fd, cn, igcfilename,  stats, prt)
     if prt:
        print "Number of records:", igcfilename, cnt
@@ -252,7 +254,7 @@ comp_shortdaytitle	=d_obj["t"]				# short day title
 comp_starttime		=d_obj["a"]				# start time millis from midnite
 comp_startaltitude	=d_obj["h"]				# start altitude
 comp_finishaltitude	=d_obj["f"]				# finish altitude
-print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
+print "Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, date, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude
 if "k" in d_obj:
 	comp_taskinfo		=d_obj["k"]			# task infor data
 else:
@@ -266,15 +268,15 @@ else:
 #
 if execopt:
     cwd=os.getcwd()
-    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", cwd, "To:", dirpath+"/DAY"+str(day)
-    os.chdir(dirpath+"/DAY"+str(day))                           # report current directory and the new one
+    print "Extracting the IGC file from embeded FLARM messages \nFrom CD:", cwd, "To:", dirpath+"/"+str(date)
+    os.chdir(dirpath+"/"+str(date))                             # report current directory and the new one
 
     fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
     if os.path.isfile(fname):                                   # remove to avoid errors
         os.remove(fname)                                        # remove if exists
                                                                 # get the new IGC files based on the FLARM messages
     os.system('grep "FLARM "'+FlarmID+' * | sort -k 3 | python '+cwd+'/genIGC.py '+FlarmID+' > '+fname)
-    print "Resulting IGC file is on:", dirpath+"/DAY"+str(day), "As: ", fname
+    print "Resulting IGC file is on:", dirpath+"/"+str(date), "As: ", fname
 
 if npil == 0:
         exit(-1)
