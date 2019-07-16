@@ -217,7 +217,8 @@ for r in rr:                                            # get all the pilots
     fd = urllib2.urlopen(req)                           # open the url resource
                                                         # call the routine that will read the file and handle the FLARM records
     igcfilename=dirpath+"/"+str(date)+"/"+cn+"."+fr[4:7]+".igc"
-    cnt=getflarmfile(fd, cn, igcfilename,  stats, prt)
+    cnt=getflarmfile(fd, cn, igcfilename,  stats, prt)  # grab and convert FLARM records
+    sys.stdout.flush()                                  # print results
     if prt:
        print "Number of records:", igcfilename, cnt
     print "----------------------------------------------------------------"

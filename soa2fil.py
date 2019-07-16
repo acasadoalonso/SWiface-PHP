@@ -210,7 +210,8 @@ for cl in getemb(cd,'classes'):
                 r = urllib2.urlopen(req)        # open the url resource
                 #fff=r.read()
                 # call the routine that will read the file and handle the FLARM records
-                cnt=getflarmfile(r, igcfile, igcfilename, stats, prt)
+                cnt=getflarmfile(r, igcfile, igcfilename, stats, prt) # grab and convert the FLARM records
+                sys.stdout.flush()              # print the records
                 if prt:
                     print "Number of records:", igcfilename, cnt
                 print "----------------------------------------------------------------"

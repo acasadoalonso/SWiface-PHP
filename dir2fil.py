@@ -77,6 +77,7 @@ for f in ld:                                            # scan all the files on 
     fd=open(dirpath+"/"+f, 'r')                         # open the file
     cnt +=getflarmfile(fd, f, tmppath+f, stats, prt)    # extract the FLARM data from the embeded records
     fd.close()                                          # close the file
+    sys.stdout.flush()                                  # print results 
 print "Records processed:",cnt, "\n\nStats:", stats     # print the stats
 if FlarmID == '' or FlarmID == 'NFLARM':                # if no FlarmID, nothing else to do 
         print "Files processed now at:", tmppath, "\n"
