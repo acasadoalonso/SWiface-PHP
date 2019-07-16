@@ -193,9 +193,9 @@ for cl in getemb(cd,'classes'):
                 else:
                     print ">>> missing FILE >>>>>", fixcoding(pil["first_name"]).encode('utf8'), fixcoding(pil["last_name"])
                     continue
-                igcfilename=dirpath+"/"+igcfile[0:3]+"/"+classname+"-"+igcfile[4:]
-                if not os.path.isdir(dirpath+"/"+igcfile[0:3]):
-                    os.system("mkdir "+dirpath+"/"+igcfile[0:3])
+                igcfilename=dirpath+"/"+taskdate+"/"+classname+"-"+igcfile[4:]
+                if not os.path.isdir(dirpath+"/"+taskdate):
+                    os.system("mkdir "+dirpath+"/"+taskdate)
                     print " OK directory made"  # create the directory if needed 
                 if "nationality" in pil:        # extracts the nationality as a doc
                     nationality=pil['nationality']
@@ -224,7 +224,7 @@ if execopt:
     if os.path.isdir(dirpath):
         os.chdir(dirpath)                               # report current directory and the new one
     else:
-        print "Not available target directory:", dirpath+igcdir
+        print "Not available target directory:", dirpath+taskdate
 
     fname=FlarmID+'.'+getognreg(FlarmID)+'.'+getogncn(FlarmID)+'.igc'
     if os.path.isfile(fname):                           # remove the file to avoid errors
