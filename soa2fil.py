@@ -196,6 +196,7 @@ for cl in getemb(cd,'classes'):
                 igcfilename=dirpath+"/"+taskdate+"/"+classname+"-"+igcfile[4:]
                 if not os.path.isdir(dirpath+"/"+taskdate):
                     os.system("mkdir "+dirpath+"/"+taskdate)
+                    os.system("chmod 775 "+dirpath+"/"+taskdate)
                     print " OK directory made"  # create the directory if needed 
                 if "nationality" in pil:        # extracts the nationality as a doc
                     nationality=pil['nationality']
