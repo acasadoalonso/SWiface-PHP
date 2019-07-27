@@ -24,3 +24,4 @@ cuc/*.tsk
 cuc/*.LIST
 utils/
 getflarm.py
+__pycache__/

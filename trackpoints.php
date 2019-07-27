@@ -9,7 +9,7 @@ $rc=0;
 if ($begin == "")
 	$begin = "0";
 ob_start();
-passthru('/usr/bin/python2.7 '.$cwd.'/trackpoints.py '.$trackid.' '.$begin, $rc);
+passthru('/usr/bin/python3 '.$cwd.'/trackpoints.py '.$trackid.' '.$begin, $rc);
 $output = ob_get_clean(); 
 echo $output;
 ?>

@@ -12,7 +12,7 @@ from uritemplate import expand
 from copy import deepcopy
 
 VALID_LINK_ATTRS = ['templated', 'type', 'name', 'profile', 'title',
-    'hreflang']
+                    'hreflang']
 
 
 class HalDocument(object):
@@ -63,7 +63,7 @@ class HalDocument(object):
                 return self.structure[data_type]
         else:
             data = {}
-            for item in self.structure.keys():
+            for item in list(self.structure.keys()):
                 if item not in ['_links', '_embedded']:
                     data[item] = self.structure[item]
             try:
@@ -181,4 +181,3 @@ class Resolver(object):
             except KeyError:
                 pass
         return link
-

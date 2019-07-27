@@ -50,6 +50,6 @@ eg2={'name':config.eventname2,  'description': config.eventdesc2, 'events': evL,
 eg.append(eg1)                                          # append the individual events groups
 eg.append(eg2)                                          # so far the QSGP and the LIVE
 j=json.dumps(eg, indent=4)                              # convert it to JSON format
-print j                                                 # pass it to the PHP script
+print (j)                                               # pass it to the PHP script
 exit()
 

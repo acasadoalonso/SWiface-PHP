@@ -1,7 +1,7 @@
 # Defines mapping between ISO 3166-1 alpha-3 and Olympic IOC country codes
 # Only mismatches are defined
-# Taken from here: http://en.wikipedia.org/wiki/Comparison_of_IOC:_FIFA:_and_ISO_3166_country_codes    
-iso2ioc = {                        
+# Taken from here: http://en.wikipedia.org/wiki/Comparison_of_IOC:_FIFA:_and_ISO_3166_country_codes
+iso2ioc = {
     "DZA": "ALG",
     "ASM": "ASA",
     "AGO": "ANG",
@@ -89,5 +89,4 @@ iso2ioc = {
     "VNM": "VIE",
     "ZMB": "ZAM",
     "ZWE": "ZIM"
-    }
-
+}

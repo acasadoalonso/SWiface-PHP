@@ -11,7 +11,7 @@ if (isset($_GET['compression']))
 $cwd =getcwd();
 $rc=0;
 ob_start();
-passthru('/usr/bin/python2.7 '.$cwd.'/sgpgetfixes.py '.$id.' '.$since, $rc);
+passthru('/usr/bin/python3 '.$cwd.'/sgpgetfixes.py '.$id.' '.$since, $rc);
 $output = ob_get_clean(); 
 if ($compression == "gzip")
                 {

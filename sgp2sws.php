@@ -6,10 +6,10 @@ $rc=0;
 echo 'COMPid='.$compid.' Indexday='.$indexday.'<br><br>';
 ob_start();
 if (is_numeric($indexday)){
-	passthru('/usr/bin/python2.7 '.$cwd.'/sgp2sws.py '.$compid.' '.$indexday, $rc);
+	passthru('/usr/bin/python3 '.$cwd.'/sgp2sws.py '.$compid.' '.$indexday, $rc);
 	} 
 else {
-	passthru('/usr/bin/python2.7 '.$cwd.'/sgp2sws.py '.$compid.' "'.$indexday.'"', $rc);
+	passthru('/usr/bin/python3 '.$cwd.'/sgp2sws.py '.$compid.' "'.$indexday.'"', $rc);
 	}
 $output = ob_get_clean(); 
 echo nl2br($output);
