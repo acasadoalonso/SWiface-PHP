@@ -21,6 +21,8 @@ cuc/qsgp/
 cuc/bkup/
 cuc/*.json
 cuc/*.tsk
+cuc/*.lst
+cuc/*.csv
 cuc/*.LIST
 utils/
 getflarm.py
