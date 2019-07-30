@@ -147,7 +147,7 @@ for id in pilots:                                       # disply the pilot infor
         ccc = pycountry.countries.get(alpha_2=country)
         country = ccc.alpha_3			        # convert to a 3 letter code
 
-    pilotname = (fname+" "+lname).encode('utf8')
+    pilotname = (fname+" "+lname).encode('utf8').decode('utf-8')
     print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, flarmID)
     pilotsID[pid] = pilotname
     flarmsID[pid] = flarmID
@@ -219,11 +219,11 @@ for r in rr:                                            # get all the pilots
                                                         # file number of the web server
     filenum = r['w']
     if filenum == 0:
-        print("Error: IGC file not found !!!>>> PID", pilotid, "Pilot: ", str(pilotsID[pilotid]).encode('utf-8'), cn, filenum)
+        print("Error: IGC file not found !!!>>> PID", pilotid, "Pilot: ", str(pilotsID[pilotid]).encode('utf-8').decode('utf-8'), cn, filenum)
         continue
     fftc = "http://www.crosscountry.aero/flight/download/sgp/" + \
         str(filenum)                                    # the URL to download the IGC fle
-    print("Pilot: ", str(pilotsID[pilotid]).encode('utf-8'), cn, filenum, "FR:", fr, "FlarmID:", flarmsID[pilotid])
+    print("Pilot: ", str(pilotsID[pilotid]).encode('utf-8').decode('utf-8'), cn, filenum, "FR:", fr, "FlarmID:", flarmsID[pilotid])
     if not os.path.isdir(dirpath+"/"+str(date)):
         os.system("mkdir "+dirpath+"/"+str(date))
         os.system("chmod 775 "+dirpath+"/"+str(date))
@@ -276,7 +276,7 @@ comp_daytitle = d_obj["l"]				# day title
 comp_shortdaytitle = d_obj["t"]				# short day title
 comp_starttime = d_obj["a"]				# start time millis from midnite
 comp_startaltitude = d_obj["h"]				# start altitude
-comp_finishaltitude = d_obj["f"]				# finish altitude
+comp_finishaltitude = d_obj["f"]			# finish altitude
 print("Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, date, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude)
 if "k" in d_obj:
     comp_taskinfo = d_obj["k"]			        # task infor data

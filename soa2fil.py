@@ -217,7 +217,7 @@ for cl in getemb(cd, 'classes'):
                                             # the first 3 char are the directory where it goes for example: 95I
             igcdir = igcfile[0:3]
         else:
-            print(">>> missing FILE >>>>>", pil["first_name"].encode('utf8'), pil["last_name"].encode('utf8'))
+            print(">>> missing FILE >>>>>", pil["first_name"].encode('utf8').decode('utf-8'), pil["last_name"].encode('utf8').decode('utf-8'))
             continue
         igcfilename = dirpath+"/"+taskdate+"/"+classname+"-"+igcfile[4:]
         if not os.path.isdir(dirpath+"/"+taskdate):

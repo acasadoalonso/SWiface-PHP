@@ -37,6 +37,7 @@ Flags = { 						# flag colors assigned to the countries
     "SWE": ["blue", "yellow", "white"],
     "NOR": ["blue", "red", "red"],
     "ZAF": ["red", "green", "yellow"],
+    "HKG": ["red", "white", "red"],
     "USA": ["red", "blue", "red"]
 }
 
@@ -176,11 +177,11 @@ for id in pilots:
                                                         # get the FlarmId from the registration
         flarm = getflarmid(registration)
         print("FlarmID on SYS:", flarmid, "Flarm reg:", flarm, "Registration:", registration)
+        if len(flarmid) == 6:
+            flarmid="FLR"+flarmid
         if flarmid == '':
                                                         # get the FlarmId from the registration
             flarmid = getflarmid(registration)
-        if len(flarmid) == 6 and flarmid[0:3] != "FLR":
-            flarmid = flarm 			        # add the FLR assuming Flarm
         if flarm == '':
             flarm = "***NOREG***"
             print("Warning .... Flarm not registered on the OGN", flarmid, flarm, "\n\n")
@@ -216,9 +217,8 @@ for id in pilots:
         country = ccc.alpha_3				# convert to a 3 letter code
 
     color = Flags[country]
-    pilotname = str((fname+" "+lname).encode('utf8'))
-    print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, flarmid, "OGN:", flarm[
-        3:9])
+    pilotname = str((fname+" "+lname).encode('utf8').decode('utf-8'))
+    print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "FlarmID:", flarmid, "OGN:", flarm)
     if config.PicPilots == 'FAI':
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model,
               "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
@@ -409,7 +409,6 @@ task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace",
         "startOpenTs": comp_date, "turnpoints": tp}
 event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks}
-print ("EEEE", event)
 j = json.dumps(event, indent=4)
 jsonfile.write(j)
 print("Task end:==========================>")
