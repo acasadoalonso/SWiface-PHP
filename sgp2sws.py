@@ -204,9 +204,6 @@ for id in pilots:
         warnings.append(lname) 				# add it to the list of warnings
         nwarnings += 1  				# and increase the number of warnings
 
-    # rgb=0x111*int(id)                                 # the the RGB color
-    # ccc=hex(rgb)                                      # convert it to hex
-    # color="#"+ccc[2:]                                 # set the JSON color required
     if hostname == "SWserver":				# deal with the different implementation of pycountry
                                                         # the the 3 letter country code
         ccc = pycountry.countries.get(alpha_2=country)
@@ -215,24 +212,39 @@ for id in pilots:
                                                         # the the 3 letter country code
         ccc = pycountry.countries.get(alpha_2=country)
         country = ccc.alpha_3				# convert to a 3 letter code
+    if country in Flags:                                # if it a known country ???
+        color = Flags[country]                          # use the predefined colots
+    else:                                               # use ramdom colors
+        rgb=0x111*int(id)                               # the the RGB color
+        ccc=hex(rgb)                                    # convert it to hex
+        color="#"+ccc[2:]                               # set the JSON color required
 
-    color = Flags[country]
     pilotname = str((fname+" "+lname).encode('utf8').decode('utf-8'))
     print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "FlarmID:", flarmid, "OGN:", flarm)
-    if config.PicPilots == 'FAI':
+    if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
+        p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
+        pr = json.load(p)
+        if pr != None:                                  # use the RankingList API
+            obj=pr['object_name']                       # reach the photo file
+            on=obj[0]
+            photo=on['photo']
+            photourl="http://rankingdata.fai.org/PilotImages/"+photo
+        else:
+            photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
+        #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>", url)
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model,
-              "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+rankingid+".jpg"}
-    else:
+              "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": photourl}
+    else:                                               # use the local pictures on the SWS server
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration,
               "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": config.SWSserver+"SWS/pic/"+compid+".png", "3dModelVariant": config.SWSserver+"SWS/pic/"+compid+".sponsor.png"}
-    # add it to the tracks
+                                                        # add it to the tracks
     tracks.append(tr)
     npil += 1						# increase the number of pilots
     print("---------------------")
 
 #print tracks
 print("Wlist:", wlist)
-print("==========")
+print("===========")
 print("Competition")
 print("===========")
 comp = j_obj["c"]					# get the competition information
@@ -439,20 +451,10 @@ latest = cucpath+config.Initials+'/SGPrace-latest.tsk'
 print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a reference
 os.system('rm  '+latest)                                # remove the previous one
 try:
-    # link the recently generated file now to be the latest !!!
+                                                        # link the recently generated file now to be the latest !!!
     os.system('ln -s '+TASKFILE+' '+latest)
 except:
     print("No latest file ...: ", latest)
-os.system("gist -login")
-cmd = "gist -u bd0ebff6b31246570fa31b2df6b701c7 "+latest
-#cmd="gist  "+latest
-print(cmd)
-try:
-    os.system(cmd)
-except:
-    print("Error on gisy ...: ", cmd)
-html = "https://gist.githubusercontent.com/acasadoalonso/bd0ebff6b31246570fa31b2df6b701c7/raw"
-print("Use: "+html)
 # Write a csv file of all gliders to be used as filter file for glidertracker.org
 for item in flist:
     csvsfile.write("%s\n" % item)
