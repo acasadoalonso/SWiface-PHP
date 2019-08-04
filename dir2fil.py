@@ -21,7 +21,6 @@ from pprint import pprint
 from ogndata import *
 from getflarm import *
 import config
-from config import fixcoding
 
 #-------------------------------------------------------------------------------------------------------------------#
 #

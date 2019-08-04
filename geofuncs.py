@@ -1,7 +1,10 @@
 # Geo routines
+#coding:UTF-8
 import math
 import geopy
 import geopy.distance
+from math import radians, cos, sin, asin, sqrt, atan2, degrees
+
 ##########################################################################
 def decdeg2dms(dd):              # convert degrees to D, M, S
     
@@ -148,3 +151,100 @@ def getnewDDMMmmm(lat, lon, alt, N, E, D):              # get the new DMS from D
     return(getnewcoor(lt, ln, alt, N, E, D))            # return the tuple in DMS format as well
 
 ##########################################################################
+
+def haversine(pointA, pointB):
+
+    if (type(pointA) != tuple) or (type(pointB) != tuple):
+        raise TypeError("Only tuples are supported as arguments")
+
+    lat1 = pointA[0]
+    lon1 = pointA[1]
+
+    lat2 = pointB[0]
+    lon2 = pointB[1]
+
+    # convert decimal degrees to radians 
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2]) 
+
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    r = 6371 # Radius of earth in kilometers. Use 3956 for miles
+    return c * r
+
+
+def initial_bearing(pointA, pointB):
+
+    if (type(pointA) != tuple) or (type(pointB) != tuple):
+        raise TypeError("Only tuples are supported as arguments")
+
+    lat1 = radians(pointA[0])
+    lat2 = radians(pointB[0])
+
+    diffLong = radians(pointB[1] - pointA[1])
+
+    x = sin(diffLong) * cos(lat2)
+    y = cos(lat1) * sin(lat2) - (sin(lat1)
+            * cos(lat2) * cos(diffLong))
+
+    initial_bearing = atan2(x, y)
+
+    # Now we have the initial bearing but math.atan2 return values
+    # from -180° to + 180° which is not what we want for a compass bearing
+    # The solution is to normalize the initial bearing as shown below
+    initial_bearing = degrees(initial_bearing)
+    compass_bearing = (initial_bearing + 360) % 360
+
+    return compass_bearing
+##########################################################################
+def getnewpoint(lat, lon, dist, bearing):
+# Define starting point.
+    start = geopy.Point(lat, lon)
+# Define a general distance object, initialized with a distance of 1 km.
+    d = geopy.distance.VincentyDistance(kilometers = dist/1000.0)   # get the distance as a point
+
+# Use the `destination` method with a bearing of 0 degrees (which is north)
+    np=d.destination(point=start, bearing=bearing)                  # go to 
+    return (np.latitude, np.longitude)                              # return the result
+
+##########################################################################
+def convertline(tsk):                       # conver the start line on several point so it will draw as a LINE
+    tasks=tsk['tasks'][0]                   # use the TSK
+    tpt=tasks['TPpointstype']               # get the TP style ... Line, cylinder, etc, ...
+    legs=tasks['legs']                      # get the legs
+    ntp=len(tpt)                            # get the number of turning points
+    lasttp=tpt[ntp-1]                       # check if the last is the START line
+    if str(lasttp) == 'Line':               # onli in the case of the LINE
+        coor1=legs[(ntp-1)*2]               # coord of the start gate
+        lat1=coor1[0]
+        lon1=coor1[1]
+        coor2=legs[(ntp-2)*2]               # get the coord of the first TP
+        lat2=coor2[0]
+        lon2=coor2[1]
+        size=legs[(ntp-1)*2+1][0]           # get the size of the START GATE
+        legs[(ntp-1)*2+1][0]=0
+        p1=(lat1, lon1)
+        p2=(lat2, lon2)
+        bearing=initial_bearing(p1,p2)      # get the bearing from the start gate to the first TP
+        np1=getnewpoint(lat1,lon1, size/2, bearing+90)  # next point is from center of start line to half of the size to the right
+        np2=getnewpoint(lat1,lon1, size/2, bearing-90)
+        np=[]
+        np.append(np1[0])                   # append this to the existing .tsk
+        np.append(np1[1])
+        legs.append(np)
+        s=[]
+        s.append(0)
+        legs.append(s)
+        np=[]
+        np.append(np2[0])
+        np.append(np2[1])
+        legs.append(np)
+        s=[]
+        s.append(0)
+        legs.append(s)
+    return (tsk)                            # return the modifies .tsk
+
+
+

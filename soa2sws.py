@@ -12,13 +12,12 @@ import base64
 import OpenSSL
 import uritemplate
 import pycountry
-import sqlite3
-import MySQLdb
 import math
 import os
 import socket
 import config
-
+from ogndata import *
+from geofuncs import convertline 
 from simplehal import HalDocument, Resolver
 from pprint import pprint
 
@@ -78,9 +77,10 @@ if clsreq:
     print("TTT", classreq)
 else:
     classreq = ' '                              # none
+version='V2.00'
 # ---------------------------------------------------------------- #
-print("Utility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs V1.1")
-print("==================================================================================================================\n\n")
+print("Utility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
+print("=================================================================================================================================\n\n")
 print("Index day: ", idx, " Class requested: ", classreq)
 print("Reading data from clientid/secretkey files")
 # ===== SETUP parameters =======================#
@@ -111,15 +111,6 @@ local_time = datetime.datetime.now()            # the local time
 print("Local Time is now:", local_time)		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")    # get the local time
 print("Config params. SWpath: ", SWdbpath, "Initials:", initials, "CUCpath:", cucpath, "SECpath:", secpath)
-if (config.MySQL):
-    connG = MySQLdb.connect(host=config.DBhost, user=config.DBuser,
-                            passwd=config.DBpasswd, db=config.DBname)     # connect with the database
-    print("Config:", config.DBhost, config.DBuser, config.DBname)
-else:
-    # open the DB with all the GLIDERS information
-    connG = sqlite3.connect(SWdbpath+config.SQLite3)
-
-cursG = connG.cursor()				# cursor for the GLIDERS table
 
 nonce = base64.b64encode(os.urandom(36))        # get the once base
                                                 # open the file with the client id
@@ -147,6 +138,7 @@ url1 = apiurl+rel
                                                 # get the contest data, first instance
 cd = gdata(url1, 'contests', prt='no')[0]
 
+ogndata=getogndata()                            # get the OGB DDB
 category = cd['category']
 eventname = cd['name']
 compid = cd['id']
@@ -160,13 +152,14 @@ lc = getemb(cd, 'location')                     # location data
 lcname = lc['name']                             # location name
 
 print("= Contest ===============================")
-print("Category:", category, "Comp name:", eventname, "Comp ID:", compid)
+print("Category:", category, "Comp Name:", eventname, "Comp ID:", compid)
 print("Loc Name:", lcname,   "Country: ", country, country3, "End date:",  endate)
 print("=========================================")
 
 npil = 0                                        # init the number of pilots
 nwarnings = 0                                   # number of warnings ...
 warnings = []                                   # warnings glider
+filenames=False
 
 # Build the tracks and turn points, exploring the contestants and task within each class
 # go thru the different classes now within the day
@@ -186,7 +179,7 @@ for cl in getemb(cd, 'classes'):
     classid = cl['id']                          # internal ID of the class
     JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
     TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
-    CSVFILE = cucpath + initials + fl_date_time+"-"+classtype+"filter.csv"
+    CSVFILE  = cucpath + initials + fl_date_time+"-"+classtype+"filter.csv"
                                                 # name of the JSON to be generated, one per class
 
     os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
@@ -198,11 +191,14 @@ for cl in getemb(cd, 'classes'):
     print("\n= Class = Category:", category, "Type:", classtype, "Class ID:", classid)
     jsonfile = open(JSONFILE, 'w')		# open the output file, one per class
     taskfile = open(TASKFILE, 'w')		# open the output file, one per class
+    csvfile = open(CSVFILE, 'w')		# open the output file, one per class
+    filenames=True
                                                 # search for the contestants on each class
     url3 = getlinks(cl, "contestants")
     ctt = gdata(url3,   "contestants")          # get the contestants data
     print("= Contestants for the class ===========================")
     wlist = []				        # filter for live.glidernet.org
+    tptype = []				        # set the turning point type
     flist = []				        # Filter list for glidertracker.org
     flist.append("ID,CALL,CN,TYPE,INDEX")       # Initialize with header row
     for contestants in ctt:                     # inspect the data of each contestant
@@ -214,40 +210,23 @@ for cl in getemb(cd, 'classes'):
         lname = getemb(contestants, 'pilot')[0]['last_name']
                                                 # convert it to utf8 in order to avoid problems
         pname = (fname+" "+lname).encode('utf-8').decode('utf-8')
-        if 'live_track_id' in contestants:
+        if 'live_track_id' in contestants:      # check if we have the FlarmId from the SoaringSpot
             idflarm = contestants['live_track_id']
+            if len(idflarm) == 6:               # in case of missing FLR/ICA/OGN 
+                if idflarm[0] == 'D':
+                    idflarm="FLR"+idflarm       # assume a Flarm type 
+                elif idflarm[0].isdigit():
+                    idflarm="ICA"+idflarm       # assume a ICAO type
+                else:
+                    idflarm="OGN"+idflarm       # assume a OGN type
+                    
+            if 'aircraft_registration' in contestants:
+                regi = contestants['aircraft_registration']
+            else:
+                regi = "reg_NOTYET"             # if we do not have the registration ID on the soaringspot
         elif 'aircraft_registration' in contestants:
             regi = contestants['aircraft_registration']
-            ff = False                          # assume false initially
-            idflarm = ' '
-            cursG.execute(
-                "select * from GLIDERS where registration ='%s'; " % regi)
-            for rowg in cursG.fetchall():  # look for that registration on the OGN database
-                #print "\t\t", rowg[0], "For:", rowg[1], rowg[2], rowg[3], rowg[4], rowg[5]
-                source = rowg[4]
-                devicetype = rowg[5]
-                deviceID = rowg[0]
-                if idflarm != ' ' and source == 'F':
-                    continue
-                if devicetype == 'F':
-                    if deviceID[0].isdigit():
-                        print("Warning: flarmid numeric ...", deviceID)
-                                                # prepend FLR in order to be consistent
-                    idflarm = "FLR"+rowg[0]
-                elif devicetype == 'O':
-                                                # prepend OGN in order to be consistent
-                    idflarm = "OGN"+rowg[0]
-                elif devicetype == 'I':
-                                                # prepend ICA in order to be consistent
-                    idflarm = "ICA"+rowg[0]
-                else:
-                                                # prepend FLR in order to be consistent
-                    idflarm = "RDN"+rowg[0]
-                ff = True                       # mark that at least we found one
-
-            if not ff:
-                idflarm = ' '                   # if not found mark it as blank
-
+            idflarm=getognflarmid(regi)         # get the flarm if from the OGN DDB
         else:
             regi = "reg_NOTYET"                 # if we do not have the registration ID on the soaringspot
             idflarm = ' '
@@ -258,7 +237,7 @@ for cl in getemb(cd, 'classes'):
             fr = fr.rstrip('\r')
         else:
             fr = "fr_NOTYET"+str(npil)
-        if idflarm == ' ':
+        if idflarm == ' ' or idflarm == 'NOREG  ':
             warnings.append(pname)              # add it to the list of warnings
             nwarnings += 1                      # and increase the number of warnings
 
@@ -327,7 +306,14 @@ for cl in getemb(cd, 'classes'):
                                                 # look for the tasks within that class
     url4 = getlinks(cl, "tasks")
                                                 # get the TASKS data for the day
-    ctt = gdata(url4,   "tasks")
+    try:
+        ctt = gdata(url4,   "tasks")
+    except:
+        print ("No task yet...", url4)          # when the task is not ready
+        os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
+        os.system('rm  '+TASKFILE)
+        os.system('rm  '+CSVFILE)
+        continue
     print("= Tasks ==", ctt[idx]["task_date"])
     print("= Tasks ==", ctt[idx]["result_status"])
     print("= Tasks ==", ctt[idx]["task_distance"]/1000)
@@ -340,7 +326,7 @@ for cl in getemb(cd, 'classes'):
     cpp = gdata(url5,        "points")
     print("= Waypoints for the task within the class  ============")
     tasklen = 0                                 # task length for double check
-    ntp = 0
+    ntp = 0                                     # number of turning points
     wp = 0
     legs = []					# legs for the task file
     for point in cpp:                           # search for each waypoint within the task
@@ -394,7 +380,8 @@ for cl in getemb(cd, 'classes'):
         tpx = {"latitude": lati, "longitude": lon, "name": name, "observationZone": oz,
                "type": ttype, "radius": rad, "trigger": "Enter", "texture": tptexture}
         tp.append(tpx)                          # add it to the TP
-        tlegs = [lati, lon]
+        tptype.append(oz)                       # save the turning point ype
+        tlegs = [lati, lon]                     # legs
         legs.append(tlegs)
         trad = [rad]
         legs.append(trad)
@@ -405,9 +392,11 @@ for cl in getemb(cd, 'classes'):
     print("=Task length: ", tasklen, "Number of pilots in the class: ", npilc)
 
     tps = []					# create the instance for the turn points
+    tpt = []					# create the instance for the turn points
     while ntp > 0:				# reverse the order of the TPs
         ntp -= 1
         tps.append(tp[ntp])
+        tpt.append(tptype[ntp])
     local_time = datetime.datetime.utcnow()     # the local time
                                                 # build the event
                                                 # event
@@ -427,10 +416,11 @@ for cl in getemb(cd, 'classes'):
     os.chmod(JSONFILE, 0o777) 			# make the JSON file accessible
     #print j
     print("Generate TSK file ...")
-    tsk = {"name": classtype, "color": "0000FF", "legs": legs, "wlist": wlist}
+    tsk = {"name": classtype, "color": "0000FF", "legs": legs, "TPpointstype": tptype, "wlist": wlist}
     tsks = []
     tsks.append(tsk)
     tasks = {"tasks": tsks}
+    tasks = convertline(tasks)                  # convert the START line on 3 point that will draw a line
     j = json.dumps(tasks, indent=4)             # dump it
     #print j
                                                 # write it into the task file on json format
@@ -448,25 +438,23 @@ for cl in getemb(cd, 'classes'):
     try:
         os.link(TASKFILE, latest)
     # Write a csv file of all gliders to be used as filter file for glidertracker.org
-        with open(cucpath + initials + fl_date_time+"-"+classtype+"filter.csv", 'wb') as myfile:
-            for item in flist:
-                myfile.write("%s\n" % item)
+        #with open(cucpath + initials + fl_date_time+"-"+classtype+"filter.csv", 'wb') as myfile:
+        for item in flist:
+            csvfile.write("%s\n" % item)
     except:
         print("error on link")
-
-    # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
-    # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
-
-
 
 # print the number of pilots as a reference and control
 print("= Pilots ===========================", npil, "\n\n")
 
 
-connG.close()                                    # close the connection
 
 if npil == 0:
-    print("JSON invalid: No pilots found ... ")
+    print("JSON invalid: No pilots found ...  or invalid class ...")
+    if filenames:
+        os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
+        os.system('rm  '+TASKFILE)
+        os.system('rm  '+CSVFILE)
     exit(-1)
 else:
     print("Pilots found ... ", npil, "Warnings:", nwarnings)

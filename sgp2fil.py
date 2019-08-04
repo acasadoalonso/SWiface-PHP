@@ -105,8 +105,7 @@ print("===========================: \n") 		# just a trace
 #
 # get the JSON string for the web server
 #
-j = urllib.request.urlopen(
-    'http://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
+j = urllib.request.urlopen( 'http://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
 j_obj = json.load(j)                                    # convert it to dict
 if prt:
     #print j_obj
@@ -252,8 +251,7 @@ print(stats)
 print("= Pilots ===========================", npil)
 
                                                         # print information about the day
-d = urllib.request.urlopen(
-    'http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
+d = urllib.request.urlopen('http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
 d_obj = json.load(d)
 if prt:
     print("____________________________________________________________")

@@ -12,8 +12,6 @@ import base64
 import OpenSSL
 import uritemplate
 import pycountry
-import sqlite3
-import MySQLdb
 import math
 import os
 import socket

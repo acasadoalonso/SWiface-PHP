@@ -13,7 +13,9 @@ import os
 import math
 import pycountry
 import socket
-import kglid
+#import kglid
+from ogndata import *
+from geofuncs import convertline
 #-------------------------------------------------------------------------------------------------------------------#
 import config
 Flags = { 						# flag colors assigned to the countries
@@ -67,6 +69,7 @@ prtreq = sys.argv[3:]					# print request
 cucpath = config.cucFileLocation
 tp = []							# turn pint list
 tracks = []						# track list
+version='V2.00'
 #
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
@@ -85,8 +88,9 @@ if prtreq and prtreq[0] == "print":
 else:
     prt = False
 
-print("Generate .json files V1.1 from  the www.sgp.aero web server")
-print("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html ")
+print("\n\nGenerate .json files from the www.sgp.aero web server. Version: "+version)
+print("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
+print("=======================================================================\n\n")
 hostname = socket.gethostname()
 print("DBhost:", config.DBhost, "ServerName:", hostname)
 start_time = time.time()
@@ -152,6 +156,7 @@ flist.append("ID,CALL,CN,TYPE,INDEX")   		# Initialize with header row
 nwarnings = 0                                  		# number of warnings ...
 warnings = []                                  		# warnings glider
 
+ogndata=getogndata()                                    # get the OGN DDB
 npil = 0				        	# number of pilots found
 pilots = j_obj["p"]					# get the pilot information
 print("Pilots:", len(pilots))
@@ -175,13 +180,13 @@ for id in pilots:
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
                                                         # get the FlarmId from the registration
-        flarm = getflarmid(registration)
+        flarm = getognflarmid(registration)
         print("FlarmID on SYS:", flarmid, "Flarm reg:", flarm, "Registration:", registration)
         if len(flarmid) == 6:
             flarmid="FLR"+flarmid
         if flarmid == '':
                                                         # get the FlarmId from the registration
-            flarmid = getflarmid(registration)
+            flarmid = getognflarmid(registration)
         if flarm == '':
             flarm = "***NOREG***"
             print("Warning .... Flarm not registered on the OGN", flarmid, flarm, "\n\n")
@@ -319,6 +324,8 @@ else:
     os.system('rm  '+JSONFILE)
                                                         # remove the previous one
     os.system('rm  '+TASKFILE)
+    os.system('rm  '+COMPFILE)		                # remove the previous one
+    os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit()
 task_type = comp_taskinfo["@type"]
 task_id = comp_taskinfo["id"]
@@ -369,6 +376,7 @@ print("=====================")
 #
 wp = 0
 legs = []
+tptype=[]
 while wp < len(task_wp):
     wp_name = task_wp[wp]["n"]                          # waypoint name
     wp_name = "TP"+str(wp)+"-"+wp_name
@@ -405,6 +413,8 @@ while wp < len(task_wp):
     legs.append(tlegs)
     trad = [wp_radius]
     legs.append(trad)
+    tptype.append(oz)                       # save the turning point ype
+
     if wp > 0 and (wp_name == wpinit or wp_type == "line"):
         break
     wp += 1
@@ -425,10 +435,11 @@ j = json.dumps(event, indent=4)
 jsonfile.write(j)
 print("Task end:==========================>")
 print("Generate TSK file ...")
-tsk = {"name": "SGPrace", "color": "0000FF", "legs": legs, "wlist": wlist}
+tsk = {"name": "SGPrace", "color": "0000FF", "legs": legs, "TPpointstype": tptype, "wlist": wlist}
 tsks = []
 tsks.append(tsk)
 tasks = {"tasks": tsks}
+tasks = convertline(tasks)                              # convert the start line on 3 point that will draw an START line
 j = json.dumps(tasks, indent=4)                         # dump it
 #print j
                                                         # write it into the task file on json format
@@ -460,6 +471,10 @@ for item in flist:
     csvsfile.write("%s\n" % item)
 if npil == 0:
     print("JSON invalid: No pilots found ... ")
+    os.system('rm  '+JSONFILE)		                # remove the previous one
+    os.system('rm  '+TASKFILE)		                # remove the previous one
+    os.system('rm  '+COMPFILE)		                # remove the previous one
+    os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit(-1)
 else:
     print("Pilots found ... ", npil, "Warnings:", nwarnings)
