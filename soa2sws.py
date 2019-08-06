@@ -110,6 +110,7 @@ print(date)                                     #
 local_time = datetime.datetime.now()            # the local time
 print("Local Time is now:", local_time)		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")    # get the local time
+td_date_time = local_time.strftime("%Y-%m-%d")  # get the local time
 print("Config params. SWpath: ", SWdbpath, "Initials:", initials, "CUCpath:", cucpath, "SECpath:", secpath)
 
 nonce = base64.b64encode(os.urandom(36))        # get the once base
@@ -315,6 +316,8 @@ for cl in getemb(cd, 'classes'):
         os.system('rm  '+CSVFILE)
         continue
     print("= Tasks ==", ctt[idx]["task_date"])
+    if td_date_time != ctt[idx]["task_date"]:
+        print ("Warning ... the task date is not today!!!")
     print("= Tasks ==", ctt[idx]["result_status"])
     print("= Tasks ==", ctt[idx]["task_distance"]/1000)
     tasktype = ctt[idx]["task_type"]

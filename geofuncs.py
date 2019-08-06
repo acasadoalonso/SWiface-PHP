@@ -216,7 +216,7 @@ def convertline(tsk):                       # conver the start line on several p
     legs=tasks['legs']                      # get the legs
     ntp=len(tpt)                            # get the number of turning points
     lasttp=tpt[ntp-1]                       # check if the last is the START line
-    if str(lasttp) == 'Line':               # onli in the case of the LINE
+    if str(lasttp) == 'Line':               # only in the case of the LINE
         coor1=legs[(ntp-1)*2]               # coord of the start gate
         lat1=coor1[0]
         lon1=coor1[1]
@@ -233,17 +233,48 @@ def convertline(tsk):                       # conver the start line on several p
         np=[]
         np.append(np1[0])                   # append this to the existing .tsk
         np.append(np1[1])
-        legs.append(np)
+        legs.append(np)                     # add this extra point
         s=[]
         s.append(0)
-        legs.append(s)
+        legs.append(s)                      # set the size as ZERO
         np=[]
         np.append(np2[0])
         np.append(np2[1])
-        legs.append(np)
+        legs.append(np)                     # add the other point of the perpendicular line
+        s=[]
+        s.append(0)                         # set the size as ZERO
+        legs.append(s)
+
+    firsttp=tpt[0]                          # check if the first TP  is the FINISH line
+    if str(firsttp) == 'Line':              # only in the case of the LINE
+        coor1=legs[0]                       # coord of the start gate
+        lat1=coor1[0]
+        lon1=coor1[1]
+        coor2=legs[2]                       # get the coord of the first TP
+        lat2=coor2[0]
+        lon2=coor2[1]
+        size=legs[1][0]                     # get the size of the FINISH GATE
+        legs[1][0]=0
+        p1=(lat1, lon1)
+        p2=(lat2, lon2)
+        bearing=initial_bearing(p1,p2)      # get the bearing from the start gate to the first TP
+        np1=getnewpoint(lat1,lon1, size/2, bearing+90)  # next point is from center of start line to half of the size to the right
+        np2=getnewpoint(lat1,lon1, size/2, bearing-90)
+        np=[]
+        np.append(np1[0])                   # append this to the existing .tsk
+        np.append(np1[1])
+        legs.insert(0, np)
         s=[]
         s.append(0)
-        legs.append(s)
+        legs.insert(1, s)
+        np=[]
+        np.append(np2[0])
+        np.append(np2[1])
+        legs.insert(2, np)
+        s=[]
+        s.append(0)
+        legs.insert(3, s)
+
     return (tsk)                            # return the modifies .tsk
 
 

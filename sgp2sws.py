@@ -110,6 +110,7 @@ else:
     print("CompID:", qsgpID, "Time is now:", local_time)
 
 fl_date_time = local_time.strftime("%Y%m%d")            # get the local time
+ts_date_time = local_time.strftime("%Y-%m-%d")          # get the local time
 JSONFILE = cucpath + config.Initials + fl_date_time + \
     '.json'                                             # name of the JSON to be generated
 TASKFILE = cucpath + config.Initials + fl_date_time + \
@@ -287,7 +288,8 @@ starttime = indexofdays[day]["a"]    		        # start time millis from midnite
 daytype = indexofdays[day]["y"]    		        # day type: 1, 2, 3 ...
 dayid = indexofdays[day]["i"] 			        # day ID
 print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
-
+if date != ts_date_time:
+    print ("Warning the task date is not TODAY !!!")
 
 d = urllib.request.urlopen(
     'http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
