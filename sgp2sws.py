@@ -290,6 +290,8 @@ dayid = indexofdays[day]["i"] 			        # day ID
 print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
 if date != ts_date_time:
     print ("Warning the task date is not TODAY !!!")
+    nwarnings += 1
+    warnings.append("<<DATE>>") 			        # add it to the list of warnings
 
 d = urllib.request.urlopen(
     'http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))

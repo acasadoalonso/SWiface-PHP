@@ -318,6 +318,8 @@ for cl in getemb(cd, 'classes'):
     print("= Tasks ==", ctt[idx]["task_date"])
     if td_date_time != ctt[idx]["task_date"]:
         print ("Warning ... the task date is not today!!!")
+        nwarnings += 1
+        warnings.append('<<DATE>>--'+classtype)
     print("= Tasks ==", ctt[idx]["result_status"])
     print("= Tasks ==", ctt[idx]["task_distance"]/1000)
     tasktype = ctt[idx]["task_type"]
@@ -446,6 +448,10 @@ for cl in getemb(cd, 'classes'):
             csvfile.write("%s\n" % item)
     except:
         print("error on link")
+    # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
+    # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
+
+
 
 # print the number of pilots as a reference and control
 print("= Pilots ===========================", npil, "\n\n")
