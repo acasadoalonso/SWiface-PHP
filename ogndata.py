@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 import json
 import urllib.request, urllib.error, urllib.parse
-global _ogninfo_                                # the OGN info data
-_ogninfo_ = {}                                    # the OGN info data
+global _ogninfo_                            # the OGN info data
+_ogninfo_ = {}                              # the OGN info data
 ####################################################################
 
 
@@ -18,20 +19,20 @@ def getogndata():                           # get the data from the API server
     return j_obj                            # return the JSON object
 
 
-def getognreg(flarmid):                     # get the ogn registration from the flarmID
+def getognchk(flarmid):                     # Check if the FlarmID exist or NOT
 
     global _ogninfo_                        # the OGN info data
     if len(_ogninfo_) == 0:
-        _ogninfo_ = getogndata()
+        _ogninfo_ = getogndata()            # get the table from OGN DDB
     devices = _ogninfo_["devices"]          # access to the ogndata
     for dev in devices:                     # loop into the registrations
         if dev["device_id"] == flarmid:     # if matches ??
-            return dev["registration"]      # return the registration
+            return True
 
-    return "NOREG  "                        # if not found !!!
+    return False
 
 
-def getognflarmid(registration):
+def getognflarmid(registration):            # get the FlarmID based on the registration
 
     global _ogninfo_                        # the OGN info data
     if len(_ogninfo_) == 0:

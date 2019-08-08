@@ -13,7 +13,6 @@ import os
 import math
 import pycountry
 import socket
-#import kglid
 from ogndata import *
 from geofuncs import convertline
 #-------------------------------------------------------------------------------------------------------------------#
@@ -47,11 +46,6 @@ Flags = { 						# flag colors assigned to the countries
 #-------------------------------------------------------------------------------------------------------------------#
 
 
-def getflarmid(reg):					# return the flarmId from the registration
-    for r in kglid.kglid:				# explore the whole table
-        if kglid.kglid[r] == reg:		        # if registration is the same
-            return ('FLR'+r)		                # return the FlarmID
-    return ('')
 #-------------------------------------------------------------------------------------------------------------------#
 #
 # arguments:   compid, dayindex, print
