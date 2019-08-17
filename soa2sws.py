@@ -16,7 +16,8 @@ import math
 import os
 import socket
 import config
-from ogndata import *
+import geopy
+from ognddbfuncs import *
 from geofuncs import convertline 
 from simplehal import HalDocument, Resolver
 from pprint import pprint
@@ -87,6 +88,14 @@ print("Reading data from clientid/secretkey files")
                                                 # where to find the SQLITE3 database
 SWdbpath = config.DBpath
 initials = config.Initials		        # initials of the files generated
+if 'USER' in os.environ:
+        user=os.environ['USER']
+else:
+        user="www-data"                     # assume www
+if 'APACHE_RUN_USER' in os.environ or user == "www-data":        # check if www
+        www=True
+else:
+        www=False
 cwd = os.getcwd()				# get the current working directory
                                                 # where to store the JSON files
 cucpath = config.cucFileLocation
@@ -99,7 +108,7 @@ taskType = "SailplaneRacing"                    # race type
 # ==============================================#
 tsks = {}					# task file
 hostname = socket.gethostname()			# hostname as control
-print("Hostname:", hostname)
+print("Hostname:", hostname, user, www)
 start_time = time.time()                        # get the time now
 utc = datetime.datetime.utcnow()                # the UTC time
                                                 # print the time for information only
@@ -139,7 +148,7 @@ url1 = apiurl+rel
                                                 # get the contest data, first instance
 cd = gdata(url1, 'contests', prt='no')[0]
 
-ogndata=getogndata()                            # get the OGB DDB
+#ogndata=getddbdata()                            # get the OGB DDB
 category = cd['category']
 eventname = cd['name']
 compid = cd['id']
@@ -289,9 +298,9 @@ for cl in getemb(cd, 'classes'):
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
-            print("\t", (fname+" "+lname).encode('utf8').decode('utf8'), nation, country, regi, cn, hd, ar, club, igcid, idflarm)  # , fr
+            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm)  # , fr
         except:
-            print("\t", pname, nation, country, regi, cn, hd, ar, club, igcid, idflarm)  # , fr
+            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm)  # , fr
         if idflarm == ' ':
             idflarm = str(npil)
                                                 # create the track
@@ -319,7 +328,7 @@ for cl in getemb(cd, 'classes'):
     if td_date_time != ctt[idx]["task_date"]:
         print ("Warning ... the task date is not today!!!")
         nwarnings += 1
-        warnings.append('<<DATE>>--'+classtype)
+        warnings.append('<< DATE >>--'+classtype)
     print("= Tasks ==", ctt[idx]["result_status"])
     print("= Tasks ==", ctt[idx]["task_distance"]/1000)
     tasktype = ctt[idx]["task_type"]
@@ -380,7 +389,7 @@ for cl in getemb(cd, 'classes'):
             print("\t", name, wtyp, ttype, oz, lati, lon, alti, dist, ozty, ozra, ozr2, oz, ttype, rad, pidx, tptexture)
         except:
                                                 # print it as a reference
-            print("\t", name.encode('utf8').decode('utf8'), wtyp, ttype, oz, lati, lon, alti, dist, ozty, ozra, ozr2, oz, ttype, rad, pidx, tptexture)
+            print("\t", name.encode(encoding='utf8').decode(encoding='utf8'), wtyp, ttype, oz, lati, lon, alti, dist, ozty, ozra, ozr2, oz, ttype, rad, pidx, tptexture)
                                                 # built the turning point
         tpx = {"latitude": lati, "longitude": lon, "name": name, "observationZone": oz,
                "type": ttype, "radius": rad, "trigger": "Enter", "texture": tptexture}

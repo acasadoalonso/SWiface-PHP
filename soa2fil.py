@@ -16,7 +16,7 @@ import math
 import os
 import socket
 import config
-from ogndata import *
+from ognddbfuncs import *
 from getflarm import *
 from simplehal import HalDocument, Resolver
 from pprint import pprint

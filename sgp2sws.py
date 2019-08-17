@@ -13,7 +13,7 @@ import os
 import math
 import pycountry
 import socket
-from ogndata import *
+from ognddbfuncs import *
 from geofuncs import convertline
 #-------------------------------------------------------------------------------------------------------------------#
 import config
@@ -151,7 +151,7 @@ flist.append("ID,CALL,CN,TYPE,INDEX")   		# Initialize with header row
 nwarnings = 0                                  		# number of warnings ...
 warnings = []                                  		# warnings glider
 
-ogndata=getogndata()                                    # get the OGN DDB
+#ogndata=getddbdata()                                    # get the OGN DDB
 npil = 0				        	# number of pilots found
 pilots = j_obj["p"]					# get the pilot information
 print("Pilots:", len(pilots))

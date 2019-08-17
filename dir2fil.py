@@ -18,7 +18,7 @@ import math
 import pycountry
 import socket
 from pprint import pprint
-from ogndata import *
+from ognddbfuncs import *
 from getflarm import *
 import config
 

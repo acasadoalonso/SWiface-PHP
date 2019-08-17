@@ -14,7 +14,7 @@ import math
 import pycountry
 import socket
 from pprint import pprint
-from ogndata import *
+from ognddbfuncs import *
 from getflarm import *
 
 
@@ -76,7 +76,7 @@ if prtreq and prtreq[0] == "print":                     # if we ask to print
 else:
     prt = False
 
-print("\n\nExtract the IGC files V1.1 from  the www.sgp.aero web server")
+print("\n\nExtract the IGC files from the www.sgp.aero web server V1.2")
 print("Usage:      python sgp2fil.py COMPID indexday -e FlarmID print\n\n")
 print("==============================================================\n\n")
 hostname = socket.gethostname()

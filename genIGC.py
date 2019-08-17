@@ -6,7 +6,7 @@
 import sys
 from datetime import *
 from geofuncs import *
-from ogndata import *
+from ognddbfuncs import *
 ########################################################################
 
 
