@@ -1,0 +1,189 @@
+{
+    "Compname": "3rd FAI 13.5 m World Gliding Championship",
+    "Category": "any",
+    "Country": "ITA",
+    "EndDate": "2019-09-14",
+    "Location": "Pavullo",
+    "Classes": [
+        {
+            "Class": "13_5_meter",
+            "Pilots": [
+                {
+                    "PilotName": "Uli Schwenk",
+                    "Club": "LSV M\u00fcnsingen - Eisberg",
+                    "CompID": "LR2",
+                    "Nation": "DE",
+                    "CountryCode": "DEU",
+                    "Email": "FLRD008ED",
+                    "IgcID": 286,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/286.jpg"
+                },
+                {
+                    "PilotName": "Alexander Kaplunov",
+                    "Club": "club_NOTYET",
+                    "CompID": "IV",
+                    "Nation": "RU",
+                    "CountryCode": "RUS",
+                    "Email": "FLRD00930",
+                    "IgcID": 7248,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/7248.jpg"
+                },
+                {
+                    "PilotName": "Peter Hartmann",
+                    "Club": "club_NOTYET",
+                    "CompID": "Y",
+                    "Nation": "AT",
+                    "CountryCode": "AUT",
+                    "Email": "FLRDD4E9D",
+                    "IgcID": 29,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/29.jpg"
+                },
+                {
+                    "PilotName": "Thomas Gostner",
+                    "Club": "Bolzano Italy",
+                    "CompID": "GT",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRDDE3BB",
+                    "IgcID": 20,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/20.jpg"
+                },
+                {
+                    "PilotName": "Christoph Matkowski",
+                    "Club": "club_NOTYET",
+                    "CompID": "I",
+                    "Nation": "PL",
+                    "CountryCode": "POL",
+                    "Email": "ICA3D05BF",
+                    "IgcID": 639,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/639.jpg"
+                },
+                {
+                    "PilotName": "Matic Knez",
+                    "Club": "club_NOTYET",
+                    "CompID": "T",
+                    "Nation": "SI",
+                    "CountryCode": "SVN",
+                    "Email": "FLRD00994",
+                    "IgcID": 9442,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/9442.jpg"
+                },
+                {
+                    "PilotName": "Vytautas Maciulis",
+                    "Club": "club_NOTYET",
+                    "CompID": "A7",
+                    "Nation": "LT",
+                    "CountryCode": "LTU",
+                    "Email": "FLRD00985",
+                    "IgcID": 336,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/336.jpg"
+                },
+                {
+                    "PilotName": "Alberto Sironi",
+                    "Club": "ACAO Calcinate Varese",
+                    "CompID": "A",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRDF0864",
+                    "IgcID": 991,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/991.jpg"
+                },
+                {
+                    "PilotName": "Stefano Ghiorzo",
+                    "Club": "ACAO - Varese - ITALY",
+                    "CompID": "VS",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRD009DB",
+                    "IgcID": 190,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/190.jpg"
+                },
+                {
+                    "PilotName": "Vittorio Pinni",
+                    "Club": "club_NOTYET",
+                    "CompID": "AB",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRDDF0EA",
+                    "IgcID": 968,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/968.jpg"
+                }
+            ]
+        },
+        {
+            "Class": "unknown",
+            "Pilots": [
+                {
+                    "PilotName": "Luka Znidarsic",
+                    "Club": "Ak Postojna",
+                    "CompID": "LZ",
+                    "Nation": "SI",
+                    "CountryCode": "SVN",
+                    "Email": "FLRD0098C",
+                    "IgcID": 285,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/285.jpg"
+                },
+                {
+                    "PilotName": "Markus Uhlig",
+                    "Club": "FC Grossr\u00fcckerswalde",
+                    "CompID": "ES",
+                    "Nation": "DE",
+                    "CountryCode": "DEU",
+                    "Email": "FLRDDEE28",
+                    "IgcID": 8050,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/8050.jpg"
+                },
+                {
+                    "PilotName": "Aldo Pigni",
+                    "Club": "ACAO",
+                    "CompID": "MC",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRD003A2",
+                    "IgcID": 973,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/973.jpg"
+                },
+                {
+                    "PilotName": "Stefan Langer",
+                    "Club": "SFG Donauwoerth Monheim",
+                    "CompID": "71",
+                    "Nation": "DE",
+                    "CountryCode": "DEU",
+                    "Email": "FLRD004CA",
+                    "IgcID": 7203,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/7203.jpg"
+                },
+                {
+                    "PilotName": "Tilo Holighaus",
+                    "Club": "FG Wolf-Hirth Kirchheim",
+                    "CompID": "FES",
+                    "Nation": "DE",
+                    "CountryCode": "DEU",
+                    "Email": "FLRDDEEB0",
+                    "IgcID": 2507,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/2507.jpg"
+                },
+                {
+                    "PilotName": "Stefano Corradi",
+                    "Club": "club_NOTYET",
+                    "CompID": "SL",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRDDEB19",
+                    "IgcID": 0,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/0.jpg"
+                },
+                {
+                    "PilotName": "Mauro Brunazzo",
+                    "Club": "ACAO",
+                    "CompID": "GP",
+                    "Nation": "IT",
+                    "CountryCode": "ITA",
+                    "Email": "FLRD00999",
+                    "IgcID": 2070,
+                    "PortraitUrl": "http://rankingdata.fai.org/PilotImages/2070.jpg"
+                }
+            ]
+        }
+    ]
+}

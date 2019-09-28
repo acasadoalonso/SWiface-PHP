@@ -188,7 +188,8 @@ for cl in getemb(cd, 'classes'):
     print("Class:", classname, "\n\n")      # search for each class
                                             # search for the contestants on each class
     url3 = getlinks(cl, "class_results")
-    if len(gdata(url3,   "class_results", prt='no')) > idx:
+    ll= len(gdata(url3,   "class_results", prt='no')) 
+    if ll  > idx:
         ctt = gdata(url3,   "class_results", prt='no')[
             idx]                            # get the results data
     else:
