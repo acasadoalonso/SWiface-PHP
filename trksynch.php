@@ -9,6 +9,8 @@ if ( $synch == 'synch') {
  	echo "RC=".nl2br($var)."\n";
 	//echo "git pull done\n\n";
 }
+else
+	echo "No synch...";
 //echo var_dump($synch);
 ?>hi
 
