@@ -41,14 +41,14 @@ if len(sys.argv) > 6:
 #print (len(sys.argv), "Action=", action, "Tracker=", trk, "FlarmID=", tflarmid, "Owner=", towner, deleteyn)
 
 localtime = datetime.datetime.now()					# get today's date
-today = localtime.strftime("%y/%m/%d")					# in string format yymmdd
+today = localtime.strftime("%y/%m/%d %H:%M:%S")					# in string format yymmdd
 DBpath = config.DBpath							# use the configuration DB path
 DBname = config.DBname							# use the configuration DB name
 DBtable = config.DBtable						# use the configuration DB table
 DBname ='APRSLOG'
 DBtable = 'TRKDEVICES'
 
-html1 = """<head><meta charset="UTF-8"></head><TITLE>Get the pairing of trackers with flarms</TITLE> <IMG src="./gif/ogn-logo-150x150.png" border=1 alt=[image]><H1>The pairing so far are: </H1> <HR> <P>Today is:  %s and we have %d Pairs on TRKDEVICES table.  <br/> Do you want to <a href=%s/SWS/pairtrkadd.html >Add a new pairing device: </a>  <br /> </p> </HR> """
+html1 = """<head><meta charset="UTF-8"></head><TITLE>Get the pairing of trackers with flarms</TITLE> <IMG src="./gif/ogn-logo-150x150.png" border=1 alt=[image]><H1>The pairing so far are: </H1> <HR> <P>Today is:  %s and we have %d Pairs on TRKDEVICES table.  <br /> <br /> Do you want to <a href=%s/SWS/pairtrkadd.html >Add a new pairing device: </a>  <br /> </p> </HR> """
 html2 = """<center><table><tr><td><pre>"""
 html3 = """</pre></td></tr></table></center>"""
 html4 = '<a href='+config.SWSserver+'SWS/pairtrk.php?action=edit&trk=%s&flarmid=%s&owner=%s&active=%s'
@@ -130,7 +130,7 @@ except MySQLdb.Error as e:
 
 print (html1% (today,nrecs, config.SWSserver))
 print (html2)
-print ("<a> TRKDEV  IDTRK     REGTRK    REGIST  CID ACT DEVTYP Flarm     Owner </a>") 
+print ("<b> <a> TRKDEV  IDTRK     REGTRK   REGIST  CID ACT DEVTYP Flarm     Owner </a> </b> <br />") 
 for row in cursD.fetchall():                                    # search for the first 20 the rows
         # flarmid is the first field
         id1      = row[0]
@@ -143,6 +143,9 @@ for row in cursD.fetchall():                                    # search for the
         flarmid  = row[9]
         if flarmid == '' or len(flarmid) <9:
            flarmid = getognflarmid(regis)
+        else:
+           if regis.strip() != "" and flarmid != getognflarmid(regis):
+              print("Warning the registered flarmid and pairing flarmid does not match:", regis, getognflarmid(regis))
         if regis == '':
            regis = getognreg(flarmid[3:9])
         idfromdb = getognreg(id1[3:9])
