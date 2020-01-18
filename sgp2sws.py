@@ -90,7 +90,8 @@ print("DBhost:", config.DBhost, "ServerName:", hostname)
 start_time = time.time()
 local_time = datetime.datetime.now()
 j = urllib.request.urlopen('http://www.crosscountry.aero/c/sgp/rest/comps/')
-j_obj = json.load(j)
+rr=j.read().decode('UTF-8') 
+j_obj = json.loads(rr)
 if qsgpID == '0':
     #print j_obj
     j = json.dumps(j_obj, indent=4)
@@ -135,7 +136,8 @@ csvsfile = open(CSVSFILE, 'w')
 # get the JSON string for the web server
 #
 j = urllib.request.urlopen('http://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
-j_obj = json.load(j)
+rr=j.read().decode('UTF-8') 
+j_obj = json.loads(rr)
 if prt:
     #print j_obj
     j = json.dumps(j_obj, indent=4)
@@ -223,7 +225,8 @@ for id in pilots:
     print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "FlarmID:", flarmid, "OGN:", flarm)
     if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
         p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
-        pr = json.load(p)
+        rr=p.read().decode('UTF-8') 
+        pr = json.loads(rr)
         if pr != None:                                  # use the RankingList API
             obj=pr['object_name']                       # reach the photo file
             on=obj[0]
@@ -289,7 +292,8 @@ if date != ts_date_time:
 
 d = urllib.request.urlopen(
     'http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
-d_obj = json.load(d)
+rr=d.read().decode('UTF-8') 
+d_obj = json.loads(rr)
 if prt:
     print("____________________________________________________________")
     d = json.dumps(d_obj, indent=4)
