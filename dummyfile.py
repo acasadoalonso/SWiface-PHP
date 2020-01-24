@@ -20,6 +20,7 @@ def fixcoding(addr):
                 addr=addr.replace('ò', 'o')
                 addr=addr.replace('ô', 'o')
                 addr=addr.replace('Ó', 'O')
+                addr=addr.replace('ö', 'o')
                 addr=addr.replace('Ò', 'O')
                 addr=addr.replace('ú', 'u')
                 addr=addr.replace('ù', 'u')
