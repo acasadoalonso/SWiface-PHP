@@ -82,13 +82,13 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
         # get the data from the DB
         gli = cursG.fetchone()
         if gli and gli != None:                                 # did we find it ??? Index is unique, only one row
-            # get the registration
+            							# get the registration
             regi = gli[0]
-            # get the competition numbers
-            cn = gli[1]
-            if cn == "" or cn == " ":			# if not competition number, use the last two letter of the registration
-                cn = regi[4:6]                            # if none ?
-            type = gli[2]                                     # get glider type
+            							# get the competition numbers
+            cn = gli[1]						# 
+            if cn == "" or cn == " ":				# if not competition number, use the last two letter of the registration
+                cn = regi[4:6]                            	# if none ?
+            gtype = gli[2]                                     	# get glider type
             if regi[0:1] == "F":
                 country = "FRA"
             elif regi[0:1] == "D":
@@ -112,8 +112,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
         else:
             regi = 'NO-NAME'					# just indicate no name
             cn = str(pn)					# the CN is the pilot number found
-            type = 'NOTYPE'					# No glider type
-            continue
+            gtype = 'NOTYPE'					# No glider type
         # check if know the pilot because is our database kpilot.py
         if idflarm in kpilot.kpilot:
             # in that case place the name of the pilot
@@ -123,14 +122,14 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
                 # otherwise just say: NoName#
                 pname = "Pilot NN-"+str(pn)
             else:
-                pname = regi				# use the registration as pilot name
-#    		print "D==>: ", idflarm, pname, regi, cn, type
+                pname = regi					# use the registration as pilot name
+#    		print "D==>: ", idflarm, pname, regi, cn, gtype
 #                                                               write the Pilot detail
 
         pn += 1
 
         tr = {"trackId": eventid+':'+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,
-              "aircraft": type, "registration": regi, "3dModel": "ventus2", "ribbonColors": ["red"]}
+              "aircraft": gtype, "registration": regi, "3dModel": "ventus2", "ribbonColors": ["red"]}
         tracks.append(tr)
 
 # event
