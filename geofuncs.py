@@ -2,7 +2,8 @@
 #coding:UTF-8
 import math
 import geopy
-import geopy.distance
+from geopy.distance import geodesic     # use the Vincenty algorithm^M
+
 from math import radians, cos, sin, asin, sqrt, atan2, degrees
 
 ##########################################################################
@@ -129,8 +130,8 @@ def getnewpos(lat, lon, alt, N, E, D):
     start = geopy.Point(lat, lon, alt)
 
 # Define a general distance object, initialized with a distance of 1 km.
-    dN = geopy.distance.VincentyDistance(kilometers = N/1000.0) # get the distance as a point
-    dE = geopy.distance.VincentyDistance(kilometers = E/1000.0)
+    dN = geopy.distance.geodesic(kilometers = N/1000.0) # get the distance as a point
+    dE = geopy.distance.geodesic(kilometers = E/1000.0)
 
 # Use the `destination` method with a bearing of 0 degrees (which is north)
 # in order to go from point `start` 1 km to north.
@@ -203,7 +204,7 @@ def getnewpoint(lat, lon, dist, bearing):
 # Define starting point.
     start = geopy.Point(lat, lon)
 # Define a general distance object, initialized with a distance of 1 km.
-    d = geopy.distance.VincentyDistance(kilometers = dist/1000.0)   # get the distance as a point
+    d = geopy.distance.geodesic(kilometers = dist/1000.0)   # get the distance as a point
 
 # Use the `destination` method with a bearing of 0 degrees (which is north)
     np=d.destination(point=start, bearing=bearing)                  # go to 

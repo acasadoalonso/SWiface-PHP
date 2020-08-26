@@ -21,6 +21,8 @@ from ognddbfuncs import *
 from geofuncs import convertline 
 from simplehal import HalDocument, Resolver
 from pprint import pprint
+from geopy.distance import geodesic     # use the Vincenty algorithm^M
+
 
 #-------------------------------------------------------------------------------------------------------------------#
 
