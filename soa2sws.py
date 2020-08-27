@@ -82,15 +82,17 @@ if clsreq:
     print("TTT", classreq)
 else:
     classreq = ' '                              # none
-version='V2.00'
+version='V2.01'
 # ---------------------------------------------------------------- #
-print("Utility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
+print("\n\nUtility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
 print("=================================================================================================================================\n\n")
 print("Index day: ", idx, " Class requested: ", classreq)
 print("Reading data from clientid/secretkey files")
 # ===== SETUP parameters =======================#
                                                 # where to find the SQLITE3 database
 SWdbpath = config.DBpath
+if not os.path.isdir(SWdbpath):
+   SWdbpath='.'
 initials = config.Initials		        # initials of the files generated
 if 'USER' in os.environ:
         user=os.environ['USER']
@@ -103,6 +105,8 @@ else:
 cwd = os.getcwd()				# get the current working directory
                                                 # where to store the JSON files
 cucpath = config.cucFileLocation
+if not os.path.isdir(cucpath):
+   cucpath='.'
                                                 # where to find the clientid and secretkey files
 secpath = cwd+"/SoaringSpot/"
 apiurl = "http://api.soaringspot.com/"          # soaringspot API URL
@@ -195,10 +199,12 @@ for cl in getemb(cd, 'classes'):
     TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
     CSVFILE  = cucpath + initials + fl_date_time+"-"+classtype+"filter.csv"
                                                 # name of the JSON to be generated, one per class
-
-    os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
-    os.system('rm  '+TASKFILE)
-    os.system('rm  '+CSVFILE)
+    if os.path.isfile(JSONFILE):
+    	os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
+    if os.path.isfile(TASKFILE):
+        os.system('rm  '+TASKFILE)
+    if os.path.isfile(CSVFILE):
+        os.system('rm  '+CSVFILE)
     print("JSON generated data file for the class is: ", JSONFILE)  # just a trace
     print("TASK generated data file for the class is: ", TASKFILE)  # just a trace
     print("CSV  generated data file for the class is: ", CSVFILE)  # just a trace
