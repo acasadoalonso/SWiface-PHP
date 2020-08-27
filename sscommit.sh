@@ -1,4 +1,4 @@
-rm ognddbfuncs.py kglid.py 
+rm ognddbfuncs.py 
 cp /nfs/OGN/src/funcs/ognddbfuncs.py .
 git add .
 git commit

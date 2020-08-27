@@ -120,10 +120,14 @@ print("COMP generated data file is: ", COMPFILE) 	# just a trace
 print("CSVS generated data file is: ", CSVSFILE) 	# just a trace
 print("===========================: ") 			# just a trace
 
-os.system('rm  '+JSONFILE)		                # remove the previous one
-os.system('rm  '+TASKFILE)		                # remove the previous one
-os.system('rm  '+COMPFILE)		                # remove the previous one
-os.system('rm  '+CSVSFILE)		                # remove the previous one
+if  os.path.isfile(JSONFILE):
+  os.system('rm  '+JSONFILE)		                # remove the previous one
+if  os.path.isfile(TASKFILE):
+  os.system('rm  '+TASKFILE)		                # remove the previous one
+if  os.path.isfile(COMPFILE):
+  os.system('rm  '+COMPFILE)		                # remove the previous one
+if  os.path.isfile(CSVSFILE):
+  os.system('rm  '+CSVSFILE)		                # remove the previous one
                                                         # open the output file
 jsonfile = open(JSONFILE, 'w')
                                                         # open the output file
@@ -228,9 +232,9 @@ for id in pilots:
         rr=p.read().decode('UTF-8') 
         pr = json.loads(rr)
         if pr != None:                                  # use the RankingList API
-            obj=pr['object_name']                       # reach the photo file
+            obj=pr['data']   		                # reach the photo file
             on=obj[0]
-            photo=on['photo']
+            photo=on['photo']				# get the photo file
             photourl="http://rankingdata.fai.org/PilotImages/"+photo
         else:
             photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
@@ -462,7 +466,8 @@ os.chmod(JSONFILE, 0o777)                               # make the JSON file acc
                                                         # the latest TASK file to be used on live.glidernet.org
 latest = cucpath+config.Initials+'/SGPrace-latest.tsk'
 print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a reference
-os.system('rm  '+latest)                                # remove the previous one
+if os.path.islink(latest):
+   os.system('rm  '+latest)                             # remove the previous one
 try:
                                                         # link the recently generated file now to be the latest !!!
     os.system('ln -s '+TASKFILE+' '+latest)

@@ -408,12 +408,14 @@ j_obj = json.loads(rr)
 j = json.dumps(j_obj, indent=4)
 #print(j)
 #
+cdate=''
+filenames=False
 lclases=j_obj						# list of clases
 # --------------------------------------------------------------------------
 for cl in lclases:
     cid=cl['id']
-    cname=cl['name']				# classname
-    rname=cl['rulename']			# racing|AAT
+    cname=cl['name']					# classname
+    rname=cl['rulename']				# racing|AAT
     for cd in compdays:
         if cname != cd['nameCC']:
            continue
@@ -432,9 +434,12 @@ for cl in lclases:
         CSVFILE  = cucpath + initials + fl_date_time+"-"+cname+"filter.csv"
                                                 # name of the JSON to be generated, one per class
 
-        os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
-        os.system('rm  '+TASKFILE)
-        os.system('rm  '+CSVFILE)
+        if os.path.isfile(JSONFILE):
+         os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
+        if os.path.isfile(TASKFILE):
+         os.system('rm  '+TASKFILE)
+        if os.path.isfile(CSVFILE):
+         os.system('rm  '+CSVFILE)
         print("JSON generated data file for the class is: ", JSONFILE)  # just a trace
         print("TASK generated data file for the class is: ", TASKFILE)  # just a trace
         print("CSV  generated data file for the class is: ", CSVFILE)  # just a trace
@@ -492,7 +497,7 @@ for cl in lclases:
         try:
             os.system('rm  '+latest)			# remove the previous one
         except:
-            print("No previous task file")
+            print("No previous latest task file")
                                                 	# link the recently generated file now to be the latest !!!
         try:
             os.link(TASKFILE, latest)
@@ -516,12 +521,13 @@ print("Task end:==========================>")
 #
 # close the files and exit
 #
+if filenames:
 
-jsonfile.close()
-taskfile.close()
-os.chmod(TASKFILE, 0o777)                               # make the TASK file accessible
-os.chmod(JSONFILE, 0o777)                               # make the JSON file accessible
-os.chmod(CSVFILE, 0o777)                                # make the CSV  file accessible
+   jsonfile.close()
+   taskfile.close()
+   os.chmod(TASKFILE, 0o777)                               # make the TASK file accessible
+   os.chmod(JSONFILE, 0o777)                               # make the JSON file accessible
+   os.chmod(CSVFILE, 0o777)                                # make the CSV  file accessible
                                                         # the latest TASK file to be used on live.glidernet.org
 # Write a csv file of all gliders to be used as filter file for glidertracker.org
 #for item in flist:
