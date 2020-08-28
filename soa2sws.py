@@ -225,6 +225,7 @@ for cl in getemb(cd, 'classes'):
         npil += 1                               # increase the number of total pilots
         npilc += 1                              # increase the number of pilot within this class
         idflarm = ' '                           # no FALRM id yet
+        ognid = ' '                           # no FALRM id yet
         fr = ' '                                # no FR yet
         fname = getemb(contestants, 'pilot')[0]['first_name']
         lname = getemb(contestants, 'pilot')[0]['last_name']
@@ -242,11 +243,13 @@ for cl in getemb(cd, 'classes'):
                     
             if 'aircraft_registration' in contestants:
                 regi = contestants['aircraft_registration']
+                ognid=getognflarmid(regi)         # get the flarm if from the OGN DDB
             else:
                 regi = "reg_NOTYET"             # if we do not have the registration ID on the soaringspot
         elif 'aircraft_registration' in contestants:
             regi = contestants['aircraft_registration']
             idflarm=getognflarmid(regi)         # get the flarm if from the OGN DDB
+            ognid=idflarm
         else:
             regi = "reg_NOTYET"                 # if we do not have the registration ID on the soaringspot
             idflarm = ' '
@@ -308,9 +311,9 @@ for cl in getemb(cd, 'classes'):
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
-            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm)  # , fr
+            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, "OGNDDB:==>", ognid)  # , fr
         except:
-            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm)  # , fr
+            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm, "OGN DDB:==>", ognid )  # , fr
         if idflarm == ' ':
             idflarm = str(npil)
                                                 # create the track
