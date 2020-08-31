@@ -107,6 +107,7 @@ cwd = os.getcwd()				# get the current working directory
 cucpath = config.cucFileLocation
 if not os.path.isdir(cucpath):
    cucpath='.'
+locname =config.locname
                                                 # where to find the clientid and secretkey files
 secpath = cwd+"/SoaringSpot/"
 apiurl = "http://api.soaringspot.com/"          # soaringspot API URL
@@ -128,7 +129,7 @@ local_time = datetime.datetime.now()            # the local time
 print("Local Time is now:", local_time)		# print the time for information only
 fl_date_time = local_time.strftime("%Y%m%d")    # get the local time
 td_date_time = local_time.strftime("%Y-%m-%d")  # get the local time
-print("Config params. SWpath: ", SWdbpath, "Initials:", initials, "CUCpath:", cucpath, "SECpath:", secpath)
+print("Config params. SWpath: ", SWdbpath, ", Initials:", initials, ", Location Name:", locname, ", CUCpath:", cucpath, ", SECpath:", secpath)
 
 nonce = base64.b64encode(os.urandom(36))        # get the once base
                                                 # open the file with the client id

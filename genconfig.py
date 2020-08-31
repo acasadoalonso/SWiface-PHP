@@ -76,6 +76,7 @@ except:
 SQLite3 = cfg.get('server', 'SQLite3').strip("'").strip('"')
 Initials = cfg.get('server', 'Initials').strip("'").strip('"')
 
+locname = cfg.get('location', 'location_name').strip("'").strip('"')
 eventname1 = cfg.get('location', 'eventname1').strip("'").strip('"')
 eventname2 = cfg.get('location', 'eventname2').strip("'").strip('"')
 
@@ -110,6 +111,7 @@ datafile.write("eventdesc1='"+eventdesc1+"' \n")
 datafile.write("eventdesc2='"+eventdesc2+"' \n")
 datafile.write("loclatitude='"+loclatitude+"' \n")
 datafile.write("loclongitud='"+loclongitud+"' \n")
+datafile.write("locname='"+locname+"' \n")
 datafile.write("PicPilots='"+PicPilots+"' \n")
 # --------------------------------------#
 datafile.write(tailfile.read())
