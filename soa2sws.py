@@ -172,7 +172,11 @@ lcname = lc['name']                             # location name
 
 print("= Contest ===============================")
 print("Category:", category, "Comp Name:", eventname, "Comp ID:", compid)
-print("Loc Name:", lcname,   "Country: ", country, country3, "End date:",  endate)
+try:
+   print("Loc Name:", lcname.encode('utf-8').decode('utf-8') ,   "Country: ", country, country3, "End date:",  endate)
+except:
+   print( "Country: ", country, country3, "End date:",  endate)
+   
 print("=========================================")
 
 npil = 0                                        # init the number of pilots
@@ -403,7 +407,7 @@ for cl in getemb(cd, 'classes'):
             print("\t", name, wtyp, ttype, oz, lati, lon, alti, dist, ozty, ozra, ozr2, oz, ttype, rad, pidx, tptexture)
         except:
                                                 # print it as a reference
-            print("\t", name.encode(encoding='utf8').decode(encoding='utf8'), wtyp, ttype, oz, lati, lon, alti, dist, ozty, ozra, ozr2, oz, ttype, rad, pidx, tptexture)
+            print("\t",  wtyp, ttype, oz, lati, lon, alti, dist, ozty, ozra, ozr2, oz, ttype, rad, pidx, tptexture)
                                                 # built the turning point
         tpx = {"latitude": lati, "longitude": lon, "name": name, "observationZone": oz,
                "type": ttype, "radius": rad, "trigger": "Enter", "texture": tptexture}
