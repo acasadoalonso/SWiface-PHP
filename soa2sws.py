@@ -17,6 +17,7 @@ import os
 import socket
 import config
 import geopy
+from stat import *
 from ognddbfuncs import *
 from geofuncs import convertline 
 from simplehal import HalDocument, Resolver
@@ -107,6 +108,9 @@ cwd = os.getcwd()				# get the current working directory
 cucpath = config.cucFileLocation
 if not os.path.isdir(cucpath):
    cucpath='.'
+mode = os.stat(cucpath+initials).st_mode
+if not (mode & S_IWOTH or mode & S_IWGRP):
+ print("Check permisions on:", cucpath+initials, filemode(mode), "%o"%mode)
 locname =config.locname
                                                 # where to find the clientid and secretkey files
 secpath = cwd+"/SoaringSpot/"
@@ -117,7 +121,7 @@ taskType = "SailplaneRacing"                    # race type
 # ==============================================#
 tsks = {}					# task file
 hostname = socket.gethostname()			# hostname as control
-print("Hostname:", hostname, user, www)
+print("Hostname:", hostname, "User:", user, "From WWW:", www)
 start_time = time.time()                        # get the time now
 utc = datetime.datetime.utcnow()                # the UTC time
                                                 # print the time for information only
@@ -493,8 +497,8 @@ if npil == 0:
         os.system('rm  '+CSVFILE)
     exit(-1)
 else:
-    print("Pilots found ... ", npil, "Warnings:", nwarnings)
+    print("Pilots found ... ", npil, "Warnings:", nwarnings, "Date & time:", date)
     if nwarnings > 0:
-        print("Pilots with no FLARMID: ", warnings)
+        print("Pilots with no FLARMID or invalid date: ", warnings)
     print("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n\n")
     exit(0)
