@@ -252,7 +252,10 @@ for cl in getemb(cd, 'classes'):
                     
             if 'aircraft_registration' in contestants:
                 regi = contestants['aircraft_registration']
-                ognid=getognflarmid(regi)         # get the flarm if from the OGN DDB
+                ognid=getognflarmid(regi)       # get the flarm if from the OGN DDB
+                if (ognid == "NOFlarm"):
+                   ognid=getognreg(idflarm[3:9])# show the differences
+                   #ognid=getogninfo(idflarm[3:9])# show the differences
             else:
                 regi = "reg_NOTYET"             # if we do not have the registration ID on the soaringspot
         elif 'aircraft_registration' in contestants:
