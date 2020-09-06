@@ -121,7 +121,7 @@ taskType = "SailplaneRacing"                    # race type
 # ==============================================#
 tsks = {}					# task file
 hostname = socket.gethostname()			# hostname as control
-print("Hostname:", hostname, "User:", user, "From WWW:", www)
+print("Hostname:", hostname, "User:", user, " WWW:", www)
 start_time = time.time()                        # get the time now
 utc = datetime.datetime.utcnow()                # the UTC time
                                                 # print the time for information only
