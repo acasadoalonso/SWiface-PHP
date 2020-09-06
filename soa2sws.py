@@ -470,7 +470,8 @@ for cl in getemb(cd, 'classes'):
     latest = cucpath+initials+'/'+classtype+'-latest.tsk'
     print(TASKFILE+' ==>  '+latest)		# print is as a reference
     try:
-        os.system('rm  '+latest)		# remove the previous one
+        if os.path.isfile(latest):
+           os.system('rm  '+latest)		# remove the previous one
     except:
         print("No previous task file")
                                                 # link the recently generated file now to be the latest !!!
