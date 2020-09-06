@@ -108,9 +108,12 @@ cwd = os.getcwd()				# get the current working directory
 cucpath = config.cucFileLocation
 if not os.path.isdir(cucpath):
    cucpath='.'
-mode = os.stat(cucpath+initials).st_mode
-if not (mode & S_IWOTH or mode & S_IWGRP):
- print("Check permisions on:", cucpath+initials, filemode(mode), "%o"%mode)
+if os.path.isdir(cucpath+initials):
+   mode = os.stat(cucpath+initials).st_mode
+   if not (mode & S_IWOTH or mode & S_IWGRP):
+       print("Check permisions on:", cucpath+initials, filemode(mode), "%o"%mode)
+else:
+   print("Check directory:", cucpath+initials)
 locname =config.locname
                                                 # where to find the clientid and secretkey files
 secpath = cwd+"/SoaringSpot/"
