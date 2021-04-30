@@ -174,7 +174,7 @@ for id in pilots:
     j = pilots[id]["j"]                                 # ranking list
     rankingid = pilots[id]["r"]                         # ranking id
     if int(qsgpID) >= 14:
-        flarmid = pilots[id]["q"]                       # flarm id
+        flarmid = pilots[id]["q"].rstrip()              # flarm id
         registration = pilots[id]["w"]                  # registration
         if registration == "":
             print("Warning .... Missing glider registration:", flarmid, "\n\n")
@@ -236,6 +236,9 @@ for id in pilots:
             on=obj[0]
             photo=on['photo']				# get the photo file
             photourl="http://rankingdata.fai.org/PilotImages/"+photo
+            print    ("wget "+photourl+" -q -O PilotImages/"+photo)
+            os.system("wget "+photourl+" -q -O PilotImages/"+photo)
+            photourl=config.SWSserver+"SWS/PilotImages/"+photo
         else:
             photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
         #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>", url)
