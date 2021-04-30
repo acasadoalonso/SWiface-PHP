@@ -88,6 +88,26 @@ try:
     PicPilots = cfg.get('location', 'PicPilots').strip("'").strip('"')
 except:
     PicPilots = ' '
+try:
+    DDBhost = cfg.get('server', 'DDBhost').strip("'")
+except:
+    DDBhost = 'acasado.es'
+
+try:
+    DDBport = cfg.get('server', 'DDBport').strip("'")
+except:
+    DDBport = '60082'
+
+try:
+    DDBurl1 = cfg.get('server', 'DDBurl1').strip("'")
+except:
+    DDBurl1 = 'http://acasado.es:60082/download/?j=2'
+
+try:
+    DDBurl2 = cfg.get('server', 'DDBurl2').strip("'")
+except:
+    DDBurl2 = 'http://DDB.glidernet.org/download/?j=2'
+
 
 datafile.write("cucFileLocation='"+cucFileLocation+"'; \n")
 datafile.write("DBpath='"+DBpath+"' \n")
@@ -113,6 +133,11 @@ datafile.write("loclatitude='"+loclatitude+"' \n")
 datafile.write("loclongitud='"+loclongitud+"' \n")
 datafile.write("locname='"+locname+"' \n")
 datafile.write("PicPilots='"+PicPilots+"' \n")
+datafile.write("DDBhost='"+DDBhost+"' \n")
+datafile.write("DDBport='"+DDBport+"' \n")
+datafile.write("DDBurl1='"+DDBurl1+"' \n")
+datafile.write("DDBurl2='"+DDBurl2+"' \n")
+datafile.write("prt=False \n")
 # --------------------------------------#
 datafile.write(tailfile.read())
 datafile.close()
