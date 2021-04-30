@@ -63,7 +63,7 @@ prtreq = sys.argv[3:]					# print request
 cucpath = config.cucFileLocation
 tp = []							# turn pint list
 tracks = []						# track list
-version='V2.00'
+version='V2.01'
 #
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
