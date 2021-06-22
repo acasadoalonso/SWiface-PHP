@@ -122,7 +122,7 @@ if trk == 'ALL':
 	cmd1 = "select * from "+DBtable+" where id like '%OGN%' and devicetype = 'OGNT' ;"
 else:
 	cmd1 = "select * from "+DBtable+" where id = '"+trk+"' and devicetype = 'OGNT' ;"
-#print cmd
+print ("CMD:",cmd1)
 try:
         cursD.execute(cmd1)
 except MySQLdb.Error as e:

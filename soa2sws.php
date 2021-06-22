@@ -11,7 +11,9 @@ if ($indexday != 0)
 	}
 else
 	{
-	passthru('/usr/bin/python3 '.$cwd.'/soa2sws.py ', $rc);
+	system('/usr/bin/python3 '.$cwd.'/soa2sws.py ', $rc);
+        echo "ttt";
+        echo $rc;
 	}
 $output = ob_get_clean(); 
 echo nl2br($output);

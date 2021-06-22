@@ -9,8 +9,8 @@ import time
 import hmac
 import hashlib
 import base64
-import OpenSSL
-import uritemplate
+#import OpenSSL
+#import uritemplate
 import pycountry
 import math
 import os
@@ -20,9 +20,18 @@ import geopy
 from stat import *
 from ognddbfuncs import *
 from geofuncs import convertline 
-from simplehal import HalDocument, Resolver
-from pprint import pprint
+from uritemplate import expand
+from copy import deepcopy
+try:
+   from simplehal import HalDocument, Resolver
+except ImportError:
+   cwd = os.getcwd()
+   print("import error... ",cwd)
+   #sys.path.insert(0, cwd)
+   from simplehal import HalDocument, Resolver
+
 from geopy.distance import geodesic     # use the geodesic (Vincenty deprecated) algorithm^M
+from gistfuncs import *
 
 
 #-------------------------------------------------------------------------------------------------------------------#
@@ -83,7 +92,9 @@ if clsreq:
     print("TTT", classreq)
 else:
     classreq = ' '                              # none
-version='V2.01'
+
+
+version='V2.02'
 # ---------------------------------------------------------------- #
 print("\n\nUtility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
 print("=================================================================================================================================\n\n")
@@ -116,9 +127,9 @@ else:
    print("Check directory:", cucpath+initials)
 locname =config.locname
                                                 # where to find the clientid and secretkey files
-secpath = cwd+"/SoaringSpot/"
-apiurl = "http://api.soaringspot.com/"          # soaringspot API URL
-rel = "v1"                                      # we use API version 1
+secpath  = cwd+"/SoaringSpot/"
+apiurl   = "http://api.soaringspot.com/"        # soaringspot API URL
+rel      = "v1"                                 # we use API version 1
 taskType = "SailplaneRacing"                    # race type
 
 # ==============================================#
@@ -197,8 +208,7 @@ for cl in getemb(cd, 'classes'):
                                                 # search for each class
     tracks = []				        # create the instance for the tracks
     tp = []					# create the instance for the turn points
-    npilc = 0                                   
-                                                # number of pilot per class
+    npilc = 0                                   # number of pilot per class
                                                 # category: glider/motorglider/paragliding
     category = cl['category']
     classtype = cl['type']                      # type: club/open/...
@@ -225,19 +235,21 @@ for cl in getemb(cd, 'classes'):
     taskfile = open(TASKFILE, 'w')		# open the output file, one per class
     csvfile = open(CSVFILE, 'w')		# open the output file, one per class
     filenames=True
+#   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+    						# PILOTS within the CLASS
                                                 # search for the contestants on each class
     url3 = getlinks(cl, "contestants")
     ctt = gdata(url3,   "contestants")          # get the contestants data
     print("= Contestants for the class ===========================")
     wlist = []				        # filter for live.glidernet.org
     tptype = []				        # set the turning point type
-    flist = []				        # Filter list for glidertracker.org
+    flist = []				        # Filter list for glidertracker.orga
     flist.append("ID,CALL,CN,TYPE,INDEX")       # Initialize with header row
     for contestants in ctt:                     # inspect the data of each contestant
         npil += 1                               # increase the number of total pilots
         npilc += 1                              # increase the number of pilot within this class
         idflarm = ' '                           # no FALRM id yet
-        ognid = ' '                           # no FALRM id yet
+        ognid = ' '                           	# no OGNID (THE ID from the OGN DDB) yet
         fr = ' '                                # no FR yet
         fname = getemb(contestants, 'pilot')[0]['first_name']
         lname = getemb(contestants, 'pilot')[0]['last_name']
@@ -340,7 +352,10 @@ for cl in getemb(cd, 'classes'):
             tr = {"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,
                   "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors": [color]}
         tracks.append(tr)			# add it to the tracks
+    print("= Number of pilots in this class =========================== ", npilc)
 
+#   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+    						# TASK within the CLASS
                                                 # look for the tasks within that class
     url4 = getlinks(cl, "tasks")
                                                 # get the TASKS data for the day
@@ -348,10 +363,10 @@ for cl in getemb(cd, 'classes'):
         ctt = gdata(url4,   "tasks")
     except:
         print ("No task yet...", url4)          # when the task is not ready
-        os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
+        os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
         os.system('rm  '+TASKFILE)
         os.system('rm  '+CSVFILE)
-        continue
+        continue				# nothing else to do now
     print("= Tasks ==", ctt[idx]["task_date"])
     if td_date_time != ctt[idx]["task_date"]:
         print ("Warning ... the task date is not today!!!")
@@ -362,6 +377,7 @@ for cl in getemb(cd, 'classes'):
     tasktype = ctt[idx]["task_type"]
     print("= Tasks ==", "Kms.  ", tasktype)
 
+#   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
                                                 # look for the waypoints within the task
     url5 = getlinks(ctt[idx], "points")
                                                 # look for the waypoints within the task within the day IDX
@@ -371,6 +387,7 @@ for cl in getemb(cd, 'classes'):
     ntp = 0                                     # number of turning points
     wp = 0
     legs = []					# legs for the task file
+
     for point in cpp:                           # search for each waypoint within the task
         lati = point["latitude"]
         lon  = point["longitude"]
@@ -429,9 +446,11 @@ for cl in getemb(cd, 'classes'):
         legs.append(trad)
         ntp += 1				# number of TPs
         tasklen += dist                         # compute the task distance
-
+# end of WAYPOINT for
+    print("= Number of WayPoints  ============ ", ntp)
                                                 # just a control of the total task distance
-    print("=Task length: ", tasklen, "Number of pilots in the class: ", npilc)
+    print("= Task length: ", tasklen, "Number of pilots in the class: ", npilc)
+#   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
     tps = []					# create the instance for the turn points
     tpt = []					# create the instance for the turn points
@@ -463,10 +482,10 @@ for cl in getemb(cd, 'classes'):
     tsks.append(tsk)
     tasks = {"tasks": tsks}
     tasks = convertline(tasks)                  # convert the START line on 3 point that will draw a line
-    j = json.dumps(tasks, indent=4)             # dump it
+    t = json.dumps(tasks, indent=4)             # dump the TASK file  .tsk
     #print j
                                                 # write it into the task file on json format
-    taskfile.write(j)
+    taskfile.write(t)
     taskfile.close()                            # close the TASK file for this class
     os.chmod(TASKFILE, 0o777) 			# make the TASK file accessible
                                                 # files that contains the latest TASK file to be used on live.glidernet.org
@@ -480,14 +499,29 @@ for cl in getemb(cd, 'classes'):
                                                 # link the recently generated file now to be the latest !!!
     try:
         os.link(TASKFILE, latest)
+    except:
+        print("error on link")
+
     # Write a csv file of all gliders to be used as filter file for glidertracker.org
-        #with open(cucpath + initials + fl_date_time+"-"+classtype+"filter.csv", 'wb') as myfile:
+    try:
         for item in flist:
             csvfile.write("%s\n" % item)
     except:
-        print("error on link")
-    # html="https://gist.githubusercontent.com/acasadoalonso/90d7523bfc9f0d2ee3d19b11257b9971/raw"
-    # cmd="gist -u 90d7523bfc9f0d2ee3d19b11257b9971 "+TASKFILE
+        print("error on writing CSV file ... ", flist)
+
+    if config.GIST:				# if GIST is requested
+       content=t+"\n"				# the content is the TASK file
+       res=updategist(config.GIST_USER, classtype+" latest task", config.GIST_TOKEN, TASKFILE, content)
+       print ("GIST RC: ", res.status_code)
+       if res.status_code == 200 or res.status_code == 201:
+          id=res.json()['id']
+          print("https://gist.githubusercontent.com/"+config.GIST_USER+"/"+id+"/raw/")
+       else:
+          print("Error on GIST ....", res.status_code)
+
+# end of CLASSES for 
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
 
 
 
@@ -509,3 +543,4 @@ else:
         print("Pilots with no FLARMID or invalid date: ", warnings)
     print("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n\n")
     exit(0)
+#   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #

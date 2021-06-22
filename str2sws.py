@@ -188,7 +188,7 @@ def gettask(ct, cdID, ccID, fptask, prt=False):		# competition ID, competition d
        numLegs=tt['numLegs']
        rule=tt['rule']
        task_wp=tt['tps']
-       #print ("TTT:", tid, name, distance, task_wp)
+       print ("TTT:", tid, name, distance, task_wp)
        while wp < len(task_wp):
            wp_name = task_wp[wp]['tp']["name"].encode('utf8').decode('utf8')          # waypoint name
            wp_name = "TP"+str(wp)+"-"+wp_name
@@ -261,11 +261,11 @@ def gettask(ct, cdID, ccID, fptask, prt=False):		# competition ID, competition d
    tasks = {"tasks": tsks}
    tasks = convertline(tasks)                  		# convert the START line on 3 point that will draw a line
                                                 	# files that contains the latest TASK file to be used on live.glidernet.org
-   j = json.dumps(tasks, indent=4)             		# dump it
+   t = json.dumps(tasks, indent=4)             		# dump it
    #print j
                                                 	# write it into the task file on json format
-   taskfile.write(j)
-   taskfile.close()                            		# close the TASK file for this class
+   fptask.write(t)
+   fptask.close()                            		# close the TASK file for this class
    swstask={ "taskName": name, "taskType": rule, "startOpenTs": ts, "turnpoints": tp}
    return(swstask)
 #-------------------------------------------------------------------------------------------------------------------#
@@ -346,7 +346,7 @@ if prt:
     #print j_obj
     j = json.dumps(j_obj, indent=4)
     print(j)
-    exit(0)
+    #exit(0)
 #
 # the different pieces of information
 #
@@ -416,6 +416,7 @@ for cl in lclases:
     cid=cl['id']
     cname=cl['name']					# classname
     rname=cl['rulename']				# racing|AAT
+    print ("Task:", cid, cname, rname)
     for cd in compdays:
         if cname != cd['nameCC']:
            continue
@@ -461,7 +462,7 @@ for cl in lclases:
         rr=j.read().decode('UTF-8') 
         j_obj = json.loads(rr)
 
-        tracks=getpilots(pilots, cname)			# get the pilots of that class
+        tracks=getpilots(pilots, cname,prt=prt)			# get the pilots of that class
         tsk=gettask(j_obj, idCD, idCC, taskfile, prt=False)	# get the task info
 
         #print ("TSKTSK", tsk)

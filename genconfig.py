@@ -108,6 +108,23 @@ try:
 except:
     DDBurl2 = 'http://DDB.glidernet.org/download/?j=2'
 
+try:
+    GIST = cfg.get('server', 'GIST').strip("'")
+except:
+    GIST = 'False'
+
+try:
+    GIST_USER = cfg.get('server', 'GIST_USER').strip("'")
+    GIST = 'True'
+except:
+    GIST_USER = ''
+
+try:
+    GIST_TOKEN = cfg.get('server', 'GIST_TOKEN').strip("'")
+    GIST = 'True'
+except:
+    GIST_TOKEN = ''
+
 
 datafile.write("cucFileLocation='"+cucFileLocation+"'; \n")
 datafile.write("DBpath='"+DBpath+"' \n")
@@ -137,7 +154,11 @@ datafile.write("DDBhost='"+DDBhost+"' \n")
 datafile.write("DDBport='"+DDBport+"' \n")
 datafile.write("DDBurl1='"+DDBurl1+"' \n")
 datafile.write("DDBurl2='"+DDBurl2+"' \n")
+datafile.write("GIST="+GIST+" \n")
+datafile.write("GIST_USER='"+GIST_USER+"' \n")
+datafile.write("GIST_TOKEN='"+GIST_TOKEN+"' \n")
 datafile.write("prt=False \n")
+
 # --------------------------------------#
 datafile.write(tailfile.read())
 datafile.close()

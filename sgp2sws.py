@@ -15,6 +15,7 @@ import pycountry
 import socket
 from ognddbfuncs import *
 from geofuncs import convertline
+from gistfuncs import *
 #-------------------------------------------------------------------------------------------------------------------#
 import config
 Flags = { 						# flag colors assigned to the countries
@@ -231,16 +232,16 @@ for id in pilots:
         p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
         rr=p.read().decode('UTF-8') 
         pr = json.loads(rr)
+        photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
         if pr != None:                                  # use the RankingList API
             obj=pr['data']   		                # reach the photo file
-            on=obj[0]
-            photo=on['photo']				# get the photo file
-            photourl="http://rankingdata.fai.org/PilotImages/"+photo
-            print    ("wget "+photourl+" -q -O PilotImages/"+photo)
-            os.system("wget "+photourl+" -q -O PilotImages/"+photo)
-            photourl=config.SWSserver+"SWS/PilotImages/"+photo
-        else:
-            photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
+            if obj != None:
+               on=obj[0]
+               photo=on['photo']				# get the photo file
+               photourl="http://rankingdata.fai.org/PilotImages/"+photo
+               print    ("wget "+photourl+" -q -O PilotImages/"+photo)
+               os.system("wget "+photourl+" -q -O PilotImages/"+photo)
+               photourl=config.SWSserver+"SWS/PilotImages/"+photo
         #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>", url)
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model,
               "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": photourl}
@@ -449,10 +450,10 @@ tsks = []
 tsks.append(tsk)
 tasks = {"tasks": tsks}
 tasks = convertline(tasks)                              # convert the start line on 3 point that will draw an START line
-j = json.dumps(tasks, indent=4)                         # dump it
+t = json.dumps(tasks, indent=4)                         # dump it
 #print j
                                                         # write it into the task file on json format
-taskfile.write(j)
+taskfile.write(t)
 j = json.dumps(clist, indent=4)                         # dump it
 #print j
                                                         # write it into the comp file on json format
@@ -472,10 +473,19 @@ print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a referenc
 if os.path.islink(latest):
    os.system('rm  '+latest)                             # remove the previous one
 try:
-                                                        # link the recently generated file now to be the latest !!!
-    os.system('ln -s '+TASKFILE+' '+latest)
+    os.system('ln -s '+TASKFILE+' '+latest) 		# link the recently generated file now to be the latest !!!
 except:
     print("No latest file ...: ", latest)
+if config.GIST:
+   content=t+"\n"
+   res=updategist(config.GIST_USER, "SGP RACING latest task", config.GIST_TOKEN, TASKFILE, content)
+   print ("GIST RC: ", res.status_code)
+   if res.status_code == 200 or res.status_code == 201:
+      id=res.json()['id']
+      print("https://gist.githubusercontent.com/"+config.GIST_USER+"/"+id+"/raw/")
+   else:
+      print("Error on GIST ....", res.status_code)
+
 # Write a csv file of all gliders to be used as filter file for glidertracker.org
 for item in flist:
     csvsfile.write("%s\n" % item)
