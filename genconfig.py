@@ -126,7 +126,7 @@ except:
     GIST_TOKEN = ''
 
 
-datafile.write("cucFileLocation='"+cucFileLocation+"'; \n")
+datafile.write("cucFileLocation='"+cucFileLocation+"' \n")
 datafile.write("DBpath='"+DBpath+"' \n")
 datafile.write("SARpath='"+SARpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")

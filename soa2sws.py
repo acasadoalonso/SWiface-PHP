@@ -118,7 +118,7 @@ cwd = os.getcwd()				# get the current working directory
                                                 # where to store the JSON files
 cucpath = config.cucFileLocation
 if not os.path.isdir(cucpath):
-   cucpath='.'
+   cucpath='./'
 if os.path.isdir(cucpath+initials):
    mode = os.stat(cucpath+initials).st_mode
    if not (mode & S_IWOTH or mode & S_IWGRP):
