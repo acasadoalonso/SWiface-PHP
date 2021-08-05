@@ -249,6 +249,7 @@ for cl in getemb(cd, 'classes'):
         npil += 1                               # increase the number of total pilots
         npilc += 1                              # increase the number of pilot within this class
         idflarm = ' '                           # no FALRM id yet
+        idfreg = ' '                            # no FALRM id yet
         ognid = ' '                           	# no OGNID (THE ID from the OGN DDB) yet
         fr = ' '                                # no FR yet
         fname = getemb(contestants, 'pilot')[0]['first_name']
@@ -264,7 +265,7 @@ for cl in getemb(cd, 'classes'):
                     idflarm="ICA"+idflarm       # assume a ICAO type
                 else:
                     idflarm="OGN"+idflarm       # assume a OGN type
-                    
+            idfreg=getognreg(idflarm[3:9]) 	# get the registration from DDB       
             if 'aircraft_registration' in contestants:
                 regi = contestants['aircraft_registration']
                 ognid=getognflarmid(regi)       # get the flarm if from the OGN DDB
@@ -338,7 +339,7 @@ for cl in getemb(cd, 'classes'):
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
-            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, "OGNDDB:==>", ognid)  # , fr
+            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, '(', idfreg, ')', "OGNDDB:==>", ognid)  # , fr
         except:
             print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm, "OGN DDB:==>", ognid )  # , fr
         if idflarm == ' ':
