@@ -469,11 +469,14 @@ os.chmod(TASKFILE, 0o777)                               # make the TASK file acc
 os.chmod(JSONFILE, 0o777)                               # make the JSON file accessible
                                                         # the latest TASK file to be used on live.glidernet.org
 latest = cucpath+config.Initials+'/SGPrace-latest.tsk'
+latestj = cucpath+config.Initials+'/SGPrace-latest.json'
 print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a reference
 if os.path.islink(latest):
    os.system('rm  '+latest)                             # remove the previous one
+   os.system('rm  '+latestj)                            # remove the previous one
 try:
     os.system('ln -s '+TASKFILE+' '+latest) 		# link the recently generated file now to be the latest !!!
+    os.system('ln -s '+JSONFILE+' '+latestj) 		# link the recently generated file now to be the latest !!!
 except:
     print("No latest file ...: ", latest)
 if config.GIST:
