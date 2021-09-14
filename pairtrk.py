@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
-# Silent Wings interface --- JSON formaat
+# Silent Wings interface --- pairing flarms and trackers
 #
 import json
 import time
@@ -21,30 +21,31 @@ trk='ALL'
 tflarmid=''
 towner=''
 deleteyn='N'
+active='N'
 #print (sys.argv)
 if len(sys.argv) >1:
-	arg1 = sys.argv[1]
-	action = arg1[0:]				
+        arg1 = sys.argv[1]
+        action = arg1[0:]                               
 if len(sys.argv) >2:
-	arg2 = sys.argv[2]
-	trk = arg2[0:9].upper()
+        arg2 = sys.argv[2]
+        trk = arg2[0:9].upper()
 if len(sys.argv) > 4:
-	arg3 = sys.argv[3]
-	tflarmid = arg3[0:9].upper()					
-	arg4 = sys.argv[4]
-	towner = arg4[0:]	
+        arg3 = sys.argv[3]
+        tflarmid = arg3[0:9].upper()                                    
+        arg4 = sys.argv[4]
+        towner = arg4[0:]       
 if len(sys.argv) > 6:
-	arg5 = sys.argv[5]
-	deleteyn = arg5[0:1].upper()					
-	arg6 = sys.argv[6]
-	active = arg6[0:1]					
-#print (len(sys.argv), "Action=", action, "Tracker=", trk, "FlarmID=", tflarmid, "Owner=", towner, deleteyn)
+        arg5 = sys.argv[5]
+        deleteyn = arg5[0:1].upper()                                    
+        arg6 = sys.argv[6]
+        active = arg6[0:1]                                      
+#print (len(sys.argv), "Action=", action, "Tracker=", trk, "FlarmID=", tflarmid, "Owner=", towner, deleteyn, active)
 
-localtime = datetime.datetime.now()					# get today's date
-today = localtime.strftime("%y/%m/%d %H:%M:%S")					# in string format yymmdd
-DBpath = config.DBpath							# use the configuration DB path
-DBname = config.DBname							# use the configuration DB name
-DBtable = config.DBtable						# use the configuration DB table
+localtime = datetime.datetime.now()                                     # get today's date
+today = localtime.strftime("%y/%m/%d %H:%M:%S")                                 # in string format yymmdd
+DBpath = config.DBpath                                                  # use the configuration DB path
+DBname = config.DBname                                                  # use the configuration DB name
+DBtable = config.DBtable                                                # use the configuration DB table
 DBname ='APRSLOG'
 DBtable = 'TRKDEVICES'
 
@@ -56,57 +57,57 @@ html4 = '<a href='+config.SWSserver+'SWS/pairtrk.php?action=edit&trk=%s&flarmid=
 
 #
 conn = MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname, connect_timeout=1000)     # connect with the database
-cursD = conn.cursor()				# connect with the DB set the cursor
-	
-if action == 'update':				# the update order
-	if trk[0:3] != 'OGN' and (tflarmid[0:3] == 'FLR' or tflarmid[0:3] == 'ICA'):	# check that we are pairing OGN to FLR/ICA
-		print ("Pairing error, you can only pair OGN tracker with Flarms")
-		conn.close()
-		exit(1)
-	if deleteyn == 'Y':			# if we want to delete the record
-		cmd1 = "DELETE FROM "+DBtable+" WHERE id = '"+trk+"' ;"
-	else:
-		cmd1 = "UPDATE "+DBtable+" SET "	# if we want just to update the record
-		if towner != '':
-			cmd1 += " owner = '"+towner+"' , " 				# if updated the owner
-		if active != '':
-			cmd1 += " active = '"+active+"' , " 				# if updated the active
-		if tflarmid != '':
-			cmd1 += " flarmid = '"+tflarmid+"' WHERE id = '"+trk+"' ;" 	# or just the Flarmid
-	#print (cmd1)
-	if getognchk(trk[3:]) and getognchk(tflarmid[3:]):				# check that the devices are registered in order to be consistent
-		try:
-        		cursD.execute(cmd1)						# delete or update the DB
-		except MySQLdb.Error as e:
-        		print ("SQL error: ",e)
-		conn.commit()
-	else:										# warn about the error
-		print ("UPDATE Pairing Error either the OGN tracker "+trk+" or the FlarmID "+tflarmid+" are not registered on the OGN DDB")
-	conn.close()
-	exit(0)
+cursD = conn.cursor()                           # connect with the DB set the cursor
+        
+if action == 'update':                          # the update order
+        if trk[0:3] != 'OGN' and (tflarmid[0:3] == 'FLR' or tflarmid[0:3] == 'ICA'):    # check that we are pairing OGN to FLR/ICA
+                print ("Pairing error, you can only pair OGN tracker with Flarms")
+                conn.close()
+                exit(1)
+        if deleteyn == 'Y':                     # if we want to delete the record
+                cmd1 = "DELETE FROM "+DBtable+" WHERE id = '"+trk+"' ;"
+        else:
+                cmd1 = "UPDATE "+DBtable+" SET "        # if we want just to update the record
+                if towner != '':
+                        cmd1 += " owner = '"+towner+"' , "                              # if updated the owner
+                if active != '':
+                        cmd1 += " active = '"+active+"' , "                             # if updated the active
+                if tflarmid != '':
+                        cmd1 += " flarmid = '"+tflarmid+"' WHERE id = '"+trk+"' ;"      # or just the Flarmid
+        #print (cmd1)
+        if getognchk(trk[3:]) and getognchk(tflarmid[3:]):                              # check that the devices are registered in order to be consistent
+                try:
+                        cursD.execute(cmd1)                                             # delete or update the DB
+                except MySQLdb.Error as e:
+                        print ("SQL error: ",e)
+                conn.commit()
+        else:                                                                           # warn about the error
+                print ("UPDATE Pairing Error either the OGN tracker "+trk+" or the FlarmID "+tflarmid+" are not registered on the OGN DDB")
+        conn.close()
+        exit(0)
 
-if action == 'add':				# adding a new pair ogn <==> flarm
-	#print ("ADD Action=", action, "Tracker=", trk, "FlarmID", tflarmid, "Owner=", towner)
-	if trk[0:3] != 'OGN' and (tflarmid[0:3] == 'FLR' or tflarmid[0:3] == 'ICA'):
-		print ("Pairing error, you can only pair OGN tracker with Flarms")
-		conn.close()
-		exit(1)
-	ognreg=getognreg(trk[3:])		# the the information fro the OGN DDB
-	flrreg=getognreg(tflarmid[3:])		# glider registration
-	cn=getogncn(tflarmid[3:])		# glider competition ID
-	model=getognmodel(tflarmid[3:])		# glider model
-	if getognchk(trk[3:]) and getognchk(tflarmid[3:]):				# checkk that the devices are rgistered on the OGN DDB
-		cmd1 = "INSERT INTO "+DBtable+" (id, owner, spotid, compid, model, registration, active, devicetype, flarmid) VALUES ( '"+trk+"', '"+towner+"', '"+ognreg+"' , '"+cn+"', '"+model+"', '"+flrreg+"', '1', 'OGNT', '"+tflarmid+"' ) ; "
-		#print ("cmd1:",cmd1)
-		try:
-        		cursD.execute(cmd1)
-		except MySQLdb.Error as e:
-        		print ("Pairing error, ID already exist on the DB --- SQL error: ",e)
-		conn.commit()
-	else:
-		print ("ADD Pairing Error either the OGN tracker "+trk+" or the FlarmID "+tflarmid+" are not registered on the OGN DDB")
-	conn.close()
-	exit(0)
+if action == 'add':                             # adding a new pair ogn <==> flarm
+        #print ("ADD Action=", action, "Tracker=", trk, "FlarmID", tflarmid, "Owner=", towner)
+        if trk[0:3] != 'OGN' and (tflarmid[0:3] == 'FLR' or tflarmid[0:3] == 'ICA'):
+                print ("Pairing error, you can only pair OGN tracker with Flarms")
+                conn.close()
+                exit(1)
+        ognreg=getognreg(trk[3:])               # the the information fro the OGN DDB
+        flrreg=getognreg(tflarmid[3:])          # glider registration
+        cn=getogncn(tflarmid[3:])               # glider competition ID
+        model=getognmodel(tflarmid[3:])         # glider model
+        if getognchk(trk[3:]) and getognchk(tflarmid[3:]):                              # checkk that the devices are rgistered on the OGN DDB
+                cmd1 = "INSERT INTO "+DBtable+" (id, owner, spotid, compid, model, registration, active, devicetype, flarmid) VALUES ( '"+trk+"', '"+towner+"', '"+ognreg+"' , '"+cn+"', '"+model+"', '"+flrreg+"', '1', 'OGNT', '"+tflarmid+"' ) ; "
+                #print ("cmd1:",cmd1)
+                try:
+                        cursD.execute(cmd1)
+                except MySQLdb.Error as e:
+                        print ("Pairing error, ID already exist on the DB --- SQL error: ",e)
+                conn.commit()
+        else:
+                print ("ADD Pairing Error either the OGN tracker "+trk+" or the FlarmID "+tflarmid+" are not registered on the OGN DDB")
+        conn.close()
+        exit(0)
 
 #
 # action LIST ALL pair
@@ -119,10 +120,10 @@ except MySQLdb.Error as e:
 row = cursD.fetchone()
 nrecs=row[0]
 if trk == 'ALL':
-	cmd1 = "select * from "+DBtable+" where id like '%OGN%' and devicetype = 'OGNT' ;"
+        cmd1 = "select * from "+DBtable+" where id like '%OGN%' and devicetype = 'OGNT' and active = '1' ;"
 else:
-	cmd1 = "select * from "+DBtable+" where id = '"+trk+"' and devicetype = 'OGNT' ;"
-print ("CMD:",cmd1)
+        cmd1 = "select * from "+DBtable+" where id = '"+trk+"' and devicetype = 'OGNT' ;"
+#print cmd
 try:
         cursD.execute(cmd1)
 except MySQLdb.Error as e:
@@ -141,7 +142,7 @@ for row in cursD.fetchall():                                    # search for the
         active   = row[7]
         devtype  = row[8]
         flarmid  = row[9]
-        if flarmid == '' or len(flarmid) <9:
+        if flarmid == None or flarmid == '' or len(flarmid) <9:
            flarmid = getognflarmid(regis)
         else:
            if regis.strip() != "" and flarmid != getognflarmid(regis):
@@ -156,3 +157,4 @@ for row in cursD.fetchall():                                    # search for the
 print (html3)
 conn.close()
 exit(0)
+
