@@ -94,7 +94,7 @@ else:
     classreq = ' '                              # none
 
 
-version='V2.02'
+version='V2.03'
 # ---------------------------------------------------------------- #
 print("\n\nUtility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
 print("=================================================================================================================================\n\n")
@@ -204,6 +204,7 @@ filenames=False
 
 # Build the tracks and turn points, exploring the contestants and task within each class
 # go thru the different classes now within the day
+
 for cl in getemb(cd, 'classes'):
                                                 # search for each class
     tracks = []				        # create the instance for the tracks
@@ -219,53 +220,68 @@ for cl in getemb(cd, 'classes'):
     classid = cl['id']                          # internal ID of the class
     JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
     TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
-    CSVFILE  = cucpath + initials + fl_date_time+"-"+classtype+"filter.csv"
+    CSVFILE  = cucpath + initials + fl_date_time+"-"+classtype+"_filter.csv"
+    COMPFILE = cucpath + initials + fl_date_time+"-"+classtype+"_competitiongliders.lst"
                                                 # name of the JSON to be generated, one per class
     if os.path.isfile(JSONFILE):
-    	os.system('rm  '+JSONFILE)		        # delete the JSON & TASK files
+    	os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
     if os.path.isfile(TASKFILE):
         os.system('rm  '+TASKFILE)
     if os.path.isfile(CSVFILE):
         os.system('rm  '+CSVFILE)
+    if os.path.isfile(COMPFILE):
+        os.system('rm  '+COMPFILE)
     print("JSON generated data file for the class is: ", JSONFILE)  # just a trace
     print("TASK generated data file for the class is: ", TASKFILE)  # just a trace
-    print("CSV  generated data file for the class is: ", CSVFILE)  # just a trace
+    print("CSV  generated data file for the class is: ", CSVFILE)   # just a trace
+    print("COMP generated data file for the class is: ", COMPFILE)  # just a trace
+
     print("\n= Class = Category:", category, "Type:", classtype, "Class ID:", classid)
     jsonfile = open(JSONFILE, 'w')		# open the output file, one per class
     taskfile = open(TASKFILE, 'w')		# open the output file, one per class
-    csvfile = open(CSVFILE, 'w')		# open the output file, one per class
-    filenames=True
+    csvfile  = open(CSVFILE,  'w')		# open the output file, one per class
+    compfile = open(COMPFILE, 'w')		# open the output file, one per class
+    filenames=True				# set a mark that we created the files
 #   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
     						# PILOTS within the CLASS
                                                 # search for the contestants on each class
     url3 = getlinks(cl, "contestants")
-    ctt = gdata(url3,   "contestants")          # get the contestants data
+    ctt  = gdata(url3,  "contestants")          # get the contestants data
     print("= Contestants for the class ===========================")
-    wlist = []				        # filter for live.glidernet.org
+    wlist  = []				        # filter for live.glidernet.org
     tptype = []				        # set the turning point type
-    flist = []				        # Filter list for glidertracker.orga
+    flist  = []				        # Filter list for glidertracker.orga
     flist.append("ID,CALL,CN,TYPE,INDEX")       # Initialize with header row
+    clist  = []				        # list of competitors
+
     for contestants in ctt:                     # inspect the data of each contestant
         npil += 1                               # increase the number of total pilots
         npilc += 1                              # increase the number of pilot within this class
         idflarm = ' '                           # no FALRM id yet
         idfreg = ' '                            # no FALRM id yet
         ognid = ' '                           	# no OGNID (THE ID from the OGN DDB) yet
+        ognpair = ' '                          	# the ogn tracker to be paired
         fr = ' '                                # no FR yet
         fname = getemb(contestants, 'pilot')[0]['first_name']
         lname = getemb(contestants, 'pilot')[0]['last_name']
                                                 # convert it to utf8 in order to avoid problems
         pname = (fname+" "+lname).encode('utf-8').decode('utf-8')
         if 'live_track_id' in contestants:      # check if we have the FlarmId from the SoaringSpot
-            idflarm = contestants['live_track_id']
-            if len(idflarm) == 6:               # in case of missing FLR/ICA/OGN 
+            livetrk = contestants['live_track_id']  # flarmID and OGN pair
+            if len(livetrk) == 9:
+               idflarm = livetrk		# case that just the FlarmID, no piaring
+            if len(livetrk) == 19:              # format:  FLR123456 OGN654321
+               idflarm = livetrk[0:9]		# case that just the FlarmID and OGN tracker pair
+               ognpair = livetrk[10:]		# OGN trackers paired
+            if len(idflarm) == 6:               # in case of missing FLR/ICA/OGN (deprecated)
                 if idflarm[0] == 'D':
                     idflarm="FLR"+idflarm       # assume a Flarm type 
                 elif idflarm[0].isdigit():
                     idflarm="ICA"+idflarm       # assume a ICAO type
                 else:
                     idflarm="OGN"+idflarm       # assume a OGN type
-            idfreg=getognreg(idflarm[3:9]) 	# get the registration from DDB       
+
+            idfreg=getognreg(idflarm[3:9]) 	# get the registration from OGN DDB       
             if 'aircraft_registration' in contestants:
                 regi = contestants['aircraft_registration']
                 ognid=getognflarmid(regi)       # get the flarm if from the OGN DDB
@@ -273,7 +289,8 @@ for cl in getemb(cd, 'classes'):
                    ognid=getognreg(idflarm[3:9])# show the differences
                    #ognid=getogninfo(idflarm[3:9])# show the differences
             else:
-                regi = "reg_NOTYET"             # if we do not have the registration ID on the soaringspot
+                regi = "reg_NOTYET"             # if we do not have the registration ID on the soaringspota
+            
         elif 'aircraft_registration' in contestants:
             regi = contestants['aircraft_registration']
             idflarm=getognflarmid(regi)         # get the flarm if from the OGN DDB
@@ -329,19 +346,25 @@ for cl in getemb(cd, 'classes'):
                                                 # convert the 2 char ISO code to 3 chars ISO code
         ccc = pycountry.countries.get(alpha_2=nation)
         country = ccc.alpha_3
+
         if idflarm != 'NOTYET':
             if idflarm != " ":
                 wlist.append(idflarm[3:9])
             else:
                 print("Missing Flarm:", fname, lname)
-            flist.append(idflarm+","+regi+","+cn+","+ar+"," +
-                         str(hd))               # Populate the filter list
+            flist.append(idflarm+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
+
+        clist.append(idflarm)			# add device to the competion list
+        if ognpair != ' ':
+           clist.append(ognpair)		# add pairing tracker to the competion list
+        else:
+           clist.append("OGNFFFFFF")		# add pairing tracker to the competion list
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
-            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, '(', idfreg, ')', "OGNDDB:==>", ognid)  # , fr
+            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, '(', idfreg, ')', "OGNDDB:==>", ognid, "Pairing with:", ognpair)  # , fr
         except:
-            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm, "OGN DDB:==>", ognid )  # , fr
+            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm, "OGN DDB:==>", ognid, "Pairing with:", ognpair )  # , fr
         if idflarm == ' ':
             idflarm = str(npil)
                                                 # create the track
@@ -353,6 +376,7 @@ for cl in getemb(cd, 'classes'):
             tr = {"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,
                   "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors": [color]}
         tracks.append(tr)			# add it to the tracks
+
     print("= Number of pilots in this class =========================== ", npilc)
 
 #   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
@@ -367,6 +391,7 @@ for cl in getemb(cd, 'classes'):
         os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
         os.system('rm  '+TASKFILE)
         os.system('rm  '+CSVFILE)
+        os.system('rm  '+COMPFILE)
         continue				# nothing else to do now
     print("= Tasks ==", ctt[idx]["task_date"])
     if td_date_time != ctt[idx]["task_date"]:
@@ -509,7 +534,19 @@ for cl in getemb(cd, 'classes'):
             csvfile.write("%s\n" % item)
     except:
         print("error on writing CSV file ... ", flist)
+    csvfile.close()				# close the CSV file
+    os.chmod(CSVFILE, 0o775) 			# make the CSV file accessible
 
+    # Write a comp file of all gliders to be used as filter file for pairing
+    j = json.dumps(clist, indent=4)             # dump it
+                                                # write it into the comp file on json format
+    try:
+        compfile.write(j)
+        compfile.close()                        # close the COMP file for this class
+    except:
+        print("error on writing COMP file ... ", clist)
+
+    os.chmod(COMPFILE, 0o775) 			# make the COMP file accessible
     if config.GIST:				# if GIST is requested
        content=t+"\n"				# the content is the TASK file
        res=updategist(config.GIST_USER, classtype+" latest task", config.GIST_TOKEN, TASKFILE, content)
