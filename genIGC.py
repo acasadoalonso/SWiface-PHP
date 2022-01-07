@@ -41,28 +41,31 @@ print("HFDTM100GPSDATUM:WGS-1984")      # Datum
 print("HFGIDGLIDERID:"+getognreg(flarmID))   # registration ID
 print("HFCIDCOMPETITIONID:"+getogncn(flarmID))  # competition ID
 print("HFFTYFRTYPE:FLrebuild")          # Flarm rebuild
-
+nline=0
 for line in sys.stdin:                  # read one line
+    nline += 1
     p1 = line.find(">>>")
     if p1 == -1:                        # this should never happens
         continue                        # ignore this record
-    pos = line[p1+4:p1+36+4]            # get the original position
+    pos   = line[p1+4:p1+36+4]          # get the original position
     ttime = pos[1:7]                    # the time
-    lat = pos[7:15]                     # latitude
-    lon = pos[15:24]                    # longitude
-    palt = pos[25:30]                   # pressuere altitude
-    galt = pos[30:35]                   # GPS altitude
+    lat   = pos[7:15]                   # latitude
+    lon   = pos[15:24]                  # longitude
+    palt  = pos[25:30]                  # pressuere altitude
+    galt  = pos[30:35]                  # GPS altitude
     north = gdatar(line, "North:")      # get the N data
-    east =  gdatar(line, "East:")       # get the E data
-    down =  gdatar(line, "Down:")       # get the D data
+    east  = gdatar(line, "East:")       # get the E data
+    down  = gdatar(line, "Down:")       # get the D data
     try:
-        N = int(north)
-        E = int(east)
-        D = int(down)
+        N  = int(north)
+        E  = int(east)
+        D  = int(down)
         pa = int(palt)-D                # the new pressure altitude
         ga = int(galt)-D                # get the GPS altitude
     except:
-        print(">:>LINE:", line)
+        print(">:>Invalid LINE:", nline, line, file=sys.stderr)
+        print(ttime, lat, lon, palt, galt,  pos, file=sys.stderr)
+        continue
     ppa = "A%05d" % pa                  # format the pressure altitude
     gga = "%05d" % ga                   # format the GPS altitude
     #print ttime, lat, lon, palt, galt, N, E, D, pos, line

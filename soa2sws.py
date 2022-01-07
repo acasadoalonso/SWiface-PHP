@@ -362,7 +362,7 @@ for cl in getemb(cd, 'classes'):
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
-            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, '(', idfreg, ')', "OGNDDB:==>", ognid, "Pairing with:", ognpair)  # , fr
+            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, '(Reg:', idfreg, ')', "OGNDDB:==>", ognid, "Pairing with:", ognpair)  # , fr
         except:
             print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm, "OGN DDB:==>", ognid, "Pairing with:", ognpair )  # , fr
         if idflarm == ' ':

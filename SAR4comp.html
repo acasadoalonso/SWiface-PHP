@@ -1,0 +1,24 @@
+<html>
+<head><meta charset="UTF-8"></head>
+<title>SAR for competitions (SAR4comp)</title>
+<body>
+<IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]>
+<H1>Search and Rescue (SAR) for IGC competitions </H1>
+<hr>
+<form method=GET action="./SAR4comp.php">
+	<P><B>Enter competition information: </B></br>
+	</br>Competition Type scoring:        SoaringSpot | SGP | DIR    <P>
+        <select name=competype>
+        <option>SOA
+        <option>SGP
+        <option>DIR
+        </select></br>
+	</br>FlarmID to search                <P><input type=text name=flarmid></br>
+	</br>SGP eventID for SGP events       <P><input type=text name=sgpid></br>
+	</br>or  SoaringSpot ClientID         <P><input type=text name=clientid>
+	</br>and SoaringSpot SecretKey        <P><input type=text name=secretkey>
+	</br>Index day                        <P><input type=text name=day> </br>
+	</br><P><input type=submit name=action value='search for it'>
+</form>
+</body></html>
+

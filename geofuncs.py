@@ -1,6 +1,8 @@
+#!/usr/bin/python3
 # Geo routines
 #coding:UTF-8
 import math
+import sys
 import geopy
 from geopy.distance import geodesic     # use the Vincenty algorithm^M
 
@@ -95,8 +97,11 @@ def DMS2lat(lat):               # convert string DDMMSS to degrees
             return 0
             
 def DDMMmmm2lat(lat):           # convert string DDMMmmm to degrees
-        l=DDMMmmm2decdeg(int(lat[0:2]), int(lat[2:4]), int(lat[4:7]))
-        
+        if lat[0:7].isnumeric():
+           l=DDMMmmm2decdeg(int(lat[0:2]), int(lat[2:4]), int(lat[4:7]))
+        else:
+           print ("LAT:", lat, file=sys.stderr)
+           l=0
         if lat[7:8] == 'N':
             return l
         if lat[7:8] == 'S':
@@ -115,7 +120,11 @@ def DMS2lon(lon):               # convert string DDDMMSS to degrees
             return 0
 def DDMMmmm2lon(lon):           # convert string DDDMMmmm to degrees
     
-        l=DDMMmmm2decdeg(int(lon[0:3]), int(lon[3:5]), int(lon[5:8]))
+        if lon[0:8].isnumeric():
+           l=DDMMmmm2decdeg(int(lon[0:3]), int(lon[3:5]), int(lon[5:8]))
+        else:
+           print ("LON", lon, file=sys.stderr)
+           l=0
         if lon[8:9] == 'E':
             return l
         if lon[8:9] == 'W':
@@ -193,7 +202,7 @@ def initial_bearing(pointA, pointB):
     initial_bearing = atan2(x, y)
 
     # Now we have the initial bearing but math.atan2 return values
-    # from -180° to + 180° which is not what we want for a compass bearing
+    # from -180 to + 180 degrees which is not what we want for a compass bearing
     # The solution is to normalize the initial bearing as shown below
     initial_bearing = degrees(initial_bearing)
     compass_bearing = (initial_bearing + 360) % 360

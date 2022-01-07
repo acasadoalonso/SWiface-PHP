@@ -125,6 +125,16 @@ try:
 except:
     GIST_TOKEN = ''
 
+try:
+    clientid = cfg.get('server', 'clientid').strip("'")
+except:
+    clientid = ''
+try:
+    secretkey = cfg.get('server', 'secretkey').strip("'")
+except:
+    secretkey = ''
+
+
 
 datafile.write("cucFileLocation='"+cucFileLocation+"' \n")
 datafile.write("DBpath='"+DBpath+"' \n")
@@ -157,6 +167,8 @@ datafile.write("DDBurl2='"+DDBurl2+"' \n")
 datafile.write("GIST="+GIST+" \n")
 datafile.write("GIST_USER='"+GIST_USER+"' \n")
 datafile.write("GIST_TOKEN='"+GIST_TOKEN+"' \n")
+datafile.write("clientid='"+clientid+"' \n")
+datafile.write("secretkey='"+secretkey+"' \n")
 datafile.write("prt=False \n")
 
 # --------------------------------------#
