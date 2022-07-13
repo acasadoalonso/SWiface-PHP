@@ -257,16 +257,17 @@ for cl in getemb(cd, 'classes'):
     for contestants in ctt:                     # inspect the data of each contestant
         npil += 1                               # increase the number of total pilots
         npilc += 1                              # increase the number of pilot within this class
-        idflarm = ' '                           # no FALRM id yet
-        idfreg = ' '                            # no FALRM id yet
-        ognid = ' '                           	# no OGNID (THE ID from the OGN DDB) yet
-        ognpair = ' '                          	# the ogn tracker to be paired
+        idflarm = ' '                           # FLARM ID as gathere for SS - no FLARM id yet
+        idfreg = '?'                            # registration on the OGNDDB based on the flarm ID provided on SS
+        ognid = '?'                           	# no OGNID (THE ID from the OGN DDB) yet
+        ognpair = 'NO'                         	# the ogn tracker to be paired
         fr = ' '                                # no FR yet
         fname = getemb(contestants, 'pilot')[0]['first_name']
         lname = getemb(contestants, 'pilot')[0]['last_name']
                                                 # convert it to utf8 in order to avoid problems
         pname = (fname+" "+lname).encode('utf-8').decode('utf-8')
         if 'live_track_id' in contestants:      # check if we have the FlarmId from the SoaringSpot
+            idfreg = '*'                        # FLARM ID from OGNDDB when live track id supplied  based on registration - no FLARM yet
             livetrk = contestants['live_track_id']  # flarmID and OGN pair
             if len(livetrk) == 9:
                idflarm = livetrk		# case that just the FlarmID, no piaring
@@ -305,7 +306,7 @@ for cl in getemb(cd, 'classes'):
             fr = fr.rstrip('\r')
         else:
             fr = "fr_NOTYET"+str(npil)
-        if idflarm == ' ' or idflarm == 'NOREG  ':
+        if idflarm == ' ' or idflarm == 'NOREG  ' or idflarm == 'NOFlarm' :
             warnings.append(pname)              # add it to the list of warnings
             nwarnings += 1                      # and increase the number of warnings
 

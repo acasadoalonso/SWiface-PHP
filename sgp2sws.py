@@ -69,7 +69,12 @@ version='V2.01'
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
     qsgpID = sys.argv[1]
-    days = str(sys.argv[2])
+    try:
+       days = str(sys.argv[2])
+    except:
+       print ("Please indicate the index day\n\n")
+       print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
+       exit(-1)
     if days[0].isdigit():
         day = int(days)
         days = ''
@@ -199,7 +204,10 @@ for id in pilots:
             print("Warning .... Flarm on system is not the same that Flarms registered on OGN, SGP system:", flarmid, "OGNi DDB:", ognflarm, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
-        ogntracker=pilots[id]['t'].upper().rstrip()	# OGN tracker to pair
+        if 't' in pilots[id] :
+            ogntracker=pilots[id]['t'].upper().rstrip()	# OGN tracker to pair
+        else:
+            ogntracker=''
     else:
         flarmid = "FLRDDDDDD"
         registration = "EC-XXX"
@@ -404,7 +412,10 @@ while wp < len(task_wp):
     wp_lat = task_wp[wp]["a"]                           # latitude
     wp_lon = task_wp[wp]["o"]                           # longitude
     wp_type = task_wp[wp]["y"]                          # type: line or cylinder
-    wp_radius = task_wp[wp]["r"]                        # cylinder radius or line length
+    if "r" in task_wp[wp]:
+       wp_radius = task_wp[wp]["r"]                     # cylinder radius or line length
+    else:
+       wp_radius = 500
     if wp > 0 and (wp_name == wpinit or wp_type == "line"):
         isbreak = True
         type = "Finish"
