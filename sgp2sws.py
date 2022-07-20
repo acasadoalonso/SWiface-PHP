@@ -196,21 +196,22 @@ for id in pilots:
             flarmid = getognflarmid(registration)
         if ognflarm == '' or ognflarm == "NOFlarm":
             ognflarm = "***NOREG***"
-            print("Warning .... Flarm not registered on the OGN", flarmid, ognflarm, "\n\n")
+            print("Warning .... Flarm not registered on the OGN DDB", flarmid, ognflarm, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
 
         elif flarmid[3:9] != ognflarm[3:9]:
-            print("Warning .... Flarm on system is not the same that Flarms registered on OGN, SGP system:", flarmid, "OGNi DDB:", ognflarm, "\n\n")
+            print("Warning .... Flarm on system is not the same that Flarms registered on OGN, on the SGP system:", flarmid, "and on the OGN DDB:", ognflarm, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
-        if 't' in pilots[id] :
+        if 't' in pilots[id] :				# if we have tracker paired ???
             ogntracker=pilots[id]['t'].upper().rstrip()	# OGN tracker to pair
         else:
             ogntracker=''
     else:
-        flarmid = "FLRDDDDDD"
+        flarmid = "FLRDDDDDD"				# older versions 
         registration = "EC-XXX"
+
     if flarmid != '':
         wlist.append(flarmid[3:9])			# add device to the white list
         clist.append(flarmid)				# add device to the competion list
