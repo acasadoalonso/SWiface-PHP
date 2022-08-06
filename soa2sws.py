@@ -433,7 +433,7 @@ for cl in getemb(cd, 'classes'):
         dist = point["distance"]/1000		# distance in kms.
         if ozr2 <= 0:
             ozr2 = 500
-
+        print ("WTYP",wtyp)
         if (wtyp == "start"):                   # convert from CU format to SW format
             ttype = "Start"
             oz = "Line"
@@ -441,7 +441,7 @@ for cl in getemb(cd, 'classes'):
             dist = 0
         elif (wtyp == "finish"):
             ttype = "Finish"
-            oz = "Cylinder"
+            oz = "Line"
             rad = ozra
         else:
             ttype = "Turnpoint"
