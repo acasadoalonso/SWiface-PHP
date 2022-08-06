@@ -431,9 +431,9 @@ for cl in getemb(cd, 'classes'):
         ozra = point["oz_radius1"]		# oz radius
         ozr2 = point["oz_radius2"]		# oz radius
         dist = point["distance"]/1000		# distance in kms.
+        print ("PPP", point)
         if ozr2 <= 0:
             ozr2 = 500
-        print ("WTYP",wtyp)
         if (wtyp == "start"):                   # convert from CU format to SW format
             ttype = "Start"
             oz = "Line"
