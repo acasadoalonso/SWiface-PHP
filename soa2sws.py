@@ -441,7 +441,10 @@ for cl in getemb(cd, 'classes'):
             dist = 0
         elif (wtyp == "finish"):
             ttype = "Finish"
-            oz = "Line"
+            if point["oz_line"]:
+               oz = "Line"
+            else:
+               oz = "Cylinder"
             rad = ozra
         else:
             ttype = "Turnpoint"
