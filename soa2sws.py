@@ -347,13 +347,23 @@ for cl in getemb(cd, 'classes'):
                                                 # convert the 2 char ISO code to 3 chars ISO code
         ccc = pycountry.countries.get(alpha_2=nation)
         country = ccc.alpha_3
+        OGNTRACKERS = True
+        if OGNTRACKERS:
+           if ognpair != 'NOTYET':
+               if ognpair != " ":
+                   wlist.append(ognpair[3:9])
+               else:
+                   print("Missing ognpair:", fname, lname)
+               flist.append(ognpair+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
 
-        if idflarm != 'NOTYET':
-            if idflarm != " ":
-                wlist.append(idflarm[3:9])
-            else:
-                print("Missing Flarm:", fname, lname)
-            flist.append(idflarm+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
+        else:
+
+           if idflarm != 'NOTYET':
+               if idflarm != " ":
+                   wlist.append(idflarm[3:9])
+               else:
+                   print("Missing Flarm:", fname, lname)
+               flist.append(idflarm+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
 
         clist.append(idflarm)			# add device to the competion list
         if ognpair != ' ':
