@@ -355,6 +355,7 @@ for cl in getemb(cd, 'classes'):
                else:
                    print("Missing ognpair:", fname, lname)
                flist.append(ognpair+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
+           clist.append(ognpair)			# add device to the competion list
 
         else:
 
@@ -365,7 +366,7 @@ for cl in getemb(cd, 'classes'):
                    print("Missing Flarm:", fname, lname)
                flist.append(idflarm+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
 
-        clist.append(idflarm)			# add device to the competion list
+           clist.append(idflarm)			# add device to the competion list
         if ognpair != ' ':
            clist.append(ognpair)		# add pairing tracker to the competion list
         else:
@@ -379,6 +380,9 @@ for cl in getemb(cd, 'classes'):
         if idflarm == ' ':
             idflarm = str(npil)
                                                 # create the track
+
+        if OGNTRACKERS:
+           idflarm=ognpair
         if igcid != 0:
             tr = {"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,
                   "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors": [color],
