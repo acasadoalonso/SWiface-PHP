@@ -133,6 +133,10 @@ try:
     secretkey = cfg.get('server', 'secretkey').strip("'")
 except:
     secretkey = ''
+try:
+    OGNTRACKERS = cfg.get('server', 'OGNTRACKERS').strip("'")
+except:
+    OGNTRACKERS = 'False'
 
 
 
@@ -169,6 +173,7 @@ datafile.write("GIST_USER='"+GIST_USER+"' \n")
 datafile.write("GIST_TOKEN='"+GIST_TOKEN+"' \n")
 datafile.write("clientid='"+clientid+"' \n")
 datafile.write("secretkey='"+secretkey+"' \n")
+datafile.write("OGNTRACKERS="+OGNTRACKERS+" \n")
 datafile.write("prt=False \n")
 
 # --------------------------------------#

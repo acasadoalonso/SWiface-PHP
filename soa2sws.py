@@ -34,6 +34,7 @@ from geopy.distance import geodesic     # use the geodesic (Vincenty deprecated)
 from gistfuncs import *
 
 
+OGNTRACKERS = True
 #-------------------------------------------------------------------------------------------------------------------#
 
 
@@ -347,7 +348,6 @@ for cl in getemb(cd, 'classes'):
                                                 # convert the 2 char ISO code to 3 chars ISO code
         ccc = pycountry.countries.get(alpha_2=nation)
         country = ccc.alpha_3
-        OGNTRACKERS = True
         if OGNTRACKERS:
            if ognpair != 'NOTYET':
                if ognpair != " ":
@@ -420,9 +420,17 @@ for cl in getemb(cd, 'classes'):
 
 #   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
                                                 # look for the waypoints within the task
-    url5 = getlinks(ctt[idx], "points")
+    try:
+        url5 = getlinks(ctt[idx], "points")
                                                 # look for the waypoints within the task within the day IDX
-    cpp = gdata(url5,        "points")
+        cpp = gdata(url5,        "points")
+    except:
+        print ("No WP yet...", url5)            # when the task is not ready
+        os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
+        os.system('rm  '+TASKFILE)
+        os.system('rm  '+CSVFILE)
+        os.system('rm  '+COMPFILE)
+        continue				# nothing else to do now
     print("= Waypoints for the task within the class  ============")
     tasklen = 0                                 # task length for double check
     ntp = 0                                     # number of turning points
