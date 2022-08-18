@@ -206,6 +206,12 @@ filenames=False
 # Build the tracks and turn points, exploring the contestants and task within each class
 # go thru the different classes now within the day
 
+COMPFILE = cucpath +"competitiongliders.lst"
+if os.path.isfile(COMPFILE):
+    os.system('rm  '+COMPFILE)
+print("COMP generated data file for the class is: ", COMPFILE)  # just a trace
+compfile = open(COMPFILE, 'w')			# open the output file, one per all
+clist  = []				        # list of competitors
 for cl in getemb(cd, 'classes'):
                                                 # search for each class
     tracks = []				        # create the instance for the tracks
@@ -222,7 +228,6 @@ for cl in getemb(cd, 'classes'):
     JSONFILE = cucpath + initials + fl_date_time+"-"+classtype+".json"
     TASKFILE = cucpath + initials + fl_date_time+"-"+classtype+".tsk"
     CSVFILE  = cucpath + initials + fl_date_time+"-"+classtype+"_filter.csv"
-    COMPFILE = cucpath + initials + fl_date_time+"-"+classtype+"_competitiongliders.lst"
                                                 # name of the JSON to be generated, one per class
     if os.path.isfile(JSONFILE):
     	os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
@@ -230,18 +235,14 @@ for cl in getemb(cd, 'classes'):
         os.system('rm  '+TASKFILE)
     if os.path.isfile(CSVFILE):
         os.system('rm  '+CSVFILE)
-    if os.path.isfile(COMPFILE):
-        os.system('rm  '+COMPFILE)
     print("JSON generated data file for the class is: ", JSONFILE)  # just a trace
     print("TASK generated data file for the class is: ", TASKFILE)  # just a trace
     print("CSV  generated data file for the class is: ", CSVFILE)   # just a trace
-    print("COMP generated data file for the class is: ", COMPFILE)  # just a trace
 
-    print("\n= Class = Category:", category, "Type:", classtype, "Class ID:", classid)
+    print("\n= Class = Category:", category, "Type:", classtype, "Class ID:", classid,"\n")
     jsonfile = open(JSONFILE, 'w')		# open the output file, one per class
     taskfile = open(TASKFILE, 'w')		# open the output file, one per class
     csvfile  = open(CSVFILE,  'w')		# open the output file, one per class
-    compfile = open(COMPFILE, 'w')		# open the output file, one per class
     filenames=True				# set a mark that we created the files
 #   --------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
     						# PILOTS within the CLASS
@@ -253,7 +254,6 @@ for cl in getemb(cd, 'classes'):
     tptype = []				        # set the turning point type
     flist  = []				        # Filter list for glidertracker.orga
     flist.append("ID,CALL,CN,TYPE,INDEX")       # Initialize with header row
-    clist  = []				        # list of competitors
 
     for contestants in ctt:                     # inspect the data of each contestant
         npil += 1                               # increase the number of total pilots
@@ -406,7 +406,6 @@ for cl in getemb(cd, 'classes'):
         os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
         os.system('rm  '+TASKFILE)
         os.system('rm  '+CSVFILE)
-        os.system('rm  '+COMPFILE)
         continue				# nothing else to do now
     print("= Tasks ==", ctt[idx]["task_date"])
     if td_date_time != ctt[idx]["task_date"]:
@@ -429,7 +428,6 @@ for cl in getemb(cd, 'classes'):
         os.system('rm  '+JSONFILE)		# delete the JSON & TASK files
         os.system('rm  '+TASKFILE)
         os.system('rm  '+CSVFILE)
-        os.system('rm  '+COMPFILE)
         continue				# nothing else to do now
     print("= Waypoints for the task within the class  ============")
     tasklen = 0                                 # task length for double check
@@ -453,7 +451,7 @@ for cl in getemb(cd, 'classes'):
         ozra = point["oz_radius1"]		# oz radius
         ozr2 = point["oz_radius2"]		# oz radius
         dist = point["distance"]/1000		# distance in kms.
-        print ("PPP", point)
+        #print ("PPP", point)
         if ozr2 <= 0:
             ozr2 = 500
         if (wtyp == "start"):                   # convert from CU format to SW format
@@ -563,15 +561,6 @@ for cl in getemb(cd, 'classes'):
     csvfile.close()				# close the CSV file
     os.chmod(CSVFILE, 0o775) 			# make the CSV file accessible
 
-    # Write a comp file of all gliders to be used as filter file for pairing
-    j = json.dumps(clist, indent=4)             # dump it
-                                                # write it into the comp file on json format
-    try:
-        compfile.write(j)
-        compfile.close()                        # close the COMP file for this class
-    except:
-        print("error on writing COMP file ... ", clist)
-
     os.chmod(COMPFILE, 0o775) 			# make the COMP file accessible
     if config.GIST:				# if GIST is requested
        content=t+"\n"				# the content is the TASK file
@@ -585,6 +574,15 @@ for cl in getemb(cd, 'classes'):
 
 # end of CLASSES for 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
+# Write a comp file of all gliders to be used as filter file for pairing
+j = json.dumps(clist, indent=4)             # dump it
+                                                # write it into the comp file on json format
+try:
+    compfile.write(j)
+    compfile.close()                        # close the COMP file for this class
+except:
+    print("error on writing COMP file ... ", clist)
 
 
 
