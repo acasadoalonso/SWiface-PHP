@@ -286,6 +286,10 @@ if j_obj.get("j") != None:
 if j_obj.get("i") == None:				# check if is fully setup the web site
     print("No index of days ... exiting.")
     print("WARNING: No valid JSON file generated .....................")
+    os.system('rm  '+JSONFILE)		                # remove the previous one
+    os.system('rm  '+TASKFILE)		                # remove the previous one
+    os.system('rm  '+COMPFILE)		                # remove the previous one
+    os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit(-1)
 indexofdays = j_obj["i"]
                                                         #print "Index of Days", indexofdays
