@@ -278,7 +278,7 @@ comp_lastday = comp['b']				# last day of the competition
 comp_name = comp['t']				        # event name
 comp_shortname = comp['l']				# event short name
 comp_id = comp['i']
-print("Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, comp_firstday, comp_lastday)
+print("Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, "First day:",comp_firstday, "Last day:", comp_lastday)
 numberofactivedays = 0
 
 if j_obj.get("j") != None:
@@ -341,7 +341,7 @@ comp_daytitle = d_obj["l"]				# day title
 comp_shortdaytitle = d_obj["t"]				# short day title
 comp_starttime = d_obj["a"]				# start time millis from midnite
 comp_startaltitude = d_obj["h"]				# start altitude
-comp_finishaltitude = d_obj["f"]				# finish altitude
+comp_finishaltitude = d_obj["f"]			# finish altitude
 print("Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude)
 if "k" in d_obj:
     comp_taskinfo = d_obj["k"]			        # task infor data
@@ -394,7 +394,7 @@ else:
 
 print("Task info")
 print("=========")
-print("Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name)
+print("Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Airfield:", task_at_place, "TimeZone:", task_at_timezone)
 #print "Task at:", task_at, "WPLA", task_wpla
 print("Task country:", task_at_country, "at", task_at_place, "TZ:", task_at_timezone, "Elevation:", task_at_elevation, "Task Runway:", task_at_runway, task_at_runways, task_at_runwaydir, task_at_runwaywidth, task_at_runwaysurface, "Freq:", task_at_freq, "ICAO code:", task_at_icao)
 print("Task creator:", task_creator, "\nTask length:", task_length, "From:", task_atfrom)
@@ -458,7 +458,7 @@ print("Comp full  name:", comp_name)
 print("Comp date:", comp_date)
 print("Comp Start time:", comp_starttime/1000)
 #print tp
-task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace",
+task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "TimeZone": task_at_timezone, 
         "startOpenTs": comp_date, "turnpoints": tp}
 event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks}
