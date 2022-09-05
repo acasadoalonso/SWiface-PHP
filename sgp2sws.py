@@ -258,7 +258,7 @@ for id in pilots:
                photourl=config.SWSserver+"SWS/PilotImages/"+photo
         #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>", url)
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model,
-              "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": photourl}
+              "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": photourl, "ognTrackerPaired": ogntracker}
     else:                                               # use the local pictures on the SWS server
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model, "registration": registration,
               "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": config.SWSserver+"SWS/pic/"+compid+".png", "3dModelVariant": config.SWSserver+"SWS/pic/"+compid+".sponsor.png"}
