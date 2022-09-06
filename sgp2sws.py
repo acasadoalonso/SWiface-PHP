@@ -458,7 +458,7 @@ print("Comp full  name:", comp_name)
 print("Comp date:", comp_date)
 print("Comp Start time:", comp_starttime/1000)
 #print tp
-task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "TimeZone": task_at_timezone, 
+task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
         "startOpenTs": comp_date, "turnpoints": tp}
 event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks}
