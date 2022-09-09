@@ -34,7 +34,7 @@ from geopy.distance import geodesic     # use the geodesic (Vincenty deprecated)
 from gistfuncs import *
 
 
-OGNTRACKERS = True
+OGNTRACKERS = False
 #-------------------------------------------------------------------------------------------------------------------#
 
 
@@ -450,6 +450,7 @@ for cl in getemb(cd, 'classes'):
         ozty = point["oz_type"]			# oz type: next/symmetric/previous
         ozra = point["oz_radius1"]		# oz radius
         ozr2 = point["oz_radius2"]		# oz radius
+        oza2 = point["oz_angle2"]               # oz angle 
         dist = point["distance"]/1000		# distance in kms.
         #print ("PPP", point)
         if ozr2 <= 0:
@@ -493,6 +494,10 @@ for cl in getemb(cd, 'classes'):
         tlegs = [lati, lon]                     # legs
         legs.append(tlegs)
         trad = [rad]
+        if oza2 == 0:				# if angle2 is zero use the radius 1
+           trad = [ozra]
+        else:
+           trad = [ozr2]
         legs.append(trad)
         ntp += 1				# number of TPs
         tasklen += dist                         # compute the task distance
