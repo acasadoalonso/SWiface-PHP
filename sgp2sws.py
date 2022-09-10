@@ -188,7 +188,6 @@ for id in pilots:
             warnings.append(lname) 			# add it to the list of warnings
                                                         # get the FlarmId from the registration
         ognflarm = getognflarmid(registration)
-        print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
         if len(flarmid) == 6:
             flarmid="FLR"+flarmid
         if flarmid == '':
@@ -242,6 +241,7 @@ for id in pilots:
 
     pilotname = str((fname+" "+lname).encode('utf8').decode('utf-8'))
     print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, "Tracker:", ogntracker)
+    print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
     if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
         p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
         rr=p.read().decode('UTF-8') 
@@ -458,7 +458,7 @@ print("Comp full  name:", comp_name)
 print("Comp date:", comp_date)
 print("Comp Start time:", comp_starttime/1000)
 #print tp
-task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
+task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
         "startOpenTs": comp_date, "turnpoints": tp}
 event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks}
