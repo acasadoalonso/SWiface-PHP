@@ -238,8 +238,8 @@ def convertline(tsk):                       # conver the start line on several p
         p1=(lat1, lon1)
         p2=(lat2, lon2)
         bearing=initial_bearing(p1,p2)      # get the bearing from the start gate to the first TP
-        np1=getnewpoint(lat1,lon1, size/2, bearing+90)  # next point is from center of start line to half of the size to the right
-        np2=getnewpoint(lat1,lon1, size/2, bearing-90)
+        np1=getnewpoint(lat1,lon1, size, bearing+90)  # next point is from center of start line to half of the size to the right
+        np2=getnewpoint(lat1,lon1, size, bearing-90)
         np=[]
         np.append(np1[0])                   # append this to the existing .tsk
         np.append(np1[1])
@@ -263,13 +263,13 @@ def convertline(tsk):                       # conver the start line on several p
         coor2=legs[2]                       # get the coord of the first TP
         lat2=coor2[0]
         lon2=coor2[1]
-        size=legs[1][0]                     # get the size of the FINISH GATE
+        size=legs[1][0]                     # get the size / radius of the FINISH GATE
         legs[1][0]=0
         p1=(lat1, lon1)
         p2=(lat2, lon2)
         bearing=initial_bearing(p1,p2)      # get the bearing from the start gate to the first TP
-        np1=getnewpoint(lat1,lon1, size/2, bearing+90)  # next point is from center of start line to half of the size to the right
-        np2=getnewpoint(lat1,lon1, size/2, bearing-90)
+        np1=getnewpoint(lat1,lon1, size, bearing+90)  # next point is from center of start line to radius the size to the right
+        np2=getnewpoint(lat1,lon1, size, bearing-90)
         np=[]
         np.append(np1[0])                   # append this to the existing .tsk
         np.append(np1[1])
