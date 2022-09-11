@@ -4,6 +4,9 @@ $indexday = $_POST['indexday'];
 $cwd =getcwd();
 $rc=0;
 echo 'COMPid='.$compid.' Indexday='.$indexday.'<br><br>';
+if  ( ! is_numeric($compid)) {
+   die;
+   }
 ob_start();
 if (is_numeric($indexday)){
 	passthru('/usr/bin/python3 '.$cwd.'/sgp2sws.py '.$compid.' '.$indexday, $rc);

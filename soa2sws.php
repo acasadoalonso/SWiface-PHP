@@ -1,8 +1,13 @@
 <?php
+$class = 'ALL';
+$indexday = 0;
 $class = $_POST['class'];
 $indexday = $_POST['indexday'];
 $cwd =getcwd();
 $rc=0;
+if  ( ! is_numeric($indexday)) {
+   die;
+   }
 echo 'Class='.$class.' Indexday='.$indexday.'<br><br>';
 ob_start();
 if ($indexday != 0)

@@ -175,8 +175,7 @@ auth = apiurl+rel+'/hmac/v1 ClientID="'+client+'",Signature="' + \
 url1 = apiurl+rel
                                                 # get the contest data, first instance
 cd = gdata(url1, 'contests', prt='no')[0]
-
-#ogndata=getddbdata()                            # get the OGB DDB
+#print ("CCC",cd)
 category = cd['category']
 eventname = cd['name']
 compid = cd['id']
@@ -187,12 +186,16 @@ ccc = pycountry.countries.get(alpha_2=country)
 country3 = ccc.alpha_3
 endate = cd['end_date']
 lc = getemb(cd, 'location')                     # location data
-lcname = lc['name']                             # location name
+lcname      = lc['name'].encode('utf-8').decode('utf-8')                        # location name
+lctimezone  = lc['time_zone']			# Time Zone
+lclongitude = lc['longitude']			# longitude 
+lclatitude  = lc['latitude']			# latitude 
+lcaltitude  = lc['altitude']			# altitude 
 
-print("= Contest ===============================")
+print("\n= Contest ===============================")
 print("Category:", category, "Comp Name:", eventname, "Comp ID:", compid)
 try:
-   print("Loc Name:", lcname.encode('utf-8').decode('utf-8') ,   "Country: ", country, country3, "End date:",  endate)
+   print("Loc Name:", lcname.encode('utf-8').decode('utf-8') ,   "Country: ", country, country3, "End date:",  endate, "TZ:", lctimezone, "lat:", lclatitude, "lon:", lclongitude, "alt:", lcaltitude)
 except:
    print( "Country: ", country, country3, "End date:",  endate)
    
@@ -524,7 +527,7 @@ for cl in getemb(cd, 'classes'):
                                                 # timestamp 09:00:00 UTC
     ts = int(td.total_seconds()+9*60*60)
     event = {"name": classtype+"-"+eventname, "description": classtype,  "eventRevision": 0, "task": {
-        "taskName": classtype, "taskType": taskType, "startOpenTs": ts, "turnpoints": tps},  "tracks": tracks}
+        "taskName": classtype, "taskType": taskType, "startOpenTs": ts, "Airfield": lcname, "Elevation": lcaltitude, "TimeZone": lctimezone, "turnpoints": tps},  "tracks": tracks}
     j = json.dumps(event, indent=4)             # dump it
                                                 # write it into the JSON file
     jsonfile.write(j)

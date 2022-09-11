@@ -69,6 +69,11 @@ version='V2.01'
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
     qsgpID = sys.argv[1]
+    if not qsgpID.isnumeric():
+
+       print ("Please indicate the COMP ID\n\n")
+       print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
+       exit(-1)
     try:
        days = str(sys.argv[2])
     except:
