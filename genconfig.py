@@ -202,3 +202,6 @@ datafile.write("$SWSserver='"+SWSserver+"' ;\n")
 datafile.write("$MySQL="+MySQLtext+";\n")
 datafile.write("?> \n")
 datafile.close()
+os.system("chmod 700 config.*")
+os.system("chown :www-data config.*")
+
