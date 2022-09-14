@@ -11,6 +11,7 @@ import datetime
 import urllib.parse
 from  ognddbfuncs import *
 import config
+from   gistfuncs  import unobscure
 
 #
 #   This script set the pairing between OGN trackers and flarms that are on the same glider, so it become a virtual single device
@@ -56,7 +57,7 @@ html4 = '<a href='+config.SWSserver+'SWS/pairtrk.php?action=edit&trk=%s&flarmid=
 
 
 #
-conn = MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=config.DBpasswd, db=DBname, connect_timeout=1000)     # connect with the database
+conn = MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=unobscure(config.DBpasswd.encode(), db=DBname, connect_timeout=1000)     # connect with the database
 cursD = conn.cursor()                           # connect with the DB set the cursor
         
 if action == 'update':                          # the update order

@@ -10,6 +10,7 @@ import time
 import sys
 import os
 import config
+from   gistfuncs  import unobscure
 
 dbpath = config.DBpath
 # use the configuration DB path
@@ -47,7 +48,7 @@ if (today != date):                                             # it is today
     dbpath = dbpath+'/archive/'
     live = False                                              # mark as NOT live
 if (config.MySQL):
-    conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread,
+    conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=unobscure(config.DBpasswd.encode(),
                            db=DBname, connect_timeout=1000)     # connect with the database
 else:
     # open th DB in read only mode

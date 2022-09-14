@@ -11,7 +11,7 @@ import sqlite3
 import MySQLdb
 import datetime
 import config
-
+from   gistfuncs  import unobscure
 cucpath = config.cucFileLocation
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
@@ -24,10 +24,10 @@ localtime = datetime.datetime.now()					# get today's date
 today = localtime.strftime("%y%m%d")					# in string format yymmdd
 DBpath = config.DBpath							# use the configuration DB path
 DBname = config.DBname							# use the configuration DB name
-DBtable = config.DBtable							# use the configuration DB table
+DBtable = config.DBtable						# use the configuration DB table
 
 if (today != dateid):
-    DBpath = DBpath+'/archive/'					# use the archive folder instead
+    DBpath = DBpath+'/archive/'						# use the archive folder instead
     DBname = config.DBarchive						# use the archive DB
 
 if (id == "LIVE"):							# if it a dummy envent LIVE
@@ -41,7 +41,7 @@ if (id == "LIVE"):							# if it a dummy envent LIVE
 
 #
     if (config.MySQL):
-        conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=config.DBpasswdread,
+        conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=unobscure(config.DBpasswdread.encode()).decode(),
                                db=DBname, connect_timeout=1000)     # connect with the database
     else:
         # open th DB in read only mode

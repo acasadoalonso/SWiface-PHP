@@ -8,6 +8,11 @@ $rc=0;
 if  ( ! is_numeric($indexday)) {
    die;
    }
+if(strpos($class, ';') !== false){
+    echo "Wrong class!";
+   die;
+   }
+   
 echo 'Class='.$class.' Indexday='.$indexday.'<br><br>';
 ob_start();
 if ($indexday != 0)

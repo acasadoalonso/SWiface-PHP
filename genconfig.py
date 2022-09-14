@@ -14,6 +14,7 @@
 import socket
 import os
 import datetime
+from   gistfuncs  import obscure
 from configparser import ConfigParser
 configdir = os.getenv('CONFIGDIR')
 if configdir == None:
@@ -47,12 +48,14 @@ MySQLtext = cfg.get('server', 'MySQL').strip("'").strip('"')
 DBhost = cfg.get('server', 'DBhost').strip("'").strip('"')
 DBuser = cfg.get('server', 'DBuser').strip("'").strip('"')
 DBpasswd = cfg.get('server', 'DBpasswd').strip("'").strip('"')
+DBpasswd = obscure(DBpasswd.encode())
 try:
     DBuserread = cfg.get('server', 'DBuserread').strip("'").strip('"')
 except:
     DBuserread = DBuser
 try:
     DBpasswdread = cfg.get('server', 'DBpasswdread').strip("'").strip('"')
+    DBpasswdread = obscure(DBpasswdread)
 except:
     DBpasswdread = DBpasswd
 try:
@@ -149,9 +152,9 @@ datafile.write("DBtable='"+DBtable+"' \n")
 datafile.write("DBarchive='"+DBarchive+"' \n")
 datafile.write("SQLite3='"+SQLite3+"' \n")
 datafile.write("DBuser='"+DBuser+"' \n")
-datafile.write("DBpasswd='"+DBpasswd+"' \n")
+datafile.write("DBpasswd='"+DBpasswd.decode()+"' \n")
 datafile.write("DBuserread='"+DBuserread+"' \n")
-datafile.write("DBpasswdread='"+DBpasswdread+"' \n")
+datafile.write("DBpasswdread='"+DBpasswdread.decode()+"' \n")
 datafile.write("MySQL="+MySQLtext+" \n")
 datafile.write("Initials='"+Initials+"' \n")
 datafile.write("SWSserver='"+SWSserver+"' \n")
@@ -195,13 +198,13 @@ datafile.write("$DBtable='"+DBtable+"';\n")
 datafile.write("$DBarchive='"+DBarchive+"';\n")
 datafile.write("$SQLite3='"+SQLite3+"';\n")
 datafile.write("$DBuser='"+DBuser+"';\n")
-datafile.write("$DBpasswd='"+DBpasswd+"';\n")
+datafile.write("$DBpasswd='"+DBpasswd.decode()+"';\n")
 datafile.write("$DBuserread='"+DBuserread+"';\n")
-datafile.write("$DBpasswdread='"+DBpasswdread+"';\n")
+datafile.write("$DBpasswdread='"+DBpasswdread.decode()+"';\n")
 datafile.write("$SWSserver='"+SWSserver+"' ;\n")
 datafile.write("$MySQL="+MySQLtext+";\n")
 datafile.write("?> \n")
 datafile.close()
-os.system("chmod 700 config.*")
+os.system("chmod 740 config.*")
 os.system("chown :www-data config.*")
 

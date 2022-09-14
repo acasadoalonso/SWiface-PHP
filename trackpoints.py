@@ -11,7 +11,7 @@ import time
 import sys
 import os
 import config
-
+from   gistfuncs  import unobscure
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
@@ -53,7 +53,7 @@ else:
 
 if (config.MySQL):						# Are we using MySQL ??
     conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread,
-                           passwd=config.DBpasswdread, db=DBname)     # connect with the database
+                           passwd=unobscure(config.DBpasswdread.encode(), db=DBname)     # connect with the database
 else:
 
     filename = dbpath+config.SQLite3				# open th DB in read only mode

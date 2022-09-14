@@ -3,6 +3,14 @@ $compid = $_POST['compid'];
 $indexday = $_POST['indexday'];
 $cwd =getcwd();
 $rc=0;
+if  ( ! is_numeric($indexday)) {
+   die;
+   }
+if(strpos($compid, ';') !== false){
+    echo "Wrong compid!";
+   die;
+   }
+
 echo 'COMPid='.$compid.' Indexday='.$indexday.'<br><br>';
 ob_start();
 if (is_numeric($indexday)){
