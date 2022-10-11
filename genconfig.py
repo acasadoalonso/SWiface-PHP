@@ -48,6 +48,7 @@ MySQLtext = cfg.get('server', 'MySQL').strip("'").strip('"')
 DBhost = cfg.get('server', 'DBhost').strip("'").strip('"')
 DBuser = cfg.get('server', 'DBuser').strip("'").strip('"')
 DBpasswd = cfg.get('server', 'DBpasswd').strip("'").strip('"')
+origDBpasswd=DBpasswd
 DBpasswd = obscure(DBpasswd.encode())
 try:
     DBuserread = cfg.get('server', 'DBuserread').strip("'").strip('"')
@@ -55,9 +56,9 @@ except:
     DBuserread = DBuser
 try:
     DBpasswdread = cfg.get('server', 'DBpasswdread').strip("'").strip('"')
-    DBpasswdread = obscure(DBpasswdread)
+    DBpasswdread = obscure(DBpasswdread.encode())
 except:
-    DBpasswdread = DBpasswd
+    DBpasswdread = obscure(origDBpasswd.encode())
 try:
     SWSserver = cfg.get('server', 'SWSserver').strip("'").strip('"')
 except:
@@ -71,10 +72,6 @@ try:
     DBtable = cfg.get('server', 'DBtable').strip("'").strip('"')
 except:
     DBtable = "OGNDATA"
-try:
-    DBarchive = cfg.get('server', 'DBarchive').strip("'").strip('"')
-except:
-    DBarchive = "SWARCHIVE"
 
 SQLite3 = cfg.get('server', 'SQLite3').strip("'").strip('"')
 Initials = cfg.get('server', 'Initials').strip("'").strip('"')
@@ -149,7 +146,6 @@ datafile.write("SARpath='"+SARpath+"' \n")
 datafile.write("DBhost='"+DBhost+"' \n")
 datafile.write("DBname='"+DBname+"' \n")
 datafile.write("DBtable='"+DBtable+"' \n")
-datafile.write("DBarchive='"+DBarchive+"' \n")
 datafile.write("SQLite3='"+SQLite3+"' \n")
 datafile.write("DBuser='"+DBuser+"' \n")
 datafile.write("DBpasswd='"+DBpasswd.decode()+"' \n")
@@ -195,7 +191,6 @@ datafile.write("$SARpath='"+SARpath+"';\n")
 datafile.write("$DBhost='"+DBhost+"';\n")
 datafile.write("$DBname='"+DBname+"';\n")
 datafile.write("$DBtable='"+DBtable+"';\n")
-datafile.write("$DBarchive='"+DBarchive+"';\n")
 datafile.write("$SQLite3='"+SQLite3+"';\n")
 datafile.write("$DBuser='"+DBuser+"';\n")
 datafile.write("$DBpasswd='"+DBpasswd.decode()+"';\n")

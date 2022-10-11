@@ -24,16 +24,8 @@ $stime = substr($starttime, 8);
 $eyear = substr($endtime, 2, 6);
 $etime = substr($endtime, 8);
 $ini_array = parse_ini_file("/etc/local/SWSconfig.ini");
-if ($syear == date('ymd'))
-	{
-	$DBpath=$ini_array['DBpath'];
-	//echo "Today";
-	}
-else 
-	{
-	$DBpath=$ini_array['DBpath'].'archive';
-	}
 	
+$DBpath=$ini_array['DBpath'];
 $DB=$DBpath.'SWiface.db';
 if ($querytype == "getintfixes")
 	{

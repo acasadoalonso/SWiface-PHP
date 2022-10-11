@@ -44,8 +44,6 @@ else:
 
 
 if (today != date):                                             # it is today
-    # no user archive folder
-    dbpath = dbpath+'/archive/'
     live = False                                              # mark as NOT live
 if (config.MySQL):
     conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread, passwd=unobscure(config.DBpasswd.encode(),

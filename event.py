@@ -26,9 +26,6 @@ DBpath = config.DBpath							# use the configuration DB path
 DBname = config.DBname							# use the configuration DB name
 DBtable = config.DBtable						# use the configuration DB table
 
-if (today != dateid):
-    DBpath = DBpath+'/archive/'						# use the archive folder instead
-    DBname = config.DBarchive						# use the archive DB
 
 if (id == "LIVE"):							# if it a dummy envent LIVE
 
