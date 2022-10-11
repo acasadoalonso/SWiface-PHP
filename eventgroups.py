@@ -11,17 +11,13 @@ import os
 import config
 
 localtime=datetime.now()
-yesterday=localtime-timedelta(days=1)
 todaydate=localtime.strftime("%Y%m%d")
-yesterdaydate=yesterday.strftime("%Y%m%d")
 today=date.today()
 evQ=[]                                                  # create the event entity
 evL=[]                                                  # new instance of the event
 
 ev2={'id':"LIVE"+todaydate, 'startOpenTs': int(time.time())}# Live today's event
-ev3={'id':"LIVE"+yesterdaydate, 'startOpenTs': int(time.time()) - 86400}# Live yesterday's event
 evL.append(ev2)                                         # add today's event
-evL.append(ev3)                                         # add today's event
 
 eventname=config.eventname1                             # use the defaults
 eventdesc=config.eventdesc1
