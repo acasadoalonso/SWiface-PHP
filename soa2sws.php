@@ -22,7 +22,7 @@ if ($indexday != 0)
 else
 	{
 	system('/usr/bin/python3 '.$cwd.'/soa2sws.py ', $rc);
-        echo "ttt";
+        echo "RC: ";
         echo $rc;
 	}
 $output = ob_get_clean(); 
