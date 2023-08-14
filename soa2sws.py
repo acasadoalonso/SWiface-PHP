@@ -95,7 +95,7 @@ else:
     classreq = ' '                              # none
 
 
-version='V2.03'
+version='V2.04'
 # ---------------------------------------------------------------- #
 print("\n\nUtility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
 print("=================================================================================================================================\n\n")
@@ -152,15 +152,26 @@ print("Config params. SWpath: ", SWdbpath, ", Initials:", initials, ", Location 
 
 nonce = base64.b64encode(os.urandom(36))        # get the once base
                                                 # open the file with the client id
-f = open(secpath+"clientid")
-client = f.read()                               # read it
-                                                # clear the whitespace at the end
-client = client.rstrip()
-                                                # open the file with the secret key
-f = open(secpath+"secretkey")
-secretkey = f.read()                            # read it
-                                                # clear the whitespace at the end
-secretkey = secretkey.rstrip().encode(encoding='utf-8')
+# ----------------------------------------------#
+if config.clientid == '' or config.secretkey == '': # check if provided by the config file ???
+           if prt:
+               print("Reading the clientid/secretkey from the SoaringSpot directory")
+           # if client/screct keys are not in the config file, read it for SoaringSpot directory
+           f = open(secpath+"clientid") 	# open the file with the client id
+           client = f.read()               	# read it
+           client = client.rstrip() 		# clear the whitespace at the end
+           f = open(secpath+"secretkey") 	# open the file with the secret key
+           secretkey = f.read()            	# read it
+           					# clear the whitespace at the end
+           secretkey = secretkey.rstrip().encode(encoding='utf-8')
+else:						# the credentials are from the config file
+           client = config.clientid
+           client = client.rstrip() 		# clear the whitespace at the end
+           secretkey = config.secretkey
+           secretkey = secretkey.rstrip().encode(encoding='utf-8')
+
+#print (client,":::",secretkey)
+
 message = nonce+date.encode(encoding='utf-8')+client.encode(encoding='utf-8')   # build the message
                                                 # and the message digest
 digest = hmac.new(secretkey, msg=message, digestmod=hashlib.sha256).digest()
@@ -363,7 +374,7 @@ for cl in getemb(cd, 'classes'):
         else:
 
            if idflarm != 'NOTYET':
-               if idflarm != " ":
+               if idflarm != " " and idflarm != "NOFlarm":
                    wlist.append(idflarm[3:9])
                else:
                    print("Missing Flarm:", fname, lname)
@@ -374,12 +385,16 @@ for cl in getemb(cd, 'classes'):
            clist.append(ognpair)		# add pairing tracker to the competion list
         else:
            clist.append("OGNFFFFFF")		# add pairing tracker to the competion list
+        if idflarm == ognid and regi != "reg_NOTYET":
+           flarmOK = "OK"
+        else:
+           flarmOK = "NOTOK"
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
-            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, igcid, idflarm, '(Reg:', idfreg, ')', "OGNDDB:==>", ognid, "Pairing with:", ognpair)  # , fr
+            print("\t", (fname+" "+lname),  nation, country, regi, cn, hd, ar, club, ", IGCID:", igcid, " ,FlarmdID from CU", idflarm, ', (Reg:', idfreg, ')', ", OGN DDB:==>", ognid, "is:", flarmOK, ", Pairing with:", ognpair)  # , fr
         except:
-            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), igcid, idflarm, "OGN DDB:==>", ognid, "Pairing with:", ognpair )  # , fr
+            print("\n\t", pname.encode(encoding='utf-8'), nation, country, regi, cn, hd, ar, club.encode(encoding='utf-8'), ", IGCID:", igcid, ", FlarmdID from CU", idflarm, ", OGN DDB:==>", ognid, "is:", flarmOK, ", Pairing with:", ognpair )  # , fr
         if idflarm == ' ':
             idflarm = str(npil)
                                                 # create the track

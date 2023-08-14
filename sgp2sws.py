@@ -245,7 +245,11 @@ for id in pilots:
         color="#"+ccc[2:]                               # set the JSON color required
 
     pilotname = str((fname+" "+lname).encode('utf8').decode('utf-8'))
-    print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, "Tracker:", ogntracker)
+    if flarmid == ognflarm and registration != "":
+       flarmOK = "OK"
+    else:
+       flarmOK = "NOTOK"
+    print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker)
     print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
     if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
         p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
@@ -283,7 +287,7 @@ comp_lastday = comp['b']				# last day of the competition
 comp_name = comp['t']				        # event name
 comp_shortname = comp['l']				# event short name
 comp_id = comp['i']
-print("Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, "First day:",comp_firstday, "Last day:", comp_lastday)
+print("Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, "First day:",comp_firstday, "Last day:", comp_lastday, "Number of pilots:", npil)
 numberofactivedays = 0
 
 if j_obj.get("j") != None:
