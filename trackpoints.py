@@ -50,7 +50,7 @@ dbpath = config.DBpath					# use the std path
 
 if (config.MySQL):						# Are we using MySQL ??
     conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread,
-                           passwd=unobscure(config.DBpasswdread.encode(), db=DBname)     # connect with the database
+                           passwd=unobscure(config.DBpasswdread).decode(), db=DBname)     # connect with the database
 else:
 
     filename = dbpath+config.SQLite3				# open th DB in read only mode
