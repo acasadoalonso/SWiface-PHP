@@ -57,7 +57,7 @@ html4 = '<a href='+config.SWSserver+'SWS/pairtrk.php?action=edit&trk=%s&flarmid=
 
 
 #
-conn = MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=unobscure(config.DBpasswd.encode(), db=DBname, connect_timeout=1000)     # connect with the database
+conn = MySQLdb.connect(host=config.DBhost, user=config.DBuser, passwd=unobscure(config.DBpasswd).decode(), db=DBname, connect_timeout=1000)     # connect with the database
 cursD = conn.cursor()                           # connect with the DB set the cursor
         
 if action == 'update':                          # the update order

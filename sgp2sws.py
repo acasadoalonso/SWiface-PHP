@@ -186,7 +186,7 @@ for id in pilots:
     rankingid = pilots[id]["r"]                         # ranking id
     if int(qsgpID) >= 14:
         flarmid = pilots[id]["q"].rstrip()              # flarm id
-        registration = pilots[id]["w"]                  # registration
+        registration = pilots[id]["w"].lstrip()         # registration
         if registration == "":
             print("Warning .... Missing glider registration:", flarmid, "\n\n")
             nwarnings += 1
