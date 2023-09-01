@@ -256,6 +256,7 @@ for id in pilots:
         rr=p.read().decode('UTF-8') 
         pr = json.loads(rr)
         photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
+        #print("PR", pr)
         if pr != None:                                  # use the RankingList API
             obj=pr['data']   		                # reach the photo file
             if obj != None:
@@ -265,7 +266,15 @@ for id in pilots:
                print    ("wget "+photourl+" -q -O PilotImages/"+photo)
                os.system("wget "+photourl+" -q -O PilotImages/"+photo)
                photourl=config.SWSserver+"SWS/PilotImages/"+photo
-        #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>", url)
+           
+            if photo == "noimage.jpg":
+               #print("PPP", config.SWSserver+"SWS/PilotImages/"+str(rankingid)+".jpg")
+               if os.path.exists("PilotImages/"+str(rankingid)+".jpg"):
+                  photourl=config.SWSserver+"SWS/PilotImages/"+str(rankingid)+".jpg"
+               else:
+                  print("Photo not found")
+               
+        #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>",photourl)
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model,
               "registration": registration, "3dModel": "ventus2", "ribbonColors": color, "portraitUrl": photourl, "ognTrackerPaired": ogntracker}
     else:                                               # use the local pictures on the SWS server
