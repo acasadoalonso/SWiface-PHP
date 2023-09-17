@@ -14,6 +14,7 @@ import base64
 import pycountry
 import math
 import os
+#import shutil
 import socket
 import config
 import geopy
@@ -221,7 +222,7 @@ filenames=False
 # go thru the different classes now within the day
 
 COMPFILE = cucpath +"competitiongliders.lst"
-if os.path.isfile(COMPFILE):
+if os.path.isfile(COMPFILE):			# delete the previous COMP file
     os.system('rm  '+COMPFILE)
 print("COMP generated data file for the class is: ", COMPFILE)  # just a trace
 compfile = open(COMPFILE, 'w')			# open the output file, one per all
@@ -369,7 +370,7 @@ for cl in getemb(cd, 'classes'):
                else:
                    print("Missing ognpair:", fname, lname)
                flist.append(ognpair+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
-           clist.append(ognpair)			# add device to the competion list
+           clist.append(ognpair)		# add device to the competion list
 
         else:
 
@@ -404,10 +405,10 @@ for cl in getemb(cd, 'classes'):
         if igcid != 0:
             tr = {"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,
                   "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors": [color],
-                  "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+str(igcid)+".jpg"}
+                  "portraitUrl": "http://rankingdata.fai.org/PilotImages/"+str(igcid)+".jpg","ognTrackerPaired": ognpair}
         else:
             tr = {"trackId": initials+fl_date_time+":"+idflarm, "pilotName": pname,  "competitionId": cn, "country": country,
-                  "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors": [color]}
+                  "aircraft": ar, "registration": regi, "3dModel": "ventus2", "ribbonColors": [color],"ognTrackerPaired": ognpair}
         tracks.append(tr)			# add it to the tracks
 
     print("= Number of pilots in this class =========================== ", npilc)
