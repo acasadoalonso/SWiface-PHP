@@ -14,7 +14,6 @@ import base64
 import pycountry
 import math
 import os
-#import shutil
 import socket
 import config
 import geopy
@@ -586,10 +585,11 @@ for cl in getemb(cd, 'classes'):
     os.chmod(CSVFILE, 0o775) 			# make the CSV file accessible
 
     os.chmod(COMPFILE, 0o775) 			# make the COMP file accessible
-    if user == "root":
-       os.system ("chown www-data:www-data "+CSVFILE) # in case of root
+    if user == "root":				# only if user is root ... in order to prevent later on use by the web user
+       os.system ("chown www-data:www-data "+CSVFILE)  # in case of root
        os.system ("chown www-data:www-data "+TASKFILE) # in case of root
-       os.system ("chown www-data:www-data "+JSONFILE) # in case of root
+       os.system ("chown www-data:www-data "+JSONFILE) # in case of roota
+
     if config.GIST:				# if GIST is requested
        content=t+"\n"				# the content is the TASK file
        res=updategist(config.GIST_USER, classtype+" latest task", config.GIST_TOKEN, TASKFILE, content)
