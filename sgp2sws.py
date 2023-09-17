@@ -64,7 +64,12 @@ prtreq = sys.argv[3:]					# print request
 cucpath = config.cucFileLocation
 tp = []							# turn pint list
 tracks = []						# track list
-version='V2.01'
+version='V2.02'
+if 'USER' in os.environ:
+        user=os.environ['USER']
+else:
+        user="www-data"                     	# assume www
+
 #
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
@@ -505,6 +510,8 @@ j = json.dumps(clist, indent=4)                         # dump it
 #print j
                                                         # write it into the comp file on json format
 compfile.write(j)
+compfile.close()
+
 
 #
 # close the files and exit
@@ -512,9 +519,6 @@ compfile.write(j)
 
 jsonfile.close()
 taskfile.close()
-os.chmod(TASKFILE, 0o777)                               # make the TASK file accessible
-os.chmod(JSONFILE, 0o777)                               # make the JSON file accessible
-                                                        # the latest TASK file to be used on live.glidernet.org
 latest = cucpath+config.Initials+'/SGPrace-latest.tsk'
 latestj = cucpath+config.Initials+'/SGPrace-latest.json'
 print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a reference
@@ -539,6 +543,18 @@ if config.GIST:
 # Write a csv file of all gliders to be used as filter file for glidertracker.org
 for item in flist:
     csvsfile.write("%s\n" % item)
+csvsfile.close()
+# change the chmod 
+os.chmod(TASKFILE, 0o777)                               # make the TASK file accessible
+os.chmod(JSONFILE, 0o777)                               # make the JSON file accessible
+os.chmod(COMPFILE, 0o777)                               # make the COMP file accessible
+os.chmod(CSVSFILE, 0o777)                               # make the CSVS file accessible
+if user == "root":					# change the chown
+       os.system ("chown www-data:www-data "+COMPFILE) 	# in case of root
+       os.system ("chown www-data:www-data "+TASKFILE) 	# in case of root
+       os.system ("chown www-data:www-data "+JSONFILE) 	# in case of root
+       os.system ("chown www-data:www-data "+CSVSFILE) 	# in case of root
+                                                        # the latest TASK file to be used on live.glidernet.org
 if npil == 0:
     print("JSON invalid: No pilots found ... ")
     os.system('rm  '+JSONFILE)		                # remove the previous one
