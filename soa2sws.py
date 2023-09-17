@@ -96,7 +96,7 @@ else:
     classreq = ' '                              # none
 
 
-version='V2.04'
+version='V2.05'
 # ---------------------------------------------------------------- #
 print("\n\nUtility to get the api.soaringspot.com data and convert it to a JSON file compatible with the Silent Wings specs Version: "+version)
 print("=================================================================================================================================\n\n")
@@ -111,7 +111,7 @@ initials = config.Initials		        # initials of the files generated
 if 'USER' in os.environ:
         user=os.environ['USER']
 else:
-        user="www-data"                     # assume www
+        user="www-data"                     	# assume www
 if 'APACHE_RUN_USER' in os.environ or user == "www-data":        # check if www
         www=True
 else:
@@ -586,6 +586,10 @@ for cl in getemb(cd, 'classes'):
     os.chmod(CSVFILE, 0o775) 			# make the CSV file accessible
 
     os.chmod(COMPFILE, 0o775) 			# make the COMP file accessible
+    if user == "root":
+       os.system ("chown www-data:www-data "+CSVFILE) # in case of root
+       os.system ("chown www-data:www-data "+TASKFILE) # in case of root
+       os.system ("chown www-data:www-data "+JSONFILE) # in case of root
     if config.GIST:				# if GIST is requested
        content=t+"\n"				# the content is the TASK file
        res=updategist(config.GIST_USER, classtype+" latest task", config.GIST_TOKEN, TASKFILE, content)
@@ -601,10 +605,12 @@ for cl in getemb(cd, 'classes'):
 
 # Write a comp file of all gliders to be used as filter file for pairing
 j = json.dumps(clist, indent=4)             # dump it
-                                                # write it into the comp file on json format
+                                            # write it into the comp file on json format
 try:
     compfile.write(j)
     compfile.close()                        # close the COMP file for this class
+    if user == "root":
+       os.system ("chown www-data:www-data "+COMPFILE) # in case of root
 except:
     print("error on writing COMP file ... ", clist)
 
