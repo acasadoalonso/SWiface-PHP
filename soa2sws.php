@@ -1,12 +1,25 @@
 <?php
 $class = 'ALL';
 $indexday = 0;
-$class = $_POST['class'];
-$indexday = $_POST['indexday'];
+if (isset($_POST['class']))
+   {
+   $class = $_POST['class'];
+   }
+if (isset($_POST['indexday']))
+   {
+   $indexday = $_POST['indexday'];
+   }
 $cwd =getcwd();
+if ($class == '')
+   $class='ALL';
+if ($indexday == '')
+   $indexday=0;
 $rc=0;
 if  ( ! is_numeric($indexday)) {
    die;
+   }
+else {
+   $indexday = abs($indexday);
    }
 if(strpos($class, ';') !== false){
     echo "Wrong class!";

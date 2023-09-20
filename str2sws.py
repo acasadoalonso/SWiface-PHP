@@ -188,7 +188,7 @@ def gettask(ct, cdID, ccID, fptask, prt=False):		# competition ID, competition d
        numLegs=tt['numLegs']
        rule=tt['rule']
        task_wp=tt['tps']
-       print ("TTT:", tid, name, distance, task_wp)
+       #print ("TTT:", tid, name, distance, task_wp)
        while wp < len(task_wp):
            wp_name = task_wp[wp]['tp']["name"].encode('utf8').decode('utf8')          # waypoint name
            wp_name = "TP"+str(wp)+"-"+wp_name

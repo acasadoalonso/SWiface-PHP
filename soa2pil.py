@@ -73,7 +73,7 @@ else:
 clsreq = sys.argv[2:]                       # if class is requested
 if clsreq:
     classreq = clsreq[0]                    # class requested
-    print("TTT", classreq)
+    #print("TTT", classreq)
 else:
     classreq = ' '                          # none
 # ---------------------------------------------------------------- #

@@ -1,6 +1,9 @@
 <?php
 $compid = $_POST['compid'];
 $indexday = $_POST['indexday'];
+if ($indexday == '')
+   $indexday=0;
+
 $cwd =getcwd();
 $rc=0;
 echo 'COMPid='.$compid.' Indexday='.$indexday.'<br><br>';
