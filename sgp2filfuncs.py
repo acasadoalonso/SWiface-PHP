@@ -196,7 +196,7 @@ def sgp2fil(qsgpID, day, FlarmID, execopt=False, prt=False, web=False):
             os.system("mkdir "+dirpath+"/"+str(date))
             os.system("chmod 775 "+dirpath+"/"+str(date))
             if not web:
-                print(" OK directory made")
+                print(" OK directory made: "+dirpath+"/"+str(date))
 
         req = urllib.request.Request(fftc)
         req.add_header("Accept", "application/json")

@@ -69,6 +69,8 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    global auth                             	# auth and apiurl are globals
    global apiurl
    FlarmID=FlarmID.upper()
+   fr=''
+   idflram=''
    if not web:
       print ("ARgs: ", client, secretkey, idx, FlarmID, execopt, "Program version:", pgmver)
    SARpath = config.SARpath
@@ -84,7 +86,8 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    if execopt:                                 	# if we choose the option of gen the IGC file
 
                                             	# delete all the files to avoid problems
-      os.system("rm "+dirpath+"SOA/*")
+      os.system("rm -r "+dirpath+"/*")
+      print ("Directory  "+dirpath+"/ deleted")
 
 # ==============================================#
    hostname = socket.gethostname()	    	# hostname as control
@@ -191,13 +194,28 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
            if not os.path.isdir(dirpath+"/"+taskdate):
                os.system("mkdir "+dirpath+"/"+taskdate)
                os.system("chmod 775 "+dirpath+"/"+taskdate)
-               print(" OK directory made")     	# create the directory if needed
+               print(" OK directory made: "+dirpath+"/"+taskdate)     	# create the directory if needed
            if "nationality" in pil:            	# extracts the nationality as a doc
                nationality = pil['nationality']
            else:
                nationality = "UNKOWN"          	# report that we are extracting the flight of that pilot
+           livetrk = cnt['live_track_id']  	# flarmID and OGN pair
+           if len(livetrk) == 9:
+               idflarm = livetrk[3:9]		# case that just the FlarmID, no piaring
+           if len(livetrk) == 19:              	# format:  FLR123456 OGN654321
+               idflarm = livetrk[3:9]		# case that just the FlarmID and OGN tracker pair
+           if len(livetrk) == 6:               	# in case of missing FLR/ICA/OGN (deprecated)
+               idflarm = livetrk[0:6]		# case that just the FlarmID, no piaring
+           if 'flight_recorders' in cnt:
+               fr = cnt['flight_recorders']
+               fr = fr.rstrip('\n')
+               fr = fr.rstrip('\r')
+               fr = fr.replace ('\n', ' ')
+               fr = fr.replace ('\r', ' ')
+
+
            if not web:
-              print("Pilot:>>>>", pil["first_name"], pil["last_name"], nationality)
+              print("Pilot:>>>>", pil["first_name"], pil["last_name"], nationality, fr, idflarm)
            req = urllib.request.Request(fftc)  	# open the URL
                                             	# build the authorization header
            req.add_header('Authorization', auth)
