@@ -15,11 +15,11 @@ import config
 #                            SAR4comp 
 # ======================================================================================================================= #
 pgmver='2.0'
-reposerver=config.SWSserver
+reposerver=config.SWSserver				# the server is defined on the config.py built by the genconfig.py script
 html1 = """<TITLE>SAR4comp</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]><H1> <Extracted flight</H1>  """
 html2 = """<center><table><tr><td><pre>"""
 html3 = """</pre></td></tr></table></center>"""
-html4 = 'Click here to see the resulting file ==> <a href="http://cunimb.net/igc2map.php?lien=http://' + reposerver+'%s'
+html4 = 'Click here to see the resulting file ==> <a href="http://cunimb.net/igc2map.php?lien=' + reposerver+'%s'
 # ---------------------------------------------------------------- #
 # ======================== parsing arguments =======================#
 parser = argparse.ArgumentParser(description="SAR4comp utility ")
@@ -106,10 +106,12 @@ if reqtype == "SOA":					# extracting IGC file form SoaringSpot
    resultfile=soa2fil(client,secretkey,idx,flarm,extractopt,prt,web)
 
 elif reqtype == "SGP":					# extracting the IGC files from the sgp.aero website
+
    from sgp2filfuncs import sgp2fil			# get the routines
    resultfile=sgp2fil(sgpid,idx,flarm,extractopt,prt,web)	# call the routines
 
 elif reqtype == "DIR":					# extracting the IGC files from the DIR directory
+
    from dir2filfuncs import dir2fil			# get the routines
    resultfile=dir2fil(flarm,prt,web)			# call the routinesa
 

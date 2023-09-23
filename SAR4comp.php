@@ -27,7 +27,7 @@ $cwd =getcwd();
 $rc=0;
 ob_start();
 $args='-t '.$competype.' -f '.$flarmid.' -g '.$sgpid.' -c'.$clientid.' -s '.$secretkey.' -i '.$day.' -w True ';
-//echo $args;
+//echo $args ;
 passthru('/usr/bin/python3  ./SAR4comp.py '.$args, $rc);
 $output = ob_get_clean();
 echo nl2br($output);
