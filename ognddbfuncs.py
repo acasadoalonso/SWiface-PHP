@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 import json
-import requests
+import socket
 import urllib.request
 import urllib.error
 import urllib.parse
-import socket
+import requests
 import config
+from ping3 import ping
 
 global _ogninfo_                            # the OGN info data
 _ogninfo_ = {}                              # the OGN info data
@@ -15,11 +16,29 @@ NOinfo = {"return": "NOinfo"}
 HOST		=config.DDBhost		    # OGN DDB host name to try first
 PORT		=config.DDBport		    # port to try
 DDB_URL1 	=config.DDBurl1		    # url of where to get initially the DDB data
-DDB_URL2 	=config.DDBurl2		    # second choice 
+DDB_URL2 	=config.DDBurl2		    # second choice
                                             #url = "http://ddb.glidernet.org/download/?j=2"  # the OGN DDB source
 prt		=config.prt
 
 ####################################################################
+
+def findfastestaprs():				# find the fastest APRS server
+
+   aprs=["glidern1.glidernet.org",		# list of aprs.glidernet.org server 
+         "glidern2.glidernet.org",
+         "glidern3.glidernet.org",
+         "glidern4.glidernet.org",
+         "glidern5.glidernet.org"]
+   p=999					# start with a high value
+   url=''
+   for u in aprs:				# got thru all the servers
+       pp=ping(u)				# ping the server
+       if pp < p:				# if faster ?
+          p=pp					# remember the ping time
+          url=u					# remember the URL
+   return(url)					# return the URL of the fastest server 
+####################################################################
+
 def servertest(host, port):
 
     args = socket.getaddrinfo(host, port, socket.AF_INET, socket.SOCK_STREAM)
@@ -33,6 +52,7 @@ def servertest(host, port):
             s.close()
             return True
 
+####################################################################
 
 def getddbdata():                           # get the data from the API server
 
@@ -41,8 +61,9 @@ def getddbdata():                           # get the data from the API server
         DDB_URL=DDB_URL1
     else:
         DDB_URL=DDB_URL2
-    if prt:
-       print("DDB Connecting with: ", DDB_URL, HOST, PORT)
+    #if prt:
+    print("DDB Connecting with: ", DDB_URL, HOST, PORT)
+    print("PING time: ",           ping(HOST))
     req = urllib.request.Request(DDB_URL)
     req.add_header("Accept", "application/json")  # it return a JSON string
     req.add_header("Content-Type", "application/hal+json")
@@ -53,6 +74,7 @@ def getddbdata():                           # get the data from the API server
     _ogninfo_ = j_obj                       # save the data on the global storage
     return j_obj                            # return the JSON objecta
 
+####################################################################
 
 def getogninfo(devid):			    # return the OGN DDB infor for this device
 
@@ -66,6 +88,7 @@ def getogninfo(devid):			    # return the OGN DDB infor for this device
     return "NOInfo"  			    # if not found !!!
 
 
+####################################################################
 def getognreg(devid):                       # get the ogn registration from the flarmID
 
     global _ogninfo_                        # the OGN info data
@@ -77,6 +100,7 @@ def getognreg(devid):                       # get the ogn registration from the 
             return dev["registration"]  # return the registration
     return "NOReg  "  # if not found !!!
 
+####################################################################
 
 def getognchk(devid):                       # Check if the FlarmID exist or NOT
 
@@ -90,6 +114,7 @@ def getognchk(devid):                       # Check if the FlarmID exist or NOT
 
     return False
 
+####################################################################
 
 def getognflarmid(registration):            # get the FlarmID based on the registration
 
@@ -111,6 +136,7 @@ def getognflarmid(registration):            # get the FlarmID based on the regis
 
     return "NOFlarm"                        # if not found !!!
 
+####################################################################
 
 def getogncn(devid):                        # get the ogn competition ID from the flarmID
 
@@ -124,6 +150,7 @@ def getogncn(devid):                        # get the ogn competition ID from th
 
     return "NID"                            # if not found !!!
 
+####################################################################
 
 def getognmodel(devid):                     # get the ogn aircraft model from the flarmID
 
@@ -145,12 +172,13 @@ def get_ddb_devices():
         DDB_URL=DDB_URL1
     else:
         DDB_URL=DDB_URL2
-    r = requests.get(DDB_URL)
+    r = requests.get(DDB_URL, allow_redirects=False)
     for device in r.json()['devices']:
         device.update({'identified': device['identified'] == 'Y',
                        'tracked': device['tracked'] == 'Y'})
         yield device
 
+####################################################################
 
 def get_by_dvt(devdvt, dvt):
     global _ogninfo_                        # the OGN info dataa
@@ -163,3 +191,4 @@ def get_by_dvt(devdvt, dvt):
             devdvt.append(device)
             cnt += 1
     return (cnt)
+####################################################################

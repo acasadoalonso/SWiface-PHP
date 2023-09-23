@@ -15,7 +15,7 @@ import config
 #                            SAR4comp 
 # ======================================================================================================================= #
 pgmver='2.0'
-reposerver="acasado.es:60080/SWS/SWdata/"
+reposerver=config.SWSserver
 html1 = """<TITLE>SAR4comp</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]><H1> <Extracted flight</H1>  """
 html2 = """<center><table><tr><td><pre>"""
 html3 = """</pre></td></tr></table></center>"""
