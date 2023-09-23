@@ -9,11 +9,11 @@ import os
 import argparse
 
 import config
-#from config import *
 
 # ======================================================================================================================= #
-#                            SAR4comp 
+#                            SAR4comp  ==>  Serach and Rescue for IGC competitions
 # ======================================================================================================================= #
+
 pgmver='2.1'
 reposerver=config.SWSserver+'/SWdata/'		# the server is defined on the config.py built by the genconfig.py script
 html1 = """<TITLE>SAR4comp</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]><H1> <Extracted flight</H1>  """
@@ -67,7 +67,7 @@ if not web:
    print("\n\n")
    print("Utility extract IGC files from SoaringSpot/SGP/DIR and rebuild a flight track based on the FLARM info ", pgmver)
    print("===========================================================================================================")
-   print("Args:", reqtype, client, secretkey, flarm, indexday, sgpid, prt, web)
+   print("Args  reqtype: ", reqtype, "clientID: ", client, "secretKey: ", secretkey, "flarmID: ", flarm, "indexday: ", indexday, "sgpID: ", sgpid, prt, web)
 else:
    prt=False
 resultfile=''						# name of the resulting file

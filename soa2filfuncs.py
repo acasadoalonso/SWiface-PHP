@@ -21,7 +21,7 @@ from getflarm import *
 from simplehal import HalDocument, Resolver
 from pprint import pprint
 from config import *
-pgmver='2.0'
+pgmver='2.1'
 #-------------------------------------------------------------------------------------------------------------------#
 
 

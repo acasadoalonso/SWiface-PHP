@@ -72,6 +72,8 @@ distance=0.0
 disthome=0.0
 lastdist=0.0
 diffalt=0
+averagealt=0
+totalalt=0
 for line in sys.stdin:                  # read one line
     nline += 1
     p1 = line.find(">>>")
@@ -102,26 +104,31 @@ for line in sys.stdin:                  # read one line
     loclon=float(lon[0:7])/10000.0
     if lon[8] == 'W':
        loclon *= -1.0
-    if nline != 1:
+    if nline != 1:			# if not the first line
        distance=geodesic((loclat, loclon), (lastloclat,lastloclon)).km		# distance to previus position
        disthome=geodesic((loclat, loclon), (loclatitude,loclongitud)).km	# distance to HOME
        diffalt=pa-lastalt
     else:				# line first
        lastloclat=loclat		# INITIAL LOCATION
        lastloclon=loclon
-       lastalt=pa
+       lastalt=pa			# altitude
+       averagealt=pa			# average altitude
+       totalalt=pa			# total altitude
+       
        
     #print("DDD", nline, lat, lon,loclat,loclon, "D: ", distance, lastloclat, lastloclon)
-    if disthome < 80.0 and abs(diffalt) < 500:
+    if disthome < 80.0 and abs(diffalt) < 500 and abs(pa - averagealt) < 3000:
        lastloclat=loclat		# remeber last location
        lastloclon=loclon
-       lastdist=distance
+       lastdist=distance		# last distance 
        lastalt=pa			# remember altitude
+       totalalt += pa			# total altitude
+       averagealt = totalalt/(nrec+1)	# average altitude during the race
     else:
        pass
        lastalt=pa			# remember altitude
        nerr += 1
-       print("DDD", nline, nerr, "D: ", distance, disthome, diffalt, lastdist, lat,loclon, lastloclat, lastloclon,  file=sys.stderr)
+       print(">>>Ignore", nline, nerr, "Time: ", ttime, totalalt, averagealt, "D: ", distance, disthome, diffalt, lastdist, "Pos:", lat,loclon, lastloclat, lastloclon,  "Alt: ", pa, file=sys.stderr)
        continue
     ppa = "A%05d" % pa                  # format the pressure altitude
     gga = "%05d" % ga                   # format the GPS altitude

@@ -20,7 +20,7 @@ from getflarm import *
 
 #-------------------------------------------------------------------------------------------------------------------#
 import config
-pgmver='2.0'
+pgmver='2.1'
 def sgp2fil(qsgpID, day, FlarmID, execopt=False, prt=False, web=False):
     FlarmID=FlarmID.upper()
     stats = {}                                              	# statistics

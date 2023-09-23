@@ -9,7 +9,7 @@
 import config
 import sys
 from dir2filfuncs import dir2fil
-pgmver='2.0'
+pgmver='2.1'
 #-------------------------------------------------------------------------------------------------------------------#
 #
 # arguments:   compid, dayindex, print
