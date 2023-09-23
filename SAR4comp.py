@@ -14,8 +14,8 @@ import config
 # ======================================================================================================================= #
 #                            SAR4comp 
 # ======================================================================================================================= #
-pgmver='2.0'
-reposerver=config.SWSserver				# the server is defined on the config.py built by the genconfig.py script
+pgmver='2.1'
+reposerver=config.SWSserver+'/SWS/SWdata/'		# the server is defined on the config.py built by the genconfig.py script
 html1 = """<TITLE>SAR4comp</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]><H1> <Extracted flight</H1>  """
 html2 = """<center><table><tr><td><pre>"""
 html3 = """</pre></td></tr></table></center>"""
@@ -73,8 +73,9 @@ else:
 resultfile=''						# name of the resulting file
 
 # ======================== SETUP parameters =======================#
+#							# invoke the different handlers SOA/SGP/DIR
 if reqtype == "SOA":					# extracting IGC file form SoaringSpot
-   from soa2filfuncs import soa2fil			# get the routines
+
    # validate the arguments
    # where to find the clientid and secretkey files
    if (client == '' and secretkey == '') or (client == '0' and secretkey == '0'):    		# if not provided in the arguments ???
@@ -103,6 +104,7 @@ if reqtype == "SOA":					# extracting IGC file form SoaringSpot
        secretkey = secretkey.rstrip().encode(encoding='utf-8')
    #print (client,":::",secretkey)
 							# call the routines
+   from soa2filfuncs import soa2fil			# get the routines
    resultfile=soa2fil(client,secretkey,idx,flarm,extractopt,prt,web)
 
 elif reqtype == "SGP":					# extracting the IGC files from the sgp.aero website
