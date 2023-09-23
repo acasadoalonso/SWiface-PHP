@@ -15,7 +15,7 @@ import config
 #                            SAR4comp 
 # ======================================================================================================================= #
 pgmver='2.1'
-reposerver=config.SWSserver+'/SWS/SWdata/'		# the server is defined on the config.py built by the genconfig.py script
+reposerver=config.SWSserver+'/SWdata/'		# the server is defined on the config.py built by the genconfig.py script
 html1 = """<TITLE>SAR4comp</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]><H1> <Extracted flight</H1>  """
 html2 = """<center><table><tr><td><pre>"""
 html3 = """</pre></td></tr></table></center>"""
