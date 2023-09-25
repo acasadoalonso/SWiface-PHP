@@ -4,6 +4,7 @@
 #
 
 import sys
+import os
 from datetime import *
 from geofuncs import *
 from ognddbfuncs import *
@@ -35,6 +36,12 @@ def gdatar(data, typer):                # get data on the  right
 #
 
 # -----------------------------------------------------------------------------------
+if 'USER' in os.environ:
+        user=os.environ['USER']
+        prt = True
+else:
+        user="www-data"                     	# assume www
+        prt = False
 
 if getinfoairport (config.locname) != None:
    #print(getinfoairport (config.locname), file=sys.stderr)
@@ -46,7 +53,8 @@ if getinfoairport (config.locname) != None:
 else:
    loclatitude = config.loclatitude
    loclongitud = config.loclongitud
-print("Location coordinates:", loclatitude, loclongitud, "at: ", config.locname, timezn, file=sys.stderr)
+if prt:
+   print("Location coordinates:", loclatitude, loclongitud, "at: ", config.locname, timezn, user, file=sys.stderr)
 
 date = datetime.now()                   # get the date
 offset=tz.utcoffset(date).seconds/3600.0 # TZ offset
@@ -138,4 +146,5 @@ for line in sys.stdin:                  # read one line
     print("B"+ttime+npos[0]+npos[1]+ppa+gga)    # set the new IGC record
     print("LIGC ", nline, distance, disthome, ">>>"+line.rstrip('\n\r'))        # write the L record as control
     nrec += 1
-print ("File processed: Input lines ", nline, " Errors: ", nerr, " Total output lines: ", nrec, file=sys.stderr) 
+if prt:
+   print ("File processed: Input lines ", nline, " Errors: ", nerr, " Total output lines: ", nrec, file=sys.stderr) 
