@@ -7,7 +7,7 @@
 import sys
 import os
 import argparse
-
+from   ognddbfuncs import getognflarmid
 import config
 
 # ======================================================================================================================= #
@@ -31,6 +31,8 @@ parser.add_argument('-s', '--secret', required=False,
                     dest='secret', action='store', default='')
 parser.add_argument('-f', '--flarm', required=False,
                     dest='flarm', action='store', default='')
+parser.add_argument('-r', '--registration', required=False,
+                    dest='registration', action='store', default='')
 parser.add_argument('-i', '--indexday', required=False,
                     dest='indexday', action='store', default='0')
 parser.add_argument('-g', '--sgpid', required=False,
@@ -44,6 +46,7 @@ reqtype   = args.type					# request type SOA|SGP|DIR
 client    = args.client    				# client ID
 secretkey = args.secret  				# secret key
 flarm     = args.flarm 					# flarm ID
+registration     = args.registration			# registration
 indexday  = args.indexday				# indexday ID
 sgpid     = args.sgpid  				# indexday ID
 prt       = args.prt					# print on|off
@@ -58,16 +61,24 @@ if sgpid.isdigit():          				# if provided and numeric
 else:
     sgpid = 0
 
-if flarm == '':
+if flarm == '' and registration == '':
    extractopt=False
 else:
    extractopt=True
+#
+if flarm == 'NOFLARMID':
+   flarm = ''
+if registration == 'NOREG':
+   registration = ''
+if flarm == ''  and registration != '' :
+   flarm = getognflarmid(registration)
+   flarm = flarm[3:9] 
 #
 if not web:
    print("\n\n")
    print("Utility extract IGC files from SoaringSpot/SGP/DIR and rebuild a flight track based on the FLARM info ", pgmver)
    print("===========================================================================================================")
-   print("Args  reqtype: ", reqtype, "clientID: ", client, "secretKey: ", secretkey, "flarmID: ", flarm, "indexday: ", indexday, "sgpID: ", sgpid, prt, web)
+   print("Args  reqtype: ", reqtype, "flarmID: ", flarm, "indexday: ", indexday, "sgpID: ", sgpid, prt, web)
 else:
    prt=False
 resultfile=''						# name of the resulting file

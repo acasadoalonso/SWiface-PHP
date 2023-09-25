@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
+#
+# SoaringSpot IGC files extractor 
+# ===============================
+#
 import sys
 import json
 import urllib.request, urllib.error, urllib.parse
@@ -72,7 +76,8 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    fr=''
    idflram=''
    if not web:
-      print ("ARgs: ", client, secretkey, idx, FlarmID, execopt, "Program version:", pgmver)
+      print ("\nSoaringSpot IGC files extractor for SAR4comp           Program version:", pgmver)
+      print ("ARgs: ", client, secretkey, idx, FlarmID, execopt)
    SARpath = config.SARpath
    cwd = os.getcwd()			    	# get the current working directory
                                             	# where to find the clientid and secretkey files
