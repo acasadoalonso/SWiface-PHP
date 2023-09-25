@@ -133,6 +133,9 @@ try:
 except:
     GIST_TOKEN = ''
 
+origGIST_TOKEN=GIST_TOKEN
+GIST_TOKEN = obscure(GIST_TOKEN.encode())
+
 try:
     clientid = cfg.get('server', 'clientid').strip("'")
 except:
@@ -189,7 +192,7 @@ datafile.write("DDBurl1='"+DDBurl1+"' \n")
 datafile.write("DDBurl2='"+DDBurl2+"' \n")
 datafile.write("GIST="+GIST+" \n")
 datafile.write("GIST_USER='"+GIST_USER+"' \n")
-datafile.write("GIST_TOKEN='"+GIST_TOKEN+"' \n")
+datafile.write("GIST_TOKEN='"+GIST_TOKEN.decode()+"' \n")
 datafile.write("clientid='"+clientid+"' \n")
 datafile.write("secretkey='"+secretkey+"' \n")
 datafile.write("OGNTRACKERS="+OGNTRACKERS+" \n")

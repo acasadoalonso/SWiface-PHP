@@ -592,7 +592,9 @@ for cl in getemb(cd, 'classes'):
 
     if config.GIST:				# if GIST is requested
        content=t+"\n"				# the content is the TASK file
-       res=updategist(config.GIST_USER, classtype+" latest task", config.GIST_TOKEN, TASKFILE, content)
+       GIST_TOKEN= unobscure(config.GIST_TOKEN.encode()).decode()
+       res=updategist(config.GIST_USER, classtype+" latest task", GIST_TOKEN, TASKFILE, content)
+
        print ("GIST RC: ", res.status_code)
        if res.status_code == 200 or res.status_code == 201:
           id=res.json()['id']

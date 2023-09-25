@@ -532,7 +532,8 @@ except:
     print("No latest file ...: ", latest)
 if config.GIST:
    content=t+"\n"
-   res=updategist(config.GIST_USER, "SGP RACING latest task", config.GIST_TOKEN, TASKFILE, content)
+   GIST_TOKEN= unobscure(config.GIST_TOKEN.encode()).decode()
+   res=updategist(config.GIST_USER, "SGP RACING latest task", GIST_TOKEN, TASKFILE, content)
    print ("GIST RC: ", res.status_code)
    if res.status_code == 200 or res.status_code == 201:
       id=res.json()['id']
