@@ -138,11 +138,10 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    lc = getemb(cd, 'location')                 	# location data
    lcname = lc['name']                         	# location name
 
-   if not web:
-      print("\n\n= Contest ===============================")
-      print("Category:", category, "Comp name:", eventname, "Comp ID:", compid)
-      print("Loc Name:", lcname,   "Country: ", country, country3, "End date:",  endate)
-      print("=========================================\n\n")
+   print("\n\n= Contest ===============================")
+   print("Category:", category, "Comp name:", eventname, "Comp ID:", compid)
+   print("Loc Name:", lcname,   "Country: ", country, country3, "End date:",  endate)
+   print("=========================================\n\n")
 
    npil = 0                                    	# init the number of pilots
    stats = {}                                  	# statistics
