@@ -14,7 +14,12 @@ from pytz import timezone
 import config
 ########################################################################
 
+# SETUP filter parameters
+DISTHOME= 100.0				# distance to home
+DIFFALT = 500				# difference in altitude from previous fix
+DIFFAVG = 3000				# difference in altitude over the average altitude
 
+# ----------------------------------------------------------------------
 def gdatar(data, typer):                # get data on the  right
     p = data.find(typer)                # scan for the type requested
     if p == -1:                         # if not found
@@ -31,19 +36,22 @@ def gdatar(data, typer):                # get data on the  right
 ########################################################################
 
 
+# ----------------------------------------------------------------------
 #
 # this program reads from standard input the results of the grep & sort the IGC files with the FLARM data and try to build an IGC file
 #
+# ----------------------------------------------------------------------
 
-# -----------------------------------------------------------------------------------
+# ----------------------------------------------------------------------
 if 'USER' in os.environ:
         user=os.environ['USER']
         prt = True
 else:
         user="www-data"                     	# assume www
         prt = False
+# ----------------------------------------------------------------------
 
-if getinfoairport (config.locname) != None:
+if getinfoairport (config.locname) != None:	# check where is home
    #print(getinfoairport (config.locname), file=sys.stderr)
    loclatitude = getinfoairport (config.locname)['lat']
    loclongitud = getinfoairport (config.locname)['lon']
@@ -125,7 +133,7 @@ for line in sys.stdin:                  # read one line
        
        
     #print("DDD", nline, lat, lon,loclat,loclon, "D: ", distance, lastloclat, lastloclon)
-    if disthome < 80.0 and abs(diffalt) < 500 and abs(pa - averagealt) < 3000:
+    if disthome < DISTHOME and abs(diffalt) < DIFFALT and abs(pa - averagealt) < DIFFAVG:
        lastloclat=loclat		# remeber last location
        lastloclon=loclon
        lastdist=distance		# last distance 
