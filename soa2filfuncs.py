@@ -187,6 +187,7 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
            cnt = getemb(ft, "contestant")
            pil = getemb(cnt, "pilot")[0]       	# get the pilot name information
            npil += 1
+           ognid = ''
            if "igc_file" in ft:
                fftc = getlinks(ft, "flight")   	# URL to the file to be downloaded
                igcfile = ft["igc_file"]        	# full IGC file DIR/IGCfilename
@@ -195,6 +196,13 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
            else:
                print(">>> missing FILE >>>>>", pil["first_name"].encode('utf8').decode('utf-8'), pil["last_name"].encode('utf8').decode('utf-8'))
                continue
+           if 'aircraft_registration' in cnt:
+               regi = cnt['aircraft_registration']
+               ognid=getognflarmid(regi)         # get the flarm if from the OGN DDB
+           else:
+               regi=''
+               ognid=''
+
            igcfilename = dirpath+"/"+taskdate+"/"+classname+"-"+igcfile[4:]
            if not os.path.isdir(dirpath+"/"+taskdate):
                os.system("mkdir "+dirpath+"/"+taskdate)
@@ -220,7 +228,7 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
 
 
            if not web:
-              print("Pilot:>>>>", pil["first_name"], pil["last_name"], nationality, fr, idflarm)
+              print("Pilot:>>>>", pil["first_name"], pil["last_name"], nationality, fr, idflarm, regi, ognid)
            req = urllib.request.Request(fftc)  	# open the URL
                                             	# build the authorization header
            req.add_header('Authorization', auth)
