@@ -77,7 +77,8 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    idflram=''
    if not web:
       print ("\nSoaringSpot IGC files extractor for SAR4comp           Program version:", pgmver)
-      print ("ARgs: ", client, secretkey, idx, FlarmID, execopt)
+      if prt:
+         print ("Args: ", client, secretkey, idx, FlarmID, execopt)
    SARpath = config.SARpath
    cwd = os.getcwd()			    	# get the current working directory
                                             	# where to find the clientid and secretkey files
@@ -92,7 +93,8 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
 
                                             	# delete all the files to avoid problems
       os.system("rm -r "+dirpath+"/*")
-      print ("Directory  "+dirpath+"/ deleted")
+      if not web:
+         print ("Directory  "+dirpath+"/ deleted")
 
 # ==============================================#
    hostname = socket.gethostname()	    	# hostname as control
@@ -107,7 +109,8 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
       print("UTC Time is now:", utc)
       print(date)                             	#
       print("Local Time is now:", local_time)	# print the time for information only
-      print("Config params.  SECpath:", secpath)
+      if prt:
+         print("Config params.  SECpath:", secpath)
 
    nonce = base64.b64encode(os.urandom(36))    	# get the once base
                                             	# open the file with the client id

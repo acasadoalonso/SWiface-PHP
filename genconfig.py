@@ -82,8 +82,16 @@ eventname2 = cfg.get('location', 'eventname2').strip("'").strip('"')
 
 eventdesc1 = cfg.get('location', 'eventdesc1').strip("'").strip('"')
 eventdesc2 = cfg.get('location', 'eventdesc2').strip("'").strip('"')
-loclatitude = cfg.get('location', 'location_latitude').strip("'").strip('"')
-loclongitud = cfg.get('location', 'location_longitud').strip("'").strip('"')
+#
+try:
+    loclatitude = cfg.get('location', 'location_latitude').strip("'").strip('"')
+except:
+    loclatitude = ''
+try:
+    loclongitud = cfg.get('location', 'location_longitud').strip("'").strip('"')
+except:
+    loclongitud = ''
+#
 try:
     PicPilots = cfg.get('location', 'PicPilots').strip("'").strip('"')
 except:
@@ -137,6 +145,18 @@ try:
     OGNTRACKERS = cfg.get('server', 'OGNTRACKERS').strip("'")
 except:
     OGNTRACKERS = 'False'
+try:
+    DISTHOME = cfg.get('server', 'DISTHOME').strip("'")
+except:
+    DISTHOME = ''
+try:
+    DIFFALT = cfg.get('server', 'DIFFALT').strip("'")
+except:
+    DIFFALT = ''
+try:
+    DIFFAVG = cfg.get('server', 'DIFFAVG').strip("'")
+except:
+    DIFFAVG = ''
 
 
 
@@ -173,6 +193,9 @@ datafile.write("GIST_TOKEN='"+GIST_TOKEN+"' \n")
 datafile.write("clientid='"+clientid+"' \n")
 datafile.write("secretkey='"+secretkey+"' \n")
 datafile.write("OGNTRACKERS="+OGNTRACKERS+" \n")
+datafile.write("DISTHOME='"+DISTHOME+"' \n")
+datafile.write("DIFFALT='"+DIFFALT+"' \n")
+datafile.write("DIFFAVG='"+DIFFAVG+"' \n")
 datafile.write("prt=False \n")
 
 # --------------------------------------#

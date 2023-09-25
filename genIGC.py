@@ -15,10 +15,19 @@ import config
 ########################################################################
 
 # SETUP filter parameters
-DISTHOME= 100.0				# distance to home
-DIFFALT = 500				# difference in altitude from previous fix
-DIFFAVG = 3000				# difference in altitude over the average altitude
-
+if config.DISTHOME != '':
+   DISTHOME = config.DISTHOME
+else:
+   DISTHOME= 100.0			# distance to home
+if config.DIFFALT != '':
+   DIFFALT = config.DIFFALT
+else:
+   DIFFALT = 500			# difference in altitude from previous fix
+if config.DIFFAVG != '':
+   DIFFAVG = config.DIFFAVG
+else:
+   DIFFAVG = 3000			# difference in altitude over the average altitude
+print("Setup params:", DISTHOME, DIFFALT, DIFFAVG, file=sys.stderr)
 # ----------------------------------------------------------------------
 def gdatar(data, typer):                # get data on the  right
     p = data.find(typer)                # scan for the type requested
