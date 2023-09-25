@@ -74,11 +74,18 @@ if flarm == ''  and registration != '' :
    flarm = getognflarmid(registration)
    flarm = flarm[3:9] 
 #
+# ----------------------------------------------------------------------
+if 'USER' in os.environ:
+        user=os.environ['USER']
+else:
+        user="www-data"                     	# assume www
+# ----------------------------------------------------------------------
+
 if not web:
    print("\n\n")
    print("Utility extract IGC files from SoaringSpot/SGP/DIR and rebuild a flight track based on the FLARM info ", pgmver)
    print("===========================================================================================================")
-   print("Args  reqtype: ", reqtype, "flarmID: ", flarm, "indexday: ", indexday, "sgpID: ", sgpid, prt, web)
+   print("Args  reqtype: ", reqtype, "flarmID: ", flarm, "indexday: ", indexday, "sgpID: ", sgpid, prt, web, user)
 else:
    prt=False
 resultfile=''						# name of the resulting file
@@ -139,5 +146,9 @@ if web:
    print(fn, '">MAP</a>', "<a>", fname, " </a>")
    print (html3)
 else:
-   print ("The resulting file is:", resultfile)		# result the name of the file
+   print ("The resulting file is:", config.SARpath+resultfile)		# result the name of the file
+if user == 'root':
+   print ("chown "+user+":www-data -R "+config.SARpath+"/IGCfiles/"+reqtype)
+   os.system ("chown "+user+":www-data -R "+config.SARpath+"/IGCfiles/"+reqtype)
+   os.system ("chmod 775 -R "              +config.SARpath+"/IGCfiles/"+reqtype)
 exit(0)
