@@ -6,3 +6,11 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule "^(.*)$" "$1.php"
 Options +ExecCGI 
 AddHandler cgi-script .py 
+
+Satisfy any
+Header add Access-Control-Allow-Origin "*"
+AuthType Basic
+AuthName "Restricted Content
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user
+
