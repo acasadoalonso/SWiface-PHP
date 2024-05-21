@@ -105,7 +105,7 @@ hostname = socket.gethostname()
 print("DBhost:", config.DBhost, "ServerName:", hostname)
 start_time = time.time()
 local_time = datetime.datetime.now()
-j = urllib.request.urlopen('http://www.crosscountry.aero/c/sgp/rest/comps/')
+j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comps/')
 rr=j.read().decode('UTF-8') 
 j_obj = json.loads(rr)
 if qsgpID == '0':
@@ -155,7 +155,7 @@ csvsfile = open(CSVSFILE, 'w')
 #
 # get the JSON string for the web server
 #
-j = urllib.request.urlopen('http://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
+j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
 rr=j.read().decode('UTF-8') 
 j_obj = json.loads(rr)
 if prt:
@@ -340,7 +340,7 @@ if date != ts_date_time:
     warnings.append("<<DATE>>") 			        # add it to the list of warnings
 
 d = urllib.request.urlopen(
-    'http://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
+    'https://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
 rr=d.read().decode('UTF-8') 
 d_obj = json.loads(rr)
 if prt:
@@ -353,15 +353,21 @@ if numberofactivedays == 0:
 print("=============================")
 print("Day: ", day, "DayID: ", dayid)
 print("=============================")
-#print "DDD", d_obj
+#print( "DDD", d_obj)
 comp_day = d_obj["@type"]
 comp_id = d_obj["e"]				        # again the compatition ID
 comp_dayid = d_obj["i"]				        # the day ID
 comp_date = d_obj["d"]				        # date in milliseconds from the Unix epoch
 # day type: 1= valid, 2= practice, 3= canceled, 4= rest, 9= other
 comp_daytype = d_obj["y"]
-comp_daytitle = d_obj["l"]				# day title
-comp_shortdaytitle = d_obj["t"]				# short day title
+if 'l' in d_obj:					#check if  day title
+   comp_daytitle = d_obj["l"]				# day title
+else:
+   comp_daytitle =  'NoDay'				# day title
+if 't' in d_obj:					#check if  day title
+   comp_shortdaytitle = d_obj["t"]				# short day title
+else:
+   comp_shortdaytitle = 'Noday'
 comp_starttime = d_obj["a"]				# start time millis from midnite
 comp_startaltitude = d_obj["h"]				# start altitude
 comp_finishaltitude = d_obj["f"]			# finish altitude
@@ -490,7 +496,7 @@ print("Comp date:", comp_date)
 print("Comp Start time:", comp_starttime/1000)
 #print tp
 task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
-        "startOpenTs": comp_date, "turnpoints": tp}
+        "compDate": comp_date, "turnpoints": tp, "startOpenTs": comp_starttime/1000}
 event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks}
 j = json.dumps(event, indent=4)
