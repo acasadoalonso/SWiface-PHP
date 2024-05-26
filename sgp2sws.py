@@ -315,7 +315,10 @@ if j_obj.get("i") == None:				# check if is fully setup the web site
     os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit(-1)
 indexofdays = j_obj["i"]
-                                                        #print "Index of Days", indexofdays
+#print ("Index of Days", indexofdays)
+#for dayday in indexofdays:
+    #print (dayday)
+    #print ("DDD", dayday["d"])
 if days != '':
     cday = 0
     for dayday in indexofdays:
@@ -371,6 +374,16 @@ else:
 comp_starttime = d_obj["a"]				# start time millis from midnite
 comp_startaltitude = d_obj["h"]				# start altitude
 comp_finishaltitude = d_obj["f"]			# finish altitude
+
+
+task_handicap= d_obj['k'] 				# handicaps
+
+# print (json.dumps(task_handicap, indent=4))
+
+task_handicap_list = []
+if 'h' in task_handicap['data']:			# handicap data for each TP
+    task_handicap_list = task_handicap['data']['h'] 	# handicaps list
+    print("Task Handicap per TP",task_handicap_list['100'])
 print("Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude)
 if "k" in d_obj:
     comp_taskinfo = d_obj["k"]			        # task infor data
@@ -451,6 +464,8 @@ while wp < len(task_wp):
        wp_radius = task_wp[wp]["r"]                     # cylinder radius or line length
     else:
        wp_radius = 500
+    if len(task_handicap_list) > 0 and wp <= len(task_handicap_list['100']) and wp != 0:
+       wp_radius = task_handicap_list['100'][wp-1]             	# the radius when a handicap has been set
     if wp > 0 and (wp_name == wpinit or wp_type == "line"):
         isbreak = True
         type = "Finish"
@@ -492,7 +507,7 @@ print("WP:================================>")
 
 print("Comp short name:", comp_shortname)
 print("Comp full  name:", comp_name)
-print("Comp date:", comp_date)
+print("Comp date:",       comp_date)
 print("Comp Start time:", comp_starttime/1000)
 #print tp
 task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
