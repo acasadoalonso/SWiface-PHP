@@ -57,7 +57,7 @@ def servertest(host, port):
 
 ####################################################################
 
-def getddbdata(prt):                  		# get the data from the API server
+def getddbdata(prt=False):                  		# get the data from the API server
 
     global _ogninfo_                        	# the OGN info data
     if servertest(HOST, PORT):
@@ -83,7 +83,7 @@ def getogninfo(devid):			    # return the OGN DDB infor for this device
 
     global _ogninfo_   		            # the OGN info data
     if len(_ogninfo_) == 0:
-        _ogninfo_=getddbdata()
+        _ogninfo_=getddbdata(prt)
     devices=_ogninfo_["devices"]            # access to the ddbdata
     for dev in devices:                     # loop into the registrations
         if dev["device_id"] == devid:       # if matches ??
