@@ -338,7 +338,7 @@ daytype = indexofdays[day]["y"]    		        # day type: 1, 2, 3 ...
 dayid = indexofdays[day]["i"] 			        # day ID
 print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
 if date != ts_date_time:
-    print ("Warning the task date is not TODAY !!!")
+    print ("\nWarning the task date is not TODAY !!!\n\n")
     nwarnings += 1
     warnings.append("<<DATE>>") 			        # add it to the list of warnings
 
@@ -376,14 +376,16 @@ comp_startaltitude = d_obj["h"]				# start altitude
 comp_finishaltitude = d_obj["f"]			# finish altitude
 
 
-task_handicap= d_obj['k'] 				# handicaps
+task_handicap_list = [] 				# handicap list if the case
+if 'k' in d_obj: 					# handicaps ???
+    task_handicap= d_obj['k'] 				# handicaps
 
-# print (json.dumps(task_handicap, indent=4))
+#   print (json.dumps(task_handicap, indent=4))
 
-task_handicap_list = []
-if 'h' in task_handicap['data']:			# handicap data for each TP
-    task_handicap_list = task_handicap['data']['h'] 	# handicaps list
-    print("Task Handicap per TP",task_handicap_list['100'])
+    if 'h' in task_handicap['data']:			# handicap data for each TP
+        task_handicap_list = task_handicap['data']['h'] 	# handicaps list
+        print("Task Handicap per TP",task_handicap_list['100'])
+
 print("Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude)
 if "k" in d_obj:
     comp_taskinfo = d_obj["k"]			        # task infor data
