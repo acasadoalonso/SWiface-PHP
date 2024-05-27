@@ -57,9 +57,9 @@ def servertest(host, port):
 
 ####################################################################
 
-def getddbdata(prt=True):                  # get the data from the API server
+def getddbdata(prt):                  		# get the data from the API server
 
-    global _ogninfo_                        # the OGN info data
+    global _ogninfo_                        	# the OGN info data
     if servertest(HOST, PORT):
         DDB_URL=DDB_URL1
     else:
