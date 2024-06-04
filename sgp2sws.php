@@ -6,7 +6,8 @@ if ($indexday == '')
 
 $cwd =getcwd();
 $rc=0;
-$IP=$server['REMOTE_ADDR']
+$IP=$_SERVER['HTTP_X_FORWARDED_FOR']; 
+
 echo 'COMPid='.$compid.' Indexday='.$indexday.' IP addr: '.$IP.'<br><br>';
 if  ( ! is_numeric($compid)) {
    die;
@@ -16,7 +17,7 @@ if (is_numeric($indexday)){
 	passthru('/usr/bin/python3 '.$cwd.'/sgp2sws.py '.$compid.' '.$indexday.' '.$IP, $rc);
 	} 
 else {
-	passthru('/usr/bin/python3 '.$cwd.'/sgp2sws.py '.$compid.' "'.$indexday.'"', $rc);
+	passthru('/usr/bin/python3 '.$cwd.'/sgp2sws.py '.$compid.' "'.$indexday.'"'.' '.$IP, $rc);
 	}
 $output = ob_get_clean(); 
 echo nl2br($output);
