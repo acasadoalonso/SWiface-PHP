@@ -96,7 +96,6 @@ else:
 
 if ipreq :
     IPaddr=ipreq[0]				# the IP addr of the remote client
-    print ("Request coming ffrom: ", ipreq[0])
 else:
     IPaddr='0.0.0.0'
 if prtreq and prtreq[0] == "print":
@@ -109,6 +108,8 @@ print("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
 print("=======================================================================\n\n")
 hostname = socket.gethostname()
 print("DBhost:", config.DBhost, "ServerName:", hostname)
+print("Request coming from IP addr: ", IPaddr)
+print("===========================================\n\n")
 start_time = time.time()
 local_time = datetime.datetime.now()
 j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comps/')
