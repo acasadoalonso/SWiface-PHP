@@ -58,7 +58,8 @@ Flags = { 						# flag colors assigned to the countries
 
 qsgpIDreq = sys.argv[1:]				# first arg is the event ID
 dayreq = sys.argv[2:]					# second arg is the day index within the event
-prtreq = sys.argv[3:]					# print request
+ipreq = sys.argv[3:]					# print request
+prtreq = sys.argv[4:]					# print request
 
                                                         # directory where to stor the JSON file generated
 cucpath = config.cucFileLocation
@@ -93,6 +94,11 @@ if qsgpIDreq and qsgpIDreq[0] != '0':
 else:
     qsgpID = '0'
 
+if ipreq :
+    IPaddr=ipreq[0]				# the IP addr of the remote client
+    print ("Request coming ffrom: ", ipreq[0])
+else:
+    IPaddr='0.0.0.0'
 if prtreq and prtreq[0] == "print":
     prt = True
 else:
@@ -176,7 +182,7 @@ warnings = []                                  		# warnings glider
 #ogndata=getddbdata()                                    # get the OGN DDB
 npil = 0				        	# number of pilots found
 pilots = j_obj["p"]					# get the pilot information
-print("Pilots:", len(pilots))
+print("\n\nPilots:", len(pilots))
 print("==========")
 for id in pilots:
     #
@@ -291,8 +297,8 @@ for id in pilots:
     print("---------------------")
 
 #print tracks
-print("Wlist:", wlist)
-print("===========")
+print("\n\nWlist:", wlist)
+print("\n\n===========")
 print("Competition")
 print("===========")
 comp = j_obj["c"]					# get the competition information
@@ -338,7 +344,8 @@ daytype = indexofdays[day]["y"]    		        # day type: 1, 2, 3 ...
 dayid = indexofdays[day]["i"] 			        # day ID
 print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
 if date != ts_date_time:
-    print ("\nWarning the task date is not TODAY !!!\n\n")
+    print ("\nWarning the task date is not TODAY !!!")
+    print ("<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>\n\n")
     nwarnings += 1
     warnings.append("<<DATE>>") 			        # add it to the list of warnings
 
@@ -353,9 +360,6 @@ if prt:
 if numberofactivedays == 0:
     print("No active days ...")
 
-print("=============================")
-print("Day: ", day, "DayID: ", dayid)
-print("=============================")
 #print( "DDD", d_obj)
 comp_day = d_obj["@type"]
 comp_id = d_obj["e"]				        # again the compatition ID
@@ -386,7 +390,10 @@ if 'k' in d_obj: 					# handicaps ???
         task_handicap_list = task_handicap['data']['h'] 	# handicaps list
         print("Task Handicap per TP",task_handicap_list['100'])
 
-print("Comp day:", comp_day, "Comp ID:", comp_id, "Comp ID DAY:", comp_dayid, "Title:", comp_daytitle, comp_shortdaytitle, "\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude)
+print("\n\n=============================")
+print("Day: ", day, "DayID: ", dayid, "Title:", comp_daytitle, comp_shortdaytitle)
+print("=============================")
+print("\nStart time (millis):", comp_starttime, "Start alt.:", comp_startaltitude, "Finish Alt.:", comp_finishaltitude)
 if "k" in d_obj:
     comp_taskinfo = d_obj["k"]			        # task infor data
 else:
@@ -436,7 +443,7 @@ if task_at.get("q") != None:
 else:
     task_at_freq = 0
 
-print("Task info")
+print("\n\nTask info")
 print("=========")
 print("Tasks type:", task_type, "ID:", task_id, task_listid, "Task Name:", task_name, "Airfield:", task_at_place, "TimeZone:", task_at_timezone)
 #print "Task at:", task_at, "WPLA", task_wpla
@@ -504,7 +511,8 @@ while wp < len(task_wp):
         break
     wp += 1
 
-print("WP:================================>")
+print("WP:================================>\n\n")
+
 # event
 
 print("Comp short name:", comp_shortname)
@@ -515,11 +523,11 @@ print("Comp Start time:", comp_starttime/1000)
 task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
         "compDate": comp_date, "startOpenTs": comp_starttime/1000, "turnpoints": tp} 
 event = {"name": comp_shortname, "description": comp_name,
-         "task": task, "tracks": tracks}
+         "task": task, "tracks": tracks, "IPaddr": IPaddr}
 j = json.dumps(event, indent=4)
 jsonfile.write(j)
 print("Task end:==========================>")
-print("Generate TSK file ...")
+print("\n\nGenerate TSK file ...")
 tsk = {"name": "SGPrace", "color": "0000FF", "legs": legs, "TPpointstype": tptype, "wlist": wlist}
 tsks = []
 tsks.append(tsk)
@@ -587,7 +595,7 @@ if npil == 0:
     os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit(-1)
 else:
-    print("Pilots found ... ", npil, "Warnings:", nwarnings)
+    print("\n\nPilots found ... ", npil, "Warnings:", nwarnings)
     if nwarnings > 0:
         print("Pilots with no FLARMID: ", warnings)
     exit(0)
