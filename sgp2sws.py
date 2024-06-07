@@ -103,13 +103,14 @@ if prtreq and prtreq[0] == "print":
 else:
     prt = False
 
-print("\n\nGenerate .json files from the www.sgp.aero web server. Version: "+version)
-print("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
-print("=======================================================================\n\n")
 hostname = socket.gethostname()
-print("DBhost:", config.DBhost, "ServerName:", hostname)
-print("Request coming from IP addr: ", IPaddr)
-print("===========================================\n\n")
+if prt:
+   print("\n\nGenerate .json files from the www.sgp.aero web server. Version: "+version)
+   print("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
+   print("=======================================================================\n\n")
+   print("DBhost:", config.DBhost, "ServerName:", hostname)
+   print("Request coming from IP addr: ", IPaddr)
+   print("===========================================\n\n")
 start_time = time.time()
 local_time = datetime.datetime.now()
 j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comps/')
@@ -137,11 +138,12 @@ TASKFILE = cucpath + config.Initials + fl_date_time + \
 COMPFILE = cucpath + 'competitiongliders.lst'
                                                         # name of the COMP to be generated
 CSVSFILE = cucpath + 'competitiongliders.csv'
-print("JSON generated data file is: ", JSONFILE) 	# just a trace
-print("TASK generated data file is: ", TASKFILE) 	# just a trace
-print("COMP generated data file is: ", COMPFILE) 	# just a trace
-print("CSVS generated data file is: ", CSVSFILE) 	# just a trace
-print("===========================: ") 			# just a trace
+if prt:
+   print("JSON generated data file is: ", JSONFILE) 	# just a trace
+   print("TASK generated data file is: ", TASKFILE) 	# just a trace
+   print("COMP generated data file is: ", COMPFILE) 	# just a trace
+   print("CSVS generated data file is: ", CSVSFILE) 	# just a trace
+   print("===========================: ") 			# just a trace
 
 if  os.path.isfile(JSONFILE):
   os.system('rm  '+JSONFILE)		                # remove the previous one
@@ -165,11 +167,9 @@ csvsfile = open(CSVSFILE, 'w')
 j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
 rr=j.read().decode('UTF-8') 
 j_obj = json.loads(rr)
-if prt:
-    #print j_obj
-    j = json.dumps(j_obj, indent=4)
-    print(j)
-    exit(0)
+#print j_obj
+j = json.dumps(j_obj, indent=4)
+#print(j)
 #
 # the different pieces of information
 #
@@ -183,14 +183,18 @@ warnings = []                                  		# warnings glider
 #ogndata=getddbdata()                                    # get the OGN DDB
 npil = 0				        	# number of pilots found
 pilots = j_obj["p"]					# get the pilot information
-print("\n\nPilots:", len(pilots))
-print("==========")
+if prt:
+   print("\n\nPilots:", len(pilots))
+   print("==========")
 for id in pilots:
     #
-    print("---------------------")
+    
+    if prt:
+       print("---------------------")
     pid = pilots[id]["i"]                               # get the pilot ID
     fname = pilots[id]["f"]                             # first name
     lname = pilots[id]["l"]                             # last name
+    pilotname = str((fname+" "+lname).encode('utf8').decode('utf-8'))
     compid = pilots[id]["d"]                            # competition number
     country = pilots[id]["z"]                           # two letters country code
     model = pilots[id]["s"]                             # aircraft model
@@ -212,12 +216,12 @@ for id in pilots:
             flarmid = getognflarmid(registration)
         if ognflarm == '' or ognflarm == "NOFlarm":
             ognflarm = "***NOREG***"
-            print("Warning .... Flarm not registered on the OGN DDB", flarmid, ognflarm, "\n\n")
+            print("Warning .... Flarm not registered on the OGN DDB", flarmid, ognflarm, pilotname, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
 
         elif flarmid[3:9] != ognflarm[3:9]:
-            print("Warning .... Flarm on system is not the same that Flarms registered on OGN, on the SGP system:", flarmid, "and on the OGN DDB:", ognflarm, "\n\n")
+            print("Warning .... Flarm on system is not the same that Flarms registered on OGN, on the SGP system:", flarmid, "and on the OGN DDB:", ognflarm, pilotname, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
         if 't' in pilots[id] :				# if we have tracker paired ???
@@ -256,13 +260,14 @@ for id in pilots:
         ccc=hex(rgb)                                    # convert it to hex
         color="#"+ccc[2:]                               # set the JSON color required
 
-    pilotname = str((fname+" "+lname).encode('utf8').decode('utf-8'))
     if flarmid == ognflarm and registration != "":
        flarmOK = "OK"
     else:
        flarmOK = "NOTOK"
-    print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker)
-    print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
+    
+    if prt:
+       print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker)
+       print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
     if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
         p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
         rr=p.read().decode('UTF-8') 
@@ -275,7 +280,8 @@ for id in pilots:
                on=obj[0]
                photo=on['photo']				# get the photo file
                photourl="http://rankingdata.fai.org/PilotImages/"+photo
-               print    ("wget "+photourl+" -q -O PilotImages/"+photo)
+               if prt:
+                  print    ("wget "+photourl+" -q -O PilotImages/"+photo)
                os.system("wget "+photourl+" -q -O PilotImages/"+photo)
                photourl=config.SWSserver+"SWS/PilotImages/"+photo
            
@@ -284,7 +290,8 @@ for id in pilots:
                if os.path.exists("PilotImages/"+str(rankingid)+".jpg"):
                   photourl=config.SWSserver+"SWS/PilotImages/"+str(rankingid)+".jpg"
                else:
-                  print("Photo not found")
+                  if prt:
+                     print("Photo not found")
                
         #print ("PhotoURL: ", pilotname, "RankingID:", rankingid, "==>>",photourl)
         tr = {"trackId": config.Initials+fl_date_time+":"+flarmid, "pilotName": pilotname,  "competitionId": compid, "country": country, "aircraft": model,
@@ -295,13 +302,15 @@ for id in pilots:
                                                         # add it to the tracks
     tracks.append(tr)
     npil += 1						# increase the number of pilots
-    print("---------------------")
+    if prt:
+       print("---------------------")
 
 #print tracks
-print("\n\nWlist:", wlist)
-print("\n\n===========")
-print("Competition")
-print("===========")
+if prt:
+   print("\n\nWlist:", wlist)
+   print("\n\n===========")
+   print("Competition")
+   print("===========")
 comp = j_obj["c"]					# get the competition information
 comp_firstday = comp['a']				# first day of the competition
 comp_lastday = comp['b']				# last day of the competition
@@ -322,10 +331,6 @@ if j_obj.get("i") == None:				# check if is fully setup the web site
     os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit(-1)
 indexofdays = j_obj["i"]
-#print ("Index of Days", indexofdays)
-#for dayday in indexofdays:
-    #print (dayday)
-    #print ("DDD", dayday["d"])
 if days != '':
     cday = 0
     for dayday in indexofdays:
@@ -343,7 +348,8 @@ shorttitle = indexofdays[day]["l"]    		        # day short title
 starttime = indexofdays[day]["a"]    		        # start time millis from midnite
 daytype = indexofdays[day]["y"]    		        # day type: 1, 2, 3 ...
 dayid = indexofdays[day]["i"] 			        # day ID
-print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
+if prt:
+   print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
 if date != ts_date_time:
     print ("\nWarning the task date is not TODAY !!!")
     print ("<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>\n\n")
@@ -354,14 +360,11 @@ d = urllib.request.urlopen(
     'https://www.crosscountry.aero/c/sgp/rest/day/'+str(qsgpID)+'/'+str(dayid))
 rr=d.read().decode('UTF-8') 
 d_obj = json.loads(rr)
-if prt:
-    print("____________________________________________________________")
-    d = json.dumps(d_obj, indent=4)
-    print(d)
+d = json.dumps(d_obj, indent=4)
+#print(d)
 if numberofactivedays == 0:
     print("No active days ...")
 
-#print( "DDD", d_obj)
 comp_day = d_obj["@type"]
 comp_id = d_obj["e"]				        # again the compatition ID
 comp_dayid = d_obj["i"]				        # the day ID
@@ -527,8 +530,9 @@ event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks, "IPaddr": IPaddr}
 j = json.dumps(event, indent=4)
 jsonfile.write(j)
-print("Task end:==========================>")
-print("\n\nGenerate TSK file ...")
+if prt:
+   print("Task end:==========================>")
+   print("\n\nGenerate TSK file ...")
 tsk = {"name": "SGPrace", "color": "0000FF", "legs": legs, "TPpointstype": tptype, "wlist": wlist}
 tsks = []
 tsks.append(tsk)
@@ -553,7 +557,8 @@ jsonfile.close()
 taskfile.close()
 latest = cucpath+config.Initials+'/SGPrace-latest.tsk'
 latestj = cucpath+config.Initials+'/SGPrace-latest.json'
-print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a reference
+if prt:
+   print("Linking:", TASKFILE+' ==>  '+latest)             # print is as a reference
 if os.path.islink(latest):
    os.system('rm  '+latest)                             # remove the previous one
    os.system('rm  '+latestj)                            # remove the previous one
@@ -566,7 +571,8 @@ if config.GIST:
    content=t+"\n"
    GIST_TOKEN= unobscure(config.GIST_TOKEN.encode()).decode()
    res=updategist(config.GIST_USER, "SGP RACING latest task", GIST_TOKEN, TASKFILE, content)
-   print ("GIST RC: ", res.status_code)
+   if prt:
+      print ("GIST RC: ", res.status_code)
    if res.status_code == 200 or res.status_code == 201:
       id=res.json()['id']
       print("https://gist.githubusercontent.com/"+config.GIST_USER+"/"+id+"/raw/")
