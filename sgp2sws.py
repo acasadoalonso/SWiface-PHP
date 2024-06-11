@@ -56,22 +56,23 @@ Flags = { 						# flag colors assigned to the countries
 #
 
 
-qsgpIDreq = sys.argv[1:]				# first arg is the event ID
-dayreq = sys.argv[2:]					# second arg is the day index within the event
-ipreq = sys.argv[3:]					# print request
-prtreq = sys.argv[4:]					# print request
+qsgpIDreq = sys.argv[1:]			# first arg is the event ID
+dayreq    = sys.argv[2:]			# second arg is the day index within the event
+ipreq     = sys.argv[3:]			# IP addr  request
+prtreq    = sys.argv[4:]			# print request
 
-                                                        # directory where to stor the JSON file generated
 cucpath = config.cucFileLocation
-tp = []							# turn pint list
-tracks = []						# track list
-version='V2.02'
+tp = []						# turn point list
+tracks = []					# track list
+version='V2.03'
 if 'USER' in os.environ:
         user=os.environ['USER']
 else:
         user="www-data"                     	# assume www
 
 #
+start_time = time.time()
+local_time = datetime.datetime.now()
 
 if qsgpIDreq and qsgpIDreq[0] != '0':
     qsgpID = sys.argv[1]
@@ -80,24 +81,29 @@ if qsgpIDreq and qsgpIDreq[0] != '0':
        print ("Please indicate the COMP ID\n\n")
        print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
        exit(-1)
-    try:
-       days = str(sys.argv[2])
-    except:
-       print ("Please indicate the index day\n\n")
-       print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
-       exit(-1)
-    if days[0].isdigit():
-        day = int(days)
-        days = ''
+    if dayreq[0] == 'today':
+       day = -1
+       days='Today'
     else:
-        day = 0
+       try:
+          days = str(sys.argv[2])			
+       except:
+          print ("Please indicate the index day\n\n")
+          print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
+          exit(-1)
+       if days[0].isdigit():
+           day  = int(days)
+           days = ''
+       else:
+           day = 0
 else:
-    qsgpID = '0'
+    qsgpID = '0'				# no competition ID 
 
 if ipreq :
     IPaddr=ipreq[0]				# the IP addr of the remote client
 else:
     IPaddr='0.0.0.0'
+
 if prtreq and prtreq[0] == "print":
     prt = True
 else:
@@ -111,8 +117,7 @@ if prt:
    print("DBhost:", config.DBhost, "ServerName:", hostname)
    print("Request coming from IP addr: ", IPaddr)
    print("===========================================\n\n")
-start_time = time.time()
-local_time = datetime.datetime.now()
+
 j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comps/')
 rr=j.read().decode('UTF-8') 
 j_obj = json.loads(rr)
@@ -128,6 +133,7 @@ else:
     # print the time for information only
     print("CompID:", qsgpID, "Time is now:", local_time)
 
+dl_date_time = local_time.strftime("%Y-%m-%d")          # get the local date
 fl_date_time = local_time.strftime("%Y%m%d")            # get the local time
 ts_date_time = local_time.strftime("%Y-%m-%d")          # get the local time
 JSONFILE = cucpath + config.Initials + fl_date_time + \
@@ -164,7 +170,11 @@ csvsfile = open(CSVSFILE, 'w')
 #
 # get the JSON string for the web server
 #
-j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
+try:
+   j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comp/'+str(qsgpID))
+except:
+   print ("Event not aactivated yet ...")
+   exit (-1)
 rr=j.read().decode('UTF-8') 
 j_obj = json.loads(rr)
 #print j_obj
@@ -330,24 +340,34 @@ if j_obj.get("i") == None:				# check if is fully setup the web site
     os.system('rm  '+COMPFILE)		                # remove the previous one
     os.system('rm  '+CSVSFILE)		                # remove the previous one
     exit(-1)
-indexofdays = j_obj["i"]
-if days != '':
-    cday = 0
-    for dayday in indexofdays:
-        #print "DAYDAY", days, dayday
-        if dayday["l"].upper() == days.upper():
-            day = cday
-            break
-        else:
-            cday += 1
-            continue
 
-date = indexofdays[day]["d"]			        # date
-title = indexofdays[day]["t"] 			        # day tittle
+indexofdays = j_obj["i"]
+
+cday = 0
+if days != '':
+    for dayday in indexofdays:
+        #print ("DAYDAY", day, cday, days, dayday["d"], dayday["l"], dayday)
+        if days == 'Today':
+           
+           if dayday["d"].upper() == dl_date_time:
+              day = cday
+              print ("DAY:", dayday["d"], dayday["l"])
+              break
+           else:
+              day   = cday
+              cday += 1
+              continue
+        else:
+           break
+
+
+date       = indexofdays[day]["d"]		        # date
+title      = indexofdays[day]["t"] 		        # day tittle
 shorttitle = indexofdays[day]["l"]    		        # day short title
-starttime = indexofdays[day]["a"]    		        # start time millis from midnite
-daytype = indexofdays[day]["y"]    		        # day type: 1, 2, 3 ...
-dayid = indexofdays[day]["i"] 			        # day ID
+starttime  = indexofdays[day]["a"]    		        # start time millis from midnite
+daytype    = indexofdays[day]["y"]    		        # day type: 1, 2, 3 ...
+dayid      = indexofdays[day]["i"] 		        # day ID
+
 if prt:
    print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
 if date != ts_date_time:

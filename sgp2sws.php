@@ -1,8 +1,8 @@
 <?php
-$compid = $_POST['compid'];
-$indexday = $_POST['indexday'];
+$compid=$_POST['compid'];
+$indexday=$_POST['indexday'];
 if ($indexday == '')
-   $indexday=0;
+    $indexday ='today';
 
 $cwd =getcwd();
 $rc=0;
