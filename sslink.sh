@@ -12,5 +12,5 @@ ln -s /nfs/OGN/src/funcs/soa2filfuncs.py .
 ln -s /nfs/OGN/src/SARsrc/ksta.py .
 
 ls -la *funcs.py 
-
+sudo chown $USER:www-data .
 

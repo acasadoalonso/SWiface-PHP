@@ -16,6 +16,7 @@ import socket
 from ognddbfuncs import *
 from geofuncs import convertline
 from gistfuncs import *
+from termcolor import colored
 #-------------------------------------------------------------------------------------------------------------------#
 import config
 Flags = { 						# flag colors assigned to the countries
@@ -81,7 +82,7 @@ if qsgpIDreq and qsgpIDreq[0] != '0':
        print ("Please indicate the COMP ID\n\n")
        print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
        exit(-1)
-    if dayreq[0] == 'today':
+    if dayreq and dayreq[0] == 'today':
        day = -1
        days='Today'
     else:
@@ -89,7 +90,8 @@ if qsgpIDreq and qsgpIDreq[0] != '0':
           days = str(sys.argv[2])			
        except:
           print ("Please indicate the index day\n\n")
-          print ("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
+          print ("Usage python sgp2sws.py COMPID INDEXDAY        or http://host/SWS/sgp2sws.html")
+          print ("==============================================================================")
           exit(-1)
        if days[0].isdigit():
            day  = int(days)
@@ -108,13 +110,18 @@ if prtreq and prtreq[0] == "print":
     prt = True
 else:
     prt = False
+if 'APACHE_RUN_USER' in os.environ or user == "www-data":        # check if www
+        www=True
+else:
+        www=False
 
 hostname = socket.gethostname()
-if prt:
+
+if prt or www:
    print("\n\nGenerate .json files from the www.sgp.aero web server. Version: "+version)
    print("Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html")
    print("=======================================================================\n\n")
-   print("DBhost:", config.DBhost, "ServerName:", hostname)
+   print("DBhost:", config.DBhost, "ServerName:", hostname, "User:", user, "WWW", www)
    print("Request coming from IP addr: ", IPaddr)
    print("===========================================\n\n")
 
@@ -214,7 +221,7 @@ for id in pilots:
         flarmid = pilots[id]["q"].rstrip()              # flarm id
         registration = pilots[id]["w"].lstrip()         # registration
         if registration == "":
-            print("Warning .... Missing glider registration:", flarmid, "\n\n")
+            print(colored("Warning .... Missing glider registration:",'red'), flarmid, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
                                                         # get the FlarmId from the registration
@@ -226,12 +233,12 @@ for id in pilots:
             flarmid = getognflarmid(registration)
         if ognflarm == '' or ognflarm == "NOFlarm":
             ognflarm = "***NOREG***"
-            print("Warning .... Flarm not registered on the OGN DDB", flarmid, ognflarm, pilotname, "\n\n")
+            print(colored("Warning .... Flarm not registered on the OGN DDB",'red'), flarmid, ognflarm, pilotname, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
 
         elif flarmid[3:9] != ognflarm[3:9]:
-            print("Warning .... Flarm on system is not the same that Flarms registered on OGN, on the SGP system:", flarmid, "and on the OGN DDB:", ognflarm, pilotname, "\n\n")
+            print(colored("Warning .... Flarm on system is not the same that Flarms registered on OGN, on the SGP system:",'red'), flarmid, "and on the OGN DDB:", ognflarm, pilotname, "\n\n")
             nwarnings += 1
             warnings.append(lname) 			# add it to the list of warnings
         if 't' in pilots[id] :				# if we have tracker paired ???
@@ -271,9 +278,9 @@ for id in pilots:
         color="#"+ccc[2:]                               # set the JSON color required
 
     if flarmid == ognflarm and registration != "":
-       flarmOK = "OK"
+       flarmOK = colored('\033[1m'+"OK", 'green')
     else:
-       flarmOK = "NOTOK"
+       flarmOK = colored('\033[1m'+"NOTOK", 'red')
     
     if prt:
        print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker)
@@ -327,7 +334,9 @@ comp_lastday = comp['b']				# last day of the competition
 comp_name = comp['t']				        # event name
 comp_shortname = comp['l']				# event short name
 comp_id = comp['i']
-print("Comp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, "First day:",comp_firstday, "Last day:", comp_lastday, "Number of pilots:", npil)
+if prt:
+   print("---------------------")
+print("\nComp ID:", comp_id, "Name:", comp_name, "Short name:", comp_shortname, "First day:",comp_firstday, "Last day:", comp_lastday, "Number of pilots:", npil)
 numberofactivedays = 0
 
 if j_obj.get("j") != None:
@@ -371,7 +380,7 @@ dayid      = indexofdays[day]["i"] 		        # day ID
 if prt:
    print("DATE:", date, "Title:", title, "Day:", shorttitle, "==>", day, "\nStart time(millis):", starttime, "Day type:", daytype, "Day ID:", dayid, "Number of active days:", numberofactivedays)
 if date != ts_date_time:
-    print ("\nWarning the task date is not TODAY !!!")
+    print (colored("\nWarning the task date is not TODAY !!!",'red'))
     print ("<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>\n\n")
     nwarnings += 1
     warnings.append("<<DATE>>") 			        # add it to the list of warnings
