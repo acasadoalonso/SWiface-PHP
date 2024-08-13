@@ -92,6 +92,7 @@ resultfile=''						# name of the resulting file
 
 # ======================== SETUP parameters =======================#
 #							# invoke the different handlers SOA/SGP/DIR
+reqtype = reqtype.upper()
 if reqtype == "SOA":					# extracting IGC file form SoaringSpot
 
    # validate the arguments
@@ -137,6 +138,7 @@ elif reqtype == "DIR":					# extracting the IGC files from the DIR directory
 
 else:
    print ("\nInvalid request type !!!\n")		# it is not a valid request
+   exit(-1)
 
 if web:
    print (html1)
