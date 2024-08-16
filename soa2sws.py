@@ -270,7 +270,7 @@ for cl in getemb(cd, 'classes'):
     flist.append("ID,CALL,CN,TYPE,INDEX")       # Initialize with header row
 
     for contestants in ctt:                     # inspect the data of each contestant
-        npil += 1                               # increase the number of total pilots
+        npil += 1                               # increase the number of total pilot 
         npilc += 1                              # increase the number of pilot within this class
         idflarm = ' '                           # FLARM ID as gathere for SS - no FLARM id yet
         idfreg = '?'                            # registration on the OGNDDB based on the flarm ID provided on SS
@@ -284,20 +284,42 @@ for cl in getemb(cd, 'classes'):
         if 'live_track_id' in contestants:      # check if we have the FlarmId from the SoaringSpot
             idfreg = '*'                        # FLARM ID from OGNDDB when live track id supplied  based on registration - no FLARM yet
             livetrk = contestants['live_track_id']  # flarmID and OGN pair
+            #print ("LLLL>>>", livetrk)
+            if livetrk[0] == '0':		# no flarm
+               if len(livetrk) == 8:		# no flarm and no OGN in front
+                  idflarm='0'
+                  ognpair='OGN'+livetrk[2:8]
+               elif len(livetrk)==11:		# no Flarm and OGN in front
+                  idflarm='0'
+                  ognpair=livetrk[2:11]
+               OGNTRACKERS=True
+
+            if len(livetrk) == 13:		# no FLR and no OGN in front
+               idflarm=livetrk[0:6]
+               ognpair='OGN'+livetrk[7:13]
+               OGNTRACKERS=True
             if len(livetrk) == 9:
                idflarm = livetrk		# case that just the FlarmID, no piaring
+               OGNTRACKERS=True
             if len(livetrk) == 19:              # format:  FLR123456 OGN654321
                idflarm = livetrk[0:9]		# case that just the FlarmID and OGN tracker pair
                ognpair = livetrk[10:]		# OGN trackers paired
+               OGNTRACKERS=True
             if len(idflarm) == 6:               # in case of missing FLR/ICA/OGN (deprecated)
                 if idflarm[0] == 'D':
                     idflarm="FLR"+idflarm       # assume a Flarm type 
-                elif idflarm[0].isdigit():
+                elif idflarm[0].isdigit() or idflarm[0] == 'A' or idflarm[0] == 'C':
                     idflarm="ICA"+idflarm       # assume a ICAO type
                 else:
                     idflarm="OGN"+idflarm       # assume a OGN type
+            
+            if idflarm[0].isdigit() or idflarm[0] == 'A' or idflarm[0] == 'C' or  idflarm[0] == 'F' or idflarm[0] == 'I' or idflarm[0] == 'O':
+               pass
+            else:
+               print(">>> check the FlarmID")
 
-            idfreg=getognreg(idflarm[3:9]) 	# get the registration from OGN DDB       
+            idfreg=getognreg(idflarm[3:9]) 	# get the registration from OGN DDB     a
+  
             if 'aircraft_registration' in contestants:
                 regi = contestants['aircraft_registration']
                 ognid=getognflarmid(regi)       # get the flarm if from the OGN DDB
@@ -367,7 +389,7 @@ for cl in getemb(cd, 'classes'):
                if ognpair != " ":
                    wlist.append(ognpair[3:9])
                else:
-                   print("Missing ognpair:", fname, lname)
+                   print(">>>Missing ognpair:", fname, lname)
                flist.append(ognpair+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
            clist.append(ognpair)		# add device to the competion list
 
@@ -377,7 +399,7 @@ for cl in getemb(cd, 'classes'):
                if idflarm != " " and idflarm != "NOFlarm":
                    wlist.append(idflarm[3:9])
                else:
-                   print("Missing Flarm:", fname, lname)
+                   print(">>>Missing Flarm:", fname, lname)
                flist.append(idflarm+","+regi+","+cn+","+ar+"," + str(hd))   # Populate the filter lista
 
            clist.append(idflarm)			# add device to the competion list
@@ -388,7 +410,7 @@ for cl in getemb(cd, 'classes'):
         if idflarm == ognid and regi != "reg_NOTYET":
            flarmOK = "OK"
         else:
-           flarmOK = "NOTOK"
+           flarmOK = ">>>NOT OK<<<"
 
         # print following infomration: first name, last name, Nation, Nationality, AC registration, call name, flight recorder ID, handicap aircraft model, club, IGC ID
         try:
