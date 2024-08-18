@@ -6,6 +6,7 @@ import urllib.request, urllib.error, urllib.parse
 import base64
 import datetime
 import time
+import zoneinfo
 import hmac
 import hashlib
 import base64
@@ -447,8 +448,12 @@ for cl in getemb(cd, 'classes'):
         os.system('rm  '+TASKFILE)
         os.system('rm  '+CSVFILE)
         continue				# nothing else to do now
-    print("= Tasks ==", ctt[idx]["task_date"])
-    if td_date_time != ctt[idx]["task_date"]:
+    localdate = datetime.datetime.now()      		# time of the servera
+    zone=zoneinfo.ZoneInfo(lctimezone)			# get the time zone
+    local = localdate.astimezone(tz=zone)
+    localdate = local.strftime("%Y-%m-%d")  	# get the local time
+    print("= Tasks ==", ctt[idx]["task_date"], localdate)
+    if localdate != ctt[idx]["task_date"]:
         print ("Warning ... the task date is not today!!!")
         nwarnings += 1
         warnings.append('<< DATE >>--'+classtype)
