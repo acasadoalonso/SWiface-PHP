@@ -25,7 +25,7 @@ from getflarm import *
 from simplehal import HalDocument, Resolver
 from pprint import pprint
 from config import *
-pgmver='2.1'
+pgmver='2.2'
 #-------------------------------------------------------------------------------------------------------------------#
 
 
@@ -166,13 +166,20 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
        url3 = getlinks(cl, "class_results")
        #print ("URL",url3)
        ll= len(gdata(url3, "class_results", prt='no')) 
+       i=0
+       while i < ll and False:
+           ctt = gdata(url3,   "class_results", prt='no')[i]   # get the results data
+           print ("LLL", i, ctt)
+           i +=1
+           print("==============================================================================================================================")
+
        if ll  > idx:
-           ctt = gdata(url3,   "class_results", prt='no')[
-            idx]                            	# get the results data
+           ctt = gdata(url3,   "class_results", prt='no')[idx]   # get the results data
        else:
            print("The class ", classname, "it is not ready yet\n")
            continue                            	# the class is not ready
-    #print "CTTCTT",ctt
+       
+       #pprint ( gdata(url3,   "class_results", prt='no'))   # get the results data
        tasktype = ctt["task_type"]
        taskdate = ctt["task_date"]
        if not web:
@@ -188,6 +195,7 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
                                             	# go the contestants (pilot) information
            cnt = getemb(ft, "contestant")
            pil = getemb(cnt, "pilot")[0]       	# get the pilot name information
+           #print ("LLL", pil)
            npil += 1
            ognid = ''
            if "igc_file" in ft:
@@ -236,7 +244,12 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
 
            if not web:
               print("Pilot:>>>>", pil["first_name"], pil["last_name"], nationality, fr, idflarm, regi, ognid)
-           req = urllib.request.Request(fftc)  	# open the URL
+           time.sleep(2)
+           try: 
+               req = urllib.request.Request(fftc)  	# open the URL
+           except HTTPError:			# in case of HTTP error
+               time.sleep(2)			# give it a second chance
+               req = urllib.request.Request(fftc)  	# open the URL
                                             	# build the authorization header
            req.add_header('Authorization', auth)
            req.add_header("Accept", "application/json")
