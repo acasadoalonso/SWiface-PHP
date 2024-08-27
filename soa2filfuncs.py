@@ -104,11 +104,12 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    date = utc.strftime("%Y-%m-%dT%H:%M:%SZ")   	# get the local time
    local_time = datetime.datetime.now()        	# the local time
    fl_date_time = local_time.strftime("%Y%m%d") # get the local time
+   dttoday = local_time.strftime("%Y-%m-%d")    # get the local time
    if not web:
       print("Hostname:", hostname)
       print("UTC Time is now:", utc)
       print(date)                             	#
-      print("Local Time is now:", local_time)	# print the time for information only
+      print("Local Time is now:", local_time, dttoday)	# print the time for information only
       if prt:
          print("Config params.  SECpath:", secpath)
 
@@ -166,6 +167,14 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
        url3 = getlinks(cl, "class_results")
        #print ("URL",url3)
        ll= len(gdata(url3, "class_results", prt='no')) 
+       i=0
+       while i < ll  and idx == 999:		# case of LAST
+           ctt = gdata(url3,   "class_results", prt='no')[i]   # get the results data
+           if ctt['task_date'] == dttoday:
+              idx=i
+              print ("Selecting for: ", dttoday, "Index: ", idx)
+              break
+           i +=1
        i=0
        while i < ll and False:
            ctt = gdata(url3,   "class_results", prt='no')[i]   # get the results data

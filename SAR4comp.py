@@ -53,6 +53,8 @@ prt       = args.prt					# print on|off
 web       = args.web					# web on|off
 if indexday.isdigit():          			# if provided and numeric
     idx = int(indexday)         			# index day
+elif indexday=='LAST':
+    idx=999
 else:
     idx = 0
 
@@ -93,7 +95,7 @@ resultfile=''						# name of the resulting file
 # ======================== SETUP parameters =======================#
 #							# invoke the different handlers SOA/SGP/DIR
 reqtype = reqtype.upper()
-if reqtype == "SOA":					# extracting IGC file form SoaringSpot
+if reqtype == "SOA" or reqtype == 'soa':					# extracting IGC file form SoaringSpot
 
    # validate the arguments
    # where to find the clientid and secretkey files
@@ -126,12 +128,12 @@ if reqtype == "SOA":					# extracting IGC file form SoaringSpot
    from soa2filfuncs import soa2fil			# get the routines
    resultfile=soa2fil(client,secretkey,idx,flarm,extractopt,prt,web)
 
-elif reqtype == "SGP":					# extracting the IGC files from the sgp.aero website
+elif reqtype == "SGP" or reqtype == 'sgp':		# extracting the IGC files from the sgp.aero website
 
    from sgp2filfuncs import sgp2fil			# get the routines
    resultfile=sgp2fil(sgpid,idx,flarm,extractopt,prt,web)	# call the routines
 
-elif reqtype == "DIR":					# extracting the IGC files from the DIR directory
+elif reqtype == "DIR" or reqtype == 'dir':		# extracting the IGC files from the DIR directory
 
    from dir2filfuncs import dir2fil			# get the routines
    resultfile=dir2fil(flarm,prt,web)			# call the routinesa
