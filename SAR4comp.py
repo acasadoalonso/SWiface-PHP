@@ -14,7 +14,7 @@ import config
 #                            SAR4comp  ==>  Serach and Rescue for IGC competitions
 # ======================================================================================================================= #
 
-pgmver='2.1'
+pgmver='2.2'
 reposerver=config.SWSserver+'/SWdata/'		# the server is defined on the config.py built by the genconfig.py script
 html1 = """<TITLE>SAR4comp</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]><H1> <Extracted flight</H1>  """
 html2 = """<center><table><tr><td><pre>"""
@@ -53,7 +53,7 @@ prt       = args.prt					# print on|off
 web       = args.web					# web on|off
 if indexday.isdigit():          			# if provided and numeric
     idx = int(indexday)         			# index day
-elif indexday=='LAST':
+elif indexday=='LAST' or indexday == 'last':		# LAST day 
     idx=999
 else:
     idx = 0
@@ -63,11 +63,6 @@ if sgpid.isdigit():          				# if provided and numeric
 else:
     sgpid = 0
 
-if flarm == '' and registration == '':
-   extractopt=False
-else:
-   extractopt=True
-#
 if flarm == 'NOFLARMID':
    flarm = ''
 if registration == 'NOREG':
@@ -75,12 +70,18 @@ if registration == 'NOREG':
 if flarm == ''  and registration != '' :
    flarm = getognflarmid(registration)
    flarm = flarm[3:9] 
+
+if flarm == '' and registration == '':
+   extractopt=False					# do not extract the flarm data, just download the IGC files
+else:
+   extractopt=True
+#
 #
 # ----------------------------------------------------------------------
 if 'USER' in os.environ:
         user=os.environ['USER']
 else:
-        user="www-data"                     	# assume www
+        user="www-data"                     		# assume www
 # ----------------------------------------------------------------------
 
 if not web:
@@ -95,7 +96,7 @@ resultfile=''						# name of the resulting file
 # ======================== SETUP parameters =======================#
 #							# invoke the different handlers SOA/SGP/DIR
 reqtype = reqtype.upper()
-if reqtype == "SOA" or reqtype == 'soa':					# extracting IGC file form SoaringSpot
+if reqtype == "SOA" :					# extracting IGC file form SoaringSpot
 
    # validate the arguments
    # where to find the clientid and secretkey files
@@ -128,12 +129,12 @@ if reqtype == "SOA" or reqtype == 'soa':					# extracting IGC file form SoaringS
    from soa2filfuncs import soa2fil			# get the routines
    resultfile=soa2fil(client,secretkey,idx,flarm,extractopt,prt,web)
 
-elif reqtype == "SGP" or reqtype == 'sgp':		# extracting the IGC files from the sgp.aero website
+elif reqtype == "SGP" :					# extracting the IGC files from the sgp.aero website
 
    from sgp2filfuncs import sgp2fil			# get the routines
    resultfile=sgp2fil(sgpid,idx,flarm,extractopt,prt,web)	# call the routines
 
-elif reqtype == "DIR" or reqtype == 'dir':		# extracting the IGC files from the DIR directory
+elif reqtype == "DIR" :					# extracting the IGC files from the DIR directory
 
    from dir2filfuncs import dir2fil			# get the routines
    resultfile=dir2fil(flarm,prt,web)			# call the routinesa
@@ -155,4 +156,5 @@ if user == 'root':
    print ("chown "+user+":www-data -R "+config.SARpath+"/IGCfiles/"+reqtype)
    os.system ("chown "+user+":www-data -R "+config.SARpath+"/IGCfiles/"+reqtype)
    os.system ("chmod 775 -R "              +config.SARpath+"/IGCfiles/"+reqtype)
+
 exit(0)

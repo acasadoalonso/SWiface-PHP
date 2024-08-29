@@ -157,7 +157,7 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
    PrevTaskDate = ""
    if not web:
       print("Classes:\n========\n\n")
-
+   last=idx
    for cl in getemb(cd, 'classes'):
        #print "CLCLCL", cl
        classname = cl["type"]                  	# search for each class
@@ -168,13 +168,12 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
        #print ("URL",url3)
        ll= len(gdata(url3, "class_results", prt='no')) 
        i=0
-       while i < ll  and idx == 999:		# case of LAST
-           ctt = gdata(url3,   "class_results", prt='no')[i]   # get the results data
-           if ctt['task_date'] == dttoday:
-              idx=i
-              print ("Selecting for: ", dttoday, "Index: ", idx)
-              break
-           i +=1
+       if last == 999:		# case of LAST
+           ctt = gdata(url3,   "class_results", prt='no')[ll-2]   # get the results data
+           idx=ll-2
+           tasktype = ctt["task_type"]
+           taskdate = ctt["task_date"]
+           print ("Selecting for: ", taskdate, "Index: ", idx)
        i=0
        while i < ll and False:
            ctt = gdata(url3,   "class_results", prt='no')[i]   # get the results data
@@ -253,7 +252,7 @@ def soa2fil(client, secretkey,idx, FlarmID, execopt,prt=False, web=False):
 
            if not web:
               print("Pilot:>>>>", pil["first_name"], pil["last_name"], nationality, fr, idflarm, regi, ognid)
-           time.sleep(2)
+           time.sleep(3)
            try: 
                req = urllib.request.Request(fftc)  	# open the URL
            except HTTPError:			# in case of HTTP error
