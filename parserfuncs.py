@@ -12,29 +12,34 @@ import sys
 import atexit
 import socket
 import airportsdata
-from datetime import datetime
+
 from ogn.parser import parse
+from datetime import datetime, timezone
+from dtfuncs  import naive_utcnow, naive_utcfromtimestamp
 
 # --------------------------------------------------------------------------
 aprssources = {			# sources based on the APRS TOCALL
-    "APRS":   "OGN",		# old tocall
+    "APRS"  : "OGN",		# old tocall
     "OGNSDR": "OGN",		# station Sofware defined radio
-    "OGFLR":  "OGN",		# Flarm
+    "OGFLR" : "OGN",		# Flarm
     "OGNFLR": "OGN",		# Flarm
+    "OGFLR6": "OGN",		# Flarm
+    "OGFLR7": "OGN",		# Flarm
     "OGNTRK": "OGN",		# OGN Tracker
     "OGNDSX": "OGN",		# old DSX
+    "OGNDVS": "WTX",		# Weather stations
     "OGNTTN": "TTN",		# the things LoRaWan network
     "OGTTN2": "TTN",		# the things LoRaWan network V2 - deprecated
     "OGTTN3": "TTN",		# the things LoRaWan network V3 - cumunity edition
     "OGNHEL": "HELI",		# helium LoRaWan
-    "OGOBS":  "OBS",		# OBS LoRaWan
+    "OGOBS" : "OBS",		# OBS LoRaWan
     "OGADSB": "ADSB",		# ADSB
     "ONADSB": "ADSB",		# ADSB
     "OGADSL": "ADSL",		# ADS-L
     "OGNFNT": "FANE",		# FANET
-    "OGFNT":  "FANE",		# FANET
+    "OGFNT" : "FANE",		# FANET
     "OGNPAW": "PAW",		# PilotAware
-    "OGPAW":  "PAW",		# PilotAware
+    "OGPAW" : "PAW",		# PilotAware
     "OGSPOT": "SPOT",		# SPOT
     "OGINRE": "INREACH",        # Garmin InReach
     "OGFLYM": "FLYM",		# FlyMaster
@@ -54,6 +59,8 @@ aprssources = {			# sources based on the APRS TOCALL
     "OGAIRM": "AIRM",	   	# Airmate
     "OGNMYC": "MYC",	   	# My cloud base
     "FXCAPP": "FXC",	   	# FXC 
+    "OGMSHT": "MSHT",	   	# Metashtic
+    "OGNPUR": "PURT",	   	# Pure track
     "OGNDLY": "DLYM"		# Delayed fixes (IGC mandated)
 }
 # --------------------------------------------------------------------------
@@ -249,7 +256,7 @@ def get_otime(packet):
     if 'timestamp' in packet:
         otime = packet['timestamp']
     else:
-        otime = datetime.utcfromtimestamp(0)
+        otime = datetime.naive_utcfromtimestamp(0)
     return otime
 
 
@@ -278,6 +285,16 @@ def gdatal(data, typer):               	        # get data on the left
         return (" ")
     pb = p
     while (data[pb] != ' ' and data[pb] != '/' and pb >= 0):
+        pb -= 1
+    ret = data[pb +1:p]                  	# return the data requested
+    return(ret)
+# #######################################################################
+def gdatall(data, typer):              	        # get data on the left
+    p = data.find(typer)              	        # scan for the type requested
+    if p == -1:
+        return (" ")
+    pb = p
+    while (data[pb] != ' ' and pb >= 0):
         pb -= 1
     ret = data[pb +1:p]                  	# return the data requested
     return(ret)
@@ -356,6 +373,12 @@ def spanishsta(station):                # return true if is an Spanish station
             station[0:4] == 'LUGA'      or      \
             station[0:5] == 'Avila'     or      \
             station[0:5] == 'AVILA'     or      \
+            station[0:7] == 'Montsec'   or      \
+            station[0:7] == 'MONTSEC'   or      \
+            station[0:9] == 'TordlOrri' or      \
+            station[0:9] == 'TORDLORRI' or      \
+            station[0:8] == 'Baqueira'  or      \
+            station[0:8] == 'BAQUEIRA'  or      \
             station in ksta.ksta and station[0:2] != 'LF' and station != 'Roquefort' :
         return True
     return False
@@ -426,7 +449,7 @@ def parseraprs(packet_str, msg):
     # print (">>>Packet:", packet, file=sys.stderr)
     # ignore if do data or just the keep alive message
     if len(packet_str) > 0 and packet_str[0] != "#":
-        date = datetime.utcnow() 			# get the date
+        date = naive_utcnow() 			# get the date
         if 'name' in packet:
             callsign = packet['name']               	# get the call sign FLARM ID or station name
             gid = callsign                  	        # id
@@ -453,14 +476,37 @@ def parseraprs(packet_str, msg):
         ix = packet_str.find(':')     # look for the message type
         # check if it is position report or status report
         msgtype = packet_str[ix +1:ix +2]
-        if msgtype != '>' and msgtype != '/':   # only status or location messages
+        if msgtype != '>' and msgtype != '/':   	# only status or location messages
             print("MMM>>>", aprstype, data, file=sys.stderr)
+# ===================================================================================================== #
+        # if TCPIP records            			The the WX
+        if dst_callsign == 'OGNDVS':			# if it is a wether station ??
+           windspeed = gdatall(data, 'kt ')
+           temp      = gdatal (data, 'F ')
+           humidity  = gdatal (data, '% ')
+           rain      = gdatal (data, 'mm/h')
+           msg['id']       = gid	        	# return the parsed data into the dict
+           msg['path']     = path
+           msg['relay']    = relay
+           msg['station']  = gid
+           msg['aprstype'] = aprstype
+           msg['otime']    = otime
+           msg['windspeed']= windspeed
+           msg['temp']     = temp
+           msg['humidity'] = humidity
+           msg['rain']     = rain
+           msg['source']   = 'WTX'
+           return (msg)
+               
+# ===================================================================================================== #
+        # if TCPIP records            			The station records
         if (path == 'aprs_receiver' or path == 'receiver') and (msgtype == '>' or msgtype == '/'):  # handle the TCPIP
             if cc.isupper():
                 gid = callsign
             else:
                 gid = cc
             station = gid
+	
             # scan for the body of the APRS message
             p = data.find(' v0.')                       # the comment side
             if aprstype == 'status':

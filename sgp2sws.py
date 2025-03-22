@@ -216,7 +216,7 @@ for id in pilots:
     country = pilots[id]["z"]                           # two letters country code
     model = pilots[id]["s"]                             # aircraft model
     j = pilots[id]["j"]                                 # ranking list
-    rankingid = pilots[id]["r"]                         # ranking id
+    rankingid = pilots[id]["r"].strip()                 # ranking id
     if int(qsgpID) >= 14:
         flarmid = pilots[id]["q"].rstrip()              # flarm id
         registration = pilots[id]["w"].lstrip()         # registration
