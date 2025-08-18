@@ -338,7 +338,7 @@ for id in pilots:
     if prt:
        print("---------------------")
 
-if prt:
+if prt or www:
        print("---------------------")
        print("Warnings:", len(warnings), warnings)
        print("---------------------\n\n")
