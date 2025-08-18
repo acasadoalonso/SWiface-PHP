@@ -65,7 +65,7 @@ prtreq    = sys.argv[4:]			# print request
 cucpath = config.cucFileLocation
 tp = []						# turn point list
 tracks = []					# track list
-version='V2.03'
+version='V2.04'
 if 'USER' in os.environ:
         user=os.environ['USER']
 else:
@@ -286,10 +286,15 @@ for id in pilots:
        print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker)
        print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
     if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
-        p = urllib.request.urlopen('https://rankingdata.fai.org/rest01/api/rlpilot?id='+str(rankingid))
-        rr=p.read().decode('UTF-8') 
-        pr = json.loads(rr)
-        photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
+        try:
+           p = urllib.request.urlopen('https://rankingdata.fai.org/rest/api/rlpilot?id='+str(rankingid))
+           rr=p.read().decode('UTF-8') 
+           pr = json.loads(rr)
+           photourl="http://rankingdata.fai.org/PilotImages/noimage.jpg"
+        except:
+           print("No ranking data ...\n")
+           pr=None
+           photourl=''
         #print("PR", pr)
         if pr != None:                                  # use the RankingList API
             obj=pr['data']   		                # reach the photo file
