@@ -327,6 +327,10 @@ for id in pilots:
     if prt:
        print("---------------------")
 
+if prt:
+       print("---------------------")
+       print("Warnings:", len(warnings), warnings)
+       print("---------------------\n\n")
 #print tracks
 if prt:
    print("\n\nWlist:", wlist)
