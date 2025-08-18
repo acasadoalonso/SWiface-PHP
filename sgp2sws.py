@@ -124,6 +124,17 @@ if prt or www:
    print("DBhost:", config.DBhost, "ServerName:", hostname, "User:", user, "WWW", www)
    print("Request coming from IP addr: ", IPaddr)
    print("===========================================\n\n")
+   print("Program Version:", time.ctime(os.path.getmtime(__file__)))
+   import platform
+   print("Python version:", platform.python_version())
+   import git
+   try:
+      repo = git.Repo(__file__, search_parent_directories=True)
+      sha = repo.head.object.hexsha
+   except:
+      sha="no sha"
+   print ("Git commit:", sha,"\n\n")
+
 
 j = urllib.request.urlopen('https://www.crosscountry.aero/c/sgp/rest/comps/')
 rr=j.read().decode('UTF-8') 
