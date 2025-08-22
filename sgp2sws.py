@@ -254,6 +254,11 @@ for id in pilots:
             warnings.append(lname) 			# add it to the list of warnings
         if 't' in pilots[id] :				# if we have tracker paired ???
             ogntracker=pilots[id]['t'].upper().rstrip()	# OGN tracker to pair
+            if len(ogntracker) == 19:			
+               ogntracker2=ogntracker[10:]
+               ogntracker =ogntracker[0:9]
+            else:
+               ogntracker2=''
         else:
             ogntracker=''
     else:
@@ -263,8 +268,12 @@ for id in pilots:
     if flarmid != '':
         wlist.append(flarmid[3:9])			# add device to the white list
         clist.append(flarmid)				# add device to the competion list
+        clist.append('MKT'+flarmid[3:9])		# add device to the competion list
         if ogntracker != '':
            clist.append(ogntracker)			# add pairing tracker to the competion list
+        elif ogntracker2 != '':
+           clist.append(ogntracker2)			# add pairing tracker to the competion list
+
         else:
            clist.append("OGNFFFFFF")			# add pairing tracker to the competion list
         flist.append(flarmid+","+registration+","+compid+"," +
@@ -294,7 +303,7 @@ for id in pilots:
        flarmOK = colored('\033[1m'+"NOTOK", 'red')
     
     if prt:
-       print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker)
+       print("Pilot:", pid, pilotname, compid, country, model, j, rankingid, registration, "SGP FlarmID:", flarmid, "OGN:", ognflarm, flarmOK  ,"Tracker:", ogntracker,ogntracker2)
        print("FlarmID on SYS:", flarmid, "Flarm reg:", ognflarm, "Registration:", registration)
     if config.PicPilots == 'FAI':                       # use the FAI ranking List for the pilot photos ???
         try:
