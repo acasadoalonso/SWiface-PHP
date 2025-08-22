@@ -268,7 +268,7 @@ for id in pilots:
     if flarmid != '':
         wlist.append(flarmid[3:9])			# add device to the white list
         clist.append(flarmid)				# add device to the competion list
-        clist.append('MKT'+flarmid[3:9])		# add device to the competion list
+        clist.append('MTK'+flarmid[3:9])		# add device to the competion list
         if ogntracker != '':
            clist.append(ogntracker)			# add pairing tracker to the competion list
         elif ogntracker2 != '':
@@ -324,8 +324,8 @@ for id in pilots:
                photourl="http://rankingdata.fai.org/PilotImages/"+photo
                if prt:
                   print    ("wget "+photourl+" -q -O PilotImages/"+photo)
-               os.system("wget "+photourl+" -q -O PilotImages/"+photo)
-               photourl=config.SWSserver+"SWS/PilotImages/"+photo
+               #os.system("wget "+photourl+" -q -O PilotImages/"+photo)
+               #photourl=config.SWSserver+"SWS/PilotImages/"+photo
            
             if photo == "noimage.jpg":
                #print("PPP", config.SWSserver+"SWS/PilotImages/"+str(rankingid)+".jpg")
