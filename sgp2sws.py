@@ -65,7 +65,7 @@ prtreq    = sys.argv[4:]			# print request
 cucpath = config.cucFileLocation
 tp = []						# turn point list
 tracks = []					# track list
-version='V2.04'
+version='V2.05'
 if 'USER' in os.environ:
         user=os.environ['USER']
 else:
@@ -268,7 +268,7 @@ for id in pilots:
     if flarmid != '':
         wlist.append(flarmid[3:9])			# add device to the white list
         clist.append(flarmid)				# add device to the competion list
-        clist.append('MTK'+flarmid[3:9])		# add device to the competion list
+        clist.append('MTK'+flarmid[3:9])		# add microtrack to the competion list
         if ogntracker != '':
            clist.append(ogntracker)			# add pairing tracker to the competion list
         elif ogntracker2 != '':
