@@ -35,7 +35,7 @@ Flags = { 						# flag colors assigned to the countries
     "DEU": ["black", "red", "yellow"],
     "NZL": ["blue", "blue", "blue"],
     "CZE": ["white", "blue", "red"],
-    "POL": ["white", "red", "white"],
+    "POL": ["white", "white", "red"],
     "RUS": ["white", "blue", "red"],
     "SWE": ["blue", "yellow", "white"],
     "NOR": ["blue", "red", "red"],
