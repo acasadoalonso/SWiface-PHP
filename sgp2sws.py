@@ -2,8 +2,10 @@
 # -*- coding: UTF-8 -*-
 
 #
-#   This script get the dat from the sgp.aero server and gen the SW JSON file
+#   This script get the data from the sgp.aero server and gen the SW JSON file
 #
+# ================================================================================================================= #
+
 import sys
 import json
 import urllib.request, urllib.error, urllib.parse

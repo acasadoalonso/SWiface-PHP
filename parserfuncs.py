@@ -28,6 +28,7 @@ aprssources = {			# sources based on the APRS TOCALL
     "OGNTRK": "OGN",		# OGN Tracker
     "OGNDSX": "OGN",		# old DSX
     "OGNDVS": "WTX",		# Weather stations
+    "APYSNR": "WTX",		# Weather stations
     "OGNTTN": "TTN",		# the things LoRaWan network
     "OGTTN2": "TTN",		# the things LoRaWan network V2 - deprecated
     "OGTTN3": "TTN",		# the things LoRaWan network V3 - cumunity edition
@@ -82,7 +83,8 @@ aprssymtypes=[
     "/O",                   # C = airship (seen once)
     "/'",                   # D = UAV (drones, can become very common)
     "/z",                   # E = ground support (ground vehicles at airfields)
-    "\\n"                   # F = static object (ground relay ?)
+    "\\n",                  # F = static object (ground relay ?)
+    "/n"                    # F = Node
 ]
 # --------------------------------------------------------------------------
 aprstypes=[
@@ -101,12 +103,14 @@ aprstypes=[
     "Airship",              # C = airship (seen once)
     "Drone",                # D = UAV (drones, can become very common)
     "GroundVehicle",        # E = ground support (ground vehicles at airfields)
-    "GroundStation"         # F = static object (ground relay ?)
+    "GroundStation",        # F = static object (ground relay ?)
+    "StaticObject"          # F = static object (ground relay ?)
 ]
 # --------------------------------------------------------------------------
 def isfloat(s):
     return (s.replace('.','',1).isdigit())
 
+unkacft={}				# list of unknow aircraft types
 def get_aircraft_type(sym1, sym2):      # return the aircraft type based on the symbol table
 
     sym=sym1 +sym2
@@ -118,7 +122,9 @@ def get_aircraft_type(sym1, sym2):      # return the aircraft type based on the 
     # deal with the NEMO for the time being
     if sym1 == 'I' and sym2 == '&':
         return ("Station")
-    print (">>> Unknown or Wrong Acft Type", sym1, sym2, "<<<", file=sys.stderr)
+    if sym not in unkacft:		# print the error once
+        unkacft[sym]=1
+        print (">>> Unknown or Wrong Acft Type", sym1, sym2, "<<<", file=sys.stderr)
     return ("UNKNOWN")
 
 
@@ -258,7 +264,10 @@ def get_otime(packet):
     if 'timestamp' in packet:
         otime = packet['timestamp']
     else:
-        otime = datetime.naive_utcfromtimestamp(0)
+        if hasattr(datetime, 'naive_utcfromtimestamp'):
+           otime = datetime.naive_utcfromtimestamp(0)
+        else:
+           otime = datetime.utcfromtimestamp(0)
     return otime
 
 
@@ -269,12 +278,14 @@ def get_station(packet):
     else:
         station=''
     return (station)
-
+unksrc={}					# list of unknow sources
 def get_source(dstcallsign):
     src = str(dstcallsign)
     if src in aprssources:
         return (aprssources[src])
-    print(">>> Unknown SOURCE:", src, naive_utcnow(),"<<<", file=sys.stderr)
+    if src not in unksrc:
+        print(">>> Unknown SOURCE:", src, naive_utcnow(),"<<<", file=sys.stderr)
+        unksrc[src]=1
         
     return ("UNKW")
 # ########################################################################
@@ -403,8 +414,8 @@ def parseraprs(packet_str, msg):
         ix = packet_str.find(':')     # look for the message type
         # check if it is position report or status report
         msgtype = packet_str[ix +1:ix +2]
-        if msgtype != '>' and msgtype != '/':   	# only status or location messages
-            print("MMM>>>", aprstype, data, file=sys.stderr)
+        if msgtype != '>' and msgtype != '/' and aprstype != 'position_weather':   	# only status or location messages
+            print("MMM Check APRStype >>>", aprstype, data, file=sys.stderr)
 # ===================================================================================================== #
         # if TCPIP records            			The the WX
         if dst_callsign == 'OGNDVS':			# if it is a wether station ??
@@ -423,6 +434,76 @@ def parseraprs(packet_str, msg):
            msg['humidity'] = humidity
            msg['rain']     = rain
            msg['source']   = 'WTX'
+           return (msg)
+        if aprstype == 'position_weather':		# if it is a wether station ??
+           msg['id']       = gid	        	# return the parsed data into the dict
+           msg['path']     = path
+           msg['relay']    = relay
+           msg['station']  = gid
+           msg['aprstype'] = aprstype
+           msg['otime']    = otime
+           #print ("WTXin:", packet)
+           if   "comment" in packet:
+              wtx = packet['comment'].rstrip()  	# status informationa
+           elif "user_comment" in packet:
+              wtx = packet['user_comment'].rstrip()  	# status informationa
+           else:
+              return (msg)
+           if len(wtx) == 0 or 'wind_speed' in packet:	# if info is already parsered 
+              if 'wind_speed' in packet:
+                 msg['wind_speed']       = packet['wind_speed']
+              if 'wind_direction' in packet:
+                 msg['wind_direction']   = packet['wind_direction']
+              if 'wind_speed_peek' in packet:
+                 msg['wind_speed_peak']  = packet['wind_speed_peak']
+              if 'temperature' in packet:
+                 msg['temperature']      = packet['temperature']
+              if 'humidity' in packet:
+                 msg['humidity']         = packet['humidity']
+              if 'rainfall_1h' in packet:
+                 msg['rainfall_1h']      = packet['rainfall_1h']
+              if 'rainfall_24h' in packet:
+                 msg['rainfall_24h']     = packet['rainfall_24h']
+              if 'barometric_pressure' in packet:
+                 msg['barometric_pressure'] = packet['barometric_pressure']
+              msg['source']   = 'WTX'
+              return (msg)
+
+              
+          						# parse the APRS weather messagea
+           temp      = 0
+           gust      = 0
+           humidity  = 0
+           rain      = 0
+           rain24    = 0
+           baro      = 0
+
+           print("WTX", packet)
+           if len(wtx) < 27:
+              return (msg)
+           if wtx[3]=='g' and len(wtx)  >6  and wtx[4:6]   != '...'   and wtx[4:6]   != '   ':
+              gust=int(wtx[4:6])			# gust
+           if wtx[7]=='t' and len(wtx)  >10 and wtx[8:10]  != '...'   and wtx[8:10]  != '   ':
+              temp=int(wtx[8:10])			# temperature
+           if wtx[11]=='r' and len(wtx) >14 and wtx[12:14] != '...'   and wtx[12:14] != '   ':
+              rain=int(wtx[12:14])			# rainfall
+           if wtx[15]=='p' and len(wtx) >18 and wtx[16:18] != '...'   and wtx[16:18] != '   ':
+              rain24=int(wtx[16:18])			# rainfall
+           if wtx[19]=='b' and len(wtx) >24 and wtx[20:24] != '.....' and wtx[20:24] != '     ':
+              baro=int(wtx[20:24])			# barometric presure
+           if wtx[25]=='h' and len(wtx) >27 and wtx[26:27] != '..'    and wtx[26:27] != '  ':
+              humidity=int(wtx[26:27])			# humidity
+
+           msg['wind_speed']    = packet['wind_speed']
+           msg['wind_direction']= packet['wind_direction']
+           msg['temperature']   = temp
+           msg['humidity']      = humidity
+           msg['rainfall_1h']   = rain
+           msg['rainfall_24h']  = rain24
+           msg['barometric_pressure'] = baro
+           msg['wind_speed_peak']     = gust
+           msg['source']   = 'WTX'
+           #print ("WTXout:", msg)
            return (msg)
                
 # ===================================================================================================== #
