@@ -22,7 +22,7 @@ def get_licenses_per_country(country,prt=True):
    while nl == 100:				# while is not over ???
       url="https://extranet.fai.org/api/v1/licences?auth_username=FAIOrganizer&auth_password=czlWc3NTZXdtUg==&discipline=Gliding&country="+country+"&limit_length=100&limit_start="+str(start)
       if prt:
-         print (url)
+         print (url,"\n\n")
       j = urllib.request.urlopen(url)
       rr=j.read().decode('UTF-8') 
       j_obj = json.loads(rr)
@@ -59,8 +59,12 @@ def get_license_details_byname(country, givenname=' ', surname=' ',prt=True):
     if prt:
        print (len(lpc), givenname, surname, "\n\n", json.dumps(lpc, indent=4))
     for lic in lpc:
-        if lic['surname_lip'] == surname and lic['givenname_lip'] == givenname:
-           return (lic)
+        if givenname == ' ':
+           if lic['surname_lip'] == surname :
+              return (lic)
+        else: 
+           if lic['surname_lip'] == surname and lic['givenname_lip'] == givenname:
+              return (lic)
     return (None)
 
 def get_license_details_byln(country, ln, prt=True):
@@ -72,5 +76,13 @@ def get_license_details_byln(country, ln, prt=True):
            return (lic)
     return (None)
 
-
+def get_full_license_details(idlicence, prt=False):
+    l=str(idlicence)
+    url="https://extranet.fai.org/api/v1/licence/"+l+"?auth_username=FAIOrganizer&auth_password=czlWc3NTZXdtUg"
+    if prt:
+       print (url,"\n\n")
+    j = urllib.request.urlopen(url)
+    rr=j.read().decode('UTF-8') 
+    j_obj = json.loads(rr)
+    return(j_obj)
 #################################################################
