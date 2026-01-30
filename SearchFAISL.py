@@ -18,7 +18,7 @@ def display_pilot_license(r,  web=True, full=False):
     if web:
        print (html1)
     print ("IOC:",                   r['IOC'])
-    print ("Is_expired:",            r['is_expired'])
+    print ("It is expired ?:",       r['is_expired'])
     #print ("License Number:",        r['idlicence'])
     print ("FAI ID:",                r['idlicencee'])
     print ("License number by NAC:", r['licencenumber_lic'])
@@ -108,6 +108,6 @@ if pilotname != '':
    if r != None:
       display_pilot_license(r, web)
    else:
-      print ("\n\nPilot namme not found ...\n\n")
+      print ("\n\nPilot name not found ...\n\n")
 
 exit(0)
