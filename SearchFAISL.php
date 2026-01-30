@@ -1,5 +1,6 @@
 <?php
 $pilotname='';
+$firstname='';
 $ioccountry='';
 $sl='0';
 $args =' -w True ';
@@ -8,9 +9,19 @@ if (isset($_GET['ioccountry']))
         $args= $args.' -c '.$ioccountry;
 if (isset($_GET['pilotname']))
         $pilotname=$_GET['pilotname'];
-        //echo "::".$pilotname."::";
+        if (strpos($pilotname, ' ')){
+           $pilotname=str_replace(' ','#', $pilotname);
+           }
         if ($pilotname != ' ' and $pilotname != '') {
            $args= $args.' -n '.$pilotname;
+           }
+if (isset($_GET['firstname']))
+        $firstname=$_GET['firstname'];
+        if (strpos($firstname, ' ')){
+           $firstname=str_replace(' ','#', $firstname);
+           }
+        if ($firstname != ' ' and $firstname != '') {
+           $args= $args.' -f '.$firstname;
            }
 if (isset($_GET['sl']))
         $sl=$_GET['sl'];

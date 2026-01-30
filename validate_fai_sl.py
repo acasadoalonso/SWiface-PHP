@@ -15,7 +15,7 @@ import os
 import math
 import pycountry
 import socket
-def get_licenses_per_country(country,prt=True):
+def get_licenses_per_country(country,prt=False):
    licenses=[]
    start=0
    nl=100
@@ -48,22 +48,23 @@ def validate_fai_sl(country,sl=0, name=' ',prt=True):
        return (False)
     elif name != ' ':
        for lic in lpc:
-           if lic['surname_lip'] == name:
+           if lic['surname_lip'].upper() == name.upper():
               return (True)
        return (False)
     else:
        return (-1)
 
-def get_license_details_byname(country, givenname=' ', surname=' ',prt=True):
+def get_license_details_byname(country, givenname=' ', surname=' ', prt=False):
+    #print("LLL->", givenname, ":::", surname)
     lpc=get_licenses_per_country(country, prt)
     if prt:
-       print (len(lpc), givenname, surname, "\n\n", json.dumps(lpc, indent=4))
+       print ("LIC:\n", len(lpc), givenname, surname, "\n\n", json.dumps(lpc, indent=4))
     for lic in lpc:
-        if givenname == ' ':
-           if lic['surname_lip'] == surname :
+        if givenname == ' ' or givenname == '':
+           if lic['surname_lip'].upper() == surname.upper() :
               return (lic)
         else: 
-           if lic['surname_lip'] == surname and lic['givenname_lip'] == givenname:
+           if lic['surname_lip'].upper() == surname.upper() and lic['givenname_lip'].upper() == givenname.upper():
               return (lic)
     return (None)
 

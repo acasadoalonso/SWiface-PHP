@@ -49,6 +49,8 @@ parser.add_argument('-c', '--country', required=True,	# IOC Country code
                     dest='country', action='store', default='')
 parser.add_argument('-n', '--pilotname', required=False,
                     dest='pilotname', action='store', default='')
+parser.add_argument('-f', '--firstname', required=False,
+                    dest='firstname', action='store', default='')
 parser.add_argument('-s', '--sportinglicense', required=False,
                     dest='sportinglicense', action='store', default='0')
 parser.add_argument('-p', '--print',  required=False,
@@ -59,6 +61,9 @@ parser.add_argument('-w', '--web',  required=False,
 args      = parser.parse_args()
 country   = args.country				# IOC country code
 pilotname = args.pilotname    				# Pilot name
+pilotname = pilotname.replace('#', ' ')			# in case of blanks in the name
+firstname = args.firstname    				# Pilot name
+firstname = firstname.replace('#', ' ')			# in case of blanks in the name
 if args.sportinglicense.isnumeric():
    sl        = int(args.sportinglicense) 		# Pilot sportinglicense
 else:
@@ -79,7 +84,7 @@ if not web:
    print("\n\n")
    print("Program to search or validate a pilot's FAI Sporting license ", pgmver)
    print("===========================================================================================================")
-   print("Args  IOC Country: ", country, "Pilot name: ", pilotname, "SL:", sl, prt, web, user)
+   print("Args  IOC Country: ", country, "Pilot name: ", pilotname, "First Name: ", firstname, "SL:", sl, prt, web, user)
 else:
    prt=False
 
@@ -101,10 +106,13 @@ if sl != 0:
    else:
       print ("\n\nLicense number not found ...\n\n")
 if pilotname != '':
-   r=validate_fai_sl(country, name=pilotname, prt=False)
+   if firstname != ' ':
+      r=get_license_details_byname(country, givenname=firstname, surname=pilotname, prt=prt)
+   else:
+      r=validate_fai_sl(country, name=pilotname, prt=False)
    if r:
       print ("\n\n",pilotname, " is a valid surname for country ", country, "with a valid sporting license.\n\n")
-   r=get_license_details_byname(country, surname=pilotname,  prt=False)
+   r=get_license_details_byname(country, givenname=firstname, surname=pilotname, prt=prt)
    if r != None:
       display_pilot_license(r, web)
    else:
