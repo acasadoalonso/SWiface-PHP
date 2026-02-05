@@ -206,7 +206,7 @@ if __name__ == '__main__':
 
     pgmver='1.0'
 # ---------------------------------------------------------------- #
-    reposerver=config.SWSserver+'/SWdata/'		# the server is defined on the config.py built by the genconfig.py script
+    reposerver=config.SWSserver+'SWdata/'		# the server is defined on the config.py built by the genconfig.py script
     html1 = """<TITLE>SSextract</TITLE> <IMG src="gif/FAIgliding.jpeg" border=1 alt=[image]></br><H1> <Extracted results</H1>  """
     html2 = """<center><table><tr><td><pre><H1>Results from Soaring Spot: </H1></br> """
     html3 = """</pre></td></tr></table></center>"""
