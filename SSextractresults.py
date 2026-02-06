@@ -16,10 +16,6 @@ from typing import List, Dict, Optional
 from urllib.parse import urljoin, urlparse
 from web_scraper import *
 
-
-
-
-
 if __name__ == '__main__':
 
 # ======================================================================================================================= #
@@ -92,9 +88,14 @@ if __name__ == '__main__':
         for i, table in enumerate(tables):
              #print(f"\nTable {i+1}:")
              if file != '':
-                 file=competition+'_'+file		# add the comp ID to distinguish between comps
-                 save_to_json(table, "../SWdata/"+file+'.json')	# create a JSON file
-                 save_2_csv  (table, "../SWdata/"+file+'.csv')	# and a CSV file
+                 file="../SWdata/"+competition+'_'+file	# add the comp ID to distinguish between comps
+                 if  os.path.isfile  (file+'.json'):
+                     os.system('rm  '+file+'.json')     # remove the previous one
+                 if  os.path.isfile  (file+'.csv'):
+                     os.system('rm  '+file+'.csv')      # remove the previous one
+
+                 save_to_json(table, file+'.json')	# create a JSON file
+                 save_2_csv  (table, file+'.csv')	# and a CSV file
                  if web:				# if on the web prepare the html line
                     html4 = 'Click here to dowload the resulting file ==> Class: '+sclass[0]+' <a href=' + reposerver+file+'.csv> '+file+" </a>"
                     print (html4)
