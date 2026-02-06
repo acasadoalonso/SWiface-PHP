@@ -10,9 +10,9 @@ cp /nfs/OGN/src/funcs/gistfuncs.py .
 cp /nfs/OGN/src/funcs/dir2filfuncs.py .
 cp /nfs/OGN/src/funcs/sgp2filfuncs.py .
 cp /nfs/OGN/src/funcs/soa2filfuncs.py .
-pipreqs . --use-local --force
+pipreqs   --force  . >&/dev/null
 git add .
 git commit
-git push origin master
+git push origin   master
 git push glidernet master
 
