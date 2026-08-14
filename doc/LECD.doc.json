@@ -1,13 +1,15 @@
-Generate .json files V1.1 from  the www.sgp.aero web server
-Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html 
-DBhost: casadonfs ServerName: CASADOUBUNTU
-Title: 9th SGP World Final
-CompID: 45 Time is now: 2019-06-12 10:37:46.449208
-JSON generated data file is:  /var/www/html/SWS/cuc/FSGP20190612.json
-TASK generated data file is:  /var/www/html/SWS/cuc/FSGP20190612.tsk
-COMP generated data file is:  /var/www/html/SWS/cuc/competitiongliders.lst
-CSVS generated data file is:  /var/www/html/SWS/cuc/competitiongliders.csv
-===========================: 
+{
+"_comment" :"#Generate .json files V1.1 from  the www.sgp.aero web server\
+#Usage python sgp2sws.py COMPID indexday or http://host/SWS/sgp2sws.html\ 
+#DBhost: casadonfs ServerName: CASADOUBUNT\
+#Title: 9th SGP World Final \
+#CompID: 45 Time is now: 2019-06-12 10:37:46.449208 \
+#JSON generated data file is:  /var/www/html/SWS/cuc/FSGP20190612.json \
+#TASK generated data file is:  /var/www/html/SWS/cuc/FSGP20190612.tsk \
+#COMP generated data file is:  /var/www/html/SWS/cuc/competitiongliders.lst \
+#CSVS generated data file is:  /var/www/html/SWS/cuc/competitiongliders.csv \
+#===========================: "
+}, 
 {
     "c": {
         "a": "2019-06-01", 

@@ -255,8 +255,8 @@ if prt:
    print("==========")
 for id in pilots:
     #
-    ogntracker=''				# OGN tracker paired   
-    ogntracker2=''				# OGN tracker paired   
+    ogntracker=''					# OGN tracker paired   
+    ogntracker2=''					# OGN tracker paired   
     if prt:
        print("---------------------")
     pid = pilots[id]["i"]                               # get the pilot ID
@@ -388,6 +388,11 @@ for id in pilots:
     npil += 1						# increase the number of pilots
     if prt:
        print("---------------------")
+#
+# pilots done
+#
+
+
 
 if prt or www:
        print("---------------------")
@@ -400,6 +405,7 @@ if prt:
    print("Competition")
    print("===========")
 comp = j_obj["c"]					# get the competition information
+#print("Competition:", comp, "\n\n")
 comp_firstday = comp['a']				# first day of the competition
 comp_lastday = comp['b']				# last day of the competition
 comp_name = comp['t']				        # event name
@@ -441,6 +447,7 @@ if days != '':
            break
 
 
+#print("DAY info:",indexofdays[day], "\n\n")	        # Day info
 date       = indexofdays[day]["d"]		        # date
 title      = indexofdays[day]["t"] 		        # day tittle
 shorttitle = indexofdays[day]["l"]    		        # day short title
@@ -461,14 +468,17 @@ d = urllib.request.urlopen(
 rr=d.read().decode('UTF-8') 
 d_obj = json.loads(rr)
 d = json.dumps(d_obj, indent=4)
-#print(d)
+#print("Day info",d, "\n\n")
+#print("Day results",d_obj['r'], "\n\n")
+QNH=d_obj['r']['qnh']					# QNH for the day
+print("Day QNH:", QNH)
 if numberofactivedays == 0:
     print("No active days ...")
 
-comp_day = d_obj["@type"]
-comp_id = d_obj["e"]				        # again the compatition ID
+comp_day   = d_obj["@type"]
+comp_id    = d_obj["e"]				        # again the competition ID
 comp_dayid = d_obj["i"]				        # the day ID
-comp_date = d_obj["d"]				        # date in milliseconds from the Unix epoch
+comp_date  = d_obj["d"]				        # date in milliseconds from the Unix epoch
 # day type: 1= valid, 2= practice, 3= canceled, 4= rest, 9= other
 comp_daytype = d_obj["y"]
 if 'l' in d_obj:					#check if  day title
@@ -476,11 +486,11 @@ if 'l' in d_obj:					#check if  day title
 else:
    comp_daytitle =  'NoDay'				# day title
 if 't' in d_obj:					#check if  day title
-   comp_shortdaytitle = d_obj["t"]				# short day title
+   comp_shortdaytitle = d_obj["t"]			# short day title
 else:
    comp_shortdaytitle = 'Noday'
-comp_starttime = d_obj["a"]				# start time millis from midnite
-comp_startaltitude = d_obj["h"]				# start altitude
+comp_starttime      = d_obj["a"]			# start time millis from midnite
+comp_startaltitude  = d_obj["h"]			# start altitude
 comp_finishaltitude = d_obj["f"]			# finish altitude
 
 
@@ -628,7 +638,7 @@ print("Comp Start time:", comp_starttime/1000)
 task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
         "compDate": comp_date, "startOpenTs": comp_starttime/1000, "turnpoints": tp} 
 event = {"name": comp_shortname, "description": comp_name,
-         "task": task, "tracks": tracks, "IPaddr": IPaddr}
+         "task": task, "tracks": tracks, "IPaddr": IPaddr, "QHN": QNH}
 j = json.dumps(event, indent=4)
 jsonfile.write(j)
 if prt:
