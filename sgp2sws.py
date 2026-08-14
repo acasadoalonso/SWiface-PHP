@@ -635,8 +635,11 @@ print("Comp full  name:", comp_name)
 print("Comp date:",       comp_date)
 print("Comp Start time:", comp_starttime/1000)
 #print tp
-task = {"taskType": "SailplaneGrandPrix", "taskName": "SGPrace", "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
+tn=task_name.replace('\u2013',' ')
+print("Task name:", tn)
+task = {"taskType": "SailplaneGrandPrix", "taskName": comp_shortname+'  '+tn, "Airfield": task_at_place, "Elevation": task_at_elevation, "Runway": task_at_runway+" "+task_at_runways, "ICAOcode":task_at_icao, "TimeZone": task_at_timezone, 
         "compDate": comp_date, "startOpenTs": comp_starttime/1000, "turnpoints": tp} 
+#print("\n\nTask: ", task)
 event = {"name": comp_shortname, "description": comp_name,
          "task": task, "tracks": tracks, "IPaddr": IPaddr, "QHN": QNH}
 j = json.dumps(event, indent=4)
