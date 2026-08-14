@@ -571,7 +571,7 @@ print("=====================")
 wp = 0
 legs = []
 tptype=[]
-while wp < len(task_wp):
+while wp < len(task_wp):				# search all the WPs of the task
     #print ("WP: ", task_wp[wp])
     wp_name = task_wp[wp]["n"]                          # waypoint name
     wp_name = "TP"+str(wp)+"-"+wp_name
@@ -587,7 +587,7 @@ while wp < len(task_wp):
     if "r" in task_wp[wp]:
        wp_radius = task_wp[wp]["r"]                     # cylinder radius or line length
     else:
-       wp_radius = 500
+       wp_radius = 500					# old format, set a default radius
     if len(task_handicap_list) > 0 and wp <= len(task_handicap_list['100']) and wp != 0:
        wp_radius = task_handicap_list['100'][wp-1]             	# the radius when a handicap has been set
     if wp > 0 and (wp_name == wpinit or wp_type == "line"):
