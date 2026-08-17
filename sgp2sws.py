@@ -44,6 +44,7 @@ Flags = { 						# flag colors assigned to the countries
     "NOR": ["blue", "red", "red"],
     "ZAF": ["red", "green", "yellow"],
     "HKG": ["red", "white", "red"],
+    "DNK": ["red", "red", "white"],
     "USA": ["red", "blue", "red"]
 }
 
