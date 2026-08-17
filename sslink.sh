@@ -9,6 +9,7 @@ ln -s /nfs/OGN/src/funcs/gistfuncs.py .
 ln -s /nfs/OGN/src/funcs/dir2filfuncs.py .
 ln -s /nfs/OGN/src/funcs/sgp2filfuncs.py .
 ln -s /nfs/OGN/src/funcs/soa2filfuncs.py .
+ln -s /nfs/OGN/src/funcs/dtfuncs.py .
 ln -s /nfs/OGN/src/SARsrc/ksta.py .
 
 ls -la *funcs.py 
