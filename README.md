@@ -345,7 +345,6 @@ In [`doc/`](doc):
 | `SGP API.txt`, `sgpcall.txt`, `sgp_json_specs.txt`, `sgpoutput.txt` | SGP REST API notes, sample calls and payloads |
 | `Ranking list REST api v.0.23.pdf` | FAI ranking-list REST API |
 | `LECD.doc.json` | Sample event document (La Cerdanya) |
-| `COPYING` | Licence |
 
 External references:
 
@@ -358,7 +357,10 @@ External references:
 
 ## Author and licence
 
-Angel Casado — `acasado (at) acm.org`. Licence: **GNU GPL v2** — see [`doc/COPYING`](doc/COPYING).
+Angel Casado — `acasado (at) acm.org`.
+
+Licensed under the **Apache License, Version 2.0** — see [`LICENSE`](LICENSE). Releases up to
+and including commit `29fea2c` were distributed under the GNU GPL v2.
 
 Bug reports and questions: please open an issue on
 [GitHub](https://github.com/acasadoalonso/SWiface-PHP/issues).
