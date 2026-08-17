@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """Generate a per-venue SWSconfig from an SGP competition.
 
 Usage:
@@ -31,7 +33,7 @@ import sgp_api  # noqa: E402
 
 CANCELLED = 3
 COORDS = ("location_latitude", "location_longitud")
-LIST_LIMIT = 10
+LIST_LIMIT = 20
 
 
 # --------------------------------------------------------------------------- #
