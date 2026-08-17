@@ -12,6 +12,7 @@ import sys
 import os
 import config
 from   gistfuncs  import unobscure
+from dtfuncs  import naive_utcnow, naive_utcfromtimestamp
 
 #
 #   This script looks into the SWiface database and generates  the fixes to Silent Wing studio
@@ -28,6 +29,7 @@ if trackid[0:3] == 'ALL' or trackid[0:3] == 'all':
    alltracks=True
 localtime = datetime.datetime.now()
 today = localtime.strftime("%y%m%d")
+today = naive_utcnow().strftime("%y%m%d")
 date = "0"
 time = "0"
 if (since == "0"):						# at the beginning
@@ -45,6 +47,7 @@ else:								# else the date/time is on the Unixtime
 
 if (today != date):						# it is today ?
     live = False						# mark as NOT live
+    timet=time							# if not live no needed to reduce time by 30 seconds
 
 dbpath = config.DBpath					# use the std path
 #print trackid,":", eventid,":", since,":", date,":", time
@@ -52,13 +55,19 @@ dbpath = config.DBpath					# use the std path
 # 
 # open the database
 #
+###     DBarchive   = 'SWARCHIVE'          (MySQL)
+###     SQLite3arch = 'archive/SWiface.db' (SQLite3)
+DBarchive   = getattr(config, 'DBarchive',   'SWARCHIVE')
+SQLite3arch = getattr(config, 'SQLite3arch', 'archive/' + config.SQLite3)
 
 if (config.MySQL):						# Are we using MySQL ??
     conn = MySQLdb.connect(host=config.DBhost, user=config.DBuserread,
-                           passwd=unobscure(config.DBpasswdread).decode(), db=DBname)     # connect with the database
+                           passwd=unobscure(config.DBpasswdread).decode(),
+                           db=(DBname if live else DBarchive))     # connect with the database
 else:							# SQLIte
 
-    filename = dbpath+config.SQLite3			# open th DB in read only mode
+    							# open th DB in read only mode
+    filename = dbpath + (config.SQLite3 if live else SQLite3arch)
     fd = os.open(filename, os.O_RDONLY)			# open the file
     conn = sqlite3.connect('/dev/fd/%d' % fd)		# connect with the database
 
