@@ -74,10 +74,10 @@ else:							# SQLIte
 
 # cursor for the ogndata table
 cursD = conn.cursor()					# cursor to be used
-if (since == "0"):					# if no timme since showw all
+if (since == "0" and not alltracks):			# if no timme since showw all
     cursD.execute("select date, time, longitude, latitude, altitude, idflarm  from "+DBtable +
                   " where idflarm = '%s' and date = '%s' order by time limit 1000;" % (trackid, date))   # get all the positions now
-elif (since == "0" and alltracks):					# if no timme since showw all
+elif (since == "0" and alltracks):			# if no timme since showw all
     cursD.execute("select date, time, longitude, latitude, altitude, idflarm  from "+DBtable +
 		  " where date = '%s' order by time limit 1000;" % (date))   # get all the positions now
 elif alltracks:
