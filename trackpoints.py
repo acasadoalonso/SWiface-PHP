@@ -24,6 +24,7 @@ eventid = id[0:12]
 since = sys.argv[2]
 live = True
 alltracks= False
+Truncate = False
 DBname = config.DBname
 
 date = "0"
@@ -87,9 +88,11 @@ else:
     cursD.execute("select date, time, longitude, latitude, altitude, idflarm  from "+DBtable +
                   " where idflarm = '%s' and date = '%s' and time > '%s' and time <= '%s'  order by time" % (trackid, date, time, timet))
 
-tn = 0
-rows=cursD.fetchall()
-nrows=len(rows)
+tn = 0								# track number
+rows=cursD.fetchall()						# get all the records from the DDBB
+nrows=len(rows)							# get the number of records
+if nrows >= 1000:						# if there are more than 1000 records, truncate the track
+    Truncate = True
 #print("NRows", nrows)
 #tracks=[{"t":0, "n":0, "e":0, "a":0, "id":0}]			# the track information
 tracks = []							# the track information
@@ -104,7 +107,7 @@ for row in rows: 						# get all the records from the DDBB
     m = int(time[2:4])
     s = int(time[4:6])
     dt = datetime.datetime(y, M, d, h, m, s)
-    # Unix time, seconds from the epoch
+    								# Unix time, seconds from the epoch
     ts = (dt - datetime.datetime(1970, 1, 1)).total_seconds()
     lon = row[2]						# longitude
     lati = row[3]						# latitude
@@ -112,15 +115,15 @@ for row in rows: 						# get all the records from the DDBB
     idfl = row[5]						# idflarm
     #print "T==>", tn, date, time, trackid, lati, lon, alti, dt, ts
     if alti == 0:
-        # append it to the previous record, no altitude
+        							# append it to the previous record, no altitude
         tracks.append({"t": int(ts), "e": lon, "n": lati, "id": idfl})
     else:
-        # append it to the previous record
+        							# append it to the previous record
         tracks.append({"t": int(ts), "e": lon, "n": lati, "a": alti, "id": idfl})
     tn += 1							# increment the track number
 
 if nrows > 0:							# if there are records, build the JSON record
-   tp = {"trackId": id, "live": live, "track": tracks}		# build the JSON record
+   tp = {"trackId": id, "live": live, "truncate": Truncate, "ntracks": tn, "track": tracks}		# build the JSON record
 else:								# if no records, build the JSON record with heartbeat	
    tp = {"trackId": id, "live": live, "track": tracks, "heartbeat": since }		
 
